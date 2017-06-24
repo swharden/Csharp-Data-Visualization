@@ -1,5 +1,5 @@
 # Csharp-Data-Visualization
-a collection of minimal-case example projects to display data with Visual Studio
+This repository is a collection of minimal-case example projects to display data with Visual Studio. I'm currently developing with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/), writing mostly in C# and only using free software.
 
 Description | Screenshot
 ---|---
