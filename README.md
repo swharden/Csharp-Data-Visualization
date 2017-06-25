@@ -11,5 +11,25 @@ Project Description | Screenshot
 **[basic buffered line plot](/projects/17-06-24_buffered_line_plot)** graphs data by creating a bitmap buffer, drawing on it with `System.Drawing.Graphics` (mostly `DrawLines()`) with customizable pens and quality (anti-aliasing), then displaying it onto a frame. The frame is resizable, which also resizes the bitmap buffer. Screen updates are timed and reported (at the bottom) so performance at different sizes can be assessed. | ![](projects/17-06-24_buffered_line_plot/demo.gif)
 
 # Development Environment
-* I am developing with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/)
-* I'm using [CodeMaid](https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid)
+* These projects were developed with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/)
+  * I'm using [CodeMaid](https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid)
+
+# Project Goals
+* ability to plot _massive_ datasets (1,000,000 X/Y pairs) rapidly
+* emphasis on time-domain plotting (signal analysis)
+* high framerate suitable for realtime plotting of live data
+
+## Similar Projects
+* [Microsoft Chart Controls](https://code.msdn.microsoft.com/mschart)
+  * Natively supported by Visual Studio
+  * not a good solution for massive datasets
+  * not a good solution for interactive charts
+* [OxyPlot](http://www.oxyplot.org/)
+  * free and open source, but a little heavier than I intend to use
+  * not designed with performance for massive datasets in mind
+* [LiveCharts](https://github.com/beto-rodriguez/Live-Charts)
+  * they put more emphasis on pretty and animated graphs
+* [ZedGraph](http://zedgraph.sourceforge.net/samples.html)
+  * no longer maintained?
+
+  * not a good solution for massive datasets
