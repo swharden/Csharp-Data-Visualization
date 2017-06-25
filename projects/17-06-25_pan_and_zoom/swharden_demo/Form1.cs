@@ -56,8 +56,8 @@ namespace swharden_demo {
 
         // buttons for data things
         private void BtnReplot_Click(object sender, EventArgs e) {Replot();}
-        private void btnDataRandom_Click(object sender, EventArgs e) {SP.CreateDataRandom();Replot();}
-        private void btnDataSine_Click(object sender, EventArgs e) {SP.CreateDataSine();Replot();}
+        private void btnDataRandom_Click(object sender, EventArgs e) {SP.CreateDataRandom((int)nudPoints.Value);Replot();}
+        private void btnDataSine_Click(object sender, EventArgs e) {SP.CreateDataSine((int)nudPoints.Value);Replot();}
         private void btnAxisGet_Click(object sender, EventArgs e) {AxisRead();}
         private void btnAxisFit_Click(object sender, EventArgs e) {SP.AxisFit();Replot();}
         private void btnAxisApply_Click(object sender, EventArgs e) {AxisApply();}

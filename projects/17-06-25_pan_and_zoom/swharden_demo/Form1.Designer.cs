@@ -31,7 +31,6 @@
             this.btnReplot = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnDataCsv = new System.Windows.Forms.Button();
             this.btnDataSine = new System.Windows.Forms.Button();
             this.btnDataRandom = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -42,6 +41,7 @@
             this.btnLeft = new System.Windows.Forms.Button();
             this.btnAxisFit = new System.Windows.Forms.Button();
             this.btnAxisApply = new System.Windows.Forms.Button();
+            this.btnAxisGet = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.nudY2 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,7 +67,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.btnAxisGet = new System.Windows.Forms.Button();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.nudPoints = new System.Windows.Forms.NumericUpDown();
             this.statusStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -82,6 +84,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudX1)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -147,47 +152,34 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox1.Location = new System.Drawing.Point(538, 0);
+            this.groupBox1.Location = new System.Drawing.Point(633, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(251, 58);
+            this.groupBox1.Size = new System.Drawing.Size(156, 58);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "new data";
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.Controls.Add(this.btnDataCsv, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDataSine, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnDataRandom, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnDataSine, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnDataRandom, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 18);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(245, 37);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 37);
             this.tableLayoutPanel1.TabIndex = 10;
-            // 
-            // btnDataCsv
-            // 
-            this.btnDataCsv.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDataCsv.Enabled = false;
-            this.btnDataCsv.Location = new System.Drawing.Point(3, 3);
-            this.btnDataCsv.Name = "btnDataCsv";
-            this.btnDataCsv.Size = new System.Drawing.Size(75, 31);
-            this.btnDataCsv.TabIndex = 7;
-            this.btnDataCsv.Text = "CSV file";
-            this.btnDataCsv.UseVisualStyleBackColor = true;
             // 
             // btnDataSine
             // 
             this.btnDataSine.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDataSine.Location = new System.Drawing.Point(165, 3);
+            this.btnDataSine.Location = new System.Drawing.Point(78, 3);
             this.btnDataSine.Name = "btnDataSine";
-            this.btnDataSine.Size = new System.Drawing.Size(77, 31);
+            this.btnDataSine.Size = new System.Drawing.Size(69, 31);
             this.btnDataSine.TabIndex = 9;
             this.btnDataSine.Text = "sine";
             this.btnDataSine.UseVisualStyleBackColor = true;
@@ -196,9 +188,9 @@
             // btnDataRandom
             // 
             this.btnDataRandom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDataRandom.Location = new System.Drawing.Point(84, 3);
+            this.btnDataRandom.Location = new System.Drawing.Point(3, 3);
             this.btnDataRandom.Name = "btnDataRandom";
-            this.btnDataRandom.Size = new System.Drawing.Size(75, 31);
+            this.btnDataRandom.Size = new System.Drawing.Size(69, 31);
             this.btnDataRandom.TabIndex = 8;
             this.btnDataRandom.Text = "random";
             this.btnDataRandom.UseVisualStyleBackColor = true;
@@ -296,6 +288,16 @@
             this.btnAxisApply.Text = "set";
             this.btnAxisApply.UseVisualStyleBackColor = true;
             this.btnAxisApply.Click += new System.EventHandler(this.btnAxisApply_Click);
+            // 
+            // btnAxisGet
+            // 
+            this.btnAxisGet.Location = new System.Drawing.Point(588, 8);
+            this.btnAxisGet.Name = "btnAxisGet";
+            this.btnAxisGet.Size = new System.Drawing.Size(55, 31);
+            this.btnAxisGet.TabIndex = 5;
+            this.btnAxisGet.Text = "read";
+            this.btnAxisGet.UseVisualStyleBackColor = true;
+            this.btnAxisGet.Click += new System.EventHandler(this.btnAxisGet_Click);
             // 
             // groupBox2
             // 
@@ -605,21 +607,64 @@
             this.label11.TabIndex = 17;
             this.label11.Text = "start by clicking a \"new data\" button";
             // 
-            // btnAxisGet
+            // groupBox6
             // 
-            this.btnAxisGet.Location = new System.Drawing.Point(588, 8);
-            this.btnAxisGet.Name = "btnAxisGet";
-            this.btnAxisGet.Size = new System.Drawing.Size(55, 31);
-            this.btnAxisGet.TabIndex = 5;
-            this.btnAxisGet.Text = "read";
-            this.btnAxisGet.UseVisualStyleBackColor = true;
-            this.btnAxisGet.Click += new System.EventHandler(this.btnAxisGet_Click);
+            this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox6.Controls.Add(this.tableLayoutPanel2);
+            this.groupBox6.Location = new System.Drawing.Point(515, 2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(112, 58);
+            this.groupBox6.TabIndex = 18;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "# of points";
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.nudPoints, 0, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 18);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(106, 37);
+            this.tableLayoutPanel2.TabIndex = 10;
+            // 
+            // nudPoints
+            // 
+            this.nudPoints.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.nudPoints.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPoints.Location = new System.Drawing.Point(3, 3);
+            this.nudPoints.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.nudPoints.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudPoints.Name = "nudPoints";
+            this.nudPoints.Size = new System.Drawing.Size(100, 22);
+            this.nudPoints.TabIndex = 0;
+            this.nudPoints.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(882, 653);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label5);
@@ -653,6 +698,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudX1)).EndInit();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudPoints)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -668,7 +716,6 @@
         private System.Windows.Forms.Button btnReplot;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Button btnDataCsv;
         private System.Windows.Forms.Button btnDataSine;
         private System.Windows.Forms.Button btnDataRandom;
         private System.Windows.Forms.Panel panel1;
@@ -705,6 +752,9 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button btnAxisGet;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.NumericUpDown nudPoints;
     }
 }
 
