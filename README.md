@@ -25,8 +25,10 @@ Project Description | Screenshot
   * not a good solution for massive datasets
   * not a good solution for interactive charts
 * [OxyPlot](http://www.oxyplot.org/)
-  * free and open source, but a little heavier than I intend to use
+  * Distributed as a portable class library which I like
+  * a little heavier than I intend to use
   * not designed with performance for massive datasets in mind
+  * interactive manipulation requires dragging axes, not the graph
 * [LiveCharts](https://github.com/beto-rodriguez/Live-Charts)
   * they put more emphasis on pretty and animated graphs
 * [ZedGraph](http://zedgraph.sourceforge.net/samples.html)
