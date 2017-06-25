@@ -18,6 +18,7 @@ Project Description | Screenshot
 * ability to plot _massive_ datasets (1,000,000 X/Y pairs) rapidly
 * emphasis on time-domain plotting (signal analysis)
 * high framerate suitable for realtime plotting of live data
+* Ultimate goal is to have a ScottPlot library with a custom control.
 
 ## Similar Projects
 * [Microsoft Chart Controls](https://code.msdn.microsoft.com/mschart)
