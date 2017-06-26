@@ -25,17 +25,15 @@ SP.PlotXY(); // plots the data using in a bitmap buffer
 pictureBox1.BackgroundImage = SP.bufferGraph; // apply the bitmap to a picturebox
 ```
 
-# Development Environment
-* These projects were developed with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/)
-  * I'm using [CodeMaid](https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid)
+## Additional Details
 
-# Project Goals
+### Project Goals
 * ability to plot _massive_ datasets (1,000,000 X/Y pairs) rapidly
 * emphasis on time-domain plotting (signal analysis)
 * high framerate suitable for realtime plotting of live data
 * Ultimate goal is to have a ScottPlot library with a custom control.
 
-## Similar Projects
+### Similar Projects
 * [Microsoft Chart Controls](https://code.msdn.microsoft.com/mschart)
   * Natively supported by Visual Studio
   * not a good solution for massive datasets
@@ -50,3 +48,7 @@ pictureBox1.BackgroundImage = SP.bufferGraph; // apply the bitmap to a picturebo
 * [ZedGraph](http://zedgraph.sourceforge.net/samples.html)
   * no longer maintained?
   * not a good solution for massive datasets
+  
+### Development Environment
+* These projects were developed with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/)
+  * I'm using [CodeMaid](https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid)
