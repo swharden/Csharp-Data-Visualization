@@ -173,6 +173,7 @@ public class ScottPlot {
             if (y1) this.axisY1 = this.Ys.Min();
             if (y2) this.axisY2 = this.Ys.Max();
         }
+        this.AxisToPixels(); // make sure this is up to date
     }
     
     /// <summary>
@@ -185,6 +186,7 @@ public class ScottPlot {
         this.axisX2 += this.axisUnitsPerPxX * Xpx;
         this.axisY1 += this.axisUnitsPerPxY * Ypx;
         this.axisY2 += this.axisUnitsPerPxY * Ypx;
+        this.AxisToPixels(); // make sure this is up to date
     }
 
     /// <summary>
@@ -193,10 +195,16 @@ public class ScottPlot {
     /// <param name="Xpx"></param>
     /// <param name="Ypx"></param>
     public void AxisZoomPx(int Xpx = 0, int Ypx = 0) {
-        this.axisX1 -= Xpx * this.axisUnitsPerPxX;
-        this.axisX2 += Xpx * this.axisUnitsPerPxX;
-        this.axisY1 -= Ypx * this.axisUnitsPerPxY;
-        this.axisY2 += Ypx * this.axisUnitsPerPxY;
+        // if the mouse goes nuts, we should shift past 0 and "flip" our data. Let's prevent that.
+        double maxX = (axisX2 - axisX1) * this.axisPixelsPerUnitX / 2; // the most it could be in pixels
+        double maxY = (axisY2 - axisY1) * this.axisPixelsPerUnitX / 2; // the most it could be in pixels
+        double shiftX = Math.Min(Xpx * this.axisUnitsPerPxX, maxX); // choose the less dramatic shift
+        double shiftY = Math.Min(Ypx * this.axisUnitsPerPxY, maxY); // choose the less dramatic shift
+        this.axisX1 -= shiftX;
+        this.axisX2 += shiftX;
+        this.axisY1 -= shiftY;
+        this.axisY2 += shiftY;
+        this.AxisToPixels();
     }
     
 

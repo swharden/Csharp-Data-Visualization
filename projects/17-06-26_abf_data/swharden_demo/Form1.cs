@@ -13,7 +13,10 @@ namespace swharden_demo {
 
         internal ScottPlot SP = new ScottPlot();
 
+        public bool plottingNow = false;
         private void Replot() {
+            if (plottingNow) return;
+            plottingNow = true;
             SP.TimerStart();
             SP.setSize(pictureBox1.Width, pictureBox1.Height);
             SP.PlotXY();
@@ -22,7 +25,7 @@ namespace swharden_demo {
             Application.DoEvents();
             SP.TimerStop();
             statusBar.Text = SP.TimerVal();
-            
+            plottingNow = false;
         }
 
         private void AxisRead() {
@@ -52,6 +55,7 @@ namespace swharden_demo {
         // form load
         public Form1() {
             InitializeComponent();
+            pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel); // capture mouse wheel
         }
 
         // buttons for data things
@@ -79,23 +83,27 @@ namespace swharden_demo {
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e) {
             mouseDownX = e.X;
             mouseDownY = e.Y;
-            mouseCalculating = false;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e) {
             if (mouseCalculating == true) { return; }
             if (e.Button == MouseButtons.None) { return;  }
-            mouseCalculating = true;
-            mouseDeltaX = mouseDownX - e.X; mouseDeltaY = e.Y - mouseDownY;
-            mouseDownX = e.X; mouseDownY = e.Y;
-            if (mouseDeltaX == 0 && mouseDeltaY == 0) {
-                mouseCalculating = false;
-                return;
-            }
-            if (e.Button == MouseButtons.Left) { SP.AxisPanPx(mouseDeltaX, mouseDeltaY); }
-            if (e.Button == MouseButtons.Right) { SP.AxisZoomPx(mouseDeltaX, mouseDeltaY); }
+            mouseDeltaX = mouseDownX - e.X; 
+            mouseDeltaY = e.Y - mouseDownY; 
+            mouseDownX = e.X;
+            mouseDownY = e.Y;
+            if (mouseDeltaX == 0 && mouseDeltaY == 0) {return;}
+            if (e.Button == MouseButtons.Left) {SP.AxisPanPx(mouseDeltaX, mouseDeltaY);}
+            if (e.Button == MouseButtons.Right) {SP.AxisZoomPx(mouseDeltaX, mouseDeltaY);}
             Replot();
-            mouseCalculating = false;
+        }
+
+        private void pictureBox1_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e) {
+            System.Console.WriteLine(e.Delta.ToString());
+            double scrollBy = -e.Delta / 120 * 50;
+            if (scrollBy>0) scrollBy *= 1.4; // zooming out is harder so help it out
+            SP.AxisZoomPx((int)scrollBy, (int)scrollBy);
+            Replot();
         }
 
         // toggle quality
