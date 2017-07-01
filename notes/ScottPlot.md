@@ -5,7 +5,7 @@ portable library? custom widget / thing?
 
 # API Examples (C#)
 I'll first write the usage examples, then code around them:
-```
+```C#
 internal ScottPlot.ScottPlot SP = new ScottPlot.ScottPlot();
 SP.FigureInit(this.pictureBox1.Width, this.pictureBox1.Height);
 SP.Ys = SP.ListSin();
