@@ -51,4 +51,3 @@ pictureBox1.BackgroundImage = SP.bufferGraph; // apply the bitmap to a picturebo
   
 ### Development Environment
 * These projects were developed with [Visual Studio Community 2017](https://www.visualstudio.com/downloads/)
-  * I'm using [CodeMaid](https://marketplace.visualstudio.com/items?itemName=SteveCadwallader.CodeMaid)
