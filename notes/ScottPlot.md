@@ -21,6 +21,8 @@ this.Refresh(); // force the window to redraw
 ```C#
 internal ScottPlot.ScottPlot SP = new ScottPlot.ScottPlot();
 
+SP.AxisAuto(Xs, Ys);
+
 SP.PlotVline(X, color, width);
 SP.PlotHline(Y, color, width);
 
