@@ -35,7 +35,7 @@ SP.PlotLine(Ys, Xs, color, width);
 SP.PlotScatter(Ys, Xs, color, width);
 
 pictureBox1.BackgroundImage = SP.Render();
-pictureBox1.BackgroundImage = SP.Render1d(); // for evenly spaced time domain data (Xs has a single point)
+pictureBox1.BackgroundImage = SP.Render1d(.001, 300); // for evenly spaced data (give it spacing and offset)
 
 this.Refresh(); // force the window to redraw
 ```
