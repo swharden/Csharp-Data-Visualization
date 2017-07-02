@@ -21,6 +21,8 @@ this.Refresh(); // force the window to redraw
 ```C#
 internal ScottPlot.ScottPlot SP = new ScottPlot.ScottPlot();
 
+SP.Size(this.pictureBox1.Width, this.pictureBox1.Height);
+
 SP.AxisAuto(Xs, Ys);
 
 SP.PlotVline(X, color, width);
@@ -32,6 +34,8 @@ SP.PlotHspan(Y1, Y2, color, width);
 SP.PlotLine(Ys, Xs, color, width);
 SP.PlotScatter(Ys, Xs, color, width);
 
-pictureBox1.BackgroundImage = SP.Render(this.pictureBox1.Width, this.pictureBox1.Height);
+pictureBox1.BackgroundImage = SP.Render();
+pictureBox1.BackgroundImage = SP.Render1d(); // for evenly spaced time domain data (Xs has a single point)
+
 this.Refresh(); // force the window to redraw
 ```
