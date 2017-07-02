@@ -39,3 +39,21 @@ pictureBox1.BackgroundImage = SP.Render1d(.001, 300); // for evenly spaced data 
 
 this.Refresh(); // force the window to redraw
 ```
+
+### Recyclable axis object
+```
+AX = new ScottPlot.Axis();
+
+// permanently change axis
+AX.Change(X1, X2, Y1, Y2); // permanently change this axis
+AX.Zoom(Xscale, Yscale, centerXfrac, centerYfrac);
+AX.Pan(Xpx, Ypx);
+
+// temporarially change axis
+AX.MouseDown(X, Y);
+AX.MousePan(X, Y);
+AX.MouseZoom(X, Y);
+AX.MouseUp(X, Y); // calls AX.Change
+
+AX.View() // get uncommitted mouse drag (X1, X2, Y1, Y2)
+```
