@@ -41,8 +41,9 @@ this.Refresh(); // force the window to redraw
 ```
 
 ### Recyclable axis object
-```
+```C#
 AX = new ScottPlot.Axis();
+AX.Size(Xpx, Ypx);
 
 // permanently change axis
 AX.Change(X1, X2, Y1, Y2); // permanently change this axis
