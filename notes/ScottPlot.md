@@ -24,8 +24,8 @@ internal ScottPlot.ScottPlot SP = new ScottPlot.ScottPlot();
 SP.PlotVline(X, color, width);
 SP.PlotHline(Y, color, width);
 
-SP.PlotVspan(X, color, width);
-SP.PlotHspan(Y, color, width);
+SP.PlotVspan(X1, X2, color, width);
+SP.PlotHspan(Y1, Y2, color, width);
 
 SP.PlotLine(Ys, Xs, color, width);
 SP.PlotScatter(Ys, Xs, color, width);
