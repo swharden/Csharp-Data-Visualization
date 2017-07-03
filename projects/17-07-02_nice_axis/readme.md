@@ -4,6 +4,7 @@ This from-scratch re-code has separate classes for core plotting routines, data 
 ## Create Graph Image from Console Application
 This 6-line program will generate 5,000 random data points and save the output graph as a figure.
 
+#### Console Application Source Code
 ```c#
 private static void Main(string[] args)
 {
@@ -17,7 +18,7 @@ private static void Main(string[] args)
 	SP.SaveFig("test.jpg");
 }
 ```
-
+#### Console Application Output (test.jpg)
 ![](test.jpg)
 
 ## Interactive GUI
