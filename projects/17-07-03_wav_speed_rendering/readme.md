@@ -12,6 +12,14 @@ Rather than generating fake data, let's use some real data. A ~20 second 8-bit 4
 
 ## Function Reference
 
+### Reading a WAV File using a Byte Array
+_this only works as written for 8-bit WAV files_
+```c#
+byte[] bytes = System.IO.File.ReadAllBytes(filename);
+Ys = new List<double>();
+for (int i=44; i<bytes.Length; i++) {Ys.Add((double)bytes[i]);}
+```
+
 ### AddLineSignal()
 ```c#
 public void AddLineSignal(List<double> Ys, double unitsPerPoint = 10, double offsetX = 0,  bool drawGrid = true)
