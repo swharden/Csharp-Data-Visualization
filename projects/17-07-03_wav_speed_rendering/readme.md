@@ -13,10 +13,9 @@ Rather than generating fake data, let's use some real data. A ~20 second 8-bit 4
 ## Function Reference
 
 ### AddLineSignal()
-```
+```c#
 public void AddLineSignal(List<double> Ys, double unitsPerPoint = 10, double offsetX = 0,  bool drawGrid = true)
 {
-	if (AX.GetAxis()[0] == 0 && AX.GetAxis()[1] == 0) {AX.SetAxis(offsetX, Ys.Count * unitsPerPoint, Ys.Min(), Ys.Max());}
 	double unitsPerPixel = AX.UnitsPerPxX;
 	double iPerPixel = unitsPerPixel / unitsPerPoint;
 	double nDataPixels = unitsPerPoint * Ys.Count / unitsPerPixel;
@@ -36,8 +35,7 @@ public void AddLineSignal(List<double> Ys, double unitsPerPoint = 10, double off
 		points.Add(new Point(x, (int)colMin));
 		if ((int)colMin != (int)colMax) { points.Add(new Point(x, (int)colMax)); }
 	}
-	if (highQuality == true) graphicsData.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-	graphicsData.DrawLines(new Pen(Color.Red, 1), points.ToArray()); //todo: is there a faster way to make an array?
+	graphicsData.DrawLines(new Pen(Color.Red, 1), points.ToArray()); 
 	dataPointCount = Ys.Count;
 	dataLinesCount = points.Count;
 }
