@@ -12,7 +12,7 @@ Rather than generating fake data, let's use some real data. A ~20 second 8-bit 4
 
 ## Function Reference
 
-### `AddLineSignal`
+### AddLineSignal()
 ```
 public void AddLineSignal(List<double> Ys, double unitsPerPoint = 10, double offsetX = 0,  bool drawGrid = true)
 {
