@@ -19,3 +19,6 @@ public double[] FFT(double[] data)
     //todo: this could be much faster by reusing variables
 }
 ```
+
+## Installing Accord
+![](accord.png)
