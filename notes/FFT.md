@@ -1,5 +1,5 @@
 # Calculating the FFT in C#
-Here is a minimal-case example how to convert an array of doubles into the frequency domain using a [Fast Fourier transformation](https://en.wikipedia.org/wiki/Fast_Fourier_transform) in C# (Visual Studio Community 2017). It uses the [Accord .NET library](http://accord-framework.net). Add a reference to the Assembly Framework `System.Numerics`.
+Here is a minimal-case example how to convert an array of doubles into the frequency domain using a [Fast Fourier transformation](https://en.wikipedia.org/wiki/Fast_Fourier_transform) in C# (Visual Studio Community 2017). It uses the [Accord .NET library](http://accord-framework.net). Add a reference to the Assembly Framework `System.Numerics`. Use NuGet to install `Accord.Audio`.
 ```C#
 using System.Numerics;
 
@@ -18,6 +18,3 @@ public double[] FFT(double[] data)
     //todo: this could be much faster by reusing variables
 }
 ```
-
-## Installing Accord
-![](accord.png)
