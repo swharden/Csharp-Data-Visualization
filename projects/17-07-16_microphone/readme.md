@@ -59,3 +59,13 @@ public double[] FFT(double[] data)
     return fft;
 }
 ```
+
+### PACKAGES
+I reduced the size of this GitHub project by not including the packages folder. It contians the following folders:
+
+* Accord.3.6.0
+* Accord.Audio.3.6.0
+* Accord.Math.3.6.0
+* NAudio.1.8.0
+
+All of these can be downloaded on your own system with nuget.
