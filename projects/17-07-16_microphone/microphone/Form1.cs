@@ -23,8 +23,7 @@ namespace microphone
         public Int32 envelopeMax;
 
         private int RATE = 44100; // sample rate of the sound card
-        private int BUFFERSIZE = (int) Math.Pow(2,13); // must be a multiple of 2
-        //private int BUFFERSIZE = 2048; // must be a multiple of 2
+        private int BUFFERSIZE = (int) Math.Pow(2,11); // must be a multiple of 2
 
         public Form1()
         {
@@ -38,6 +37,7 @@ namespace microphone
             WaveIn wi = new WaveIn();
             wi.DeviceNumber = 0;
             wi.WaveFormat = new NAudio.Wave.WaveFormat(RATE, 1);
+            wi.BufferMilliseconds = (int)((double)BUFFERSIZE / (double)RATE * 1000.0);
 
             // create a wave buffer and start the recording
             wi.DataAvailable += new EventHandler<WaveInEventArgs>(wi_DataAvailable);

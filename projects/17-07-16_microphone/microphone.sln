@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "microphone", "microphone\microphone.csproj", "{C79BE214-3E1E-41F9-BAAA-516B5F9BFAF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottPlot", "..\..\..\ScottPlot\ScottPlot\ScottPlot\ScottPlot.csproj", "{85C30C81-963A-40CB-8859-AD92B7EC4FA1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottPlot", "ScottPlot-2017-07-30\ScottPlot\ScottPlot.csproj", "{85C30C81-963A-40CB-8859-AD92B7EC4FA1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
