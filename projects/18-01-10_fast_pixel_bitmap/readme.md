@@ -1,9 +1,9 @@
 ﻿# Fast Pixel Drawing in C#
 The purpose of this example is to determine/demonstrate the fastest/simplest methods to take an array of data and plot it into a bitmap. It compares the SetPixel method to the locked bits method.
 
-![](screenshot.png)
+<img src="screenshot.png" width="300">
 
-### Example using `Bitmap.SetPixel`
+### Example using `Bitmap.SetPixel` (~100ms)
 ```
 Bitmap buffer = new Bitmap(width, height);
 Color NewPixel = Color.FromArgb(255, 123, 213, 059);
@@ -11,7 +11,7 @@ buffer.SetPixel(x, y, NewPixel); // modify the pixel (RGBA) with a Color
 pictureBox1.Image = buffer;
 ```
 
-### Example using `Bitmap.Lockbits`
+### Example using `Bitmap.Lockbits` (~5ms)
 ```
 Bitmap buffer = new Bitmap(width, height);
 BitmapData bitmapData = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.ReadWrite, buffer.PixelFormat);
