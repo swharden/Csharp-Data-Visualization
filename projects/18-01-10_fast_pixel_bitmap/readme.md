@@ -1,5 +1,5 @@
 ﻿# Fast Pixel Drawing in C#
-The purpose of this example is to determine/demonstrate the fastest/simplest methods to take an array of data and plot it into a bitmap. It compares the SetPixel method to the locked bits method.
+The purpose of this example is to determine/demonstrate the fastest/simplest methods to take an array of data and plot it into a bitmap. It compares the SetPixel method to the locked bits method. This example takes a 400x600 bitmap and fills it with random RGB values. The bitmap is then applied to a picturebox.
 
 <img src="screenshot.png" width="300">
 
