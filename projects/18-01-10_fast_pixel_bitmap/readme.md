@@ -26,5 +26,24 @@ buffer.UnlockBits(bitmapData);
 pictureBox1.Image = buffer;
 ```
 
+### Example turning raw values into a bitmap (simple/fast)
+```c
+Bitmap bitmap = new Bitmap(600, 400, PixelFormat.Format8bppIndexed);
+BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+
+// create a byte array to reflect each pixel in the image
+byte[] pixels = new byte[bitmap.Size.Height * bitmap.Size.Width];
+
+// fill pixels with random data
+for (int i=0; i < pixels.Length; i++) pixels[i] = (byte) rand.Next(255);
+
+// turn the byte array back into a bitmap
+Marshal.Copy(pixels, 0, bitmapData.Scan0, pixels.Length);
+bitmap.UnlockBits(bitmapData);
+
+// apply the bitmap to the picturebox
+pictureBox1.Image = bitmap;
+```
+
 ### Useful Links
 * [High performance System.Drawing.Bitmap pixel manipulation in C#](http://erison.blogspot.com/2016/02/techdercom-high-performance.html)
