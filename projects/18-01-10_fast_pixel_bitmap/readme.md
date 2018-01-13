@@ -12,9 +12,11 @@ pictureBox1.Image = buffer;
 ```
 
 ### Example using `Bitmap.Lockbits` (~5ms)
+This example containes extra code to show how to _read_ and also _write_ to a buffered bitmap by modifying a byte array.
 ```
 Bitmap buffer = new Bitmap(width, height);
-BitmapData bitmapData = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), ImageLockMode.ReadWrite, buffer.PixelFormat);
+BitmapData bitmapData = buffer.LockBits(new Rectangle(0, 0, buffer.Width, buffer.Height), 
+                                        ImageLockMode.ReadWrite, buffer.PixelFormat);
 int bytesPerPixel = Bitmap.GetPixelFormatSize(buffer.PixelFormat) / 8;
 int byteCount = bitmapData.Stride * buffer.Height;
 byte[] pixels = new byte[byteCount];
