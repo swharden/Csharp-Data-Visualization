@@ -27,19 +27,32 @@ pictureBox1.Image = buffer;
 ```
 
 ### Example turning raw values into a bitmap (simple/fast)
+This example shows how to make an 8-bit bitmap color-mapped to an indexed color pallette. By looking at this example you can figure out how to change the color pallette...
+
 ```c
-Bitmap bitmap = new Bitmap(600, 400, PixelFormat.Format8bppIndexed);
-BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.ReadOnly, bitmap.PixelFormat);
+// create a bitmap we will work with
+Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format8bppIndexed);
+
+// modify the indexed palette to make it grayscale
+ColorPalette pal = bitmap.Palette;
+for (int i = 0; i < 256; i++)
+    pal.Entries[i] = Color.FromArgb(255, i, i, i);
+bitmap.Palette = pal;
+
+// prepare to access data via the bitmapdata object
+BitmapData bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), 
+                                        ImageLockMode.ReadOnly, bitmap.PixelFormat);
 
 // create a byte array to reflect each pixel in the image
-byte[] pixels = new byte[bitmap.Size.Height * bitmap.Size.Width];
+byte[] pixels = new byte[bitmapData.Stride * bitmap.Height];
 
 // fill pixels with random data
-for (int i=0; i < pixels.Length; i++) pixels[i] = (byte) rand.Next(255);
+for (int i=0; i < pixels.Length; i++)
+    pixels[i] = (byte) rand.Next(255);
 
 // turn the byte array back into a bitmap
 Marshal.Copy(pixels, 0, bitmapData.Scan0, pixels.Length);
-bitmap.UnlockBits(bitmapData);
+bitmap.UnlockBits(bitmapData);            
 
 // apply the bitmap to the picturebox
 pictureBox1.Image = bitmap;
