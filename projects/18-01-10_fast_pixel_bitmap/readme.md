@@ -3,6 +3,12 @@ The purpose of this example is to determine/demonstrate the fastest/simplest met
 
 <img src="screenshot.png" width="300">
 
+**These are needed for the examples:**
+```c
+using System.Drawing.Imaging; // for ImageLockMode
+using System.Runtime.InteropServices; // for Marshal
+```
+
 ### Example using `Bitmap.SetPixel` (~100ms)
 ```c
 Bitmap buffer = new Bitmap(width, height);
