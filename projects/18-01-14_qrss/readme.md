@@ -6,8 +6,8 @@ _The default spectrograph settings are configured for highspeed music visualizat
 
 Description | Screenshot | Output
 ---|---|---
-**Music:** several songs in a row played one after the next|<img src="screenshot_music.png" height=400>|<img src="capture_music.jpg" height=400>
-**QRSS:** several minutes of relatively poor quality radio reception at 10.140 MHz I recorded many years ago|<img src="screenshot_qrss.png" height=400>|<img src="capture_qrss.jpg" height=400>
+**Music:** several songs in a row played one after the next|![](screenshot_music.png)|<img src="capture_music.jpg" height=400>
+**QRSS:** several minutes of relatively poor quality radio reception at 10.140 MHz I recorded many years ago|![](screenshot_qrss.png)|<img src="capture_qrss.jpg" height=400>
 
 ## Useful Links
 * [What is QRSS?](http://www.qsl.net/m0ayf/What-is-QRSS.html)
