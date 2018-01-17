@@ -4,4 +4,4 @@ This project aims to provide a user control to provide a navigatable axis field.
 
 ClampFit | DataView
 ---|---
-![](clampfit2.png) | ![](screenshot.png)
+![](clampfit.png) | ![](screenshot.png)
