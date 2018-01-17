@@ -4,6 +4,7 @@ This repository is a collection of minimal-case example projects to display data
 * Each example below is a standalone Visual Studio solution
 * Projects increase in complexity from bottom to top
 * Work here led to the development of [ScottPlot](https://github.com/swharden/ScottPlot), an open-source interactive graphing library for .NET
+* The [projects folder](projects) contains in-progress and unfinished works. Only completed projects are listed below.
 
 Project Description | Screenshot
 ---|---
