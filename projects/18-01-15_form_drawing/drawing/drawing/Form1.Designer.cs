@@ -87,6 +87,7 @@
             this.btn_zoom_in_x.TabIndex = 4;
             this.btn_zoom_in_x.Text = "u";
             this.btn_zoom_in_x.UseVisualStyleBackColor = true;
+            this.btn_zoom_in_x.Click += new System.EventHandler(this.btn_zoom_in_x_Click);
             // 
             // btn_zoom_out_x
             // 
@@ -97,6 +98,7 @@
             this.btn_zoom_out_x.TabIndex = 3;
             this.btn_zoom_out_x.Text = "t";
             this.btn_zoom_out_x.UseVisualStyleBackColor = true;
+            this.btn_zoom_out_x.Click += new System.EventHandler(this.btn_zoom_out_x_Click);
             // 
             // btn_zoom_out_y
             // 
@@ -107,6 +109,7 @@
             this.btn_zoom_out_y.TabIndex = 2;
             this.btn_zoom_out_y.Text = "q";
             this.btn_zoom_out_y.UseVisualStyleBackColor = true;
+            this.btn_zoom_out_y.Click += new System.EventHandler(this.btn_zoom_out_y_Click);
             // 
             // btn_zoom_in_y
             // 
@@ -117,6 +120,7 @@
             this.btn_zoom_in_y.TabIndex = 1;
             this.btn_zoom_in_y.Text = "p";
             this.btn_zoom_in_y.UseVisualStyleBackColor = true;
+            this.btn_zoom_in_y.Click += new System.EventHandler(this.btn_zoom_in_y_Click);
             // 
             // tableLayoutPanel1
             // 

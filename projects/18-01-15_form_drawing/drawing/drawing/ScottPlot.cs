@@ -63,8 +63,8 @@ namespace drawing
         private double units_per_pixel_Y;
 
         // graphics objects
-        public Bitmap bitmap;
-        public System.Drawing.Graphics gfx;
+        private Bitmap bitmap;
+        private System.Drawing.Graphics gfx;
 
         /// <summary>
         /// Create a new ScottPlot figure.
@@ -95,11 +95,25 @@ namespace drawing
 
         /// <summary>
         /// zoom in (scale greater than 1) or zoom out (scale less than 1).
-        /// If zoom is 0, auto-scale.
         /// </summary>
         /// <param name="scale"></param>
-        public void Zoom(double scale=1.0)
+        public void Zoom(double scaleX=1.0, double scaleY=1.0)
         {
+
+            double axis_X_center = (axis_X2 + axis_X1) / 2;
+            double axis_X_pad = (axis_X2 - axis_X1) / 2;
+
+            double axis_Y_center = (axis_Y2 + axis_Y1) / 2;
+            double axis_Y_pad = (axis_Y2 - axis_Y1) / 2;
+
+            axis_X_pad *= scaleX;
+            axis_Y_pad *= scaleY;
+
+            axis_X1 = axis_X_center - axis_X_pad;
+            axis_X2 = axis_X_center + axis_X_pad;
+            axis_Y1 = axis_Y_center - axis_Y_pad;
+            axis_Y2 = axis_Y_center + axis_Y_pad;
+
             pixels_per_unit_X = data_width / (axis_X2 - axis_X1);
             units_per_pixel_X = (axis_X2 - axis_X1) / data_width;
             pixels_per_unit_Y = data_height / (axis_Y2 - axis_Y1);
@@ -129,8 +143,6 @@ namespace drawing
             this.gfx = Graphics.FromImage(this.bitmap);
 
             Zoom();
-            DrawFrameABF();
-
         }
 
         /// <summary>
@@ -152,7 +164,7 @@ namespace drawing
         /// Draw the figure frame with axis labels, ticks, etc.
         /// Style it similar to how ClampFit displays ABF files.
         /// </summary>
-        public void DrawFrameABF()
+        public Bitmap Render()
         {
             // prepare colors and fonts
             Font font_axis_labels = new Font("arial", 9, FontStyle.Regular);
@@ -212,48 +224,10 @@ namespace drawing
             // draw a black line around the data area
             gfx.DrawRectangle(penAxis, data_pos_left, data_pos_top, data_width, data_height);
 
+            return this.bitmap;
+
         }
-
-        /// <summary>
-        /// Draw the figure frame with axis labels, ticks, etc.
-        /// </summary>
-        public void DrawFrame()
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* 
-         * 
-         * STANDALONE HELPER FUNCTIONS 
-         * 
-         */
-
+        
         /// <summary>
         /// format a number for a tick label by limiting its precision. axisSpan is X2-X1.
         /// </summary>
@@ -288,7 +262,7 @@ namespace drawing
         /// <summary>
         /// return an array of good tick values for an axis given a range
         /// </summary>
-        public double[] TickGen(double axisValueLower, double axisValueUpper, int graphWidthPx, int nTicks = 10)
+        public double[] TickGen(double axisValueLower, double axisValueUpper, int graphWidthPx, int nTicks = 6)
         {
             List<double> values = new List<double>();
             List<int> pixels = new List<int>();
@@ -315,7 +289,6 @@ namespace drawing
                     }
                 }
             }
-            //todo: keep it arrays the whole time
             return values.ToArray();
         }
 
