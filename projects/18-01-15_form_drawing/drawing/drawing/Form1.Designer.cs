@@ -38,9 +38,10 @@
             this.btn_zoom_in_y = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_title = new System.Windows.Forms.Label();
             this.timer_init = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -64,15 +65,20 @@
             // 
             // hScrollBar1
             // 
+            this.hScrollBar1.LargeChange = 50;
             this.hScrollBar1.Location = new System.Drawing.Point(227, 464);
+            this.hScrollBar1.Maximum = 5000;
             this.hScrollBar1.Name = "hScrollBar1";
             this.hScrollBar1.Size = new System.Drawing.Size(350, 26);
             this.hScrollBar1.TabIndex = 6;
+            this.hScrollBar1.Value = 50;
             this.hScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.hScrollBar1_Scroll);
             // 
             // vScrollBar1
             // 
+            this.vScrollBar1.LargeChange = 50;
             this.vScrollBar1.Location = new System.Drawing.Point(698, 181);
+            this.vScrollBar1.Maximum = 5000;
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(24, 231);
             this.vScrollBar1.TabIndex = 5;
@@ -85,9 +91,11 @@
             this.btn_zoom_in_x.Name = "btn_zoom_in_x";
             this.btn_zoom_in_x.Size = new System.Drawing.Size(25, 25);
             this.btn_zoom_in_x.TabIndex = 4;
+            this.btn_zoom_in_x.TabStop = false;
             this.btn_zoom_in_x.Text = "u";
             this.btn_zoom_in_x.UseVisualStyleBackColor = true;
             this.btn_zoom_in_x.Click += new System.EventHandler(this.btn_zoom_in_x_Click);
+            this.btn_zoom_in_x.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Focus_Reset);
             // 
             // btn_zoom_out_x
             // 
@@ -96,9 +104,11 @@
             this.btn_zoom_out_x.Name = "btn_zoom_out_x";
             this.btn_zoom_out_x.Size = new System.Drawing.Size(25, 25);
             this.btn_zoom_out_x.TabIndex = 3;
+            this.btn_zoom_out_x.TabStop = false;
             this.btn_zoom_out_x.Text = "t";
             this.btn_zoom_out_x.UseVisualStyleBackColor = true;
             this.btn_zoom_out_x.Click += new System.EventHandler(this.btn_zoom_out_x_Click);
+            this.btn_zoom_out_x.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Focus_Reset);
             // 
             // btn_zoom_out_y
             // 
@@ -107,9 +117,11 @@
             this.btn_zoom_out_y.Name = "btn_zoom_out_y";
             this.btn_zoom_out_y.Size = new System.Drawing.Size(25, 25);
             this.btn_zoom_out_y.TabIndex = 2;
+            this.btn_zoom_out_y.TabStop = false;
             this.btn_zoom_out_y.Text = "q";
             this.btn_zoom_out_y.UseVisualStyleBackColor = true;
             this.btn_zoom_out_y.Click += new System.EventHandler(this.btn_zoom_out_y_Click);
+            this.btn_zoom_out_y.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Focus_Reset);
             // 
             // btn_zoom_in_y
             // 
@@ -118,9 +130,10 @@
             this.btn_zoom_in_y.Name = "btn_zoom_in_y";
             this.btn_zoom_in_y.Size = new System.Drawing.Size(25, 25);
             this.btn_zoom_in_y.TabIndex = 1;
+            this.btn_zoom_in_y.TabStop = false;
             this.btn_zoom_in_y.Text = "p";
-            this.btn_zoom_in_y.UseVisualStyleBackColor = true;
             this.btn_zoom_in_y.Click += new System.EventHandler(this.btn_zoom_in_y_Click);
+            this.btn_zoom_in_y.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Focus_Reset);
             // 
             // tableLayoutPanel1
             // 
@@ -139,14 +152,24 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.label3);
             this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lbl_title);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(924, 94);
             this.panel2.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(840, 9);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -166,15 +189,15 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "C# Data Visualization Demo";
             // 
-            // label1
+            // lbl_title
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(4, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(145, 32);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "DataView";
+            this.lbl_title.AutoSize = true;
+            this.lbl_title.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_title.Location = new System.Drawing.Point(4, 10);
+            this.lbl_title.Name = "lbl_title";
+            this.lbl_title.Size = new System.Drawing.Size(145, 32);
+            this.lbl_title.TabIndex = 0;
+            this.lbl_title.Text = "DataView";
             // 
             // timer_init
             // 
@@ -213,7 +236,8 @@
         private System.Windows.Forms.Timer timer_init;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_title;
+        private System.Windows.Forms.Button button1;
     }
 }
 
