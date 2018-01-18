@@ -18,9 +18,18 @@ namespace drawing
 
         public Form1()
         {
+            
             InitializeComponent();
-                        
+
+            // prevent mouseover events until it's fully loaded
+            panel1.Visible = false;
+            pic_selection.Visible = false;
+
+            // last minute GUI customizations
+            pic_selection.BackColor = Color.FromArgb(100, 255, 0, 0);
+
             // doing this reduced panel flickering by double buffering
+            // TIP: pictureboxes are double-buffered already
             typeof(Panel).InvokeMember("DoubleBuffered", System.Reflection.BindingFlags.SetProperty | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, panel1, new object[] { true });
             
         }
@@ -30,6 +39,7 @@ namespace drawing
             timer_init.Enabled = false;
             scottPlot = new ScottPlot(panel1.Width, panel1.Height);
             layout(null, null);
+            panel1.Visible = true;
         }
 
         /// <summary>
@@ -178,6 +188,106 @@ namespace drawing
         private void Focus_Reset(object sender, MouseEventArgs e)
         {
             button1.Focus();
+        }
+
+
+        /*
+         * 
+         * MOUSE TRACKING
+         * 
+         * 
+         */
+
+        private Point Mouse_down_point;
+        private Point Mouse_up_point;
+
+        private Rectangle Mouse_rectangle(Point p1, Point p2)
+        {
+            int X1 = Math.Min(p1.X, p2.X);
+            int X2 = Math.Max(p1.X, p2.X);
+            int Y1 = Math.Min(p1.Y, p2.Y);
+            int Y2 = Math.Max(p1.Y, p2.Y);
+
+            Rectangle rect = new Rectangle(X1, Y1, X2-X1, Y2-Y1);
+            return rect;
+        }
+
+        private bool Mouse_in_zoom_horizontal(Point pt)
+        {
+            if (pt.X >= scottPlot.data_pos_left &&
+                pt.X <= scottPlot.data_pos_right &&
+                pt.Y >= scottPlot.data_pos_bottom &&
+                pt.Y <= scottPlot.data_pos_bottom + 30)
+            {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        private bool Mouse_in_zoom_vertical(Point pt)
+        {
+            if (pt.X >= scottPlot.data_pos_left - 30 &&
+                pt.X <= scottPlot.data_pos_left &&
+                pt.Y >= scottPlot.data_pos_top &&
+                pt.Y <= scottPlot.data_pos_bottom)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void panel1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // rubber band rectangle
+            if (System.Windows.Forms.Control.MouseButtons == MouseButtons.Left)
+            {
+
+                Rectangle mouseRect = Mouse_rectangle(Mouse_down_point, e.Location);
+
+                if (Mouse_in_zoom_horizontal(Mouse_down_point))
+                {
+                    panel1.Cursor = Cursors.NoMoveHoriz;
+                    int x1 = mouseRect.X;
+                    int x2 = mouseRect.X + mouseRect.Width;
+                    int y1 = scottPlot.data_pos_bottom;
+                    int y2 = scottPlot.data_pos_bottom + 7;
+                    pic_selection.Location = new Point(x1, y1);
+                    pic_selection.Size = new Size(x2 - x1, y2 - y1);
+                }
+                else if (Mouse_in_zoom_vertical(Mouse_down_point))
+                {
+                    panel1.Cursor = Cursors.NoMoveVert;
+                    int x1 = scottPlot.data_pos_left - 7;
+                    int x2 = scottPlot.data_pos_left;
+                    int y1 = mouseRect.Y;
+                    int y2 = mouseRect.Y + mouseRect.Height;
+                    pic_selection.Location = new Point(x1, y1);
+                    pic_selection.Size = new Size(x2 - x1, y2 - y1);
+                }
+            } else
+            {
+                // left button is not pressed
+                if (Mouse_in_zoom_horizontal(e.Location)) panel1.Cursor = Cursors.NoMoveHoriz;
+                else if (Mouse_in_zoom_vertical(e.Location)) panel1.Cursor = Cursors.NoMoveVert;
+                else panel1.Cursor = Cursors.Arrow;
+            }
+        }
+
+        
+        private void panel1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Mouse_down_point = new Point(e.X, e.Y);
+            pic_selection.Visible = true;
+        }
+
+        private void panel1_MouseUp(object sender, MouseEventArgs e)
+        {
+            Mouse_up_point = new Point(e.X, e.Y);
+            pic_selection.Visible = false;
         }
     }
 }

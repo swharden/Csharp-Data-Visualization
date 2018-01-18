@@ -32,10 +32,10 @@ namespace drawing
         private int data_pad_right;
         private int data_pad_bottom;
 
-        private int data_pos_left;
-        private int data_pos_right;
-        private int data_pos_top;
-        private int data_pos_bottom;
+        public int data_pos_left;
+        public int data_pos_right;
+        public int data_pos_top;
+        public int data_pos_bottom;
 
         private int data_width;
         private int data_height;
@@ -341,7 +341,16 @@ namespace drawing
             return this.bitmap;
 
         }
-        
+
+        /// <summary>
+        /// return the bitmap we last rendered
+        /// </summary>
+        /// <returns></returns>
+        public Bitmap RenderedLast()
+        {
+            return this.bitmap;
+        }
+
         /// <summary>
         /// format a number for a tick label by limiting its precision. axisSpan is X2-X1.
         /// </summary>

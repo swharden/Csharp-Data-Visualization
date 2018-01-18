@@ -43,14 +43,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_title = new System.Windows.Forms.Label();
             this.timer_init = new System.Windows.Forms.Timer(this.components);
+            this.pic_selection = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_selection)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.pic_selection);
             this.panel1.Controls.Add(this.hScrollBar1);
             this.panel1.Controls.Add(this.vScrollBar1);
             this.panel1.Controls.Add(this.btn_zoom_in_x);
@@ -62,6 +65,9 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(924, 613);
             this.panel1.TabIndex = 2;
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // hScrollBar1
             // 
@@ -205,12 +211,22 @@
             this.timer_init.Interval = 1;
             this.timer_init.Tick += new System.EventHandler(this.timer_init_Tick);
             // 
+            // pic_selection
+            // 
+            this.pic_selection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.pic_selection.Location = new System.Drawing.Point(777, 502);
+            this.pic_selection.Name = "pic_selection";
+            this.pic_selection.Size = new System.Drawing.Size(98, 75);
+            this.pic_selection.TabIndex = 7;
+            this.pic_selection.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(930, 719);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             this.SizeChanged += new System.EventHandler(this.layout);
@@ -218,6 +234,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pic_selection)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +255,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_title;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.PictureBox pic_selection;
     }
 }
 
