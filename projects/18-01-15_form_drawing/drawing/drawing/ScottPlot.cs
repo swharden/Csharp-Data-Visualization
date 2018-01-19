@@ -1,16 +1,13 @@
-﻿/* 
+﻿/*
  * ScottPlot - a portable C# library to create interactive graphs from X/Y data.
- * 
+ *
  * https://github.com/swharden/ScottPlot
  * https://github.com/swharden/Csharp-Data-Visualization
- * 
+ *
  */
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using System.Drawing;
 
@@ -19,15 +16,16 @@ namespace drawing
     /// <summary>
     /// ScottPlot graphs X/Y data and generates figures as bitmaps.
     /// </summary>
-    class ScottPlot
+    internal class ScottPlot
     {
-
         // figure dimensions
         private int figure_width;
+
         private int figure_height;
 
         // padding, position, and size of data area
         private int data_pad_left;
+
         private int data_pad_top;
         private int data_pad_right;
         private int data_pad_bottom;
@@ -44,6 +42,7 @@ namespace drawing
 
         // figure and data colors
         public Color color_figure_background = SystemColors.Control;
+
         public Color color_axis_text = Color.Black;
         public Color color_data_background = Color.White;
         public Color color_data_highlight = Color.DarkGray;
@@ -52,12 +51,14 @@ namespace drawing
 
         // axis edges (the initial view of data)
         private double axis_X1 = -100;
+
         private double axis_X2 = 100;
         private double axis_Y1 = -100;
         private double axis_Y2 = 100;
 
         // data limits (how far you can scroll around)
         public bool axis_constrain = true;
+
         public double axis_limit_X1 = -1000;
         public double axis_limit_X2 = 1000;
         public double axis_limit_Y1 = -1000;
@@ -71,12 +72,14 @@ namespace drawing
 
         // axis scale
         private double pixels_per_unit_X;
+
         private double pixels_per_unit_Y;
         private double units_per_pixel_X;
         private double units_per_pixel_Y;
 
         // graphics objects
         private Bitmap bitmap;
+
         private System.Drawing.Graphics gfx;
 
         /// <summary>
@@ -105,9 +108,9 @@ namespace drawing
             this.data_pad_right = data_pad_right;
             this.data_pad_bottom = data_pad_bottom;
         }
-        
+
         /// <summary>
-        /// Center the data view on a specific (X, Y) point in space. 
+        /// Center the data view on a specific (X, Y) point in space.
         /// This does not change scale/zoom.
         /// </summary>
         /// <param name="position_units_x">location in graph units</param>
@@ -133,12 +136,11 @@ namespace drawing
 
             System.Console.WriteLine(view_width);
 
-            axis_X1 = frac_x * limit_width + axis_limit_X1 - view_width/2;
-            axis_X2 = frac_x * limit_width + axis_limit_X1 + view_width/2;
-            axis_Y1 = frac_y * limit_height + axis_limit_Y1 - view_height/2;
-            axis_Y2 = frac_y * limit_height + axis_limit_Y1 + view_height /2;
+            axis_X1 = frac_x * limit_width + axis_limit_X1 - view_width / 2;
+            axis_X2 = frac_x * limit_width + axis_limit_X1 + view_width / 2;
+            axis_Y1 = frac_y * limit_height + axis_limit_Y1 - view_height / 2;
+            axis_Y2 = frac_y * limit_height + axis_limit_Y1 + view_height / 2;
             Zoom();
-
         }
 
         public void AxisSet(double X1, double X2, double Y1, double Y2)
@@ -169,12 +171,12 @@ namespace drawing
         /// Call this after panning, even though scale is (1,1).
         /// </summary>
         /// <param name="scale"></param>
-        public void Zoom(double scaleX=1.0, double scaleY=1.0)
+        public void Zoom(double scaleX = 1.0, double scaleY = 1.0)
         {
             // recalculate the center point (which will not change by zoom)
             axis_center_X = (axis_X2 + axis_X1) / 2;
             axis_center_Y = (axis_Y2 + axis_Y1) / 2;
-            
+
             // zoom only if necessary to reduce floating point errors
             if (!(scaleX == 1.0))
             {
@@ -189,7 +191,7 @@ namespace drawing
                 axis_Y1 = axis_center_Y - axis_Y_pad * scaleY;
                 axis_Y2 = axis_center_Y + axis_Y_pad * scaleY;
             }
-            
+
             // limit the axis values constraining them to the field area
             if (axis_constrain)
             {
@@ -211,7 +213,7 @@ namespace drawing
                 axis_Y1 = Math.Max(axis_Y1, axis_limit_Y1);
                 axis_Y2 = Math.Min(axis_Y2, axis_limit_Y2);
             }
-            
+
             // recalculate visible fractions (useful for scrollbar widths)
             axis_visible_frac_X = (axis_X2 - axis_X1) / (axis_limit_X2 - axis_limit_X1);
             axis_visible_frac_Y = (axis_Y2 - axis_Y1) / (axis_limit_Y2 - axis_limit_Y1);
@@ -225,7 +227,6 @@ namespace drawing
             units_per_pixel_X = (axis_X2 - axis_X1) / data_width;
             pixels_per_unit_Y = data_height / (axis_Y2 - axis_Y1);
             units_per_pixel_Y = (axis_Y2 - axis_Y1) / data_height;
-
         }
 
         /// <summary>
@@ -235,7 +236,6 @@ namespace drawing
         /// <param name="figure_height">width (px) of the entire plot image</param>
         public void Resize(int figure_width, int figure_height)
         {
-
             this.figure_width = figure_width;
             this.figure_height = figure_height;
 
@@ -271,7 +271,6 @@ namespace drawing
             msg += string.Format("\nVertical Position: {0}", axis_position_frac_Y);
 
             System.Console.WriteLine(msg);
-            
         }
 
         /// <summary>
@@ -291,7 +290,7 @@ namespace drawing
             // prepare pens
             Pen penAxis = new Pen(color_axis_text);
             Pen penGrid = new Pen(color_grid);
-            penGrid.DashPattern = new float[] {4, 4};
+            penGrid.DashPattern = new float[] { 4, 4 };
 
             // fill the whole canvas with the default background color
             gfx.Clear(color_figure_background);
@@ -300,7 +299,7 @@ namespace drawing
             gfx.FillRectangle(new SolidBrush(color_data_background), data_rectangle);
 
             // draw a highlight color on the far left
-            gfx.FillRectangle(new SolidBrush(color_data_highlight), new Rectangle(0, 0, 30, figure_height-data_pad_bottom));
+            gfx.FillRectangle(new SolidBrush(color_data_highlight), new Rectangle(0, 0, 30, figure_height - data_pad_bottom));
 
             // vertical axis label (complicated becasue it's rotated)
             string axis_label_y = "Analog Input 0\n(pA)";
@@ -310,18 +309,18 @@ namespace drawing
             gfx.ResetTransform();
 
             // title
-            gfx.DrawString("ScottPlot Does Amazing Things", font_title, new SolidBrush(color_axis_text), new Point(figure_width / 2, data_pad_top/2-8), string_format_center);
+            gfx.DrawString("ScottPlot Does Amazing Things", font_title, new SolidBrush(color_axis_text), new Point(figure_width / 2, data_pad_top / 2 - 8), string_format_center);
 
             // horizontal axis label
-            gfx.DrawString("Time (ms)", font_axis_labels, new SolidBrush(color_axis_text), new Point(figure_width / 2, figure_height-data_pad_bottom/2), string_format_center);
+            gfx.DrawString("Time (ms)", font_axis_labels, new SolidBrush(color_axis_text), new Point(figure_width / 2, figure_height - data_pad_bottom / 2), string_format_center);
 
             // horizontal axis
             foreach (double tickValX in TickGen(axis_X1, axis_X2, data_width))
             {
-                int tickPx = (int)((tickValX - axis_X1)*(double)this.pixels_per_unit_X)+data_pos_left;
+                int tickPx = (int)((tickValX - axis_X1) * (double)this.pixels_per_unit_X) + data_pos_left;
                 gfx.DrawLine(penGrid, new Point(tickPx, data_pos_top), new Point(tickPx, data_pos_bottom));
                 gfx.DrawLine(penAxis, new Point(tickPx, data_pos_bottom), new Point(tickPx, data_pos_bottom + 3));
-                string tickLabel = TickString(tickValX, this.axis_X2-this.axis_X1);
+                string tickLabel = TickString(tickValX, this.axis_X2 - this.axis_X1);
                 gfx.DrawString(tickLabel, font_axis_labels, new SolidBrush(color_axis_text), new Point(tickPx, data_pos_bottom + 8), string_format_center);
             }
 
@@ -330,16 +329,15 @@ namespace drawing
             {
                 int tickPx = data_pos_bottom - (int)((tickValY - axis_Y1) * (double)this.pixels_per_unit_Y);
                 gfx.DrawLine(penGrid, new Point(data_pos_left, tickPx), new Point(data_pos_right, tickPx));
-                gfx.DrawLine(penAxis, new Point(data_pos_left-3, tickPx), new Point(data_pos_left, tickPx));
+                gfx.DrawLine(penAxis, new Point(data_pos_left - 3, tickPx), new Point(data_pos_left, tickPx));
                 string tickLabel = TickString(tickValY, this.axis_Y2 - this.axis_Y1);
-                gfx.DrawString(tickLabel, font_axis_labels, new SolidBrush(color_axis_text), new Point(data_pos_left - 3, tickPx-8), string_format_right);
+                gfx.DrawString(tickLabel, font_axis_labels, new SolidBrush(color_axis_text), new Point(data_pos_left - 3, tickPx - 8), string_format_right);
             }
 
             // draw a black line around the data area
             gfx.DrawRectangle(penAxis, data_pos_left, data_pos_top, data_width, data_height);
 
             return this.bitmap;
-
         }
 
         /// <summary>
@@ -414,6 +412,5 @@ namespace drawing
             }
             return values.ToArray();
         }
-
     }
 }
