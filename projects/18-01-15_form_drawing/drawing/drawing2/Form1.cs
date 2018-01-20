@@ -16,5 +16,15 @@ namespace drawing2
         {
             InitializeComponent();
         }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
     }
 }

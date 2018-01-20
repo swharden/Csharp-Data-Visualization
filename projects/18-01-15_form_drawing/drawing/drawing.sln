@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drawing", "drawing\drawing.csproj", "{FD0C4F8F-3919-4844-8566-4C52808D721F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01 pixel placement", "drawing\01 pixel placement.csproj", "{FD0C4F8F-3919-4844-8566-4C52808D721F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "drawing2", "drawing2\drawing2.csproj", "{E36A98B4-0FBF-4F9C-A6B5-1BAC93D8CBEF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02 table layout", "drawing2\02 table layout.csproj", "{E36A98B4-0FBF-4F9C-A6B5-1BAC93D8CBEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03 functional", "03 functional\03 functional.csproj", "{A9CA9EB9-2E7B-45AF-9B39-A8A89BE77F62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E36A98B4-0FBF-4F9C-A6B5-1BAC93D8CBEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E36A98B4-0FBF-4F9C-A6B5-1BAC93D8CBEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E36A98B4-0FBF-4F9C-A6B5-1BAC93D8CBEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9CA9EB9-2E7B-45AF-9B39-A8A89BE77F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9CA9EB9-2E7B-45AF-9B39-A8A89BE77F62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9CA9EB9-2E7B-45AF-9B39-A8A89BE77F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9CA9EB9-2E7B-45AF-9B39-A8A89BE77F62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
