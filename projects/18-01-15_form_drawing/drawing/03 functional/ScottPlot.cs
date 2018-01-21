@@ -78,7 +78,7 @@ namespace _03_functional
         private double units_per_pixel_Y;
 
         // markers
-        public int[] markers_px = { 50, 100, 150, 200 };
+        public int[] markers_px = { 0,0,0,0 };
         public bool[] markers_visible = { false, false, false, false };
 
         // graphics objects
@@ -93,8 +93,12 @@ namespace _03_functional
         /// <param name="figure_height">width (px) of the entire plot image</param>
         public ScottPlot(int figure_width, int figure_height)
         {
-            Pad(40, 0, 1, 20); // default padding is fixed
+            Pad(40, 0, 1, 20);
             Resize(figure_width, figure_height);
+
+            // reset marker positions
+            Marker_bring_offscreen_markers();
+            markers_visible = new bool[] { false, false, false, false };
         }
 
         /// <summary>
@@ -354,10 +358,19 @@ namespace _03_functional
             return this.bitmap;
         }
 
-        
+        public void Marker_bring_offscreen_markers(bool resetEveryMarker=false)
+        {
+            for (int i = 0; i < markers_px.Length; i++)
+            {
+                if (resetEveryMarker==false && markers_px[i] > data_pos_left && markers_px[i] < data_pos_right) continue;
+                int spacingPx = (data_pos_right - data_pos_left) / (markers_px.Length + 1);
+                markers_px[i] = (i + 1) * spacingPx + data_pos_left;
+                if (resetEveryMarker==false) markers_visible[i] = true;
+            }
+        }
         public void MarkerSet(int markerNumber, int pixelLocation, bool visible)
         {
-            System.Console.WriteLine($"{pixelLocation}");
+            if (markerNumber == 0) return;
             this.markers_px[markerNumber - 1] = pixelLocation;
             this.markers_visible[markerNumber - 1] = visible;            
         }

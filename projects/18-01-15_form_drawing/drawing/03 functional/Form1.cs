@@ -82,25 +82,36 @@ namespace _03_functional
         // ZOOM BUTTONS
         // ############
 
+        private double _buttom_zoom_factor = .2;
+
         private void btn_zoom_y_in_Click(object sender, EventArgs e)
         {
-
+            scottPlot.Zoom(1, 1 - _buttom_zoom_factor);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
         }
 
         private void btn_zoom_y_out_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void btn_zoom_x_out_Click(object sender, EventArgs e)
-        {
-
+            scottPlot.Zoom(1, 1 + _buttom_zoom_factor);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
         }
 
         private void btn_zoom_x_in_Click(object sender, EventArgs e)
         {
-
+            scottPlot.Zoom(1 - _buttom_zoom_factor, 1);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
         }
+
+        private void btn_zoom_x_out_Click(object sender, EventArgs e)
+        {
+            scottPlot.Zoom(1 + _buttom_zoom_factor, 1);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
 
 
 
@@ -251,6 +262,15 @@ namespace _03_functional
                     );
         }
 
+        private bool Mouse_over_markerBar()
+        {
+            if (mouse_position.X < pb_markers.Location.X) return false;
+            if (mouse_position.X > pb_markers.Location.X + pb_markers.Width) return false;
+            if (mouse_position.Y < pb_markers.Location.Y) return false;
+            if (mouse_position.Y > pb_markers.Location.Y + pb_markers.Height) return false;
+            return true;
+        }
+
         private int Mouse_over_marker()
         {
             if (mouse_position.Y > 13) return 0;
@@ -320,6 +340,7 @@ namespace _03_functional
         private void MouseTracker_down(object sender, MouseEventArgs e)
         {
             // update position information
+            MouseTracker_move(sender, e); // updates mouse X/Y position
             mouse_position_down = mouse_position;
             mouse_position_up = mouse_position;
             mouse_grabbed_marker = Mouse_over_marker();
@@ -341,15 +362,49 @@ namespace _03_functional
                 marker_right_click_menu.MenuItems.Add(new MenuItem($"hide marker {mouse_grabbed_marker}", new EventHandler(Marker_hide)));
                 marker_right_click_menu.MenuItems.Add(new MenuItem($"set position of marker {mouse_grabbed_marker}"));
                 marker_right_click_menu.Show(panel_dataView, mouse_position);
+            }
 
+            if (mouse_grabbed_marker == 0 && Mouse_over_markerBar()==true && e.Button == MouseButtons.Right)
+            {
+                // right-clicking the marker bar outside a marker
+                ContextMenu marker_right_click_menu = new ContextMenu();
+                marker_right_click_menu.MenuItems.Add(new MenuItem("bring offscreen markers here", new EventHandler(Marker_bring_marks)));
+                marker_right_click_menu.MenuItems.Add(new MenuItem("reset all marker positions", new EventHandler(Marker_reset_marks)));
+                marker_right_click_menu.MenuItems.Add(new MenuItem("show all markers", new EventHandler(Marker_show_all)));
+                marker_right_click_menu.MenuItems.Add(new MenuItem("hide all markers", new EventHandler(Marker_hide_all)));
+                marker_right_click_menu.Show(panel_dataView, mouse_position);
             }
 
             MouseTracker_info();
         }
 
+        private void Marker_bring_marks(object sender, EventArgs e)
+        {
+            scottPlot.Marker_bring_offscreen_markers();
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+        private void Marker_reset_marks(object sender, EventArgs e)
+        {
+            scottPlot.Marker_bring_offscreen_markers(true);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+        private void Marker_show_all(object sender, EventArgs e)
+        {
+            for (int i=0; i<scottPlot.markers_px.Length; i++) scottPlot.markers_visible[i] = true;
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+        private void Marker_hide_all(object sender, EventArgs e)
+        {
+            for (int i = 0; i < scottPlot.markers_px.Length; i++) scottPlot.markers_visible[i] = false;
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
         private void Marker_show(object sender, EventArgs e)
         {
-            //System.Console.WriteLine($"SHOW MARKER {mouse_grabbed_marker}");
             scottPlot.markers_visible[mouse_grabbed_marker - 1] = true;
             dataView_redraw_markers();
             dataView_redraw_graph();
@@ -357,7 +412,6 @@ namespace _03_functional
 
         private void Marker_hide(object sender, EventArgs e)
         {
-            //System.Console.WriteLine($"SHOW MARKER {mouse_grabbed_marker}");
             scottPlot.markers_visible[mouse_grabbed_marker - 1] = false;
             dataView_redraw_markers();
             dataView_redraw_graph();
@@ -371,8 +425,13 @@ namespace _03_functional
         private void MouseTracker_up(object sender, MouseEventArgs e)
         {
             // update position information
+            MouseTracker_move(sender, e); // updates mouse X/Y position
             mouse_position_up = new Point(mouse_position.X, mouse_position.Y);
-            MouseTracker_info();
+            if (marker_selected > 0)
+            {
+                marker_selected = 0;
+                dataView_redraw_markers();
+            }
         }
 
         private void mouse_track_this_control(Control control)
