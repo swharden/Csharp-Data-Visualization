@@ -73,14 +73,16 @@ namespace _03_functional
 
         // axis scale
         private double pixels_per_unit_X;
-
         private double pixels_per_unit_Y;
         private double units_per_pixel_X;
         private double units_per_pixel_Y;
 
+        // markers
+        public int[] markers_px = { 50, 100, 150, 200 };
+        public bool[] markers_visible = { false, false, false, false };
+
         // graphics objects
         private Bitmap bitmap;
-
         private System.Drawing.Graphics gfx;
 
         /// <summary>
@@ -290,6 +292,7 @@ namespace _03_functional
             // prepare pens
             Pen penAxis = new Pen(color_axis_text);
             Pen penGrid = new Pen(color_grid);
+            Pen penMarkers = new Pen(Color.Gray);
             penGrid.DashPattern = new float[] { 4, 4 };
 
             // fill the whole canvas with the default background color
@@ -338,8 +341,25 @@ namespace _03_functional
             // draw a black line around the data area
             gfx.DrawRectangle(penAxis, data_pos_left, data_pos_top, data_width, data_height);
 
+            // draw markers if they exist
+            for (int i=0; i<markers_px.Length; i++)
+            {
+                if (this.markers_visible[i]==true)
+                {
+                    gfx.DrawLine(penMarkers, markers_px[i], 0, markers_px[i], data_pos_bottom);
+                }                
+            }
+
             return this.bitmap;
         }
+
+        
+        public void MarkerSet(int markerNumber, int pixelLocation, bool visible)
+        {
+            this.markers_px[markerNumber - 1] = pixelLocation;
+            this.markers_visible[markerNumber - 1] = visible;            
+        }
+
 
         /// <summary>
         /// return the bitmap we last rendered
