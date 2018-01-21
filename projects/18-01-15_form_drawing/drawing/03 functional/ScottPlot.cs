@@ -344,7 +344,8 @@ namespace _03_functional
             // draw markers if they exist
             for (int i=0; i<markers_px.Length; i++)
             {
-                if (this.markers_visible[i]==true)
+                // only draw markers flagged as visible and if their position is in the data area
+                if (this.markers_visible[i]==true && this.markers_px[i] > data_pos_left && this.markers_px[i] < data_pos_right)
                 {
                     gfx.DrawLine(penMarkers, markers_px[i], 0, markers_px[i], data_pos_bottom);
                 }                
@@ -356,6 +357,7 @@ namespace _03_functional
         
         public void MarkerSet(int markerNumber, int pixelLocation, bool visible)
         {
+            System.Console.WriteLine($"{pixelLocation}");
             this.markers_px[markerNumber - 1] = pixelLocation;
             this.markers_visible[markerNumber - 1] = visible;            
         }

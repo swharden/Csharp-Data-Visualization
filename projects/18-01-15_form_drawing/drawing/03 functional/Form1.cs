@@ -283,7 +283,7 @@ namespace _03_functional
                 // account for dragging a marker
                 if (mouse_grabbed_marker > 0)
                 {
-                    scottPlot.markers_px[mouse_grabbed_marker-1] = mouse_position.X - pb_markers.Location.X;
+                    scottPlot.MarkerSet(marker_selected, mouse_position.X - pb_markers.Location.X, true);
                     dataView_redraw_markers();
                     dataView_redraw_graph();
                 }
@@ -316,10 +316,7 @@ namespace _03_functional
 
 
         }
-
-
         
-
         private void MouseTracker_down(object sender, MouseEventArgs e)
         {
             // update position information
@@ -327,16 +324,50 @@ namespace _03_functional
             mouse_position_up = mouse_position;
             mouse_grabbed_marker = Mouse_over_marker();
 
-            if (mouse_grabbed_marker > 0)
+            if (mouse_grabbed_marker > 0 && e.Button == MouseButtons.Left)
             {
+                // we need to drag/move a marker
                 marker_selected = mouse_grabbed_marker;
                 scottPlot.MarkerSet(marker_selected, mouse_position.X - pb_markers.Location.X, true);
                 dataView_redraw_markers();
                 dataView_redraw_graph();
             }
 
+            if (mouse_grabbed_marker > 0 && e.Button == MouseButtons.Right)
+            {
+                // we are right-clicking a marker
+                ContextMenu marker_right_click_menu = new ContextMenu();
+                marker_right_click_menu.MenuItems.Add(new MenuItem($"show marker {mouse_grabbed_marker}", new EventHandler(Marker_show)));
+                marker_right_click_menu.MenuItems.Add(new MenuItem($"hide marker {mouse_grabbed_marker}", new EventHandler(Marker_hide)));
+                marker_right_click_menu.MenuItems.Add(new MenuItem($"set position of marker {mouse_grabbed_marker}"));
+                marker_right_click_menu.Show(panel_dataView, mouse_position);
+
+            }
+
             MouseTracker_info();
         }
+
+        private void Marker_show(object sender, EventArgs e)
+        {
+            //System.Console.WriteLine($"SHOW MARKER {mouse_grabbed_marker}");
+            scottPlot.markers_visible[mouse_grabbed_marker - 1] = true;
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
+        private void Marker_hide(object sender, EventArgs e)
+        {
+            //System.Console.WriteLine($"SHOW MARKER {mouse_grabbed_marker}");
+            scottPlot.markers_visible[mouse_grabbed_marker - 1] = false;
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
+        private void Marker_set(object sender, EventArgs e)
+        {
+            throw new NotImplementedException("set marker not yet supported");
+        }
+
         private void MouseTracker_up(object sender, MouseEventArgs e)
         {
             // update position information
