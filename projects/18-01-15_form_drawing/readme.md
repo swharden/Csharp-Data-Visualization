@@ -30,5 +30,5 @@ I started over and made a nicer layout which entirely uses nested tables. I foun
 ### Implementation
 ![](layout2.PNG)
 
-### This is getting pretty close!
-![](screenshot.png)
+### My version is getting pretty close!
+<img src="screenshot.png">
