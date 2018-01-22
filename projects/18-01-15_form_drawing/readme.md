@@ -1,8 +1,15 @@
-# DataView Control
+# DataView: A ClampFit-like Data Browser
 
-The goal of this project is to create a user control to easily navigate evenly-spaced data. This is ideal for visualizing temperature over time, audio data, electrophysiological recordings, etc. I will attempt to re-create ClampFit's data interactive interface in facetious detail.
+Description | ClampFit | DataView
+---|---|---
+As a challenge I decided to use only the standard library to make a data browsing user control as similar to a ClampFit as possible (a data analysis tool for electrical recordings). I accomplished this ~95% to my satisfaction, and learned a lot along the way. Insights I gained while developing this project will help me construct faster and lighter graphing tools in the future, ideally with extremly simple APIs. Although I'm going to abandon this for a ground-up recode, this project is provided as-is for reference. | ![](clampfit2.png) | ![](screenshot2.png)
+
+---
+
+# Project Log
 
 ## Inspection of ClampFit Interface
+The first step of this project involved mentally deconstructing the layout of the ClampFit interface.
 
 ![](clampfit2.png)
 
@@ -12,7 +19,7 @@ This is what a data window looks like inside ClampFit. Although there is a toolb
 
 The image inside the data area of this sunken panel is extremely similar to what [ScottPlot](https://github.com/swharden/ScottPlot) can do, so with a little tweaking we should be able to create a problem that mimics this one. 
 
-<img src="plan.PNG">
+![](plan.PNG)
 
 This is how I intend to break-up my form. I'll keep as much as possible as windows form events (labels, scrollbars, etc) and minimize the size and complexity of the bitmap I'll be updating with the axis and data changes. I suspect I can do this with two primary table layout controls. This would almost work perfectly as a single table layout (grid), but the label on the bottom right spans two columns so if I intend to be exact to the ClampFit screenshot, I'll stick with nested layouts.
 
@@ -47,6 +54,7 @@ It works well up to about 1,000,000 points, but then starts to slow down a bit. 
 * Drawing max/min binned data rather than each data point: [`Render_data()`](https://github.com/swharden/Csharp-Data-Visualization/blob/master/projects/18-01-15_form_drawing/drawing/03%20functional/ScottPlot.cs#L304)
 * Draggable elements are entirely pixel shapes in memory and creative mouseover detection
 * Although the marker bar and data window are two different controls, they don't feel like it
+* Axis "limits" (the edges of how far you can scroll) are useful, and required to set scrollbar widths.
 
 ### What can be improved:
 * Interactive elements (markers, and later peak detectors and such) should have their own layer(s). Perhaps functions could "build" a bitmap as it renders by layering-on things like shaded regions, etc. This should be planned carefully.
