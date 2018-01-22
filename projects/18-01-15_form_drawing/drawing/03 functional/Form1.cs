@@ -184,26 +184,22 @@ namespace _03_functional
         // SCROLL BAR MOUSE DETECTION
         // ##########################
 
-        private void ScollBarMoved()
-        {
-            double fracY = 1 - ((double)vScrollBar1.Value) / (vScrollBar1.Maximum - vScrollBar1.LargeChange + 1);
-            double fracX = ((double)hScrollBar1.Value) / (hScrollBar1.Maximum - hScrollBar1.LargeChange + 1);
-            scottPlot.PanToFrac(fracX, fracY);
-            dataView_redraw_markers();
-            dataView_redraw_graph();
-
-        }
-
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             if (System.Windows.Forms.Control.MouseButtons == MouseButtons.Left) return; // wait for user to let go before moving
-            ScollBarMoved();
+            double fracX = ((double)hScrollBar1.Value) / (hScrollBar1.Maximum - hScrollBar1.LargeChange + 1);
+            scottPlot.PanToFrac(fracX, scottPlot.axis_position_frac_Y);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             if (System.Windows.Forms.Control.MouseButtons == MouseButtons.Left) return; // wait for user to let go before moving
-            ScollBarMoved();
+            double fracY = 1 - ((double)vScrollBar1.Value) / (vScrollBar1.Maximum - vScrollBar1.LargeChange + 1);
+            scottPlot.PanToFrac(scottPlot.axis_position_frac_X, fracY);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
         }
 
 
