@@ -30,5 +30,25 @@ I started over and made a nicer layout which entirely uses nested tables. I foun
 ### Implementation
 ![](layout2.PNG)
 
-### My version is getting pretty close!
-<img src="screenshot.png">
+### This version got pretty close!
+
+![](screenshot2.png)
+
+I didn't try to make it look _exactly_ like ClampFit, but I wanted it to be similar enough that anyone who knows how to one will know how to use the other. You can zoom by left-click-dragging the axis marks. You can move markers. You can show/hide/bring markers by right-clicking them or the marker bar. This is a strong start!
+
+It works well up to about 1,000,000 points, but then starts to slow down a bit. There are some easy structural changes to the plotting methods which can greatly improve speed (and API simplicity), but it would require a ground-up recode so I'll freeze this project where it is.
+
+## What I learned / next iteration improvements
+
+### What worked well:
+* Table layouts for everything - no code was required to reposition buttons or scrollbars when the window resizes
+* Using a picturebox instead of setting the background of a panel
+* Having an axis/grid bitmap and a data bitmap that can be drawn on sequentially. This made drawing stacked sweeps very easy
+* Drawing max/min binned data rather than each data point: [`Render_data()`](https://github.com/swharden/Csharp-Data-Visualization/blob/master/projects/18-01-15_form_drawing/drawing/03%20functional/ScottPlot.cs#L304)
+* Draggable elements are entirely pixel shapes in memory and creative mouseover detection
+* Although the marker bar and data window are two different controls, they don't feel like it
+
+### What can be improved:
+* Interactive elements (markers, and later peak detectors and such) should have their own layer(s). Perhaps functions could "build" a bitmap as it renders by layering-on things like shaded regions, etc. This should be planned carefully.
+* For data loaded into sweeps, the pixel binning can be computationally intense. Perhaps we should store all this data in a list after it's calculated once, then cycling through sweeps will be fast (it loads the list rather than regenerating it).
+* I like the idea of starting with a base ScottPlot class and modyfing it to fit a need, rather than weighing it down with all the bells and whistles.
