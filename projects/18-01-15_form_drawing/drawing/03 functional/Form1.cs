@@ -38,15 +38,76 @@ namespace _03_functional
 
         // MID LEVEL THINGS
 
+        private System.Diagnostics.Stopwatch stopwatch = System.Diagnostics.Stopwatch.StartNew();
+
         private void dataView_redraw_graph()
         {
-            pb_graph.Image = scottPlot.Render();
+            // seems like a good time to update our scrollbar positions and sizes
+            dataView_update_scrollbars();
+
+            this.stopwatch.Reset();
+            this.stopwatch.Start();
+            System.Console.WriteLine(dataValues.Count);
+
+            if (display_sweeps_stacked)
+            {
+                int nSweeps = dataValues.Count / display_sweep_length;
+
+                // manually define limits since they're not intuitive
+                scottPlot.axis_limit_X1 = 0;
+                scottPlot.axis_limit_X2 = 5E-05 * display_sweep_length;
+                scottPlot.axis_limit_Y1 = -500;
+                scottPlot.axis_limit_Y2 = 1200;
+
+                // manually render the frame before we start
+                scottPlot.Render_frame();
+
+                // draw the data sweep by sweep
+                for (int sweepNumber=0; sweepNumber < nSweeps; sweepNumber++)
+                {
+                    List<double> sweepData = dataValues.GetRange(sweepNumber * display_sweep_length, display_sweep_length);
+                    System.Console.WriteLine($"Sweep {sweepNumber+1} first value: {sweepData[0]}");
+                    scottPlot.Render_data(sweepData, 5E-05, 0, sweepNumber*5);
+                }
+                
+                // update the image without drawing over the background
+                pb_graph.Image = scottPlot.GetBitmap(false, true);
+
+            } else
+            {
+                // simply render whatever is loaded in dataValues without worrying with sweeps
+                scottPlot.Render_frame();
+                scottPlot.Render_data(dataValues);
+                pb_graph.Image = scottPlot.GetBitmap(false, true);
+            }
+            
+            
+            this.stopwatch.Stop();
         }
-        
+
+        private int ClampNumber(int integer, int minimum_value, int maximum_value)
+        {
+            return Math.Min(Math.Max(integer, minimum_value), maximum_value);
+        }
+        private double ClampNumber(double integer, double minimum_value, double maximum_value)
+        {
+            return Math.Min(Math.Max(integer, minimum_value), maximum_value);
+        }
+
         private void dataView_update_scrollbars()
         {
-            hScrollBar1.Value = 50;
-            vScrollBar1.Value = 50;
+            int h = (int)(scottPlot.axis_visible_frac_X * hScrollBar1.Maximum);
+            hScrollBar1.LargeChange = ClampNumber(h, hScrollBar1.Maximum / 20, hScrollBar1.Maximum - 1);
+
+            int v = (int)(scottPlot.axis_visible_frac_Y * vScrollBar1.Maximum);
+            vScrollBar1.LargeChange = ClampNumber(v, vScrollBar1.Maximum / 20, vScrollBar1.Maximum - 1);
+
+            int ideal_h = (int)(scottPlot.axis_position_frac_X * hScrollBar1.Maximum - hScrollBar1.LargeChange / 2);
+            int ideal_v = (int)(scottPlot.axis_position_frac_Y * vScrollBar1.Maximum - vScrollBar1.LargeChange / 2);
+
+            hScrollBar1.Value = ClampNumber(ideal_h, hScrollBar1.Minimum, hScrollBar1.Maximum);
+            vScrollBar1.Value = ClampNumber(ideal_v, vScrollBar1.Minimum, vScrollBar1.Maximum);
+
         }
 
         private void dataView_update_labels()
@@ -82,7 +143,7 @@ namespace _03_functional
         // ZOOM BUTTONS
         // ############
 
-        private double _buttom_zoom_factor = .2;
+        private double _buttom_zoom_factor = .4;
 
         private void btn_zoom_y_in_Click(object sender, EventArgs e)
         {
@@ -123,14 +184,26 @@ namespace _03_functional
         // SCROLL BAR MOUSE DETECTION
         // ##########################
 
+        private void ScollBarMoved()
+        {
+            double fracY = 1 - ((double)vScrollBar1.Value) / (vScrollBar1.Maximum - vScrollBar1.LargeChange + 1);
+            double fracX = ((double)hScrollBar1.Value) / (hScrollBar1.Maximum - hScrollBar1.LargeChange + 1);
+            scottPlot.PanToFrac(fracX, fracY);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+
+        }
+
         private void hScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-
+            if (System.Windows.Forms.Control.MouseButtons == MouseButtons.Left) return; // wait for user to let go before moving
+            ScollBarMoved();
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
-
+            if (System.Windows.Forms.Control.MouseButtons == MouseButtons.Left) return; // wait for user to let go before moving
+            ScollBarMoved();
         }
 
 
@@ -161,20 +234,10 @@ namespace _03_functional
             Graphics gfx_markers = Graphics.FromImage(bmp_markers);
             gfx_markers.Clear(SystemColors.Control);
 
-            //int marker_position_1 = 10;
-            //int marker_position_2 = 50;
-            //int marker_position_3 = 80;
-            //int marker_position_4 = 120;
-
-
-
             // prepare brushes and fonts
-
             Font font = new Font("arial", 9, FontStyle.Regular);
             StringFormat stringFormat = new StringFormat();
             stringFormat.Alignment = StringAlignment.Center;
-
-
 
             for (int i = 0; i < scottPlot.markers_px.Length; i++)
             {
@@ -227,10 +290,13 @@ namespace _03_functional
 
         private void MouseTracker_info()
         {
+            double timeMS = this.stopwatch.ElapsedTicks * 1000 / System.Diagnostics.Stopwatch.Frequency;
             string msg = $"POSITION: {mouse_position.X}, {mouse_position.Y}\n";
             msg += $"MOUSE DOWN: {mouse_position_down.X}, {mouse_position_down.Y}\n";
             msg += $"MOUSE UP: {mouse_position_up.X}, {mouse_position_up.Y}\n";
-            msg += $"SELECTION: {mouse_selection_rectangle.ToString()}\n";
+            msg += $"SELECTION:{ mouse_selection_rectangle.X}, {mouse_selection_rectangle.Y}";
+            msg += $" (size: { mouse_selection_rectangle.Width}, {mouse_selection_rectangle.Height})\n";
+            msg += $"RENDERED {dataValues.Count} points in {timeMS} ms";
             richTextBox1.Text = msg;
         }
         
@@ -308,6 +374,19 @@ namespace _03_functional
                     dataView_redraw_graph();
                 }
 
+                // account for zooming
+                if (mouse_is_zooming_horizontally == true)
+                {
+                    scottPlot.mouse_zooming_X1px = mouse_position_down.X - pb_graph.Location.X - scottPlot.data_pos_left;
+                    scottPlot.mouse_zooming_X2px = mouse_position.X - pb_graph.Location.X - scottPlot.data_pos_left;
+                    dataView_redraw_graph();
+                }
+                if (mouse_is_zooming_vertically == true)
+                {
+                    scottPlot.mouse_zooming_Y1px = mouse_position_down.Y - pb_graph.Location.Y - 13;
+                    scottPlot.mouse_zooming_Y2px = mouse_position.Y - pb_graph.Location.Y - 13;
+                    dataView_redraw_graph();
+                }
             }
 
             // debugging message
@@ -336,7 +415,30 @@ namespace _03_functional
 
 
         }
-        
+        private void Autoscale_horizontal(object sender, EventArgs e)
+        {
+            scottPlot.AxisSet(scottPlot.axis_limit_X1, scottPlot.axis_limit_X2, scottPlot.axis_Y1, scottPlot.axis_Y2);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
+        private void Autoscale_vertical(object sender, EventArgs e)
+        {
+            scottPlot.AxisSet(scottPlot.axis_X1, scottPlot.axis_X2, scottPlot.axis_limit_Y1, scottPlot.axis_limit_Y2);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
+        private void Autoscale_all(object sender, EventArgs e)
+        {
+            scottPlot.AxisSet(scottPlot.axis_limit_X1, scottPlot.axis_limit_X2, scottPlot.axis_limit_Y1, scottPlot.axis_limit_Y2);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
+
+        private bool mouse_is_zooming_vertically = false;
+        private bool mouse_is_zooming_horizontally = false;
+
         private void MouseTracker_down(object sender, MouseEventArgs e)
         {
             // update position information
@@ -344,6 +446,33 @@ namespace _03_functional
             mouse_position_down = mouse_position;
             mouse_position_up = mouse_position;
             mouse_grabbed_marker = Mouse_over_marker();
+
+            // ZOOM AREAS
+            if (e.Button == MouseButtons.Left)
+            {
+                mouse_is_zooming_horizontally = Mouse_in_horizontal_zoom_area();
+                mouse_is_zooming_vertically = Mouse_in_vertical_zoom_area();
+            }
+
+            if (e.Button == MouseButtons.Right)
+            {
+                if (Mouse_in_horizontal_zoom_area())
+                {
+                    ContextMenu contextMenu = new ContextMenu();
+                    contextMenu.MenuItems.Add(new MenuItem("auto-scale horizontal", new EventHandler(Autoscale_horizontal)));
+                    contextMenu.MenuItems.Add(new MenuItem("auto-scale all", new EventHandler(Autoscale_all)));
+                    contextMenu.Show(panel_dataView, mouse_position);
+                }
+                if (Mouse_in_vertical_zoom_area())
+                {
+                    ContextMenu contextMenu = new ContextMenu();
+                    contextMenu.MenuItems.Add(new MenuItem("auto-scale vertical", new EventHandler(Autoscale_vertical)));
+                    contextMenu.MenuItems.Add(new MenuItem("auto-scale all", new EventHandler(Autoscale_all)));
+                    contextMenu.Show(panel_dataView, mouse_position);
+                }
+            }
+
+            // MARKERS
 
             if (mouse_grabbed_marker > 0 && e.Button == MouseButtons.Left)
             {
@@ -426,12 +555,53 @@ namespace _03_functional
         {
             // update position information
             MouseTracker_move(sender, e); // updates mouse X/Y position
+
+            // we are only interested in mouse-up events from LEFT clicks
+            // if (System.Windows.Forms.Control.MouseButtons != MouseButtons.Left) return;
+            
             mouse_position_up = new Point(mouse_position.X, mouse_position.Y);
             if (marker_selected > 0)
             {
                 marker_selected = 0;
                 dataView_redraw_markers();
             }
+
+            // see if an axis zoom just occurred
+            if (mouse_is_zooming_horizontally)
+            {
+                // update the axis based on where we let go
+                double posX1 = scottPlot.Position_X_units_from_px(scottPlot.mouse_zooming_X1px + scottPlot.data_pos_left) ;
+                double posX2 = scottPlot.Position_X_units_from_px(scottPlot.mouse_zooming_X2px + scottPlot.data_pos_left);
+                scottPlot.AxisSet(Math.Min(posX1, posX2), Math.Max(posX1, posX2), scottPlot.axis_Y1, scottPlot.axis_Y2);
+
+                // reset the zooming flags
+                scottPlot.mouse_zooming_X1px = 0;
+                scottPlot.mouse_zooming_X2px = 0;
+                mouse_is_zooming_horizontally = false;
+
+                // redraw the graph
+                dataView_redraw_markers();
+                dataView_redraw_graph();
+            }
+
+            if (mouse_is_zooming_vertically)
+            {
+                // update the axis based on where we let go
+                double posY1 = scottPlot.Position_Y_units_from_px(scottPlot.mouse_zooming_Y1px);
+                double posY2 = scottPlot.Position_Y_units_from_px(scottPlot.mouse_zooming_Y2px);
+                
+                scottPlot.AxisSet(scottPlot.axis_X1, scottPlot.axis_X2, Math.Min(posY1, posY2), Math.Max(posY1, posY2));
+
+                // reset the zooming flags
+                scottPlot.mouse_zooming_Y1px = 0;
+                scottPlot.mouse_zooming_Y2px = 0;
+                mouse_is_zooming_vertically = false;
+
+                // redraw the graph
+                dataView_redraw_markers();
+                dataView_redraw_graph();
+            }
+
         }
 
         private void mouse_track_this_control(Control control)
@@ -447,5 +617,60 @@ namespace _03_functional
 
         }
 
+        private List<double> dataValues = new List<double>();
+
+        private void Data_synthesize_noisy_sine(int data_point_count = 100)
+        {
+            // data will be stored at this class level
+            this.dataValues = new List<double>(data_point_count);
+
+            // synthesize the data and add salt
+            Random rand = new Random();
+            for (int i = 0; i < data_point_count; i++)
+            {
+                dataValues.Add(Math.Sin(20*i / (double)data_point_count) * 5 + rand.NextDouble());
+            }
+
+            // set limits based on data
+            double[] dataValuesArray = dataValues.ToArray();
+            scottPlot.axis_limit_X1 = 0; // add X offset here
+            scottPlot.axis_limit_X2 = 1.0 / 20000 * dataValuesArray.Length;
+            scottPlot.axis_limit_Y1 = dataValuesArray.Min();
+            scottPlot.axis_limit_Y2 = dataValuesArray.Max();
+            double Ycenter = (scottPlot.axis_limit_Y1 + scottPlot.axis_limit_Y2) / 2;
+            double Yhalf = Math.Abs(Ycenter - scottPlot.axis_limit_Y1);
+            scottPlot.axis_limit_Y1 -= Yhalf;
+            scottPlot.axis_limit_Y2 += Yhalf;
+            
+            // auto zoom to limits
+            Autoscale_all(null, null);
+            dataView_redraw_graph();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            display_sweeps_stacked = false;
+            display_sweep_length = 0; // continuous
+            Data_synthesize_noisy_sine(10_000);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            display_sweeps_stacked = false;
+            display_sweep_length = 0; // continuous
+            Data_synthesize_noisy_sine(60 * 60 * 20_000);
+        }
+
+        private bool display_sweeps_stacked;
+        private int display_sweep_length;
+        private void button2_Click(object sender, EventArgs e)
+        {
+            display_sweeps_stacked = true;
+            display_sweep_length = 10 * 20000; // ten second sweeps
+            Data_synthesize_noisy_sine(20 * 10 * 20_000);
+            scottPlot.AxisSet(0, display_sweep_length, -25, 125);
+            dataView_redraw_markers();
+            dataView_redraw_graph();
+        }
     }
 }

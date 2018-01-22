@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 
 using System.Drawing;
+using System.Linq; // lets us take min and max of lists
 
 namespace _03_functional
 {
@@ -51,11 +52,10 @@ namespace _03_functional
         public Color color_grid = Color.LightGray;
 
         // axis edges (the initial view of data)
-        private double axis_X1 = -100;
-
-        private double axis_X2 = 100;
-        private double axis_Y1 = -100;
-        private double axis_Y2 = 100;
+        public double axis_X1 = -100;
+        public double axis_X2 = 100;
+        public double axis_Y1 = -100;
+        public double axis_Y2 = 100;
 
         // data limits (how far you can scroll around)
         public bool axis_constrain = true;
@@ -78,12 +78,21 @@ namespace _03_functional
         private double units_per_pixel_Y;
 
         // markers
+        // TODO: make a marker struct
         public int[] markers_px = { 0,0,0,0 };
+        public double[] markers_units = { 0, 0, 0, 0 };
         public bool[] markers_visible = { false, false, false, false };
 
+        // actively zooming shaded areas
+        public int mouse_zooming_Y1px;
+        public int mouse_zooming_Y2px;
+        public int mouse_zooming_X1px;
+        public int mouse_zooming_X2px;
+
         // graphics objects
-        private Bitmap bitmap;
-        private System.Drawing.Graphics gfx;
+        private Bitmap bmpFrame;
+        private Bitmap bmpData;
+        private Graphics gfxData;
 
         /// <summary>
         /// Create a new ScottPlot figure.
@@ -95,10 +104,7 @@ namespace _03_functional
         {
             Pad(40, 0, 1, 20);
             Resize(figure_width, figure_height);
-
-            // reset marker positions
-            Marker_bring_offscreen_markers();
-            markers_visible = new bool[] { false, false, false, false };
+            Marker_bring_offscreen_markers(true);
         }
 
         /// <summary>
@@ -234,6 +240,9 @@ namespace _03_functional
             units_per_pixel_X = (axis_X2 - axis_X1) / data_width;
             pixels_per_unit_Y = data_height / (axis_Y2 - axis_Y1);
             units_per_pixel_Y = (axis_Y2 - axis_Y1) / data_height;
+
+            // recalculate marker positions
+            Markers_update_px_from_units();
         }
 
         /// <summary>
@@ -254,8 +263,7 @@ namespace _03_functional
             this.data_width = figure_width - data_pad_left - data_pad_right;
             this.data_rectangle = new Rectangle(data_pos_left, data_pos_top, data_width, data_height);
 
-            this.bitmap = new Bitmap(this.figure_width, this.figure_height);
-            this.gfx = Graphics.FromImage(this.bitmap);
+            this.bmpFrame = new Bitmap(this.figure_width, this.figure_height);
 
             Zoom();
         }
@@ -279,13 +287,54 @@ namespace _03_functional
 
             System.Console.WriteLine(msg);
         }
-
-        /// <summary>
-        /// Draw the figure frame with axis labels, ticks, etc.
-        /// Style it similar to how ClampFit displays ABF files.
-        /// </summary>
-        public Bitmap Render()
+        
+        public Bitmap GetBitmap(bool redraw_frame = true, bool draw_data = true)
         {
+            if (redraw_frame) Render_frame();
+            Bitmap bmp_axis_frame = this.bmpFrame;
+            if (draw_data)
+            {
+                // add data area on top of bitmap
+                Graphics gfx = Graphics.FromImage(bmp_axis_frame);
+                gfx.DrawImage(this.bmpData, new Point(data_pos_left, data_pos_top));
+            }
+            return bmp_axis_frame;
+        }
+
+        public void Render_data(List<double> valuesY, double spacingY = 1.0 / 20000, double offsetX = 0, double offsetY = 0)
+        {
+
+            // METHOD 2: BIN DATA AND PLOT MIN/MAX ONLY (complex, faster for large datasets)
+            double iPerPixel = units_per_pixel_X / spacingY;
+            double nDataPixels = spacingY * valuesY.Count / units_per_pixel_X;
+            double offsetPixels = -(axis_X1 - offsetX) / units_per_pixel_X;
+            List<Point> points = new List<Point>();
+            for (int x = 0; x < data_width; x++)
+            {
+                int iLeft = (int)((iPerPixel * ((x + 0) - offsetPixels)));
+                int iRight = (int)((iPerPixel * ((x + 1) - offsetPixels)));
+                if ((iLeft < 0) || (iRight <= 0)) continue;
+                if (iRight > valuesY.Count) continue;
+                if (iRight - iLeft == 0) continue;
+                double colMin = valuesY.GetRange(iLeft, iRight - iLeft).Min() + offsetY;
+                double colMax = valuesY.GetRange(iLeft, iRight - iLeft).Max() + offsetY;
+                colMin = data_height - (colMin - axis_Y1) * pixels_per_unit_Y;
+                colMax = data_height - (colMax - axis_Y1) * pixels_per_unit_Y;
+                points.Add(new Point(x, (int)colMin));
+                if ((int)colMin != (int)colMax) points.Add(new Point(x, (int)colMax));
+            }
+            if (points.Count > 1)
+            {
+                Pen pen = new Pen(new SolidBrush(Color.Red));
+                gfxData.DrawLines(new Pen(Color.Red, 1), points.ToArray());
+            }
+            
+
+        }
+
+        public void Render_frame()
+        {
+
             // prepare colors and fonts
             Font font_axis_labels = new Font("arial", 9, FontStyle.Regular);
             StringFormat string_format_center = new StringFormat();
@@ -298,6 +347,10 @@ namespace _03_functional
             Pen penGrid = new Pen(color_grid);
             Pen penMarkers = new Pen(Color.Gray);
             penGrid.DashPattern = new float[] { 4, 4 };
+            Brush brush_zoom = new SolidBrush(Color.FromArgb(100, 255, 0, 0));
+
+            // prepare a graphics object from the bitmap
+            Graphics gfx = Graphics.FromImage(this.bmpFrame);
 
             // fill the whole canvas with the default background color
             gfx.Clear(color_figure_background);
@@ -309,6 +362,29 @@ namespace _03_functional
             int major_tick_size = 5;
             int minor_tick_density = 12;
             int major_tick_density = 4;
+                        
+            // draw shaded areas behind an axis when zooming
+            int mouze_zooming_shaded_width = 8;
+            
+            if (mouse_zooming_Y2px != mouse_zooming_Y1px){
+                int height = Math.Abs(mouse_zooming_Y2px - mouse_zooming_Y1px);
+                int pxTop = Math.Min(mouse_zooming_Y2px, mouse_zooming_Y1px);
+                int pxBot = Math.Max(mouse_zooming_Y2px, mouse_zooming_Y1px);
+                Rectangle rect = new Rectangle(data_pad_left - mouze_zooming_shaded_width, 
+                                               pxTop, mouze_zooming_shaded_width, pxBot - pxTop);
+                gfx.FillRectangle(brush_zoom, rect);
+            }
+
+            if (mouse_zooming_X1px != mouse_zooming_X2px)
+            {
+                System.Console.WriteLine("DRAWING H");
+                int width = Math.Abs(mouse_zooming_X2px - mouse_zooming_X1px);
+                int pxLeft = Math.Min(mouse_zooming_X2px, mouse_zooming_X1px);
+                int pxRight = Math.Max(mouse_zooming_X2px, mouse_zooming_X1px);
+                Rectangle rect = new Rectangle(pxLeft + data_pad_left, data_pos_bottom, 
+                                               width, mouze_zooming_shaded_width);
+                gfx.FillRectangle(brush_zoom, rect);
+            }
 
             // horizontal axis
             foreach (double tickValX in TickGen(axis_X1, axis_X2, data_width, minor_tick_density))
@@ -337,9 +413,9 @@ namespace _03_functional
             {
                 int tickPx = data_pos_bottom - (int)((tickValY - axis_Y1) * (double)this.pixels_per_unit_Y);
                 gfx.DrawLine(penGrid, new Point(data_pos_left, tickPx), new Point(data_pos_right, tickPx));
-                gfx.DrawLine(penAxis, new Point(data_pos_left - major_tick_size, tickPx), new Point(data_pos_left, tickPx));
+                gfx.DrawLine(penAxis, new Point(data_pos_left - major_tick_size - 1, tickPx), new Point(data_pos_left, tickPx));
                 string tickLabel = TickString(tickValY, this.axis_Y2 - this.axis_Y1);
-                gfx.DrawString(tickLabel, font_axis_labels, new SolidBrush(color_axis_text), new Point(data_pos_left - major_tick_size, tickPx - 8), string_format_right);
+                gfx.DrawString(tickLabel, font_axis_labels, new SolidBrush(color_axis_text), new Point(data_pos_left - major_tick_size - 1, tickPx - 8), string_format_right);
             }
 
             // draw a black line around the data area
@@ -355,7 +431,9 @@ namespace _03_functional
                 }                
             }
 
-            return this.bitmap;
+            // load the new frame into the data bitmap
+            bmpData = new Bitmap(this.data_width, this.data_height);
+            gfxData = Graphics.FromImage(bmpData);
         }
 
         public void Marker_bring_offscreen_markers(bool resetEveryMarker=false)
@@ -367,12 +445,40 @@ namespace _03_functional
                 markers_px[i] = (i + 1) * spacingPx + data_pos_left;
                 if (resetEveryMarker==false) markers_visible[i] = true;
             }
+            Markers_update_px_to_units();
         }
         public void MarkerSet(int markerNumber, int pixelLocation, bool visible)
         {
             if (markerNumber == 0) return;
             this.markers_px[markerNumber - 1] = pixelLocation;
-            this.markers_visible[markerNumber - 1] = visible;            
+            this.markers_visible[markerNumber - 1] = visible;
+            Markers_update_px_to_units();
+        }
+
+        // return the pixel position ON THE GRAPH (not relative to the data box) given graph pixel value
+        public double Position_X_units_from_px(int px) { return (px - data_pos_left) * units_per_pixel_X + axis_X1; }
+        public double Position_Y_units_from_px(int px) { return (data_pos_bottom - px) * units_per_pixel_Y + axis_Y1; }
+
+        // return the pixel position ON THE GRAPH (not relative to the data box) given an axis unit value
+        public int Position_X_px_from_unit(double unit) { return (int)((unit - axis_X1) * pixels_per_unit_X); }
+        public int Position_Y_px_from_unit(double unit) { return (int)((axis_Y2 - unit) * pixels_per_unit_Y); }
+
+        public void Markers_update_px_from_units()
+        {
+            // call this after resizing
+            for (int i = 0; i < markers_px.Length; i++)
+            {
+                markers_px[i] = Position_X_px_from_unit(markers_units[i]);
+            }
+        }
+
+        public void Markers_update_px_to_units()
+        {
+            // call this after markers have been moved manually
+            for (int i=0; i<markers_px.Length; i++)
+            {
+                markers_units[i] = Position_X_units_from_px(markers_px[i]);
+            }
         }
 
 
@@ -382,7 +488,7 @@ namespace _03_functional
         /// <returns></returns>
         public Bitmap RenderedLast()
         {
-            return this.bitmap;
+            return this.bmpFrame;
         }
 
         /// <summary>
@@ -450,3 +556,4 @@ namespace _03_functional
         }
     }
 }
+ 

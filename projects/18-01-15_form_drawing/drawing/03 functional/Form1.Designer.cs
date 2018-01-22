@@ -375,36 +375,39 @@
             this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.richTextBox1.Location = new System.Drawing.Point(242, 9);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(405, 89);
+            this.richTextBox1.Size = new System.Drawing.Size(339, 89);
             this.richTextBox1.TabIndex = 15;
             this.richTextBox1.Text = "";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(734, 8);
+            this.button3.Location = new System.Drawing.Point(690, 9);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 33);
+            this.button3.Size = new System.Drawing.Size(97, 63);
             this.button3.TabIndex = 14;
-            this.button3.Text = "button3";
+            this.button3.Text = "stress test: noisy sine 1hr 20khz";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(653, 8);
+            this.button1.Location = new System.Drawing.Point(587, 9);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 33);
+            this.button1.Size = new System.Drawing.Size(97, 63);
             this.button1.TabIndex = 12;
-            this.button1.Text = "button1";
+            this.button1.Text = "10,000 values";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(815, 9);
+            this.button2.Location = new System.Drawing.Point(793, 9);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 33);
+            this.button2.Size = new System.Drawing.Size(97, 63);
             this.button2.TabIndex = 13;
-            this.button2.Text = "button2";
+            this.button2.Text = "stress test: 20 stacked 10s sweeps";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
