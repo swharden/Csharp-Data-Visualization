@@ -2,7 +2,8 @@
 This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) and only uses free software and plugins.
 
 * Each example below is a standalone Visual Studio solution
-* Projects increase in complexity from bottom to top
+* Projects typically increase in complexity from bottom to top
+* The goal is often to create a _user control_ for easy reusability into other projects
 * Work here is leading-up to the development of [ScottPlot](https://github.com/swharden/ScottPlot), an open-source interactive graphing library for .NET. I hope it will have a masterfully intuitive API, but I'm not ready to pull the trigger on a release yet.
 * The [projects folder](projects) contains in-progress and unfinished works. Only completed projects are listed below.
 
