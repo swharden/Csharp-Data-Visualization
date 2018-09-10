@@ -311,5 +311,17 @@ namespace ScottPlot
             pictureBox1_SizeChanged(null, null);
         }
 
+        /// <summary>
+        /// Force ScottPlot to redraw itself. This is helpful after changing axis limits or labels.
+        /// </summary>
+        public void Redraw()
+        {
+            pictureBox1_SizeChanged(null, null);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
