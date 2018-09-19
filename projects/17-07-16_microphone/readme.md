@@ -5,9 +5,9 @@
 
 ---
 
-# Below is the older project:
+# This is the original project:
 
-### Realtime Graphing of Microphone Audio with FFT Display using C# (Visual Studio 2017)
+**Realtime Graphing of Microphone Audio with FFT Display using C# (Visual Studio 2017)**
 
 ![](demo.gif)
 
