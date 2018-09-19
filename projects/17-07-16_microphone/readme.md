@@ -6,7 +6,7 @@ Check out: [18-09-19_microphone_FFT_revisited](https://github.com/swharden/Cshar
 
 ---
 
-## Realtime Graphing of Microphone Audio with FFT Display using C# (Visual Studio 2017)
+### Realtime Graphing of Microphone Audio with FFT Display using C# (Visual Studio 2017)
 
 ![](demo.gif)
 
