@@ -114,9 +114,7 @@ namespace ScottPlotMicrophoneFFT
             for (int i = 0; i < graphPointCount; i++)
             {
                 // read the int16 from the two bytes
-                byte byteLow = audioBytes[i * 2 + 1];
-                byte byteHigh = audioBytes[i * 2];
-                Int16 val = (short) (byteHigh * 256 + byteLow);
+                Int16 val = BitConverter.ToInt16(audioBytes, i * 2);
 
                 // store the value in Ys as a percent (+/- 100% = 200%)
                 pcm[i] = (double)(val) / Math.Pow(2,16) * 200.0;
