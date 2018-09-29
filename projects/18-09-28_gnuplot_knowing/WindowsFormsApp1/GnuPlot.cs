@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* This file originally came from the GnuplotCSharp project by James David Morris
+ * https://github.com/AwokeKnowing/GnuplotCSharp
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -9,21 +13,30 @@ namespace AwokeKnowing.GnuplotCSharp
 {
     class GnuPlot
     {
-        public static string PathToGnuplot = @"C:\Program Files (x86)\gnuplot\bin";
-        private static Process ExtPro;
-        private static StreamWriter GnupStWr;
-        private static List<StoredPlot> PlotBuffer;
-        private static List<StoredPlot> SPlotBuffer;
-        private static bool ReplotWithSplot;
+        private string pathGnuplotFolder;
+        private Process ExtPro;
+        private StreamWriter GnupStWr;
+        private List<StoredPlot> PlotBuffer;
+        private List<StoredPlot> SPlotBuffer;
+        private bool ReplotWithSplot;
 
-        public static bool Hold { get; private set; }
+        public bool Hold { get; private set; }
 
-        static GnuPlot()
+        public GnuPlot(string pathGnuplotFolder = @"C:\Program Files (x86)\gnuplot\bin")
         {
-            if (PathToGnuplot[PathToGnuplot.Length - 1].ToString() != @"\")
-                PathToGnuplot += @"\";
+            this.pathGnuplotFolder = pathGnuplotFolder;
+
+            if (pathGnuplotFolder[pathGnuplotFolder.Length - 1].ToString() != @"\")
+                pathGnuplotFolder += @"\";
+            string pathGnuplotExe = pathGnuplotFolder + "gnuplot.exe";
+
+            if (!System.IO.File.Exists(pathGnuplotExe))
+            {
+                throw new ArgumentException($"file does not exist: {pathGnuplotExe}");
+            }
+
             ExtPro = new Process();
-            ExtPro.StartInfo.FileName = PathToGnuplot + "gnuplot.exe";
+            ExtPro.StartInfo.FileName = pathGnuplotExe;
             ExtPro.StartInfo.UseShellExecute = false;
             ExtPro.StartInfo.RedirectStandardInput = true;
             ExtPro.Start();
@@ -33,33 +46,32 @@ namespace AwokeKnowing.GnuplotCSharp
             Hold = false;
         }
 
-        public static void WriteLine(string gnuplotcommands)
+        public void WriteLine(string gnuplotcommands)
         {
-
             GnupStWr.WriteLine(gnuplotcommands);
             GnupStWr.Flush();
         }
 
-        public static void Write(string gnuplotcommands)
+        public void Write(string gnuplotcommands)
         {
             GnupStWr.Write(gnuplotcommands);
             GnupStWr.Flush();
         }
 
-        public static void Set(params string[] options)
+        public void Set(params string[] options)
         {
             for (int i = 0; i < options.Length; i++)
                 GnupStWr.WriteLine("set " + options[i]);
 
         }
 
-        public static void Unset(params string[] options)
+        public void Unset(params string[] options)
         {
             for (int i = 0; i < options.Length; i++)
                 GnupStWr.WriteLine("unset " + options[i]);
         }
 
-        public static bool SaveData(double[] Y, string filename)
+        public bool SaveData(double[] Y, string filename)
         {
             StreamWriter dataStream = new StreamWriter(filename, false);
             WriteData(Y, dataStream);
@@ -68,7 +80,7 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static bool SaveData(double[] X, double[] Y, string filename)
+        public bool SaveData(double[] X, double[] Y, string filename)
         {
             StreamWriter dataStream = new StreamWriter(filename, false);
             WriteData(X, Y, dataStream);
@@ -77,7 +89,7 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static bool SaveData(double[] X, double[] Y, double[] Z, string filename)
+        public bool SaveData(double[] X, double[] Y, double[] Z, string filename)
         {
             StreamWriter dataStream = new StreamWriter(filename, false);
             WriteData(X, Y, Z, dataStream);
@@ -86,7 +98,7 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static bool SaveData(int sizeY, double[] Z, string filename)
+        public bool SaveData(int sizeY, double[] Z, string filename)
         {
             StreamWriter dataStream = new StreamWriter(filename, false);
             WriteData(sizeY, Z, dataStream);
@@ -95,7 +107,7 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static bool SaveData(double[,] Z, string filename)
+        public bool SaveData(double[,] Z, string filename)
         {
             StreamWriter dataStream = new StreamWriter(filename, false);
             WriteData(Z, dataStream);
@@ -104,7 +116,7 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static void Replot()
+        public void Replot()
         {
             if (ReplotWithSplot)
                 SPlot(SPlotBuffer);
@@ -112,26 +124,26 @@ namespace AwokeKnowing.GnuplotCSharp
                 Plot(PlotBuffer);
         }
 
-        public static void Plot(string filenameOrFunction, string options = "")
+        public void Plot(string filenameOrFunction, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(filenameOrFunction, options));
             Plot(PlotBuffer);
         }
-        public static void Plot(double[] y, string options = "")
+        public void Plot(double[] y, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(y, options));
             Plot(PlotBuffer);
         }
-        public static void Plot(double[] x, double[] y, string options = "")
+        public void Plot(double[] x, double[] y, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(x, y, options));
             Plot(PlotBuffer);
         }
 
-        public static void Contour(string filenameOrFunction, string options = "", bool labelContours = true)
+        public void Contour(string filenameOrFunction, string options = "", bool labelContours = true)
         {
             if (!Hold) PlotBuffer.Clear();
             var p = new StoredPlot(filenameOrFunction, options, PlotTypes.ContourFileOrFunction);
@@ -139,7 +151,7 @@ namespace AwokeKnowing.GnuplotCSharp
             PlotBuffer.Add(p);
             Plot(PlotBuffer);
         }
-        public static void Contour(int sizeY, double[] z, string options = "", bool labelContours = true)
+        public void Contour(int sizeY, double[] z, string options = "", bool labelContours = true)
         {
             if (!Hold) PlotBuffer.Clear();
             var p = new StoredPlot(sizeY, z, options, PlotTypes.ContourZ);
@@ -147,7 +159,7 @@ namespace AwokeKnowing.GnuplotCSharp
             PlotBuffer.Add(p);
             Plot(PlotBuffer);
         }
-        public static void Contour(double[] x, double[] y, double[] z, string options = "", bool labelContours = true)
+        public void Contour(double[] x, double[] y, double[] z, string options = "", bool labelContours = true)
         {
             if (!Hold) PlotBuffer.Clear();
             var p = new StoredPlot(x, y, z, options, PlotTypes.ContourXYZ);
@@ -155,7 +167,7 @@ namespace AwokeKnowing.GnuplotCSharp
             PlotBuffer.Add(p);
             Plot(PlotBuffer);
         }
-        public static void Contour(double[,] zz, string options = "", bool labelContours = true)
+        public void Contour(double[,] zz, string options = "", bool labelContours = true)
         {
             if (!Hold) PlotBuffer.Clear();
             var p = new StoredPlot(zz, options, PlotTypes.ContourZZ);
@@ -164,52 +176,52 @@ namespace AwokeKnowing.GnuplotCSharp
             Plot(PlotBuffer);
         }
 
-        public static void HeatMap(string filenameOrFunction, string options = "")
+        public void HeatMap(string filenameOrFunction, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(filenameOrFunction, options, PlotTypes.ColorMapFileOrFunction));
             Plot(PlotBuffer);
         }
-        public static void HeatMap(int sizeY, double[] intensity, string options = "")
+        public void HeatMap(int sizeY, double[] intensity, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(sizeY, intensity, options, PlotTypes.ColorMapZ));
             Plot(PlotBuffer);
         }
-        public static void HeatMap(double[] x, double[] y, double[] intensity, string options = "")
+        public void HeatMap(double[] x, double[] y, double[] intensity, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(x, y, intensity, options, PlotTypes.ColorMapXYZ));
             Plot(PlotBuffer);
         }
-        public static void HeatMap(double[,] intensityGrid, string options = "")
+        public void HeatMap(double[,] intensityGrid, string options = "")
         {
             if (!Hold) PlotBuffer.Clear();
             PlotBuffer.Add(new StoredPlot(intensityGrid, options, PlotTypes.ColorMapZZ));
             Plot(PlotBuffer);
         }
 
-        public static void SPlot(string filenameOrFunction, string options = "")
+        public void SPlot(string filenameOrFunction, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
             SPlotBuffer.Add(new StoredPlot(filenameOrFunction, options,PlotTypes.SplotFileOrFunction));
             SPlot(SPlotBuffer);
         }
-        public static void SPlot(int sizeY, double[] z, string options = "")
+        public void SPlot(int sizeY, double[] z, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
             SPlotBuffer.Add(new StoredPlot(sizeY, z, options));
             SPlot(SPlotBuffer);
         }
 
-        public static void SPlot(double[] x, double[] y, double[] z, string options = "")
+        public void SPlot(double[] x, double[] y, double[] z, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
             SPlotBuffer.Add(new StoredPlot(x, y, z, options));
             SPlot(SPlotBuffer);
         }
 
-        public static void SPlot(double[,] zz, string options = "")
+        public void SPlot(double[,] zz, string options = "")
         {
             if (!Hold) SPlotBuffer.Clear();
             SPlotBuffer.Add(new StoredPlot(zz, options));
@@ -217,7 +229,7 @@ namespace AwokeKnowing.GnuplotCSharp
         }
 
 
-        public static void Plot(List<StoredPlot> storedPlots)
+        public void Plot(List<StoredPlot> storedPlots)
         {
             ReplotWithSplot = false;
             string plot = "plot ";
@@ -317,7 +329,7 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr.Flush();
         }
 
-        public static void SPlot(List<StoredPlot> storedPlots)
+        public void SPlot(List<StoredPlot> storedPlots)
         {
             ReplotWithSplot = true;
             var splot = "splot ";
@@ -371,7 +383,7 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr.Flush();
         }
 
-        public static void WriteData(double[] y, StreamWriter stream, bool flush = true)
+        public void WriteData(double[] y, StreamWriter stream, bool flush = true)
         {
             for (int i = 0; i < y.Length; i++)
                 stream.WriteLine(y[i].ToString());
@@ -379,7 +391,7 @@ namespace AwokeKnowing.GnuplotCSharp
             if (flush) stream.Flush();
         }
 
-        public static void WriteData(double[] x, double[] y, StreamWriter stream, bool flush = true)
+        public void WriteData(double[] x, double[] y, StreamWriter stream, bool flush = true)
         {
             for (int i = 0; i < y.Length; i++)
                 stream.WriteLine(x[i].ToString() + " " + y[i].ToString());
@@ -387,7 +399,7 @@ namespace AwokeKnowing.GnuplotCSharp
             if (flush) stream.Flush();
         }
 
-        public static void WriteData(int ySize, double[] z, StreamWriter stream, bool flush = true)
+        public void WriteData(int ySize, double[] z, StreamWriter stream, bool flush = true)
         {
             for (int i = 0; i < z.Length; i++)
             {
@@ -399,7 +411,7 @@ namespace AwokeKnowing.GnuplotCSharp
             if (flush) stream.Flush();
         }
 
-        public static void WriteData(double[,] zz, StreamWriter stream, bool flush = true)
+        public void WriteData(double[,] zz, StreamWriter stream, bool flush = true)
         {
             int m = zz.GetLength(0);
             int n = zz.GetLength(1);
@@ -415,7 +427,7 @@ namespace AwokeKnowing.GnuplotCSharp
             if (flush) stream.Flush();
         }
 
-        public static void WriteData(double[] x, double[] y, double[] z, StreamWriter stream, bool flush = true)
+        public void WriteData(double[] x, double[] y, double[] z, StreamWriter stream, bool flush = true)
         {
             int m = Math.Min(x.Length, y.Length);
             m = Math.Min(m, z.Length);
@@ -429,12 +441,12 @@ namespace AwokeKnowing.GnuplotCSharp
             if (flush) stream.Flush();
         }
 
-        static string plotPath(string path)
+        public string plotPath(string path)
         {
             return "\"" + path.Replace(@"\", @"\\") + "\"";
         }
 
-        public static void SaveSetState(string filename = null)
+        public void SaveSetState(string filename = null)
         {
             if (filename == null)
                 filename = Path.GetTempPath() + "setstate.tmp";
@@ -442,7 +454,7 @@ namespace AwokeKnowing.GnuplotCSharp
             GnupStWr.Flush();
             waitForFile(filename);
         }
-        public static void LoadSetState(string filename = null)
+        public void LoadSetState(string filename = null)
         {
             if (filename == null)
                 filename = Path.GetTempPath() + "setstate.tmp";
@@ -451,7 +463,7 @@ namespace AwokeKnowing.GnuplotCSharp
         }
 
         //these makecontourFile functions should probably be merged into one function and use a StoredPlot parameter
-        static void makeContourFile(string fileOrFunction, string outputFile)//if it's a file, fileOrFunction needs quotes and escaped backslashes
+        private void makeContourFile(string fileOrFunction, string outputFile)//if it's a file, fileOrFunction needs quotes and escaped backslashes
         {
             SaveSetState();
             Set("table " + plotPath(outputFile));
@@ -464,7 +476,7 @@ namespace AwokeKnowing.GnuplotCSharp
             waitForFile(outputFile);
         }
 
-        static void makeContourFile(double[] x, double[] y, double[] z, string outputFile)
+        private void makeContourFile(double[] x, double[] y, double[] z, string outputFile)
         {
             SaveSetState();
             Set("table " + plotPath(outputFile));
@@ -479,7 +491,7 @@ namespace AwokeKnowing.GnuplotCSharp
             waitForFile(outputFile);
         }
 
-        static void makeContourFile(double[,] zz, string outputFile)
+        private void makeContourFile(double[,] zz, string outputFile)
         {
             SaveSetState();
             Set("table " + plotPath(outputFile));
@@ -495,7 +507,7 @@ namespace AwokeKnowing.GnuplotCSharp
             waitForFile(outputFile);
         }
 
-        static void makeContourFile(int sizeY, double[] z, string outputFile)
+        private void makeContourFile(int sizeY, double[] z, string outputFile)
         {
             SaveSetState();
             Set("table " + plotPath(outputFile));
@@ -510,8 +522,8 @@ namespace AwokeKnowing.GnuplotCSharp
             waitForFile(outputFile);
         }
 
-        static int contourLabelCount = 50000;
-        static void setContourLabels(string contourFile)
+        private int contourLabelCount = 50000;
+        private void setContourLabels(string contourFile)
         {
             var file = new System.IO.StreamReader(contourFile);
             string line;
@@ -526,13 +538,13 @@ namespace AwokeKnowing.GnuplotCSharp
             }
             file.Close();
         }
-        static void removeContourLabels()
+        private void removeContourLabels()
         {
             while (contourLabelCount > 50000)
                 GnupStWr.WriteLine("unset object " + contourLabelCount + ";unset label " + contourLabelCount--);
         }
 
-        static bool waitForFile(string filename, int timeout = 10000)
+        private bool waitForFile(string filename, int timeout = 10000)
         {
             Thread.Sleep(20);
             int attempts = timeout / 100;
@@ -552,21 +564,21 @@ namespace AwokeKnowing.GnuplotCSharp
             return true;
         }
 
-        public static void HoldOn()
+        public void HoldOn()
         {
             Hold = true;
             PlotBuffer.Clear();
             SPlotBuffer.Clear();
         }
 
-        public static void HoldOff()
+        public void HoldOff()
         {
             Hold = false;
             PlotBuffer.Clear();
             SPlotBuffer.Clear();
         }
 
-        public static void Close()
+        public void Close()
         {
             ExtPro.CloseMainWindow();
         }
