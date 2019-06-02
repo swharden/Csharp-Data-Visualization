@@ -21,7 +21,7 @@ Description | Screenshot
 ---|---
 **[Drawing Lines](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a Bitmap then use a Graphics object to draw lines on it. The Bitmap is then assigned to PictureBox.Image and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
 **[Drawing with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
-**[Plotting on a 2D Coordinate Systems](/examples/2019-06-03-coordinate-system/readme.md)** - A simple but challenging task when plotting data on a bitmap is the conversion between 2D data space and bitmap pixel coordinates. If your axis limits are -10 and +10 (horizontally and vertically), what pixel position on the bitmap corresponds to (-1.23, 3.21)? This example demonstrates a minimal-case unit-to-pixel method and uses it to plot X/Y data on a bitmap. | ![](/examples/2019-06-03-coordinate-system/screenshot.png)
+**[Plotting on a 2D Coordinate System](/examples/2019-06-03-coordinate-system/readme.md)** - A simple but challenging task when plotting data on a bitmap is the conversion between 2D data space and bitmap pixel coordinates. If your axis limits are -10 and +10 (horizontally and vertically), what pixel position on the bitmap corresponds to (-1.23, 3.21)? This example demonstrates a minimal-case unit-to-pixel method and uses it to plot X/Y data on a bitmap. | ![](/examples/2019-06-03-coordinate-system/screenshot.png)
 
 
 
