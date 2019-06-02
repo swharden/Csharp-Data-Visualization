@@ -13,17 +13,18 @@ If you're just looking for an easy way to interactively display some data on a g
 * The [ScottPlot Cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md) shows what it can do
 
 ## Instructional Code Examples
-Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them.
+Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
 
 Description | Screenshot
 ---|---
-**[Drawing Graphics in C#](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a `Bitmap` then use a `Graphics` object to draw lines on it. The `Bitmap` is then assigned to `PictureBox.Image` and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
-**[Draw with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
+**[Drawing Lines](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a Bitmap then use a Graphics object to draw lines on it. The Bitmap is then assigned to PictureBox.Image and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
+**[Drawing with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
+**[Plotting on a 2D Coordinate Systems](/examples/2019-06-03-coordinate-system/readme.md)** - A simple but challenging task when plotting data on a bitmap is the conversion between 2D data space and bitmap pixel coordinates. If your axis limits are -10 and +10 (horizontally and vertically), what pixel position on the bitmap corresponds to (-1.23, 3.21)? This example demonstrates a minimal-case unit-to-pixel method and uses it to plot X/Y data on a bitmap. | ![](/examples/2019-06-03-coordinate-system/screenshot.png)
 
 ## Additional Projects
+* These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
 * Each example below is a standalone Visual Studio solution
 * Projects typically increase in complexity from bottom to top
-* These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful!
 * Only completed projects are listed in the table below.
 * The [projects folder](projects) contains even more in-progress and unfinished projects. 
 
