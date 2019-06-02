@@ -1,10 +1,13 @@
 # C# Data Visualization Examples
 This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2017 and 2019) and only uses free software and plugins.
 
+### ScottPlot 
+<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/ScottPlotDemo/compiled/ScottPlotDemo.gif" width="300" align="right"></a>Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET. ScottPlot is [availble on NuGet](https://www.nuget.org/packages/ScottPlot/) and might be what you're looking for if your goal is to interactivity display some data on a graph.
+
+
+### Visualization Demo Projects
 * Each example below is a standalone Visual Studio solution
 * Projects typically increase in complexity from bottom to top
-* The goal is often to create a _user control_ for easy reusability into other projects
-* Work here led to the creation of [ScottPlot](https://github.com/swharden/ScottPlot), an open-source interactive graphing library for .NET designed to simplify the task of interactively displaying large datasets (with tens of millions of data points) at high speed.
 * The [projects folder](projects) contains in-progress and unfinished works. Only completed projects are listed below.
 
 Project Description | Screenshot
