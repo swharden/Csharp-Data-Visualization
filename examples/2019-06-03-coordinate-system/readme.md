@@ -19,7 +19,7 @@ private void CreateData()
 {
     List<double> xsList = new List<double>();
     List<double> ysList = new List<double>();
-    for (double x = -10; x <= 10; x += 0.25)
+    for (double x = -3; x <= 3; x += 0.25)
     {
         xsList.Add(x);
         ysList.Add(Math.Pow(x, 3) - 5 * x); //
@@ -33,7 +33,7 @@ private void CreateData()
 After a lot of experience, I prefer to handle axis limit definitions with a single class-level array. Note how easy it is to manually redefine these or act upon them (zooming or panning).
 
 ```cs
-double[] axisLimits = new double[] { -5, 5, -10, 10 }; // x1, x2, y1, y2
+double[] axisLimits = new double[] { -3, 3, -10, 10 }; // x1, x2, y1, y2
 ```
 
 ### Location Conversion Function (coordinate-to-pixel)
