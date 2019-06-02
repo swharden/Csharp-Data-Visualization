@@ -15,11 +15,21 @@ If you're just looking for an easy way to interactively display some data on a g
 ## Instructional Code Examples
 Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
 
+### Drawing / Graphing
+
 Description | Screenshot
 ---|---
 **[Drawing Lines](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a Bitmap then use a Graphics object to draw lines on it. The Bitmap is then assigned to PictureBox.Image and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
 **[Drawing with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
 **[Plotting on a 2D Coordinate Systems](/examples/2019-06-03-coordinate-system/readme.md)** - A simple but challenging task when plotting data on a bitmap is the conversion between 2D data space and bitmap pixel coordinates. If your axis limits are -10 and +10 (horizontally and vertically), what pixel position on the bitmap corresponds to (-1.23, 3.21)? This example demonstrates a minimal-case unit-to-pixel method and uses it to plot X/Y data on a bitmap. | ![](/examples/2019-06-03-coordinate-system/screenshot.png)
+
+
+
+### Bitmap Pixel Manipulation
+
+Description | Screenshot
+---|---
+**[Modifying Bitmap Data in Memory](/examples/2019-06-04-pixel-setting/readme.md)** - Bitmaps in memory have a certain number of bytes per pixel, so they're easy to convert to/from byte arrays. This example shows how to convert a Bitmap to a byte array, fill the array with random values, and convert it back to a Bitmap to display in a PictureBox. This method can be faster than using drawing methods like GetPixel and PutPixel. | ![](/examples/2019-06-04-pixel-setting/screenshot.png)
 
 ## Additional Projects
 * These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
