@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PixelSetting", "PixelSetting.csproj", "{59675989-51A4-49E2-89F3-9672BEF28856}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{59675989-51A4-49E2-89F3-9672BEF28856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59675989-51A4-49E2-89F3-9672BEF28856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59675989-51A4-49E2-89F3-9672BEF28856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59675989-51A4-49E2-89F3-9672BEF28856}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F08E3B2-2332-42A7-9E28-BA96D6C2A302}
+	EndGlobalSection
+EndGlobal

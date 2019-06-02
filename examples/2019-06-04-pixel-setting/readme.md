@@ -13,9 +13,9 @@ public byte[] BitmapToBytes(Bitmap bmp)
 {
     // return a bitmap (of any image format) as a byte array
     int bytesPerPixel = Image.GetPixelFormatSize(bmp.PixelFormat) / 8;
-    byte[] bytes = new byte[bmp.Width * bmp.Height * bytesPerPixel];
     Rectangle rect = new Rectangle(0, 0, bmp.Width, bmp.Height);
     BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadOnly, bmp.PixelFormat);
+    byte[] bytes = new byte[bmpData.Stride * bmp.Height * bytesPerPixel];
     Marshal.Copy(bmpData.Scan0, bytes, 0, bytes.Length);
     bmp.UnlockBits(bmpData);
     return bytes;
