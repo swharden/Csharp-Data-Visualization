@@ -18,6 +18,7 @@ Each of these projects introduces an important concept in data visualization and
 Description | Screenshot
 ---|---
 **[Drawing Graphics in C#](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a `Bitmap` then use a `Graphics` object to draw lines on it. The `Bitmap` is then assigned to `PictureBox.Image` and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
+**[Draw with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
 
 ## Additional Projects
 * Each example below is a standalone Visual Studio solution
