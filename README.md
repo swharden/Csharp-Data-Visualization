@@ -1,14 +1,30 @@
 # C# Data Visualization Examples
 This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2017 and 2019) and only uses free software and plugins.
 
-### ScottPlot 
-<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/ScottPlotDemo/compiled/ScottPlotDemo.gif" width="300" align="right"></a>Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET. ScottPlot is [availble on NuGet](https://www.nuget.org/packages/ScottPlot/) and might be what you're looking for if your goal is to interactivity display some data on a graph.
+## ScottPlot 
+<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/ScottPlotDemo/compiled/ScottPlotDemo.gif" width="300" align="right"></a>
 
+Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET
 
-### Visualization Demo Projects
+If you're just looking for an easy way to interactively display some data on a graph, ScottPlot might be for you! 
+
+* ScottPlot is [available via NuGet](https://www.nuget.org/packages/ScottPlot/)
+* [ScottPlot source code](https://github.com/swharden/ScottPlot) is on GitHub
+* The [ScottPlot Cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md) shows what it can do
+
+## Instructional Code Examples
+Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them.
+
+Description | Screenshot
+---|---
+**[Drawing Graphics in C#](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a `Bitmap` then use a `Graphics` object to draw lines on it. The `Bitmap` is then assigned to `PictureBox.Image` and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
+
+## Additional Projects
 * Each example below is a standalone Visual Studio solution
 * Projects typically increase in complexity from bottom to top
-* The [projects folder](projects) contains in-progress and unfinished works. Only completed projects are listed below.
+* These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful!
+* Only completed projects are listed in the table below.
+* The [projects folder](projects) contains even more in-progress and unfinished projects. 
 
 Project Description | Screenshot
 ---|---
@@ -28,10 +44,3 @@ Project Description | Screenshot
 **[basic buffered line plot](/projects/17-06-24_buffered_line_plot)** graphs data by creating a bitmap buffer, drawing on it with `System.Drawing.Graphics` (mostly `DrawLines()`) with customizable pens and quality (anti-aliasing), then displaying it onto a frame. The frame is resizable, which also resizes the bitmap buffer. Screen updates are timed and reported (at the bottom) so performance at different sizes can be assessed. | ![](projects/17-06-24_buffered_line_plot/demo.gif)
 **[highspeed bitmap pixel access](/projects/18-01-10_fast_pixel_bitmap/)** requires some consideration. This minimal-case project demonstrates how to set individual pixels of a bitmap buffer using the slower (simpler) setpixel method and the faster (but more complex) lockbits method. Once a bitmap buffer is modified, it is then applied to a pictutremap. | ![](/projects/18-01-10_fast_pixel_bitmap/screenshot.png)
 
-
-### Instructional Code Examples
-Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them.
-
-Description | Screenshot
----|---
-**Drawing Graphics in C#:** This project demonstrates a simple way to draw lines in a Windows Form. Here we create a `Bitmap` then use a `Graphics` object to draw lines on it. The `Bitmap` is then assigned to `PictureBox.Image` and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
