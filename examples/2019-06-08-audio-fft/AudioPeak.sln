@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AudioPeak", "AudioPeak.csproj", "{9A49B8F0-FFB7-4F25-8FA7-14D239BF807D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A49B8F0-FFB7-4F25-8FA7-14D239BF807D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A49B8F0-FFB7-4F25-8FA7-14D239BF807D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A49B8F0-FFB7-4F25-8FA7-14D239BF807D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A49B8F0-FFB7-4F25-8FA7-14D239BF807D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A0721F2-DB45-4148-BA38-3E7FCDCBECF4}
+	EndGlobalSection
+EndGlobal
