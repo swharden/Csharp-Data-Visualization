@@ -1,7 +1,7 @@
 # C# Data Visualization Examples
 This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2017 and 2019) and only uses free software and plugins.
 
-## ScottPlot 
+## ScottPlot (NuGet package)
 <a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/src/plot-types/ScottPlot-screenshot.gif" width="300" align="right"></a>
 
 Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET
