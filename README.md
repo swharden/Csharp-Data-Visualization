@@ -12,6 +12,16 @@ If you're just looking for an easy way to interactively display some data on a g
 * [ScottPlot source code](https://github.com/swharden/ScottPlot) is on GitHub
 * The [ScottPlot Cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md) shows what it can do
 
+## Spectrogram (NuGet package)
+<a href="https://github.com/swharden/Spectrogram"><img src="https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif" width="300" align="right"></a>
+
+Some of the early code developed for this repository matured into its own project called [Spectrogram](https://github.com/swharden/Spectrogram), a simple spectrogram library for .NET
+
+If you're just looking for an easy way to make a spectrogram, this library might be for you! 
+
+* Spectrogram is [available via NuGet](https://www.nuget.org/packages/Spectrogram/)
+* [Spectrogram source code](https://github.com/swharden/Spectrogram) is on GitHub
+
 ## Instructional Code Examples
 Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
 
