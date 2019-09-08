@@ -1,5 +1,5 @@
 # C# Data Visualization Examples
-This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2017 and 2019) and only uses free software and plugins.
+This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2019) and only uses free software and plugins.
 
 ## ScottPlot (NuGet package)
 <a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/src/plot-types/ScottPlot-screenshot.gif" width="300" align="right"></a>
@@ -39,6 +39,18 @@ Description | Screenshot
 ---|---
 **[Modifying Bitmap Data in Memory](/examples/2019-06-04-pixel-setting/readme.md)** - Bitmaps in memory have a certain number of bytes per pixel, so they're easy to convert to/from byte arrays. This example shows how to convert a Bitmap to a byte array, fill the array with random values, and convert it back to a Bitmap to display in a PictureBox. This method can be faster than using drawing methods like GetPixel and PutPixel. | ![](/examples/2019-06-04-pixel-setting/screenshot.png)
 **[Setting Pixel Intensity from a Value](/examples/2019-06-05-grayscale-image/readme.md)** - This example shows how to create an 8-bit grayscale image where pixel intensities are calculated from a formula (but could easily be assigned from a data array). This example also demonstrates the important difference between Bitmap _width_ and _span_ when working with byte positions in memory. | ![](/examples/2019-06-05-grayscale-image/screenshot.png)
+
+### Hardware-Accelerated Drawing with SkiaSharp and OpenGL
+
+**GDI+:** Calls to `System.Drawing` use the GDI+ backend to draw on the screen. It is convenient because it is been around forever and is easily supported by .NET, but it does not perform well in parallel environments or with large bitmaps (e.g., full screen). Most examples on this page use GDI+ to create images.
+
+**Skia:** The [Skia Graphics Library](https://skia.org/) is an open-source 2D drawing library developed by Google. [SkiaSharp](https://github.com/mono/SkiaSharp) is a cross-platform .NET API for drawing with Skia.
+
+**Hardware Acceleration:** GDI+ is processor-based. Skia supports hardware acceleration with the GPU with the OpenGL back-end. You don't have to know anything about OpenGL to use this feature, you just have to properly configure Skia to use OpenGL then interact with Skia normally.
+
+Description | Screenshot
+---|---
+**[Drawing with SkiaSharp and OpenGL](/examples/2019-09-08-SkiaSharp-openGL)** - This program demonstrates how to vastly outperform GDI+ when drawing thousands of semi-transparent lines at full-screen window sizes. | ![](/examples/2019-09-08-SkiaSharp-openGL/screenshot.jpg)
 
 ### Audio
 
