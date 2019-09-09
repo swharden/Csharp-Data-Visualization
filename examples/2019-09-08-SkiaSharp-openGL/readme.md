@@ -28,6 +28,7 @@ private void RenderWithOpenGL(object sender, PaintEventArgs e)
     int height = sctl.Height;
 
     // setup the Skia surface using OpenGL
+    SKColorType colorType = SKColorType.Rgba8888;
     GRContext contextOpenGL = GRContext.Create(GRBackend.OpenGL, GRGlInterface.CreateNativeGlInterface());
     GL.GetInteger(GetPName.FramebufferBinding, out var framebuffer);
     GRGlFramebufferInfo glInfo = new GRGlFramebufferInfo((uint)framebuffer, colorType.ToGlSizedFormat());
