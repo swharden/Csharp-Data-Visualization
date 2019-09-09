@@ -10,7 +10,7 @@ This project demonstrates how to perform hardware-accelerated 2D drawing using S
 ## Setup (for new projects)
 This is the sequence of steps I used to create this project:
 
-* Create a Windows Application (.NET Framework 4.5)
+* Create a Windows Application (.NET Framework 4.6)
 * NuGet to install [OpenTK.GLControl](https://www.nuget.org/packages/OpenTK.GLControl/)
 * NuGet to install [SkiaSharp](https://www.nuget.org/packages/SkiaSharp/)
 * Set your project to build for x64 (_not_ "any CPU")
