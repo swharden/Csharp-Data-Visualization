@@ -13,6 +13,7 @@ This is the sequence of steps I used to create this project:
 * Create a Windows Application (.NET Framework 4.5)
 * NuGet to install [OpenTK.GLControl](https://www.nuget.org/packages/OpenTK.GLControl/)
 * NuGet to install [SkiaSharp](https://www.nuget.org/packages/SkiaSharp/)
+* Set your project to build for x64 (_not_ "any CPU")
 * Add `using OpenTK.Graphics.ES20;` to top of file
 * Add `using SkiaSharp;` to top of file
 * Add `glControl1.Paint += new PaintEventHandler(RenderWithOpenGL);` to initializer
