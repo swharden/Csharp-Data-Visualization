@@ -55,3 +55,9 @@ private void RenderWithOpenGL(object sender, PaintEventArgs e)
     surface?.Dispose();
 }
 ```
+
+### To enable anti-aliasing with the GLControl
+You have to modify how it's instantiated. If you created the control by drag/dropping it from the toolbox you'll have to edit the Designer.cs file to make the instantiation line look like:
+```cs
+this.glControl1 = new OpenTK.GLControl(new OpenTK.Graphics.GraphicsMode(new OpenTK.Graphics.ColorFormat(8, 8, 8, 8), 24, 8, 4));
+```
