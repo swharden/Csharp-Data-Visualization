@@ -1,6 +1,8 @@
 # C# Data Visualization Examples
 This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2019) and only uses free software and plugins.
 
+Most examples use `System.Drawing` (available as a .NET Standard library using the [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) NuGet package), but some use alternative methods like WPF and Skia (SkiaSharp).
+
 ## ScottPlot (NuGet package)
 <a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/src/plot-types/ScottPlot-screenshot.gif" width="300" align="right"></a>
 
@@ -8,9 +10,8 @@ Some of the early code developed for this repository matured into its own projec
 
 If you're just looking for an easy way to interactively display some data on a graph, ScottPlot might be for you! 
 
-* ScottPlot is [available via NuGet](https://www.nuget.org/packages/ScottPlot/)
-* [ScottPlot source code](https://github.com/swharden/ScottPlot) is on GitHub
-* The [ScottPlot Cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md) shows what it can do
+* [ScottPlot on NuGet](https://www.nuget.org/packages/ScottPlot/)
+* [ScottPlot on GitHub](https://github.com/swharden/ScottPlot)
 
 ## Spectrogram (NuGet package)
 <a href="https://github.com/swharden/Spectrogram"><img src="https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif" width="300" align="right"></a>
@@ -19,8 +20,8 @@ Some of the early code developed for this repository matured into its own projec
 
 If you're just looking for an easy way to make a spectrogram, this library might be for you! 
 
-* Spectrogram is [available via NuGet](https://www.nuget.org/packages/Spectrogram/)
-* [Spectrogram source code](https://github.com/swharden/Spectrogram) is on GitHub
+* [Spectrogram on NuGet](https://www.nuget.org/packages/Spectrogram/)
+* [Spectrogram on GitHub](https://github.com/swharden/Spectrogram)
 
 ## Instructional Code Examples
 Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
@@ -40,6 +41,12 @@ Description | Screenshot
 **[Modifying Bitmap Data in Memory](/examples/2019-06-04-pixel-setting/readme.md)** - Bitmaps in memory have a certain number of bytes per pixel, so they're easy to convert to/from byte arrays. This example shows how to convert a Bitmap to a byte array, fill the array with random values, and convert it back to a Bitmap to display in a PictureBox. This method can be faster than using drawing methods like GetPixel and PutPixel. | ![](/examples/2019-06-04-pixel-setting/screenshot.png)
 **[Setting Pixel Intensity from a Value](/examples/2019-06-05-grayscale-image/readme.md)** - This example shows how to create an 8-bit grayscale image where pixel intensities are calculated from a formula (but could easily be assigned from a data array). This example also demonstrates the important difference between Bitmap _width_ and _span_ when working with byte positions in memory. | ![](/examples/2019-06-05-grayscale-image/screenshot.png)
 
+### Drawing in WPF Applications
+
+Description | Screenshot
+---|---
+**[Drawing Lines with WPF](examples\2019-10-09-WPF-Draw-Lines)** is a minimal-case example to demonstrate how to add primitive shapes to a canvas in a WPF application | ![](examples\2019-10-09-WPF-Draw-Lines\screenshot.png)
+
 ### Hardware-Accelerated Drawing with SkiaSharp and OpenGL
 
 **GDI+:** Calls to `System.Drawing` use the GDI+ backend to draw on the screen. It is convenient because it is been around forever and is easily supported by .NET, but it does not perform well in parallel environments or with large bitmaps (e.g., full screen). Most examples on this page use GDI+ to create images.
@@ -50,7 +57,7 @@ Description | Screenshot
 
 Description | Screenshot
 ---|---
-**[Drawing with SkiaSharp and OpenGL](/examples/2019-09-08-SkiaSharp-openGL)** - This program demonstrates how to vastly outperform GDI+ when drawing thousands of semi-transparent lines at full-screen window sizes. | ![](/examples/2019-09-08-SkiaSharp-openGL/screenshot.jpg)
+**[Drawing with SkiaSharp and OpenGL](/examples/2019-09-08-SkiaSharp-openGL)** - This program demonstrates how to vastly outperform GDI+ (System.Drawing) when drawing thousands of semi-transparent lines at full-screen window sizes. | ![](/examples/2019-09-08-SkiaSharp-openGL/screenshot.jpg)
 
 ### Audio
 
