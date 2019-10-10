@@ -9,7 +9,8 @@ Most of my code examples use `System.Drawing` to draw lines onto Bitmap images. 
 <Canvas Grid.Row="1" Background="Gray" Name="myCanvas" />
 ```
 
-### C#
+### Draw Lines with LineGeometry
+This method is simple, but a little slower.
 ```cs
 myCanvas.Children.Clear();
 
@@ -30,6 +31,32 @@ for (int i=0; i<1_000; i++)
 
     myCanvas.Children.Add(myPath);
 }
+```
+
+### Draw Lines with DrawingVisual
+This method is a little faster, but still too slow to be useful for my applications.
+```cs
+myCanvas.Children.Clear();
+
+DrawingVisual drawingVisual = new DrawingVisual();
+
+DrawingContext drawingContext = drawingVisual.RenderOpen();
+
+Pen pen = new Pen(new SolidColorBrush(Color.FromRgb(0, 0, 0)), 1);
+for (int i = 0; i < 1_000; i++)
+{
+    drawingContext.DrawLine(pen, randomPoint, randomPoint);
+}
+
+drawingContext.Close();
+
+RenderTargetBitmap bmp = new RenderTargetBitmap((int)myCanvas.ActualWidth, (int)myCanvas.ActualHeight, 0, 0, PixelFormats.Pbgra32);
+bmp.Render(drawingVisual);
+
+Image image = new Image();
+image.Source = bmp;
+
+myCanvas.Children.Add(image);
 ```
 
 ### Performance

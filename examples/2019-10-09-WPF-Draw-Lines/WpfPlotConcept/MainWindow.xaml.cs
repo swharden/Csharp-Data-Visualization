@@ -36,9 +36,45 @@ namespace WpfPlotConcept
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
+            //DrawUsingLineGeometry();
+            DrawUsingDrawingVisual();
+
+            Canvas.SetZIndex(btnRender, int.MaxValue); // raise the button
+
+            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
+            Title = string.Format("Rendered in {0:0.00} ms ({1:0.00} Hz)", elapsedSec * 1000.0, 1 / elapsedSec);
+        }
+
+        private void DrawUsingDrawingVisual()
+        {
             myCanvas.Children.Clear();
 
-            for (int i=0; i<1_000; i++)
+            DrawingVisual drawingVisual = new DrawingVisual();
+
+            DrawingContext drawingContext = drawingVisual.RenderOpen();
+
+            Pen pen = new Pen(new SolidColorBrush(Color.FromRgb(0, 0, 0)), 1);
+            for (int i = 0; i < 1_000; i++)
+            {
+                drawingContext.DrawLine(pen, randomPoint, randomPoint);
+            }
+
+            drawingContext.Close();
+
+            RenderTargetBitmap bmp = new RenderTargetBitmap((int)myCanvas.ActualWidth, (int)myCanvas.ActualHeight, 0, 0, PixelFormats.Pbgra32);
+            bmp.Render(drawingVisual);
+
+            Image image = new Image();
+            image.Source = bmp;
+
+            myCanvas.Children.Add(image);
+        }
+
+        private void DrawUsingLineGeometry()
+        {
+            myCanvas.Children.Clear();
+
+            for (int i = 0; i < 1_000; i++)
             {
                 LineGeometry myLineGeometry = new LineGeometry
                 {
@@ -55,11 +91,6 @@ namespace WpfPlotConcept
 
                 myCanvas.Children.Add(myPath);
             }
-
-            Canvas.SetZIndex(btnRender, int.MaxValue); // raise the button
-
-            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
-            Title = string.Format("Rendered in {0:0.00} ms ({1:0.00} Hz)", elapsedSec * 1000.0, 1 / elapsedSec);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
