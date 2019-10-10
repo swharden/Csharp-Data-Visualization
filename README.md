@@ -45,7 +45,7 @@ Description | Screenshot
 
 Description | Screenshot
 ---|---
-**[Drawing Lines with WPF](examples\2019-10-09-WPF-Draw-Lines)** is a minimal-case example to demonstrate how to add primitive shapes to a canvas in a WPF application | ![](examples\2019-10-09-WPF-Draw-Lines\screenshot.png)
+**[Drawing Lines with WPF](examples/2019-10-09-WPF-Draw-Lines)** is a minimal-case example to demonstrate how to add primitive shapes to a canvas in a WPF application | ![](examples/2019-10-09-WPF-Draw-Lines/screenshot.png)
 
 ### Hardware-Accelerated Drawing with SkiaSharp and OpenGL
 
