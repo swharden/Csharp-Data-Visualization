@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:WpfPlotConcept"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        SizeChanged="Window_SizeChanged"
+        SizeChanged="Window_SizeChanged" MouseMove="Window_MouseMove"
         >
-    <Grid>
+    <Grid Name="mainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
@@ -20,5 +20,6 @@
             <Button  Content="Render" Canvas.Left="10" Canvas.Top="10" Click="Button_Click" Name="btnRender"/>
         </StackPanel>
         <Canvas Grid.Row="1" Background="Gray" Name="myCanvas" />
+        <local:VisHost Grid.Row="1" x:Name="visThing" />
     </Grid>
 </Window>
