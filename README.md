@@ -59,6 +59,8 @@ Description | Screenshot
 ---|---
 **[Drawing with SkiaSharp and OpenGL](/examples/2019-09-08-SkiaSharp-openGL)** - This program demonstrates how to vastly outperform GDI+ (System.Drawing) when drawing thousands of semi-transparent lines at full-screen window sizes. | ![](/examples/2019-09-08-SkiaSharp-openGL/screenshot.jpg)
 
+See also: **[QuickPlot](https://github.com/swharden/QuickPlot)** - a n interactive .NET plotting library using SkiaSharp**
+
 ### Audio
 
 Description | Screenshot
