@@ -4,7 +4,7 @@ This repository is a collection of minimal-case example projects to display data
 Most examples use `System.Drawing` (available as a .NET Standard library using the [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) NuGet package), but some use alternative methods like WPF and Skia (SkiaSharp).
 
 ## ScottPlot (NuGet package)
-<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/demos/src/plot-types/ScottPlot-screenshot.gif" width="300" align="right"></a>
+<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif" width="300" align="right"></a>
 
 Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET
 
