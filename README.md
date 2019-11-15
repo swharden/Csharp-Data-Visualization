@@ -70,6 +70,13 @@ Description | Screenshot
 **[Plotting Audio FFT](/examples/2019-06-08-audio-fft/screenshot.gif)** - This example continuously plots the frequency component of an audio input device. The [NAudio](https://github.com/naudio/NAudio) library is used to acquire the audio data and process the FFT and [ScottPlot](https://github.com/swharden/ScottPlot) is used for the plotting. | ![](/examples/2019-06-08-audio-fft/screenshot.gif)
 
 ## Additional Projects
+
+Project Description | Screenshot
+---|---
+[Sound Card ECG](https://github.com/swharden/SoundCardECG) uses scottplot to interactively display the soundcard signal in real time|![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
+[HHSharp](https://github.com/swharden/HHSharp) is an interactive Hodgkin-Huxley neuron simulator using ScottPlot|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
+
+## Older Projects
 * These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
 * Each example below is a standalone Visual Studio solution
 * Projects typically increase in complexity from bottom to top
