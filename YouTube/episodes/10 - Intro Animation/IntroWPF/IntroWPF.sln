@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntroWPF", "IntroWPF.csproj", "{BCD39EAF-F340-4656-954C-8D4814014497}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntroAnimation", "..\IntroAnimation\IntroAnimation.csproj", "{2D593CD3-0859-47AE-BA31-1F9FC1D9C29A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCD39EAF-F340-4656-954C-8D4814014497}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD39EAF-F340-4656-954C-8D4814014497}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD39EAF-F340-4656-954C-8D4814014497}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD39EAF-F340-4656-954C-8D4814014497}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D593CD3-0859-47AE-BA31-1F9FC1D9C29A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D593CD3-0859-47AE-BA31-1F9FC1D9C29A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D593CD3-0859-47AE-BA31-1F9FC1D9C29A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D593CD3-0859-47AE-BA31-1F9FC1D9C29A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A51F5923-0BB5-4EFD-A051-6C1A8D388D70}
+	EndGlobalSection
+EndGlobal
