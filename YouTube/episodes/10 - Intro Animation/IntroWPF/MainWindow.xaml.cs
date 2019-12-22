@@ -26,7 +26,7 @@ namespace IntroWPF
         {
             InitializeComponent();
 
-            timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(.020) };
+            timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(.005) };
             timer.Tick += Render;
             timer.Start();
         }

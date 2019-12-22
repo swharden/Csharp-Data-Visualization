@@ -14,9 +14,22 @@ namespace IntroSkia
 {
     public partial class Form1 : Form
     {
+        OpenTK.GLControl glControl1;
         public Form1()
         {
             InitializeComponent();
+
+            // create the OpenGL control formatted to match Skia
+            var colorFormat = new OpenTK.Graphics.ColorFormat(32);
+            var graphicsMode = new OpenTK.Graphics.GraphicsMode(colorFormat, 24, 8, 4);
+            glControl1 = new OpenTK.GLControl(graphicsMode)
+            {
+                BackColor = Color.Black,
+                Dock = DockStyle.Fill,
+                VSync = true
+            };
+
+            panel1.Controls.Add(glControl1);
         }
 
         IntroAnimation.Field field;
