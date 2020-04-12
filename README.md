@@ -1,30 +1,27 @@
-# C# Data Visualization Examples
-This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) (2019) and only uses free software and plugins.
+# C# Data Visualization
+
+This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) and only uses free software and plugins.
+
 
 Most examples use `System.Drawing` (available as a .NET Standard library using the [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) NuGet package), but some use alternative methods like WPF and Skia (SkiaSharp).
 
-## ScottPlot (NuGet package)
-<a href="https://github.com/swharden/ScottPlot"><img src="https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif" width="300" align="right"></a>
+## Child Projects
 
-Some of the early code developed for this repository matured into its own project called [ScottPlot](https://github.com/swharden/ScottPlot), an interactive graphing library for .NET
+Some code examples started here have matured into their own projects:
 
-If you're just looking for an easy way to interactively display some data on a graph, ScottPlot might be for you! 
+Project | Screenshot
+---|---
+**[ScottPlot](http://swharden.com/scottplot/)** is an interactive plotting library for .NET. If you're just looking for an easy way to interactively display some data on a graph using C#, ScottPlot might be for you! | ![](https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif)
+**[Spectrogram](https://github.com/swharden/Spectrogram)** is a simple spectrogram library for .NET. Specrogram converts signals (typically audio) into the frequency-domain and makes it easy to display spectrograms as 2D images. Spectrogram is fast enough to display the audio spectrum in real time. | ![](https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif)
+**[Sound Card ECG](https://github.com/swharden/SoundCardECG)** uses scottplot to interactively display the soundcard signal in real time|![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
+**[HHSharp](https://github.com/swharden/HHSharp)** is an interactive Hodgkin-Huxley neuron simulator|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
 
-* [ScottPlot on NuGet](https://www.nuget.org/packages/ScottPlot/)
-* [ScottPlot on GitHub](https://github.com/swharden/ScottPlot)
-
-## Spectrogram (NuGet package)
-<a href="https://github.com/swharden/Spectrogram"><img src="https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif" width="300" align="right"></a>
-
-Some of the early code developed for this repository matured into its own project called [Spectrogram](https://github.com/swharden/Spectrogram), a simple spectrogram library for .NET
-
-If you're just looking for an easy way to make a spectrogram, this library might be for you! 
-
-* [Spectrogram on NuGet](https://www.nuget.org/packages/Spectrogram/)
-* [Spectrogram on GitHub](https://github.com/swharden/Spectrogram)
 
 ## Instructional Code Examples
-Each of these projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
+Each of these example projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
+
+**⚠️ WARNING:** This project is being actively restructured to better organize project code in this repository and move commentary to the [C# Data Visualization Website](http://swharden.com/CsharpDataVis/). Projects below this line have not yet been upgraded to this new format.
+
 
 ### Drawing / Graphing
 
@@ -68,13 +65,6 @@ Description | Screenshot
 **[Plotting Audio Amplitude](/examples/2019-06-06-audio-level-monitor/readme.md)** - This example uses [NAudio](https://github.com/naudio/NAudio) to access the sound card, calculates the amplitude of short recordings, then graphs them continuously in real time with [ScottPlot](https://github.com/swharden/ScottPlot). This project is a good place to get started to see how to interface audio input devices. | ![](/examples/2019-06-06-audio-level-monitor/screenshot.png)
 **[Plotting Audio Values](/examples/2019-06-07-audio-visualizer/readme.md)** - This example uses [NAudio](https://github.com/naudio/NAudio) to access the sound card and plots raw PCM values with [ScottPlot](https://github.com/swharden/ScottPlot). These graphs contain tens of thousands of data points, but remain fully interactive even as they are being updated in real time. | ![](/examples/2019-06-07-audio-visualizer/screenshot.gif)
 **[Plotting Audio FFT](/examples/2019-06-08-audio-fft/screenshot.gif)** - This example continuously plots the frequency component of an audio input device. The [NAudio](https://github.com/naudio/NAudio) library is used to acquire the audio data and process the FFT and [ScottPlot](https://github.com/swharden/ScottPlot) is used for the plotting. | ![](/examples/2019-06-08-audio-fft/screenshot.gif)
-
-## Additional Projects
-
-Project Description | Screenshot
----|---
-[Sound Card ECG](https://github.com/swharden/SoundCardECG) uses scottplot to interactively display the soundcard signal in real time|![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
-[HHSharp](https://github.com/swharden/HHSharp) is an interactive Hodgkin-Huxley neuron simulator using ScottPlot|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
 
 ## Older Projects
 * These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
