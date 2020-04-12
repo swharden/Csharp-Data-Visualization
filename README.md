@@ -11,10 +11,10 @@ Some code examples started here have matured into their own projects:
 
 Project | Screenshot
 ---|---
-**[ScottPlot](http://swharden.com/scottplot/)** is an interactive plotting library for .NET. If you're just looking for an easy way to interactively display some data on a graph using C#, ScottPlot might be for you! | ![](https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif)
-**[Spectrogram](https://github.com/swharden/Spectrogram)** is a simple spectrogram library for .NET. Specrogram converts signals (typically audio) into the frequency-domain and makes it easy to display spectrograms as 2D images. Spectrogram is fast enough to display the audio spectrum in real time. | ![](https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif)
-**[Sound Card ECG](https://github.com/swharden/SoundCardECG)** uses scottplot to interactively display the soundcard signal in real time|![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
-**[HHSharp](https://github.com/swharden/HHSharp)** is an interactive Hodgkin-Huxley neuron simulator|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
+**[ScottPlot](http://swharden.com/scottplot/)** is an interactive plotting library for .NET. If you're just looking for an easy way to interactively display some data on a graph using C#, ScottPlot might be for you! | <img src='https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif' width='300'>
+**[Spectrogram](https://github.com/swharden/Spectrogram)** is a simple spectrogram library for .NET. Specrogram converts signals (typically audio) into the frequency-domain and makes it easy to display spectrograms as 2D images. Spectrogram is fast enough to display the audio spectrum in real time. | <img src='https://raw.githubusercontent.com/swharden/Spectrogram/master/data/screenshot4.gif' width='300'>
+**[Sound Card ECG](https://github.com/swharden/SoundCardECG)** uses scottplot to interactively display the soundcard signal in real time| <img src='https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png' width='300'>
+**[HHSharp](https://github.com/swharden/HHSharp)** is an interactive Hodgkin-Huxley neuron simulator|<img src='https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif' width='300'>
 
 
 ## Instructional Code Examples
