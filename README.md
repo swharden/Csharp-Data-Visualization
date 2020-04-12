@@ -20,7 +20,7 @@ Project | Screenshot
 ## Instructional Code Examples
 Each of these example projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
 
-**⚠️ WARNING:** This project is being actively restructured to better organize project code in this repository and move commentary to the [C# Data Visualization Website](http://swharden.com/CsharpDataVis/). Projects below this line have not yet been upgraded to this new format.
+> **⚠️ WARNING:** This project is being actively restructured (April, 2020) to better organize project code in this repository and move commentary to the [C# Data Visualization Website](http://swharden.com/CsharpDataVis/). Projects below this line have not yet been upgraded to this new format.
 
 
 ### Drawing / Graphing
