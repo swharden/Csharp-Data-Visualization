@@ -1,0 +1,16 @@
+﻿<Window x:Class="DrawingQuickstartWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DrawingQuickstartWPF"
+        mc:Ignorable="d"
+        SizeChanged="Window_SizeChanged"
+        Background="WhiteSmoke"
+        Title="Drawing in WPF" Height="400" Width="600">
+    <Grid>
+        <Canvas Name="myCanvas" Background="DarkMagenta" Margin="10" MouseDown="myCanvas_MouseDown" Loaded="myCanvas_Loaded">
+            <Image Name="myImage"/>
+        </Canvas>
+    </Grid>
+</Window>
