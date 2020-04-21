@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,10 @@ namespace Starfield.WinForms
             InitializeComponent();
         }
 
+        Stopwatch stopwatch = new Stopwatch();
         private void timer1_Tick(object sender, EventArgs e)
         {
+            stopwatch.Restart();
             field.Advance();
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             byte alpha = (byte)(trackBar1.Value * 255 / 100);
@@ -28,6 +31,8 @@ namespace Starfield.WinForms
             field.Render(bmp, starColor);
             pictureBox1.Image?.Dispose();
             pictureBox1.Image = bmp;
+            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
+            Text = $"Starfield in Windows Forms - {elapsedSec * 1000:0.00} ms ({1 / elapsedSec:0.00} FPS)";
         }
 
         private void rb500_CheckedChanged(object sender, EventArgs e)

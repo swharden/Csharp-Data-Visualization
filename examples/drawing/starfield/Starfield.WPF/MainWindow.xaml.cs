@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -34,14 +35,18 @@ namespace Starfield.WPF
             timer.Start();
         }
 
+        Stopwatch stopwatch = new Stopwatch();
         void timer_Tick(object sender, EventArgs e)
         {
+            stopwatch.Restart();
             field.Advance();
             Bitmap bmp = new Bitmap((int)myCanvas.ActualWidth, (int)myCanvas.ActualHeight);
             byte alpha = (byte)(mySlider.Value * 255 / 100);
             var starColor = System.Drawing.Color.FromArgb(alpha, 255, 255, 255);
             field.Render(bmp, starColor);
             myImage.Source = BmpImageFromBmp(bmp);
+            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
+            Title = $"Starfield in WPF - {elapsedSec * 1000:0.00} ms ({1 / elapsedSec:0.00} FPS)";
         }
 
         private BitmapImage BmpImageFromBmp(Bitmap bmp)
