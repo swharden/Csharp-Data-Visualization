@@ -59,7 +59,7 @@ namespace Starfield
 
         public void Render(Bitmap bmp, Color? starColor = null)
         {
-            starColor = (starColor is null) ? Color.White : starColor.Value;
+            starColor = starColor ?? Color.White;
             using (var brush = new SolidBrush(starColor.Value))
             using (var gfx = Graphics.FromImage(bmp))
             {
