@@ -5,6 +5,13 @@ namespace Starfield
 {
     public class Field
     {
+        struct Star
+        {
+            public double x;
+            public double y;
+            public double size;
+        }
+
         Random rand = new Random();
 
         Star[] stars;
@@ -39,14 +46,13 @@ namespace Starfield
         {
             for (int i = 0; i < stars.Length; i++)
             {
-                var star = stars[i];
-                star.x += (star.x - .5) * star.size * step;
-                star.y += (star.y - .5) * star.size * step;
-                star.size += star.size * step * 2;
+                stars[i].x += (stars[i].x - .5) * stars[i].size * step;
+                stars[i].y += (stars[i].y - .5) * stars[i].size * step;
+                stars[i].size += stars[i].size * step * 2;
 
                 // reset stars that went out of bounds
-                if (star.x < 0 || star.x > 1 ||
-                    star.y < 0 || star.y > 1)
+                if (stars[i].x < 0 || stars[i].x > 1 ||
+                    stars[i].y < 0 || stars[i].y > 1)
                     stars[i] = GetRandomStar(randomSize: false);
             }
         }
