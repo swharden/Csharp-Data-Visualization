@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starfield.Tests", "Starfiel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starfield.WinForms", "Starfield.WinForms\Starfield.WinForms.csproj", "{5E710021-B94E-4898-AF31-CA145CED201F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starfield.WPF", "Starfield.WPF\Starfield.WPF.csproj", "{5B48351C-8F67-4AE8-85C8-7B381584C81E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starfield.WPF", "Starfield.WPF\Starfield.WPF.csproj", "{5B48351C-8F67-4AE8-85C8-7B381584C81E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starfield.WinFormsNoBlock", "Starfield.WinFormsNoBlock\Starfield.WinFormsNoBlock.csproj", "{506386FA-B611-4D1D-91A3-B0439C531EA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5B48351C-8F67-4AE8-85C8-7B381584C81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B48351C-8F67-4AE8-85C8-7B381584C81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B48351C-8F67-4AE8-85C8-7B381584C81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{506386FA-B611-4D1D-91A3-B0439C531EA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{506386FA-B611-4D1D-91A3-B0439C531EA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{506386FA-B611-4D1D-91A3-B0439C531EA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{506386FA-B611-4D1D-91A3-B0439C531EA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
