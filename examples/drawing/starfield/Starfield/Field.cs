@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Starfield
 {
     public class Field
     {
-        struct Star
+        public struct Star
         {
             public double x;
             public double y;
@@ -75,6 +76,11 @@ namespace Starfield
                     gfx.FillEllipse(brush, xPixel - radius, yPixel - radius, diameter, diameter);
                 }
             }
+        }
+
+        public Star[] GetStars()
+        {
+            return stars;
         }
     }
 }
