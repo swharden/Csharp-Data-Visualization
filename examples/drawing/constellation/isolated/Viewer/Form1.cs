@@ -49,7 +49,7 @@ namespace Viewer
 
             stopwatch.Stop();
             double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
-            Text = $"Constellation with System.Drawing (Simple) {1 / elapsedSec:0.00} FPS";
+            Text = $"Constellation (Isolated) {1 / elapsedSec:0.00} FPS";
         }
     }
 }
