@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mystify.Model", "Mystify.Model\Mystify.Model.csproj", "{70539ED6-926D-4333-91D2-12F2B56B83C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mystify.Viewer", "Mystify.Viewer\Mystify.Viewer.csproj", "{98E4F667-064F-49A2-A9A5-A77D69172E53}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70539ED6-926D-4333-91D2-12F2B56B83C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70539ED6-926D-4333-91D2-12F2B56B83C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70539ED6-926D-4333-91D2-12F2B56B83C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70539ED6-926D-4333-91D2-12F2B56B83C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98E4F667-064F-49A2-A9A5-A77D69172E53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98E4F667-064F-49A2-A9A5-A77D69172E53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98E4F667-064F-49A2-A9A5-A77D69172E53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98E4F667-064F-49A2-A9A5-A77D69172E53}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {645B90C3-87BC-4846-92E1-3D54B115DBEE}
+	EndGlobalSection
+EndGlobal
