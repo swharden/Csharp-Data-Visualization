@@ -21,32 +21,11 @@ namespace SkiaSharpOpenGLBenchmark
         }
 
         Random rand = new Random(0);
-        List<double> renderTimesMsec = new List<double>();
-        private void Render(int lineCount)
+        private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
-
-            // set up the Skia surface using OpenGL
-            SKColorType colorType = SKColorType.Rgba8888;
-            GRContext contextOpenGL = GRContext.Create(GRBackend.OpenGL, GRGlInterface.CreateNativeGlInterface());
-            GL.GetInteger(GetPName.FramebufferBinding, out var framebuffer);
-            GRGlFramebufferInfo glInfo = new GRGlFramebufferInfo((uint)framebuffer, colorType.ToGlSizedFormat());
-            GL.GetInteger(GetPName.StencilBits, out var stencilBits);
-            GRBackendRenderTarget renderTarget = new GRBackendRenderTarget(
-                width: skglControl1.Width,
-                height: skglControl1.Height,
-                sampleCount: contextOpenGL.GetMaxSurfaceSampleCount(colorType),
-                stencilBits: stencilBits,
-                glInfo: glInfo);
-            SKSurface surface = SKSurface.Create(
-                context: contextOpenGL, 
-                renderTarget: renderTarget, 
-                origin: GRSurfaceOrigin.BottomLeft, 
-                colorType: colorType);
-
-            // perform the drawing
+            var surface = e.Surface;
             surface.Canvas.Clear(SKColor.Parse("#003366"));
-            for (int i=0; i<lineCount; i++)
+            for (int i = 0; i < lineCount; i++)
             {
                 var paint = new SKPaint
                 {
@@ -65,32 +44,29 @@ namespace SkiaSharpOpenGLBenchmark
                     y1: rand.Next(skglControl1.Height),
                     paint: paint);
             }
-
-            // Force a display
-            surface.Canvas.Flush();
-            skglControl1.SwapBuffers();
-
-            // prevent memory access violations by disposing before exiting
-            renderTarget?.Dispose();
-            contextOpenGL?.Dispose();
-            surface?.Dispose();
-
-            stopwatch.Stop();
-            renderTimesMsec.Add(1000.0 * stopwatch.ElapsedTicks / Stopwatch.Frequency);
-            double mean = renderTimesMsec.Sum() / renderTimesMsec.Count();
-            Debug.WriteLine($"Render {renderTimesMsec.Count:00} " +
-                $"took {renderTimesMsec.Last():0.000} ms " +
-                $"(running mean: {mean:0.000} ms)");
-
-            Application.DoEvents();
         }
 
+        int lineCount;
+        List<double> renderTimesMsec = new List<double>();
         private void Benchmark(int lineCount, int times = 10)
         {
             rand = new Random(0);
             renderTimesMsec.Clear();
+            this.lineCount = lineCount;
+            Stopwatch stopwatch = new Stopwatch();
             for (int i = 0; i < times; i++)
-                Render(lineCount);
+            {
+                stopwatch.Restart();
+                skglControl1.Invalidate();
+                Application.DoEvents();
+                stopwatch.Stop();
+
+                renderTimesMsec.Add(1000.0 * stopwatch.ElapsedTicks / Stopwatch.Frequency);
+                double mean = renderTimesMsec.Sum() / renderTimesMsec.Count();
+                Debug.WriteLine($"Render {renderTimesMsec.Count:00} " +
+                    $"took {renderTimesMsec.Last():0.000} ms " +
+                    $"(running mean: {mean:0.000} ms)");
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

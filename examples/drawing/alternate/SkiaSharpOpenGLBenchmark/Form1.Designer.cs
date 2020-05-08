@@ -34,9 +34,7 @@ namespace SkiaSharpOpenGLBenchmark
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            var cf = new OpenTK.Graphics.ColorFormat(8, 8, 8, 8);
-            var gm = new OpenTK.Graphics.GraphicsMode(color: cf, depth: 24, stencil: 8, samples: 4);
-            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl(gm);
+            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             this.SuspendLayout();
             // 
             // button1
@@ -87,6 +85,7 @@ namespace SkiaSharpOpenGLBenchmark
             this.skglControl1.Size = new System.Drawing.Size(600, 400);
             this.skglControl1.TabIndex = 4;
             this.skglControl1.VSync = false;
+            this.skglControl1.PaintSurface += new System.EventHandler<SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs>(this.skglControl1_PaintSurface);
             // 
             // Form1
             // 
