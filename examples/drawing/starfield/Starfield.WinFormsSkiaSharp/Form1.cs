@@ -22,53 +22,10 @@ namespace Starfield.WinFormsSkiaSharp
             InitializeComponent();
         }
 
-        GRContext contextOpenGL;
-        GRBackendRenderTarget renderTarget;
-        SKSurface surface;
-        private void Form1_Load(object sender, EventArgs e)
+        private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
         {
-            SKColorType colorType = SKColorType.Rgba8888;
-            contextOpenGL = GRContext.Create(GRBackend.OpenGL, GRGlInterface.CreateNativeGlInterface());
-            GL.GetInteger(GetPName.FramebufferBinding, out var framebuffer);
-            GRGlFramebufferInfo glInfo = new GRGlFramebufferInfo((uint)framebuffer, colorType.ToGlSizedFormat());
-            GL.GetInteger(GetPName.StencilBits, out var stencilBits);
-            renderTarget = new GRBackendRenderTarget(
-                width: skglControl1.Width,
-                height: skglControl1.Height,
-                sampleCount: contextOpenGL.GetMaxSurfaceSampleCount(colorType),
-                stencilBits: stencilBits,
-                glInfo: glInfo);
-            surface = SKSurface.Create(
-                context: contextOpenGL,
-                renderTarget: renderTarget,
-                origin: GRSurfaceOrigin.BottomLeft,
-                colorType: colorType);
-        }
-
-        protected override void OnClosing(CancelEventArgs e)
-        {
-            renderTarget?.Dispose();
-            contextOpenGL?.Dispose();
-            surface?.Dispose();
-            base.OnClosing(e);
-        }
-
-        Stopwatch stopwatch = new Stopwatch();
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            stopwatch.Restart();
-            field.Advance();
-            Render();
-            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
-            Text = $"Starfield in Windows Forms - {elapsedSec * 1000:0.00} ms ({1 / elapsedSec:0.00} FPS)";
-        }
-
-        private void Render()
-        {
-
-
             // perform the drawing
-            surface.Canvas.Clear(SKColors.Black);
+            e.Surface.Canvas.Clear(SKColors.Black);
             var starColor = new SKColor(255, 255, 255, starAlpha);
             var starPaint = new SKPaint() { IsAntialias = true, Color = starColor };
             foreach (var star in field.GetStars())
@@ -77,13 +34,18 @@ namespace Starfield.WinFormsSkiaSharp
                 float yPixel = (float)star.y * skglControl1.Height;
                 float radius = (float)star.size - 1;
                 var point = new SKPoint(xPixel, yPixel);
-                surface.Canvas.DrawCircle(point, radius, starPaint);
+                e.Surface.Canvas.DrawCircle(point, radius, starPaint);
             }
+        }
 
-            // Force a display
-            surface.Canvas.Flush();
-            skglControl1.SwapBuffers();
-
+        Stopwatch stopwatch = new Stopwatch();
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            stopwatch.Restart();
+            field.Advance();
+            skglControl1.Invalidate();
+            double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
+            Text = $"Starfield in Windows Forms - {elapsedSec * 1000:0.00} ms ({1 / elapsedSec:0.00} FPS)";
         }
 
         private void rb500_CheckedChanged(object sender, EventArgs e)

@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            var cf = new OpenTK.Graphics.ColorFormat(8, 8, 8, 8);
-            var gm = new OpenTK.Graphics.GraphicsMode(color: cf, depth: 24, stencil: 8, samples: 4);
-            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl(gm);
+            this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             this.rb500 = new System.Windows.Forms.RadioButton();
             this.rb100k = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
@@ -52,6 +50,7 @@
             this.skglControl1.Size = new System.Drawing.Size(600, 400);
             this.skglControl1.TabIndex = 0;
             this.skglControl1.VSync = false;
+            this.skglControl1.PaintSurface += new System.EventHandler<SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs>(this.skglControl1_PaintSurface);
             // 
             // rb500
             // 
@@ -130,7 +129,6 @@
             this.Controls.Add(this.skglControl1);
             this.Name = "Form1";
             this.Text = "Starfield with SkiaSharp and OpenGL";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
