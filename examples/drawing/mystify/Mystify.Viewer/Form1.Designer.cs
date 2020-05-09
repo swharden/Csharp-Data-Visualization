@@ -117,6 +117,7 @@
             0,
             0,
             0});
+            this.nudPolygons.ValueChanged += new System.EventHandler(this.nudPolygons_ValueChanged);
             // 
             // label1
             // 
@@ -173,7 +174,7 @@
             0,
             0});
             this.nudCorners.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -186,6 +187,7 @@
             0,
             0,
             0});
+            this.nudCorners.ValueChanged += new System.EventHandler(this.nudCorners_ValueChanged);
             // 
             // nudHistory
             // 
@@ -194,10 +196,11 @@
             this.nudHistory.Size = new System.Drawing.Size(76, 20);
             this.nudHistory.TabIndex = 8;
             this.nudHistory.Value = new decimal(new int[] {
-            5,
+            10,
             0,
             0,
             0});
+            this.nudHistory.ValueChanged += new System.EventHandler(this.nudHistory_ValueChanged);
             // 
             // label4
             // 
@@ -274,6 +277,7 @@
             0,
             0,
             0});
+            this.nudSpacing.ValueChanged += new System.EventHandler(this.nudSpacing_ValueChanged);
             // 
             // label6
             // 
@@ -286,8 +290,12 @@
             // 
             // nudSpeed
             // 
-            this.nudSpeed.DecimalPlaces = 2;
             this.nudSpeed.Location = new System.Drawing.Point(495, 34);
+            this.nudSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.nudSpeed.Name = "nudSpeed";
             this.nudSpeed.Size = new System.Drawing.Size(76, 20);
             this.nudSpeed.TabIndex = 17;
@@ -295,7 +303,7 @@
             10,
             0,
             0,
-            65536});
+            0});
             // 
             // label5
             // 

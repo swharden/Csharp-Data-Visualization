@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using Mystify.Model;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,13 +32,27 @@ namespace Mystify.Viewer
             Reset();
         }
 
-        Model.Polygon poly;
+        readonly Random rand = new Random();
+        Polygon[] polys;
         private void Reset()
         {
             stopwatch.Restart();
             renderCount = 0;
-            poly = new Model.Polygon(4, skglControl1.Width, skglControl1.Height);
+            polys = new Polygon[(int)nudPolygons.Value];
+            double colorShift = rand.NextDouble();
+            for (int i = 0; i < polys.Length; i++)
+            {
+                polys[i] = new Polygon(rand, (int)nudCorners.Value, 
+                    skglControl1.Width, skglControl1.Height, 
+                    (int)nudHistory.Value, (double)i/polys.Length + colorShift);
+                
+            }
+            polys = polys.OrderBy(x => rand.Next()).ToArray();
         }
+        private void nudPolygons_ValueChanged(object sender, EventArgs e) { Reset(); }
+        private void nudCorners_ValueChanged(object sender, EventArgs e) { Reset(); }
+        private void nudHistory_ValueChanged(object sender, EventArgs e) { Reset(); }
+        private void nudSpacing_ValueChanged(object sender, EventArgs e) { Reset(); }
 
         readonly Stopwatch stopwatch = new Stopwatch();
         int renderCount = 0;
@@ -46,7 +61,7 @@ namespace Mystify.Viewer
         {
             var surface = e.Surface;
 
-            surface.Canvas.Clear(SKColor.Parse("#003366"));
+            surface.Canvas.Clear(SKColors.Black);
 
             var paint = new SKPaint
             {
@@ -58,25 +73,29 @@ namespace Mystify.Viewer
 
             bool fade = false;
 
-            for (int historyIndex = 0; historyIndex < poly.Corners[0].Points.Count(); historyIndex++)
+            foreach(Polygon poly in polys)
             {
-                var historyFrac = (double)historyIndex / (poly.Corners[0].Points.Count() - 1);
-                using (var path = new SKPath())
+                paint.Color = new SKColor(poly.Color.R, poly.Color.G, poly.Color.B, poly.Color.A);
+                for (int historyIndex = 0; historyIndex < poly.Corners[0].Points.Count(); historyIndex++)
                 {
-                    for (int cornerIndex = 0; cornerIndex < poly.Corners.Count(); cornerIndex++)
+                    var historyFrac = (double)historyIndex / (poly.Corners[0].Points.Count() - 1);
+                    using (var path = new SKPath())
                     {
-                        var corner = poly.Corners[cornerIndex];
-                        if (cornerIndex == 0)
-                            path.MoveTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
-                        else
-                            path.LineTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
+                        for (int cornerIndex = 0; cornerIndex < poly.Corners.Count(); cornerIndex++)
+                        {
+                            var corner = poly.Corners[cornerIndex];
+                            if (cornerIndex == 0)
+                                path.MoveTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
+                            else
+                                path.LineTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
+                        }
+                        path.Close();
+
+                        if (fade)
+                            paint.Color = new SKColor(255, 255, 255, (byte)(255 * historyFrac));
+
+                        e.Surface.Canvas.DrawPath(path, paint);
                     }
-                    path.Close();
-
-                    if (fade)
-                        paint.Color = new SKColor(255, 255, 255, (byte)(255 * historyFrac));
-
-                    e.Surface.Canvas.DrawPath(path, paint);
                 }
             }
 
@@ -86,7 +105,9 @@ namespace Mystify.Viewer
 
         private void timerRender_Tick(object sender, EventArgs e)
         {
-            poly.Advance(10);
+            foreach(Polygon poly in polys)
+                poly.Advance((double)nudSpeed.Value, cbRainbow.Checked);
+
             skglControl1.Invalidate();
 
             double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
@@ -95,5 +116,6 @@ namespace Mystify.Viewer
                 $"in {elapsedSec:0.00} seconds " +
                 $"({framesPerSec:0.00} FPS)";
         }
+
     }
 }
