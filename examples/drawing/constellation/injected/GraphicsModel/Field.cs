@@ -88,6 +88,10 @@ namespace GraphicsModel
             {
                 foreach (var star2 in Stars)
                 {
+                    // prevent duplicate lines
+                    if (star1.Y >= star2.Y)
+                        continue;
+
                     // determine star distance
                     double dX = Math.Abs(star1.X - star2.X);
                     double dY = Math.Abs(star1.Y - star2.Y);
@@ -96,7 +100,7 @@ namespace GraphicsModel
                     double distance = Math.Sqrt(dX * dX + dY * dY);
 
                     // set line alpha based on distance
-                    int alpha = (int)(255 - distance / connectDistance * 255);
+                    int alpha = (int)(255 - distance / connectDistance * 255) * 2;
                     alpha = Math.Min(alpha, 255);
                     alpha = Math.Max(alpha, 0);
                     var lineColor = new Color(255, 255, 255, (byte)alpha);
