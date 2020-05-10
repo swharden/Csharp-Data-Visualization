@@ -25,7 +25,10 @@ namespace Mystify.Model
             foreach (var corner in Corners)
                 corner.Advance(speed);
             if (shiftHue)
-                Color = Colors.FromHue(Hue++);
+            {
+                Hue += 2;
+                Color = Colors.FromHue(Hue);
+            }
         }
     }
 }

@@ -34,7 +34,6 @@
             this.skglControl1 = new SkiaSharp.Views.Desktop.SKGLControl();
             this.nudPolygons = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbRun = new System.Windows.Forms.CheckBox();
             this.cbGraphics = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,15 +42,16 @@
             this.label4 = new System.Windows.Forms.Label();
             this.cbRainbow = new System.Windows.Forms.CheckBox();
             this.cbFade = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.nudSpacing = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.nudSpeed = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.timerRender = new System.Windows.Forms.Timer(this.components);
+            this.nudWidth = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPolygons)).BeginInit();
@@ -60,6 +60,7 @@
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpacing)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -109,7 +110,7 @@
             0,
             0});
             this.nudPolygons.Name = "nudPolygons";
-            this.nudPolygons.Size = new System.Drawing.Size(76, 20);
+            this.nudPolygons.Size = new System.Drawing.Size(50, 20);
             this.nudPolygons.TabIndex = 1;
             this.nudPolygons.ThousandsSeparator = true;
             this.nudPolygons.Value = new decimal(new int[] {
@@ -128,24 +129,18 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Polygons:";
             // 
-            // cbRun
-            // 
-            this.cbRun.AutoSize = true;
-            this.cbRun.Location = new System.Drawing.Point(714, 37);
-            this.cbRun.Name = "cbRun";
-            this.cbRun.Size = new System.Drawing.Size(46, 17);
-            this.cbRun.TabIndex = 3;
-            this.cbRun.Text = "Run";
-            this.cbRun.UseVisualStyleBackColor = true;
-            // 
             // cbGraphics
             // 
+            this.cbGraphics.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGraphics.FormattingEnabled = true;
+            this.cbGraphics.Items.AddRange(new object[] {
+            "SkiaSharp with OpenGL",
+            "System.Drawing"});
             this.cbGraphics.Location = new System.Drawing.Point(12, 34);
             this.cbGraphics.Name = "cbGraphics";
             this.cbGraphics.Size = new System.Drawing.Size(146, 21);
             this.cbGraphics.TabIndex = 4;
-            this.cbGraphics.Text = "SkiaSharp with OpenGL";
+            this.cbGraphics.SelectedIndexChanged += new System.EventHandler(this.cbGraphics_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -159,7 +154,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(246, 18);
+            this.label3.Location = new System.Drawing.Point(220, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(46, 13);
             this.label3.TabIndex = 6;
@@ -167,7 +162,7 @@
             // 
             // nudCorners
             // 
-            this.nudCorners.Location = new System.Drawing.Point(249, 34);
+            this.nudCorners.Location = new System.Drawing.Point(223, 34);
             this.nudCorners.Maximum = new decimal(new int[] {
             10000,
             0,
@@ -179,7 +174,7 @@
             0,
             0});
             this.nudCorners.Name = "nudCorners";
-            this.nudCorners.Size = new System.Drawing.Size(76, 20);
+            this.nudCorners.Size = new System.Drawing.Size(43, 20);
             this.nudCorners.TabIndex = 7;
             this.nudCorners.ThousandsSeparator = true;
             this.nudCorners.Value = new decimal(new int[] {
@@ -191,9 +186,9 @@
             // 
             // nudHistory
             // 
-            this.nudHistory.Location = new System.Drawing.Point(331, 34);
+            this.nudHistory.Location = new System.Drawing.Point(272, 34);
             this.nudHistory.Name = "nudHistory";
-            this.nudHistory.Size = new System.Drawing.Size(76, 20);
+            this.nudHistory.Size = new System.Drawing.Size(48, 20);
             this.nudHistory.TabIndex = 8;
             this.nudHistory.Value = new decimal(new int[] {
             10,
@@ -205,7 +200,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(328, 18);
+            this.label4.Location = new System.Drawing.Point(269, 18);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 9;
@@ -214,7 +209,7 @@
             // cbRainbow
             // 
             this.cbRainbow.AutoSize = true;
-            this.cbRainbow.Location = new System.Drawing.Point(584, 37);
+            this.cbRainbow.Location = new System.Drawing.Point(495, 37);
             this.cbRainbow.Name = "cbRainbow";
             this.cbRainbow.Size = new System.Drawing.Size(68, 17);
             this.cbRainbow.TabIndex = 10;
@@ -224,27 +219,27 @@
             // cbFade
             // 
             this.cbFade.AutoSize = true;
-            this.cbFade.Location = new System.Drawing.Point(658, 37);
+            this.cbFade.Location = new System.Drawing.Point(569, 37);
             this.cbFade.Name = "cbFade";
             this.cbFade.Size = new System.Drawing.Size(50, 17);
             this.cbFade.TabIndex = 11;
             this.cbFade.Text = "Fade";
             this.cbFade.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnReset
             // 
-            this.button1.Location = new System.Drawing.Point(768, 31);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Apply";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnReset.Location = new System.Drawing.Point(625, 33);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 12;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblStatus,
-            this.toolStripStatusLabel2});
+            this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 521);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(855, 22);
@@ -257,20 +252,11 @@
             this.lblStatus.Size = new System.Drawing.Size(118, 17);
             this.lblStatus.Text = "toolStripStatusLabel1";
             // 
-            // toolStripStatusLabel2
-            // 
-            this.toolStripStatusLabel2.IsLink = true;
-            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-            this.toolStripStatusLabel2.Size = new System.Drawing.Size(722, 17);
-            this.toolStripStatusLabel2.Spring = true;
-            this.toolStripStatusLabel2.Text = "Mystify by swharden";
-            this.toolStripStatusLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // nudSpacing
             // 
-            this.nudSpacing.Location = new System.Drawing.Point(413, 34);
+            this.nudSpacing.Location = new System.Drawing.Point(326, 34);
             this.nudSpacing.Name = "nudSpacing";
-            this.nudSpacing.Size = new System.Drawing.Size(76, 20);
+            this.nudSpacing.Size = new System.Drawing.Size(46, 20);
             this.nudSpacing.TabIndex = 15;
             this.nudSpacing.Value = new decimal(new int[] {
             5,
@@ -282,7 +268,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(410, 18);
+            this.label6.Location = new System.Drawing.Point(323, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(49, 13);
             this.label6.TabIndex = 16;
@@ -290,14 +276,14 @@
             // 
             // nudSpeed
             // 
-            this.nudSpeed.Location = new System.Drawing.Point(495, 34);
+            this.nudSpeed.Location = new System.Drawing.Point(378, 34);
             this.nudSpeed.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.nudSpeed.Name = "nudSpeed";
-            this.nudSpeed.Size = new System.Drawing.Size(76, 20);
+            this.nudSpeed.Size = new System.Drawing.Size(51, 20);
             this.nudSpeed.TabIndex = 17;
             this.nudSpeed.Value = new decimal(new int[] {
             10,
@@ -308,7 +294,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(492, 18);
+            this.label5.Location = new System.Drawing.Point(375, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 13);
             this.label5.TabIndex = 18;
@@ -320,22 +306,60 @@
             this.timerRender.Interval = 1;
             this.timerRender.Tick += new System.EventHandler(this.timerRender_Tick);
             // 
+            // nudWidth
+            // 
+            this.nudWidth.DecimalPlaces = 1;
+            this.nudWidth.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            65536});
+            this.nudWidth.Location = new System.Drawing.Point(435, 35);
+            this.nudWidth.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.nudWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudWidth.Name = "nudWidth";
+            this.nudWidth.Size = new System.Drawing.Size(54, 20);
+            this.nudWidth.TabIndex = 19;
+            this.nudWidth.Value = new decimal(new int[] {
+            14,
+            0,
+            0,
+            65536});
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(432, 19);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Width:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 543);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.nudWidth);
             this.Controls.Add(this.nudSpeed);
             this.Controls.Add(this.nudSpacing);
             this.Controls.Add(this.nudHistory);
             this.Controls.Add(this.nudCorners);
             this.Controls.Add(this.nudPolygons);
-            this.Controls.Add(this.cbRun);
             this.Controls.Add(this.cbFade);
             this.Controls.Add(this.cbRainbow);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnReset);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -355,6 +379,7 @@
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpacing)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWidth)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,7 +390,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.NumericUpDown nudPolygons;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox cbRun;
         private System.Windows.Forms.ComboBox cbGraphics;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -374,10 +398,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbRainbow;
         private System.Windows.Forms.CheckBox cbFade;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
         private System.Windows.Forms.NumericUpDown nudSpacing;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nudSpeed;
@@ -385,6 +408,8 @@
         private System.Windows.Forms.Timer timerRender;
         private System.Windows.Forms.PictureBox pictureBox1;
         private SkiaSharp.Views.Desktop.SKGLControl skglControl1;
+        private System.Windows.Forms.NumericUpDown nudWidth;
+        private System.Windows.Forms.Label label7;
     }
 }
 

@@ -16,7 +16,7 @@ namespace Mystify.Model
         }
 
         // input values can be 0-256*3 and RGB sum will be 255
-        public static Color FromHue(int hue)
+        public static Color FromHue(int hue, bool brighten = true)
         {
             hue %= (256 * 3);
 
@@ -45,6 +45,13 @@ namespace Mystify.Model
                 r = 255 * fracIntoC;
                 g = 0;
                 b = 255 * (1 - fracIntoC);
+            }
+
+            if (brighten)
+            {
+                r += (255 - r) / 2;
+                g += (255 - g) / 2;
+                b += (255 - b) / 2;
             }
 
             return new Color((byte)r, (byte)g, (byte)b, 255);

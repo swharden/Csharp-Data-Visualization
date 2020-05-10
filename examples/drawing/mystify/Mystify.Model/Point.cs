@@ -4,12 +4,12 @@ using System.Text;
 
 namespace Mystify.Model
 {
-    public struct PointF
+    public struct Point
     {
         public float X;
         public float Y;
 
-        public PointF(double x, double y)
+        public Point(double x, double y)
         {
             X = (float)x;
             Y = (float)y;

@@ -18,8 +18,7 @@ namespace Mystify.Viewer
         public Form1()
         {
             InitializeComponent();
-            skglControl1.Dock = DockStyle.Fill;
-            pictureBox1.Visible = false;
+            cbGraphics.SelectedIndex = 0;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,10 +41,10 @@ namespace Mystify.Viewer
             double colorShift = rand.NextDouble();
             for (int i = 0; i < polys.Length; i++)
             {
-                polys[i] = new Polygon(rand, (int)nudCorners.Value, 
-                    skglControl1.Width, skglControl1.Height, 
-                    (int)nudHistory.Value, (double)i/polys.Length + colorShift);
-                
+                polys[i] = new Polygon(rand, (int)nudCorners.Value,
+                    skglControl1.Width, skglControl1.Height,
+                    (int)nudHistory.Value, (double)i / polys.Length + colorShift);
+
             }
             polys = polys.OrderBy(x => rand.Next()).ToArray();
         }
@@ -53,62 +52,34 @@ namespace Mystify.Viewer
         private void nudCorners_ValueChanged(object sender, EventArgs e) { Reset(); }
         private void nudHistory_ValueChanged(object sender, EventArgs e) { Reset(); }
         private void nudSpacing_ValueChanged(object sender, EventArgs e) { Reset(); }
+        private void btnReset_Click(object sender, EventArgs e) { Reset(); }
 
         readonly Stopwatch stopwatch = new Stopwatch();
         int renderCount = 0;
 
         private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
         {
-            var surface = e.Surface;
-
-            surface.Canvas.Clear(SKColors.Black);
-
-            var paint = new SKPaint
-            {
-                Style = SKPaintStyle.Stroke,
-                Color = SKColors.White,
-                StrokeWidth = 1,
-                IsAntialias = true
-            };
-
-            bool fade = false;
-
-            foreach(Polygon poly in polys)
-            {
-                paint.Color = new SKColor(poly.Color.R, poly.Color.G, poly.Color.B, poly.Color.A);
-                for (int historyIndex = 0; historyIndex < poly.Corners[0].Points.Count(); historyIndex++)
-                {
-                    var historyFrac = (double)historyIndex / (poly.Corners[0].Points.Count() - 1);
-                    using (var path = new SKPath())
-                    {
-                        for (int cornerIndex = 0; cornerIndex < poly.Corners.Count(); cornerIndex++)
-                        {
-                            var corner = poly.Corners[cornerIndex];
-                            if (cornerIndex == 0)
-                                path.MoveTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
-                            else
-                                path.LineTo(corner.Points[historyIndex].X, corner.Points[historyIndex].Y);
-                        }
-                        path.Close();
-
-                        if (fade)
-                            paint.Color = new SKColor(255, 255, 255, (byte)(255 * historyFrac));
-
-                        e.Surface.Canvas.DrawPath(path, paint);
-                    }
-                }
-            }
-
-
+            var renderer = new SkiaRenderer(e.Surface.Canvas);
+            Field.Render(renderer, polys, (float)nudWidth.Value, cbFade.Checked);
             renderCount += 1;
         }
 
         private void timerRender_Tick(object sender, EventArgs e)
         {
-            foreach(Polygon poly in polys)
+            foreach (Polygon poly in polys)
                 poly.Advance((double)nudSpeed.Value, cbRainbow.Checked);
 
-            skglControl1.Invalidate();
+            if (cbGraphics.Text.Contains("Skia"))
+            {
+                skglControl1.Invalidate();
+            }
+            else
+            {
+                var bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                var rend = new DrawingRenderer(bmp);
+                Field.Render(rend, polys, (float)nudWidth.Value, cbFade.Checked);
+                pictureBox1.Image = bmp;
+            }
 
             double elapsedSec = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency;
             double framesPerSec = renderCount / elapsedSec;
@@ -117,5 +88,22 @@ namespace Mystify.Viewer
                 $"({framesPerSec:0.00} FPS)";
         }
 
+        private void cbGraphics_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbGraphics.Text.Contains("Skia"))
+            {
+                pictureBox1.Visible = false;
+                skglControl1.Dock = DockStyle.Fill;
+                skglControl1.Visible = true;
+                Reset();
+            }
+            else
+            {
+                skglControl1.Visible = false;
+                pictureBox1.Dock = DockStyle.Fill;
+                pictureBox1.Visible = true;
+                Reset();
+            }
+        }
     }
 }

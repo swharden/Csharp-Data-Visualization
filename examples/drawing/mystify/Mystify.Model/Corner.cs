@@ -20,10 +20,10 @@ namespace Mystify.Model
 
         private readonly Random Rand;
 
-        public readonly List<PointF> Points = new List<PointF>();
+        public readonly List<Point> Points = new List<Point>();
         public readonly int PointsToKeep;
 
-        public PointF PointF { get { return new PointF(X, Y); } }
+        public Point PointF { get { return new Point(X, Y); } }
 
         public Corner(Random rand, double width, double height, int pointsToKeep)
         {
@@ -49,7 +49,7 @@ namespace Mystify.Model
         {
             X += Xvel * speed;
             Y += Yvel * speed;
-            Points.Add(new PointF(X, Y));
+            Points.Add(new Point(X, Y));
             if (Points.Count > PointsToKeep)
                 Points.RemoveRange(0, Points.Count - PointsToKeep);
             BounceOffEdges();
