@@ -33,11 +33,11 @@ namespace LifeModel
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    // determine X to left and right
+                    // determine X of left and right cells
                     int xL = (x > 0) ? x - 1 : Columns - 1;
                     int xR = (x < Columns - 1) ? x + 1 : 0;
 
-                    // determine Y to left and right
+                    // determine Y of top and bottom cells
                     int yT = (y > 0) ? y - 1 : Rows - 1;
                     int yB = (y < Rows - 1) ? y + 1 : 0;
 
