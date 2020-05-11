@@ -85,6 +85,7 @@ namespace GameOfLife
                     }
                 }
 
+                pictureBox1.Image?.Dispose();
                 pictureBox1.Image = (Bitmap)bmp.Clone();
             }
         }
