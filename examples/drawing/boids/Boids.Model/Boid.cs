@@ -24,12 +24,28 @@ namespace Boids.Model
             return Math.Sqrt(Xvel * Xvel + Yvel * Yvel);
         }
 
+        public void Accelerate(double scale = 1.0)
+        {
+            Xvel *= scale;
+            Yvel *= scale;
+        }
+
         public double GetAngle()
         {
+            if (Xvel == 0 && Yvel == 0)
+                return 0;
             double angle = Math.Atan(Yvel / Xvel) * 180 / Math.PI - 90;
             if (Xvel < 0)
                 angle += 180;
             return angle;
+        }
+
+        public double Distance(Boid boid)
+        {
+            double dX = boid.X - X;
+            double dY = boid.Y - Y;
+            double dist = Math.Sqrt(dX * dX + dY * dY);
+            return dist;
         }
     }
 }
