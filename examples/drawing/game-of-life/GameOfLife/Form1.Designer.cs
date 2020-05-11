@@ -40,6 +40,10 @@
             this.DelayNud = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
             this.DensityNud = new System.Windows.Forms.NumericUpDown();
+            this.GliderButton = new System.Windows.Forms.Button();
+            this.RowButton = new System.Windows.Forms.Button();
+            this.SpaceshipButton = new System.Windows.Forms.Button();
+            this.GunButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SizeNud)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DelayNud)).BeginInit();
@@ -53,7 +57,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(12, 33);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(776, 405);
+            this.pictureBox1.Size = new System.Drawing.Size(864, 405);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.SizeChanged += new System.EventHandler(this.pictureBox1_SizeChanged);
@@ -91,7 +95,7 @@
             this.ResetButton.Name = "ResetButton";
             this.ResetButton.Size = new System.Drawing.Size(56, 23);
             this.ResetButton.TabIndex = 5;
-            this.ResetButton.Text = "Reset";
+            this.ResetButton.Text = "Random";
             this.ResetButton.UseVisualStyleBackColor = true;
             this.ResetButton.Click += new System.EventHandler(this.ResetButton_Click);
             // 
@@ -184,11 +188,55 @@
             0});
             this.DensityNud.ValueChanged += new System.EventHandler(this.DensityNud_ValueChanged);
             // 
+            // GliderButton
+            // 
+            this.GliderButton.Location = new System.Drawing.Point(607, 5);
+            this.GliderButton.Name = "GliderButton";
+            this.GliderButton.Size = new System.Drawing.Size(56, 23);
+            this.GliderButton.TabIndex = 12;
+            this.GliderButton.Text = "Glider";
+            this.GliderButton.UseVisualStyleBackColor = true;
+            this.GliderButton.Click += new System.EventHandler(this.GliderButton_Click);
+            // 
+            // RowButton
+            // 
+            this.RowButton.Location = new System.Drawing.Point(741, 5);
+            this.RowButton.Name = "RowButton";
+            this.RowButton.Size = new System.Drawing.Size(56, 23);
+            this.RowButton.TabIndex = 12;
+            this.RowButton.Text = "Row";
+            this.RowButton.UseVisualStyleBackColor = true;
+            this.RowButton.Click += new System.EventHandler(this.RowButton_Click);
+            // 
+            // SpaceshipButton
+            // 
+            this.SpaceshipButton.Location = new System.Drawing.Point(669, 5);
+            this.SpaceshipButton.Name = "SpaceshipButton";
+            this.SpaceshipButton.Size = new System.Drawing.Size(66, 23);
+            this.SpaceshipButton.TabIndex = 13;
+            this.SpaceshipButton.Text = "Spaceship";
+            this.SpaceshipButton.UseVisualStyleBackColor = true;
+            this.SpaceshipButton.Click += new System.EventHandler(this.SpaceshipButton_Click);
+            // 
+            // GunButton
+            // 
+            this.GunButton.Location = new System.Drawing.Point(803, 5);
+            this.GunButton.Name = "GunButton";
+            this.GunButton.Size = new System.Drawing.Size(74, 23);
+            this.GunButton.TabIndex = 14;
+            this.GunButton.Text = "Glider Gun";
+            this.GunButton.UseVisualStyleBackColor = true;
+            this.GunButton.Click += new System.EventHandler(this.GunButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(888, 450);
+            this.Controls.Add(this.GunButton);
+            this.Controls.Add(this.SpaceshipButton);
+            this.Controls.Add(this.RowButton);
+            this.Controls.Add(this.GliderButton);
             this.Controls.Add(this.DensityNud);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.DelayNud);
@@ -224,6 +272,10 @@
         private System.Windows.Forms.NumericUpDown DelayNud;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown DensityNud;
+        private System.Windows.Forms.Button GliderButton;
+        private System.Windows.Forms.Button RowButton;
+        private System.Windows.Forms.Button SpaceshipButton;
+        private System.Windows.Forms.Button GunButton;
     }
 }
 

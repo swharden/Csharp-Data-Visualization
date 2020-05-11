@@ -14,7 +14,7 @@ namespace LifeModel
 
         readonly Random rand = new Random();
 
-        public Board(int width, int height, int cellSize, double liveDensity = .1)
+        public Board(int width, int height, int cellSize, bool wrap = true)
         {
             CellSize = cellSize;
 
@@ -23,25 +23,29 @@ namespace LifeModel
                 for (int y = 0; y < Rows; y++)
                     Cells[x, y] = new Cell();
 
-            ConnectNeighbors();
-            Randomize(liveDensity);
+            ConnectNeighbors(wrap);
         }
 
-        private void ConnectNeighbors()
+        private void ConnectNeighbors(bool wrap)
         {
             for (int x = 0; x < Columns; x++)
             {
                 for (int y = 0; y < Rows; y++)
                 {
-                    // determine X of left and right cells
-                    int xL = (x > 0) ? x - 1 : Columns - 1;
-                    int xR = (x < Columns - 1) ? x + 1 : 0;
+                    bool isLeftEdge = (x == 0);
+                    bool isRightEdge = (x == Columns - 1);
+                    bool isTopEdge = (y == 0);
+                    bool isBottomEdge = (y == Rows - 1);
+                    bool isEdge = isLeftEdge | isRightEdge | isTopEdge | isBottomEdge;
 
-                    // determine Y of top and bottom cells
-                    int yT = (y > 0) ? y - 1 : Rows - 1;
-                    int yB = (y < Rows - 1) ? y + 1 : 0;
+                    if ((wrap == false) && isEdge)
+                        continue;
 
-                    // add the 8 neighbors surrounding this cell
+                    int xL = isLeftEdge ? Columns - 1 : x - 1;
+                    int xR = isRightEdge ? 0 : x + 1;
+                    int yT = isTopEdge ? Rows - 1 : y - 1;
+                    int yB = isBottomEdge ? 0 : y + 1;
+
                     Cells[x, y].neighbors.Add(Cells[xL, yT]);
                     Cells[x, y].neighbors.Add(Cells[x, yT]);
                     Cells[x, y].neighbors.Add(Cells[xR, yT]);
