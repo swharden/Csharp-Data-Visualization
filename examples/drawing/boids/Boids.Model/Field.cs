@@ -1,232 +1,129 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Boids.Model
 {
     public class Field
     {
-        public double Width;
-        public double Height;
-
-        public readonly List<Boid> boids = new List<Boid>();
-        private readonly Random rand = new Random();
+        public readonly double Width;
+        public readonly double Height;
+        public readonly List<Boid> Boids = new List<Boid>();
+        private readonly Random Rand = new Random();
 
         public Field(double width, double height, int boidCount = 100)
         {
-            Width = width;
-            Height = height;
+            (Width, Height) = (width, height);
             for (int i = 0; i < boidCount; i++)
-                boids.Add(RandomBoid());
+                Boids.Add(new Boid(Rand, width, height));
         }
 
-        private Boid RandomBoid()
+        public void Advance(bool bounceOffWalls = true, bool wrapAroundEdges = false)
         {
-            return new Boid(
-                x: Width * rand.NextDouble(),
-                y: Height * rand.NextDouble(),
-                xVel: (rand.NextDouble() - .5) * 10,
-                yVel: (rand.NextDouble() - .5) * 10);
-        }
-
-        public void Resize(double width, double height)
-        {
-            Width = width;
-            Height = height;
-        }
-
-        public void AdvanceOld(double? width = null, double? height = null)
-        {
-            Width = (width is null) ? Width : width.Value;
-            Height = (height is null) ? Height : height.Value;
-
-            double closeDistance = Width / 20;
-            double flockDistance = Width / 5;
-            double maxSpeed = Width / 250;
-            double minSpeed = Width / 500;
-
-            // modify boid1 to react to boid 2
-            foreach (var boid1 in boids)
+            // update void speed and direction (velocity) based on rules
+            foreach (var boid in Boids)
             {
-                foreach (var boid2 in boids)
-                {
-                    if (boid1.Y >= boid2.Y)
-                        continue;
-
-                    double dX = boid2.X - boid1.X;
-                    double dY = boid2.Y - boid1.Y;
-                    double dXvel = boid2.Xvel - boid1.Xvel;
-                    double dYvel = boid2.Yvel - boid1.Yvel;
-
-                    double distance = Math.Sqrt(dX * dX + dY * dY);
-                    bool tooClose = (distance < closeDistance);
-                    bool sameFlock = (distance < flockDistance);
-
-                    // move away from boids that are too close
-                    if (tooClose)
-                    {
-                        double closeness = (1 - distance / closeDistance);
-                        double repulsion = .01;
-                        boid1.Xvel -= dX * closeness * repulsion;
-                        boid1.Yvel -= dY * closeness * repulsion;
-                    }
-
-                    // move toward birds within the flock distance
-                    if (sameFlock)
-                    {
-                        double flockStrength = .0002;
-                        boid1.Xvel += dX * flockStrength;
-                        boid1.Yvel += dY * flockStrength;
-                    }
-
-                    // velocity is influenced by other boids in the flock
-                    if (sameFlock)
-                    {
-                        double flockStrength = .001;
-                        boid1.Xvel += dXvel * flockStrength;
-                        boid1.Yvel += dYvel * flockStrength;
-                    }
-
-                    // random velocity adjustment
-                    //double randomness = .02;
-                    //boid1.Xvel += (rand.NextDouble() - .5) * randomness;
-                    //boid1.Yvel += (rand.NextDouble() - .5) * randomness;
-                }
-
-                // apply speed limits
-                var speed = boid1.GetSpeed();
-                if (speed > maxSpeed)
-                {
-                    boid1.Xvel *= (maxSpeed / speed);
-                    boid1.Yvel *= (maxSpeed / speed);
-                }
-                if (speed < minSpeed)
-                {
-                    boid1.Xvel *= (minSpeed / speed);
-                    boid1.Yvel *= (minSpeed / speed);
-                }
+                (double flockXvel, double flockYvel) = Flock(boid, 50, .0003);
+                (double alignXvel, double alignYvel) = Align(boid, 50, .01);
+                (double avoidXvel, double avoidYvel) = Avoid(boid, 20, .001);
+                (double predXvel, double predYval) = Predator(boid, 150, .00005);
+                boid.Xvel += flockXvel + avoidXvel + alignXvel + predXvel;
+                boid.Yvel += flockYvel + avoidYvel + alignYvel + predYval;
             }
 
-            // move all boids forward
-            foreach (var boid in boids)
+            // move all boids forward in time
+            foreach (var boid in Boids)
             {
-                (double x, double y) = boid.FuturePosition(.5);
-                boid.X = x;
-                boid.Y = y;
-
-                if (boid.X < 0) boid.X = Width + boid.X;
-                if (boid.Y < 0) boid.Y = Height + boid.Y;
-                if (boid.X > Width) boid.X -= Width;
-                if (boid.Y > Height) boid.Y -= Height;
+                boid.MoveForward();
+                if (bounceOffWalls)
+                    BounceOffWalls(boid);
+                if (wrapAroundEdges)
+                    WrapAround(boid);
             }
         }
 
-        public (double dX, double dY) DeltaPosition(Boid boid, List<Boid> neighbors)
+        private (double xVel, double yVel) Flock(Boid boid, double distance, double power)
         {
-            double centerX = 0;
-            double centerY = 0;
+            // point toward the center of the flock (mean flock boid position)
+            var neighbors = Boids.Where(x => x.GetDistance(boid) < distance);
+            double meanX = neighbors.Sum(x => x.X) / neighbors.Count();
+            double meanY = neighbors.Sum(x => x.Y) / neighbors.Count();
+            double deltaCenterX = meanX - boid.X;
+            double deltaCenterY = meanY - boid.Y;
+            return (deltaCenterX * power, deltaCenterY * power);
+        }
+
+        private (double xVel, double yVel) Avoid(Boid boid, double distance, double power)
+        {
+            // point away as boids get close
+            var neighbors = Boids.Where(x => x.GetDistance(boid) < distance);
+            (double sumClosenessX, double sumClosenessY) = (0, 0);
             foreach (var neighbor in neighbors)
             {
-                centerX += neighbor.X;
-                centerY += neighbor.Y;
+                double closeness = distance - boid.GetDistance(neighbor);
+                sumClosenessX += (boid.X - neighbor.X) * closeness;
+                sumClosenessY += (boid.Y - neighbor.Y) * closeness;
             }
-            centerX /= neighbors.Count;
-            centerY /= neighbors.Count;
-            return (centerX - boid.X, centerY - boid.Y);
+            return (sumClosenessX * power, sumClosenessY * power);
         }
 
-        public (double dX, double dY) DeltaVelocity(Boid boid, List<Boid> neighbors)
+        public int PredatorCount = 3;
+        private (double xVel, double yVel) Predator(Boid boid, double distance, double power)
         {
-            double velX = 0;
-            double velY = 0;
-            foreach (var neighbor in neighbors)
+            // point away as predators get close
+            (double sumClosenessX, double sumClosenessY) = (0, 0);
+            for (int i = 0; i < PredatorCount; i++)
             {
-                velX += neighbor.Xvel;
-                velY += neighbor.Yvel;
+                Boid predator = Boids[i];
+                double distanceAway = boid.GetDistance(predator);
+                if (distanceAway < distance)
+                {
+                    double closeness = distance - distanceAway;
+                    sumClosenessX += (boid.X - predator.X) * closeness;
+                    sumClosenessY += (boid.Y - predator.Y) * closeness;
+                }
             }
-            velX /= neighbors.Count;
-            velY /= neighbors.Count;
-            return (velX - boid.Xvel, velY - boid.Yvel);
+            return (sumClosenessX * power, sumClosenessY * power);
         }
 
-        public void Advance(double? newWidth = null, double? newHeight = null)
+        private (double xVel, double yVel) Align(Boid boid, double distance, double power)
         {
-            Width = (newWidth is null) ? Width : newWidth.Value;
-            Height = (newHeight is null) ? Height : newHeight.Value;
+            // point toward the center of the flock (mean flock boid position)
+            var neighbors = Boids.Where(x => x.GetDistance(boid) < distance);
+            double meanXvel = neighbors.Sum(x => x.Xvel) / neighbors.Count();
+            double meanYvel = neighbors.Sum(x => x.Yvel) / neighbors.Count();
+            double dXvel = meanXvel - boid.Xvel;
+            double dYvel = meanYvel - boid.Yvel;
+            return (dXvel * power, dYvel * power);
+        }
 
-            double distFlock = 200; // move toward center of flock
-            double distAlign = 40; // align with mean direction
-            double distAvoid = 20; // avoid
+        private void BounceOffWalls(Boid boid)
+        {
+            double pad = 50;
+            double turn = .5;
+            if (boid.X < pad)
+                boid.Xvel += turn;
+            if (boid.X > Width - pad)
+                boid.Xvel -= turn;
+            if (boid.Y < pad)
+                boid.Yvel += turn;
+            if (boid.Y > Height - pad)
+                boid.Yvel -= turn;
+        }
 
-            // steer all boids based on rules
-            foreach (var boid1 in boids)
-            {
-                /// CATEGORIZE NEIGHBORS BY DISTANCE
-                List<Boid> boidsFlock = new List<Boid>();
-                List<Boid> boidsAlign = new List<Boid>();
-                List<Boid> boidsAvoid = new List<Boid>();
-                foreach (var boid2 in boids)
-                {
-                    var distance = boid1.Distance(boid2);
-                    if (distance < distFlock) boidsFlock.Add(boid2);
-                    if (distance < distAlign) boidsAlign.Add(boid2);
-                    if (distance < distAvoid) boidsAvoid.Add(boid2);
-                }
-
-                // AVOID CLOSE, FLOCK, ALIGN
-                (double deltaAvoidX, double deltaAvoidY) = DeltaPosition(boid1, boidsAvoid);
-                (double deltaFlockX, double deltaFlockY) = DeltaPosition(boid1, boidsFlock);
-                (double deltaAlignX, double deltaAlignY) = DeltaVelocity(boid1, boidsAlign);
-                boid1.Xvel += deltaFlockX * .1 - deltaAvoidX * .01 + deltaAlignX * .001;
-                boid1.Yvel += deltaFlockY * .1 - deltaAvoidY * .01 + deltaAlignY * .001;
-
-                // ACCELERATE TO tARGET SPEED
-                double targetSpeed = 200;
-                if (boid1.GetSpeed() < targetSpeed)
-                    boid1.Accelerate(1.01);
-                else
-                    boid1.Accelerate(.99);
-
-                // TURN FROM EDGE
-                double pad = 50;
-                if (boid1.X < pad) boid1.Xvel += 20;
-                if (boid1.Y < pad) boid1.Yvel += 20;
-                if (boid1.X > Width - pad) boid1.Xvel -= 20;
-                if (boid1.Y > Height - pad) boid1.Yvel -= 20;
-
-                // AVOID PREDATOR
-                Boid predator = boids[0];
-                if (boid1 != predator)
-                {
-                    double predatorDistance = distFlock / 2;
-                    double distanceFromPredator = boid1.Distance(predator);
-                    if (distanceFromPredator < predatorDistance)
-                    {
-                        double dX = predator.X - boid1.X;
-                        double dY = predator.Y - boid1.Y;
-                        boid1.Xvel -= dX * .7;
-                        boid1.Yvel -= dY * .7;
-                    }
-                }
-            }
-
-            // move all boids forward
-            double simulationSpeed = .01;
-            foreach (var boid1 in boids)
-            {
-                boid1.X += boid1.Xvel * simulationSpeed;
-                boid1.Y += boid1.Yvel * simulationSpeed;
-            }
-
-            // roll boids that fell off the page
-            foreach (var boid1 in boids)
-            {
-                if (boid1.X < 0) boid1.X = Width;
-                if (boid1.Y < 0) boid1.Y = Height;
-                if (boid1.X > Width) boid1.X = 0;
-                if (boid1.Y > Height) boid1.Y = 0;
-            }
+        private void WrapAround(Boid boid)
+        {
+            if (boid.X < 0)
+                boid.X += Width;
+            if (boid.X > Width)
+                boid.X -= Width;
+            if (boid.Y < 0)
+                boid.Y += Height;
+            if (boid.Y > Height)
+                boid.Y -= Height;
         }
     }
 }

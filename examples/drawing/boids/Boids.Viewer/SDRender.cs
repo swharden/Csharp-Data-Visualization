@@ -16,14 +16,13 @@ namespace Boids.Viewer
             using (Graphics gfx = Graphics.FromImage(bmp))
             {
                 gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-                //gfx.Clear(ColorTranslator.FromHtml("#2f3539"));
                 gfx.Clear(ColorTranslator.FromHtml("#003366"));
-
-                for (int i=0; i<field.boids.Count; i++)
+                for (int i = 0; i < field.Boids.Count(); i++)
                 {
-                    Color color = (i == 0) ? Color.White : Color.LightGreen;
-                    RenderBoid(gfx, field.boids[i], color);
+                    if (i < 3)
+                        RenderBoid(gfx, field.Boids[i], Color.White);
+                    else
+                        RenderBoid(gfx, field.Boids[i], Color.LightGreen);
                 }
             }
             return bmp;
@@ -34,9 +33,9 @@ namespace Boids.Viewer
             var boidOutline = new Point[]
             {
                 new Point(0, 0),
-                new Point(-5, -1),
-                new Point(0, 10),
-                new Point(5, -1),
+                new Point(-4, -1),
+                new Point(0, 8),
+                new Point(4, -1),
                 new Point(0, 0),
             };
 
