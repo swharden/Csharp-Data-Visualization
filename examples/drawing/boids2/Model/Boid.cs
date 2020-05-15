@@ -65,7 +65,7 @@ namespace Model
             }
         }
 
-        public void AlignWithNeighbors(Boid[] boids, double vision = 100, double weight = .03)
+        public void AlignWithNeighbors(Boid[] boids, double vision, double weight)
         {
             // determine mean velocity of the flock
             int neighborCount = 0;
