@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 
 namespace NPlotQuickstart
@@ -9,6 +10,21 @@ namespace NPlotQuickstart
         public Form1()
         {
             InitializeComponent();
+            ScatterButton_Click(null, null);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // simulate plotting from a console application
+            var linePlot = new NPlot.PointPlot { DataSource = RandomWalk(20) };
+            var surface = new NPlot.Bitmap.PlotSurface2D(400, 300);
+            surface.BackColor = Color.White;
+            surface.Add(linePlot);
+            surface.Title = $"Scatter Plot from a Console Application";
+            surface.YAxis1.Label = "Vertical Axis Label";
+            surface.XAxis1.Label = "Horizontal Axis Label";
+            surface.Refresh();
+            surface.Bitmap.Save("nplot-console-quickstart.png");
         }
 
         private Random rand = new Random(0);
