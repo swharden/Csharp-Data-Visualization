@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NPlotDemo")]
+[assembly: AssemblyTitle("NPlotQuickstart")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("NPlotDemo")]
+[assembly: AssemblyProduct("NPlotQuickstart")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7156cf7a-1509-4f68-b47a-da6e89a8dd35")]
+[assembly: Guid("81c47440-d19a-4f2f-afcf-44b06cd6e420")]
 
 // Version information for an assembly consists of the following four values:
 //

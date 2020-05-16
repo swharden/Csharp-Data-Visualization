@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NPlotDemo.Properties
+namespace NPlotQuickstart.Properties
 {
 
 
