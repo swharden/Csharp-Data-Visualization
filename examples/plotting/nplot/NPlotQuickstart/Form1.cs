@@ -11,9 +11,11 @@ namespace NPlotQuickstart
         {
             InitializeComponent();
             ScatterButton_Click(null, null);
+            SaveFromConsoleApplication();
+            plotSurface2D1.BackColor = SystemColors.Control;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void SaveFromConsoleApplication()
         {
             // simulate plotting from a console application
             var linePlot = new NPlot.PointPlot { DataSource = RandomWalk(20) };
