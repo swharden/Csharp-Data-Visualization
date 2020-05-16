@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,22 @@ namespace ZedGraphQuickstart
         {
             InitializeComponent();
             ScatterButton_Click(null, null);
+            SaveFromConsoleApplication();
+        }
+
+        private void SaveFromConsoleApplication()
+        {
+            // simulate plotting from a console application
+            var pane = new ZedGraph.GraphPane();
+            var curve1 = pane.AddCurve(
+                label: "demo",
+                x: new double[] { 1, 2, 3, 4, 5 },
+                y: new double[] { 1, 4, 9, 16, 25 },
+                color:Color.Blue);
+            curve1.Line.IsAntiAlias = true;
+            pane.AxisChange();
+            Bitmap bmp = pane.GetImage(400, 300, dpi: 100, isAntiAlias: true);
+            bmp.Save("zedgraph-console-quickstart.png", ImageFormat.Png);
         }
 
         private Random rand = new Random(0);
@@ -34,7 +51,7 @@ namespace ZedGraphQuickstart
             // return an array of ascending numbers starting at 1
             double[] values = new double[points];
             for (int i = 0; i < points; i++)
-                values[i] = i;
+                values[i] = i + 1;
             return values;
         }
 
