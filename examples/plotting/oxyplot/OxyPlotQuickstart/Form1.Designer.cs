@@ -91,6 +91,7 @@
             this.Controls.Add(this.plotView1);
             this.Name = "Form1";
             this.Text = "OxyPlot Quickstart";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

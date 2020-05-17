@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OxyPlot.WindowsForms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,6 +17,56 @@ namespace OxyPlotQuickstart
         {
             InitializeComponent();
             ScatterButton_Click(null, null);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // simulate making a plot from a console
+
+            // generate some random XY data
+            int pointCount = 1_000;
+            double[] xs1 = RandomWalk(pointCount);
+            double[] ys1 = RandomWalk(pointCount);
+            double[] xs2 = RandomWalk(pointCount);
+            double[] ys2 = RandomWalk(pointCount);
+
+            // create lines and fill them with data points
+            var line1 = new OxyPlot.Series.LineSeries()
+            {
+                Title = $"Series 1",
+                Color = OxyPlot.OxyColors.Blue,
+                StrokeThickness = 1,
+                MarkerSize = 2,
+                MarkerType = OxyPlot.MarkerType.Circle
+            };
+
+            var line2 = new OxyPlot.Series.LineSeries()
+            {
+                Title = $"Series 2",
+                Color = OxyPlot.OxyColors.Red,
+                StrokeThickness = 1,
+                MarkerSize = 2,
+                MarkerType = OxyPlot.MarkerType.Circle
+            };
+
+            for (int i = 0; i < pointCount; i++)
+            {
+                line1.Points.Add(new OxyPlot.DataPoint(xs1[i], ys1[i]));
+                line2.Points.Add(new OxyPlot.DataPoint(xs2[i], ys2[i]));
+            }
+
+            // create the model and add the lines to it
+            var model = new OxyPlot.PlotModel
+            {
+                Title = $"Scatter Plot ({pointCount:N0} points each)"
+            };
+            model.Series.Add(line1);
+            model.Series.Add(line2);
+
+            // save the file as a PNG
+            string filePath = System.IO.Path.GetFullPath("oxyplot-console-quickstart.png");
+            OxyPlot.WindowsForms.PngExporter.Export(model, filePath, 400, 300, OxyPlot.OxyColors.White);
+            Console.WriteLine($"Saved: {filePath}");
         }
 
         private Random rand = new Random(0);
