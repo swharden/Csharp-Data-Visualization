@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScottPlotQuickstart", "ScottPlotQuickstart\ScottPlotQuickstart.csproj", "{440527C6-42C6-44C9-AF41-BA65749472BC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{440527C6-42C6-44C9-AF41-BA65749472BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{440527C6-42C6-44C9-AF41-BA65749472BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{440527C6-42C6-44C9-AF41-BA65749472BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{440527C6-42C6-44C9-AF41-BA65749472BC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {53724BF2-17A8-4D5A-ADAA-C2C85AF1D773}
+	EndGlobalSection
+EndGlobal
