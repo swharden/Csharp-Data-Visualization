@@ -33,6 +33,7 @@
             this.ScatterButton = new System.Windows.Forms.Button();
             this.LineButton = new System.Windows.Forms.Button();
             this.formsPlot1 = new ScottPlot.FormsPlot();
+            this.SimpleBar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BarButton
@@ -75,11 +76,22 @@
             this.formsPlot1.Size = new System.Drawing.Size(584, 297);
             this.formsPlot1.TabIndex = 3;
             // 
+            // SimpleBar
+            // 
+            this.SimpleBar.Location = new System.Drawing.Point(255, 12);
+            this.SimpleBar.Name = "SimpleBar";
+            this.SimpleBar.Size = new System.Drawing.Size(75, 23);
+            this.SimpleBar.TabIndex = 4;
+            this.SimpleBar.Text = "Simple Bar";
+            this.SimpleBar.UseVisualStyleBackColor = true;
+            this.SimpleBar.Click += new System.EventHandler(this.SimpleBar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(608, 350);
+            this.Controls.Add(this.SimpleBar);
             this.Controls.Add(this.formsPlot1);
             this.Controls.Add(this.LineButton);
             this.Controls.Add(this.ScatterButton);
@@ -96,6 +108,7 @@
         private System.Windows.Forms.Button ScatterButton;
         private System.Windows.Forms.Button LineButton;
         private ScottPlot.FormsPlot formsPlot1;
+        private System.Windows.Forms.Button SimpleBar;
     }
 }
 

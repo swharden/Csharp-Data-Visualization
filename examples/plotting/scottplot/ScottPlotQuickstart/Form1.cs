@@ -84,5 +84,25 @@ namespace ScottPlotQuickstart
             formsPlot1.plt.YLabel("Vertical Axis Label");
             formsPlot1.Render();
         }
+
+        private void SimpleBar_Click(object sender, EventArgs e)
+        {
+            // generate some random Y data
+            int pointCount = 5;
+            double[] xs = ScottPlot.DataGen.Consecutive(pointCount);
+            double[] ys = ScottPlot.DataGen.RandomWalk(rand, pointCount, mult: 50, offset: 100);
+
+            // plot the data
+            formsPlot1.Reset();
+            formsPlot1.plt.PlotBar(xs, ys);
+
+            // additional styling
+            formsPlot1.plt.Title("Simple Bar Graph");
+            formsPlot1.plt.XLabel("Horizontal Axis Label");
+            formsPlot1.plt.YLabel("Vertical Axis Label");
+            formsPlot1.plt.Legend(location: ScottPlot.legendLocation.upperLeft);
+            formsPlot1.plt.Axis(y1: 0);
+            formsPlot1.Render();
+        }
     }
 }
