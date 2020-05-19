@@ -37,6 +37,9 @@ namespace ScottPlotQuickstart
             formsPlot1.plt.PlotBarGroups(groupLabels, seriesLabels, barData);
 
             // additional styling
+            formsPlot1.plt.Title("Bar Graph");
+            formsPlot1.plt.XLabel("Horizontal Axis Label");
+            formsPlot1.plt.YLabel("Vertical Axis Label");
             formsPlot1.plt.Legend(location: ScottPlot.legendLocation.upperLeft);
             formsPlot1.plt.Axis(y1: 0);
             formsPlot1.Render();
@@ -57,6 +60,9 @@ namespace ScottPlotQuickstart
             formsPlot1.plt.PlotScatter(xs2, ys2);
 
             // additional styling
+            formsPlot1.plt.Title($"Scatter Plot ({pointCount} points per group)");
+            formsPlot1.plt.XLabel("Horizontal Axis Label");
+            formsPlot1.plt.YLabel("Vertical Axis Label");
             formsPlot1.Render();
         }
 
@@ -73,7 +79,9 @@ namespace ScottPlotQuickstart
             formsPlot1.plt.PlotSignal(ys2);
 
             // additional styling
-            formsPlot1.plt.Legend();
+            formsPlot1.plt.Title($"Line Plot ({10_000:N0} points each)");
+            formsPlot1.plt.XLabel("Horizontal Axis Label");
+            formsPlot1.plt.YLabel("Vertical Axis Label");
             formsPlot1.Render();
         }
     }
