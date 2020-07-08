@@ -5,6 +5,14 @@ This example uses the FFT provided with [NAudio](https://github.com/naudio/NAudi
 
 ![](screenshot.gif)
 
+## UPDATE: NEW VERSION
+
+Users simply looking to display audio data in the frequency domain will benefit from newer code provided with the [FftSharp](https://github.com/swharden/FftSharp) library:
+
+![](https://raw.githubusercontent.com/swharden/FftSharp/master/dev/microphone-fft.gif)
+
+* [FftSharp on GitHub](https://github.com/swharden/FftSharp)
+
 ## Core Concepts
 
 ### Notes about the FFT
