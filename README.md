@@ -25,7 +25,7 @@ Each of these example projects introduces an important concept in data visualiza
 
 ### Drawing / Graphing
 
-Description | Screenshot
+Description | Screenshots
 ---|---
 **[Drawing Lines](examples/2019-06-01-graphics-basics/readme.md)** - This project demonstrates a simple way to draw lines in a Windows Form. Here we create a Bitmap then use a Graphics object to draw lines on it. The Bitmap is then assigned to PictureBox.Image and displayed to the user. | ![](/examples/2019-06-01-graphics-basics/screenshot.png)
 **[Drawing with the Mouse](examples/2019-06-02-drawing-with-mouse/readme.md)** - This project uses a PictureBox's MouseMove event handler to create a MSPaint-like drawing surface with only a few lines of code. | ![](examples/2019-06-02-drawing-with-mouse/screenshot.png)
@@ -73,7 +73,7 @@ Description | Screenshot
 * Only completed projects are listed in the table below.
 * The [projects folder](projects) contains even more in-progress and unfinished projects. 
 
-Project Description | Screenshot
+Project Description | Screenshots
 ---|---
 **[Graphing Data with GnuPlot from C++](https://github.com/swharden/code-notes/tree/master/Cpp/projects/2018-09-27%20hello%20gnuplot%20world)** isn't Csharp-specific, but can be translated to any programming language. It demonstrates how easy it is to graph data from any programming language by saving it as a text file then launching gnuplot on it. Advanced data control and styling can be set with command line arguments (compiled-in), or defined in script files which give the end user the ability to modify styling without modifying the source code. | ![](https://github.com/swharden/code-notes/blob/master/Cpp/projects/2018-09-27%20hello%20gnuplot%20world/doc/interactive.png)
 **[Realtime Microphone FFT Analysis](projects/18-09-19_microphone_FFT_revisited)** is a new version of an older concept. This project uses a modern [ScottPlot](https://github.com/swharden/ScottPlot/) which has many improvements over older projects listed here. | ![](projects/18-09-19_microphone_FFT_revisited/screenshot.png)
