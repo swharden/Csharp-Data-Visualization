@@ -5,23 +5,8 @@ This repository is a collection of minimal-case example projects to display data
 
 Most examples use `System.Drawing` (available as a .NET Standard library using the [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) NuGet package), but some use alternative methods like WPF and Skia (SkiaSharp).
 
-## Child Projects
-
-Some code examples started here have matured into their own projects:
-
-Project | Screenshot
----|---
-**[ScottPlot](http://swharden.com/scottplot/)** is an interactive plotting library for .NET. If you're just looking for an easy way to interactively display some data on a graph using C#, ScottPlot might be for you! | ![](https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif)
-**[Spectrogram](https://github.com/swharden/Spectrogram)** is a simple spectrogram library for .NET. Specrogram converts signals (typically audio) into the frequency-domain and makes it easy to display spectrograms as 2D images. Spectrogram is fast enough to display the audio spectrum in real time. | ![](https://raw.githubusercontent.com/swharden/Spectrogram/master/dev/spectrogram.png)
-**[Sound Card ECG](https://github.com/swharden/SoundCardECG)** uses scottplot to interactively display the soundcard signal in real time| ![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
-**[HHSharp](https://github.com/swharden/HHSharp)** is an interactive Hodgkin-Huxley neuron simulator|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
-
-
-## Instructional Code Examples
-Each of these example projects introduces an important concept in data visualization and has well-documented code examples to demonstrate them. These examples can be useful individually, but are best appreciated if fully reviewed in top-down order.
-
-> **⚠️ WARNING:** This project is being actively restructured (April, 2020) to better organize project code in this repository and move commentary to the [C# Data Visualization Website](http://swharden.com/CsharpDataVis/). Projects below this line have not yet been upgraded to this new format.
-
+## Code Examples
+Each of these example projects introduces important entry-level concepts with code examples to demonstrate them. These examples can be useful individually, but are best appreciated if reviewed in top-down order.
 
 ### Drawing / Graphing
 
@@ -65,6 +50,30 @@ Description | Screenshot
 **[Plotting Audio Amplitude](/examples/2019-06-06-audio-level-monitor/readme.md)** - This example uses [NAudio](https://github.com/naudio/NAudio) to access the sound card, calculates the amplitude of short recordings, then graphs them continuously in real time with [ScottPlot](https://github.com/swharden/ScottPlot). This project is a good place to get started to see how to interface audio input devices. | ![](/examples/2019-06-06-audio-level-monitor/screenshot.png)
 **[Plotting Audio Values](/examples/2019-06-07-audio-visualizer/readme.md)** - This example uses [NAudio](https://github.com/naudio/NAudio) to access the sound card and plots raw PCM values with [ScottPlot](https://github.com/swharden/ScottPlot). These graphs contain tens of thousands of data points, but remain fully interactive even as they are being updated in real time. | ![](/examples/2019-06-07-audio-visualizer/screenshot.gif)
 **[Plotting Audio FFT](/examples/2019-06-08-audio-fft)** - This example continuously plots the frequency component of an audio input device. The [NAudio](https://github.com/naudio/NAudio) library is used to acquire the audio data and process the FFT and [ScottPlot](https://github.com/swharden/ScottPlot) is used for the plotting. | ![](/examples/2019-06-08-audio-fft/screenshot.gif)
+
+## Advanced Examples
+
+These examples were created for the [C# Data Visualization Website](https://swharden.com/CsharpDataVis) and mostly involve creating rendering-library-agnostic _models_ of complex systems, then developing rendering systems that can display the models.
+
+Project | Screenshot
+---|---
+[**Mystify Your Mind with C#**](/examples/drawing/mystify) - The classic screensaver implemented using both OpenGL and System.Drawing. See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/examples/drawing/mystify/screenshot.gif)
+[**Game of Life in C#**](/examples/drawing/game-of-life) - Conway's Game of Life is a zero-player video game that uses a few basic rules to determine if cells live or die based on the density of their neighbors. In this project we create Life using C# and System.Drawing.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/examples/drawing/game-of-life/screenshot.gif)
+[**Boids in C#**](/examples/drawing/boids) - This project implements the Boids flocking algorithm in C# to create an interesting procedural animation of bird-drones (boids) scurrying about the screen.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/examples/drawing/boids/screenshot.gif)
+[**Boids in C# with SkiaSharp**](/examples/drawing/boids2) - This project is an extension of the original boids project that uses an abstracted rendering system supporting SkiaSharp and OpenGL for hardware-accelerated rendering.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/examples/drawing/boids2/screenshot.png)
+
+
+## Child Projects
+
+Some code examples started here have matured into their own repositories:
+
+Project | Screenshot
+---|---
+**[ScottPlot](http://swharden.com/scottplot/)** is an interactive plotting library for .NET. If you're just looking for an easy way to interactively display some data on a graph using C#, ScottPlot might be for you! | ![](https://raw.githubusercontent.com/swharden/ScottPlot/master/dev/nuget/ScottPlot.gif)
+**[Spectrogram](https://github.com/swharden/Spectrogram)** is a simple spectrogram library for .NET. Specrogram converts signals (typically audio) into the frequency-domain and makes it easy to display spectrograms as 2D images. Spectrogram is fast enough to display the audio spectrum in real time. | ![](https://raw.githubusercontent.com/swharden/Spectrogram/master/dev/spectrogram.png)
+**[Sound Card ECG](https://github.com/swharden/SoundCardECG)** uses scottplot to interactively display the soundcard signal in real time| ![](https://raw.githubusercontent.com/swharden/SoundCardECG/master/src/SoundCardECG/screenshot.png)
+**[HHSharp](https://github.com/swharden/HHSharp)** is an interactive Hodgkin-Huxley neuron simulator|![](https://raw.githubusercontent.com/swharden/HHSharp/master/dev/screenshot-sEPSCs.gif)
+
 
 ## Older Projects
 * These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
