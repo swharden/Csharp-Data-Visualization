@@ -1,12 +1,8 @@
 # C# Data Visualization
 
-This repository is a collection of minimal-case code examples that display data with C#. Simple examples use the System.Drawing library to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored.
+**This repository is a collection of minimal-case code examples that display data with C#.** Simple examples use the System.Drawing library to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored. Additional resources can be found on the [C# Data Visualization Website](https://swharden.com/CsharpDataVis/).
 
-<p align="center">
-
-![](/examples/drawing/boids/screenshot.gif)
-
-</p>
+<p align="center"><img src="/examples/drawing/boids/screenshot.gif"></p>
 
 ### Drawing with C#
 
