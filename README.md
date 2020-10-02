@@ -1,14 +1,14 @@
 # C# Data Visualization
 
-This repository is a collection of minimal-case example projects to display data with Visual Studio. Code here is mostly written in C# using [Visual Studio Community](https://www.visualstudio.com/downloads/) and only uses free software and plugins.
+This repository is a collection of minimal-case code examples that display data with C#. Simple examples use the System.Drawing library to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored.
 
+<p align="center">
 
-Most examples use `System.Drawing` (available as a .NET Standard library using the [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) NuGet package), but some use alternative methods like WPF and Skia (SkiaSharp).
+![](/examples/drawing/boids/screenshot.gif)
 
-## Code Examples
-Each of these example projects introduces important entry-level concepts with code examples to demonstrate them. These examples can be useful individually, but are best appreciated if reviewed in top-down order.
+</p>
 
-### Drawing / Graphing
+### Drawing with C#
 
 Description | Screenshot
 ---|---
@@ -31,11 +31,10 @@ Description | Screenshot
 
 ### Hardware-Accelerated Drawing with SkiaSharp and OpenGL
 
-**GDI+:** Calls to `System.Drawing` use the GDI+ backend to draw on the screen. It is convenient because it is been around forever and is easily supported by .NET, but it does not perform well in parallel environments or with large bitmaps (e.g., full screen). Most examples on this page use GDI+ to create images.
+**System.Drawing uses the GDI+ backend to draw on the screen.** It is convenient because it is been around forever and is easily supported by .NET, but it does not perform well in parallel environments or with large bitmaps (e.g., full screen). See [this page](https://photosauce.net/blog/post/5-reasons-you-should-stop-using-systemdrawing-from-aspnet) for a thorough description of its limitations. Most examples on this page use GDI+ to create images. For a long time System.Drawing was limited to .NET Framework applications, but in 2018 the System.Drawing.Common package brought System.Drawing support to .NET Core.
 
-**Skia:** The [Skia Graphics Library](https://skia.org/) is an open-source 2D drawing library developed by Google. [SkiaSharp](https://github.com/mono/SkiaSharp) is a cross-platform .NET API for drawing with Skia.
+**[SkiaSharp](https://github.com/mono/SkiaSharp) is a cross-platform .NET API for drawing with Skia**, an open-source 2D drawing library developed by Google. SkiaSharp has an OpenGL control which allows hardware-accelerated rendering using OpenGL out of the box without requiring any OpenGL knowledge.
 
-**Hardware Acceleration:** GDI+ is processor-based. Skia supports hardware acceleration with the GPU with the OpenGL back-end. You don't have to know anything about OpenGL to use this feature, you just have to properly configure Skia to use OpenGL then interact with Skia normally.
 
 Description | Screenshot
 ---|---
@@ -65,7 +64,7 @@ Project | Screenshot
 
 ## Child Projects
 
-Some code examples started here have matured into their own repositories:
+Some code examples started here and have matured into their own repositories...
 
 Project | Screenshot
 ---|---
@@ -76,11 +75,8 @@ Project | Screenshot
 
 
 ## Older Projects
-* These projects are first-pass implementations of ideas, but they work, so learn and from them what you can and take whatever you find useful! They're not as polished as the ones in the previous section.
-* Each example below is a standalone Visual Studio solution
-* Projects typically increase in complexity from bottom to top
-* Only completed projects are listed in the table below.
-* The [projects folder](projects) contains even more in-progress and unfinished projects. 
+
+**⚠️ Code quality warning:** This section contains projects and notes I created when I was first learning how to draw graphics with C#. They work, but likely have poor code quality. I share them here in case someone may find them useful, but they should certainly not be deeply studied or accepted as best practice.
 
 Project Description | Screenshot
 ---|---
