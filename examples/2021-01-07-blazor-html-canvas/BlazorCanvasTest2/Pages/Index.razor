@@ -1,0 +1,65 @@
+﻿@page "/"
+
+@using Blazor.Extensions
+@using Blazor.Extensions.Canvas.Canvas2D
+@inject IJSRuntime JsRuntime;
+
+<div id="canvasHolder" style="position: fixed; background-color: magenta; width: 100%; height: 100%">
+    <BECanvas Width="600" Height="400" @ref="_canvasReference"></BECanvas>
+</div>
+
+@code{
+    private Models.Field BallField = new Models.Field();
+
+    private Canvas2DContext ctx;
+    protected BECanvasComponent _canvasReference;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        this.ctx = await _canvasReference.CreateCanvas2DAsync();
+        await JsRuntime.InvokeAsync<object>("initRenderJS", DotNetObjectReference.Create(this));
+        await base.OnInitializedAsync();
+    }
+
+    private DateTime LastRender;
+
+    [JSInvokable]
+    public void ResizeInBlazor(double width, double height) => BallField.Resize(width, height);
+
+    [JSInvokable]
+    public async ValueTask RenderInBlazor(float timeStamp)
+    {
+        if (BallField.Balls.Count == 0)
+            BallField.AddRandomBalls(50);
+
+        double fps = 1.0 / (DateTime.Now - LastRender).TotalSeconds;
+        LastRender = DateTime.Now;
+
+        BallField.StepForward();
+
+        await this.ctx.BeginBatchAsync();
+
+        await this.ctx.ClearRectAsync(0, 0, BallField.Width, BallField.Height);
+        await this.ctx.SetFillStyleAsync("#003366");
+        await this.ctx.FillRectAsync(0, 0, BallField.Width, BallField.Height);
+
+        await this.ctx.SetFontAsync("26px Segoe UI");
+        await this.ctx.SetFillStyleAsync("#FFFFFF");
+        await this.ctx.FillTextAsync("Blazor WebAssembly + HTML Canvas", 10, 30);
+
+        await this.ctx.SetFontAsync("16px consolas");
+        await this.ctx.FillTextAsync($"FPS: {fps:0.000}", 10, 50);
+
+        await this.ctx.SetStrokeStyleAsync("#FFFFFF");
+        foreach (var ball in BallField.Balls)
+        {
+            await this.ctx.BeginPathAsync();
+            await this.ctx.ArcAsync(ball.X, ball.Y, ball.R, 0, 2 * Math.PI, false);
+            await this.ctx.SetFillStyleAsync(ball.Color);
+            await this.ctx.FillAsync();
+            await this.ctx.StrokeAsync();
+        }
+
+        await this.ctx.EndBatchAsync();
+    }
+}

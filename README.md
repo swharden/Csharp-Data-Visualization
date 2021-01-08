@@ -40,6 +40,14 @@ Description | Screenshot
 
 See also: **[QuickPlot](https://github.com/swharden/QuickPlot)** - an interactive .NET plotting library using SkiaSharp
 
+### Drawing in Blazor with WebAssembly
+
+Client-side Blazor lets graphics models written in C# compile-down to WebAssembly that can run in the browser on a static website. No special hosting is required! At the time of writing client-side Blazor is on the bleeding edge of development, and performance is mediocre. For intense rendering jobs in the browser JavaScript is still required, but for simple tasks you can define graphics models in C# and render them with a HTML Canvas API without ever learning C#
+
+Description | Screenshot
+---|---
+**[Animation in the Browser with Blazor WebAssembly](/examples/2021-01-07-blazor-html-canvas)** ([demo](https://swharden.com/software/csdv/2020-01-07-animation-with-blazor-and-html-canvas/app/)) - This program demonstrates how to write a graphics model in C# and render it using the `Blazor.Extensions.Canvas` to draw on a HTML canvas. | ![](/examples/2021-01-07-blazor-html-canvas/blazor-canvas-demo.gif)
+
 ### Audio
 
 Description | Screenshot
