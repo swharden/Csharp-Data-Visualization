@@ -46,7 +46,7 @@ Client-side Blazor lets graphics models written in C# compile-down to WebAssembl
 
 Description | Screenshot
 ---|---
-**[Animation in the Browser with Blazor WebAssembly](/examples/2021-01-07-blazor-html-canvas)** ([demo](https://swharden.com/software/csdv/2020-01-07-animation-with-blazor-and-html-canvas/app/)) - This program demonstrates how to write a graphics model in C# and render it using the `Blazor.Extensions.Canvas` to draw on a HTML canvas. | ![](/examples/2021-01-07-blazor-html-canvas/blazor-canvas-demo.gif)
+**[Animation in the Browser with Blazor WebAssembly and HTML Canvas](/examples/2021-01-07-blazor-html-canvas)** ([demo](https://swharden.com/software/csdv/2021-01-07-animation-with-blazor-and-html-canvas/app/)) - This program demonstrates how to write a graphics model in C# and render it using the `Blazor.Extensions.Canvas` to draw on a HTML canvas. | ![](/examples/2021-01-07-blazor-html-canvas/blazor-canvas-demo.gif)
 
 ### Audio
 
