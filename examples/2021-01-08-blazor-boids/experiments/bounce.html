@@ -1,0 +1,61 @@
+<html>
+
+<body>
+
+    <div style="margin: 3em; text-align: center;">
+        <canvas id="myCanvas" width="600" height="400"
+            style="border: 1px solid black; box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);">
+            Your browser does not support the canvas element.
+        </canvas>
+    </div>
+
+    <script>
+
+        class BallField {
+
+            constructor(div, backgroundColor = "#000000") {
+                this.x = 50;
+                this.y = 50;
+                this.xVel = 2;
+                this.yVel = 2;
+                this.ballRadius = 10;
+
+                this.ctx = document.getElementById('myCanvas').getContext('2d');
+                this.updateSize();
+            }
+
+            updateSize() {
+                this.width = document.getElementById('myCanvas').offsetWidth;
+                this.height = document.getElementById('myCanvas').offsetHeight;
+            }
+
+            renderFrame() {
+                this.stepForward();
+                this.draw();
+                window.requestAnimationFrame(() => this.renderFrame());
+            }
+
+            stepForward() {
+                this.x += this.xVel;
+                this.y += this.yVel;
+                if (this.x < this.ballRadius || this.x > this.width - this.ballRadius) this.xVel *= -1;
+                if (this.y < this.ballRadius || this.y > this.height - this.ballRadius) this.yVel *= -1;
+            }
+
+            draw() {
+                this.ctx.fillStyle = "#003366";
+                this.ctx.fillRect(0, 0, this.width, this.height);
+                this.ctx.beginPath();
+                this.ctx.arc(this.x, this.y, this.ballRadius, 0, 2 * Math.PI, false);
+                this.ctx.fillStyle = '#FFFFFF';
+                this.ctx.fill();
+            }
+        }
+
+        var myField = new BallField();
+        window.requestAnimationFrame(() => myField.renderFrame());
+        
+    </script>
+</body>
+
+</html>

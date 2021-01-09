@@ -1,0 +1,74 @@
+<html>
+
+
+
+<body style="margin: 0px;">
+
+
+    <textarea id="myData" style="">test</textarea>
+    <div id="canvasHolder" style="position: fixed; width: 100%; height: 100%">
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+    <script>
+
+        // draw a single boid at the defined position and rotation
+        function renderBoid(ctx, x, y, r) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(r * 2 * Math.PI);
+
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(4, -2);
+            ctx.lineTo(0, 10);
+            ctx.lineTo(-4, -2);
+            ctx.lineTo(0, 0);
+            ctx.closePath();
+
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function renderBoidsFromTextboxJson(timeStamp) {
+            var ctx = document.getElementById('myCanvas').getContext('2d');
+            ctx.fillStyle = "#003366";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            var boids = JSON.parse(document.getElementById('myData').value);
+            boids.forEach(b => renderBoid(ctx, b[0], b[1], b[2]));
+
+            window.requestAnimationFrame(renderBoidsFromTextboxJson);
+        }
+
+        function resizeCanvasToFitWindow() {
+            var canvas = document.getElementById('myCanvas');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        function initRandomBoids() {
+            var boids = [
+                [111, 123, .7],
+                [333, 212, .3],
+                [121, 321, .9]
+            ]
+            document.getElementById('myData').innerHTML = JSON.stringify(boids);
+        }
+
+        window.initRenderLoop = () => {
+            window.addEventListener("resize", resizeCanvasToFitWindow);
+            resizeCanvasToFitWindow();
+            initRandomBoids();
+            window.requestAnimationFrame(renderBoidsFromTextboxJson);
+        };
+
+        window.initRenderLoop();
+
+    </script>
+
+</body>
+
+</html>

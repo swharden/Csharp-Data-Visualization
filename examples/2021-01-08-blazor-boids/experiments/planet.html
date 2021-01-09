@@ -1,0 +1,90 @@
+<html>
+
+<body style="margin: 0px;">
+
+    <div style="background-color: #EEE; width: 100%; height: 100%;">
+        <canvas id="myCanvas" style="position: fixed; width: 100%; height: 100%;">
+            Your browser does not support the canvas element.
+        </canvas>
+    </div>
+
+    <script>
+        var sun = new Image();
+        var moon = new Image();
+        var earth = new Image();
+
+        function init() {
+            var theCanvas = document.getElementById('myCanvas');
+            theCanvas.width = window.innerWidth;
+            theCanvas.height = window.innerHeight;
+            window.requestAnimationFrame(draw);
+        }
+
+        function draw() {
+            var theCanvas = document.getElementById('myCanvas');
+            var width = theCanvas.offsetWidth;
+            var height = theCanvas.offsetHeight;
+            var centerX = width / 2;
+            var centerY = height / 2;
+            var ctx = document.getElementById('myCanvas').getContext('2d');
+
+            // draw black space
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, width, height);
+
+            // draw the sun
+            ctx.beginPath();
+            var sunSize = 30;
+            ctx.arc(centerX, centerY, sunSize, 0, 2 * Math.PI, false);
+            ctx.fillStyle = 'yellow';
+            ctx.fill();
+
+            // move center (0, 0) to where the sun is
+            ctx.save();
+            ctx.translate(centerX, centerY);
+
+            // rotate an amount dependent on time
+            var time = new Date();
+            var earthSpeed = .5;
+            var totalSeconds = time.getSeconds() + time.getMilliseconds() / 1000;
+            var earthRotationAngle = earthSpeed * totalSeconds;
+            ctx.rotate(earthRotationAngle);
+
+            // move out from the sun (0, 0)
+            var earthDistance = 100;
+            ctx.translate(earthDistance, 0);
+
+            // draw the earth
+            ctx.beginPath();
+            var earthSize = 10;
+            ctx.arc(0, 0, earthSize, 0, 2 * Math.PI, false);
+            ctx.fillStyle = '#AAAAFF';
+            ctx.fill();
+
+            // rotate an amount dependent on time
+            var moonSpeed = 5;
+            var moonRotationAngle = moonSpeed * totalSeconds;
+            ctx.rotate(moonRotationAngle);
+
+            // step away the distance to the moon
+            var moonDistance = 20;
+            ctx.translate(0, moonDistance);
+
+            // draw the earth
+            ctx.beginPath();
+            var moonSize = 5;
+            ctx.arc(0, 0, moonSize, 0, 2 * Math.PI, false);
+            ctx.fillStyle = '#CCCCCC';
+            ctx.fill();
+
+            // reset rotation and translation
+            ctx.restore();
+
+            window.requestAnimationFrame(draw);
+        }
+
+        init();
+    </script>
+</body>
+
+</html>

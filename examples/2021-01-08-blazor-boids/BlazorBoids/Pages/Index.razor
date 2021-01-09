@@ -1,0 +1,64 @@
+﻿@page "/"
+@using System.Text;
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavManager
+@using Microsoft.AspNetCore.WebUtilities
+
+<div id="boidsHolder" style="position: fixed; width: 100%; height: 100%">
+    <canvas id="boidsCanvas"></canvas>
+</div>
+
+@code{
+    private Random rand = new Random();
+    private Models.Field boidField;
+    private DateTime LastRender;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JsRuntime.InvokeAsync<object>("initRenderJS", DotNetObjectReference.Create(this));
+        await base.OnInitializedAsync();
+
+        var uri = NavManager.ToAbsoluteUri(NavManager.Uri);
+
+        int boidCount = 75;
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("boids", out var boidCountString))
+            if (int.TryParse(boidCountString, out int parsedBoidCount))
+                boidCount = parsedBoidCount;
+
+        int predatorCount = 3;
+        if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("predators", out var predatorCountString))
+            if (int.TryParse(predatorCountString, out int parsedPredatorCount))
+                predatorCount = parsedPredatorCount;
+
+        boidField = new Models.Field(800, 600, boidCount, predatorCount);
+    }
+
+    [JSInvokable]
+    public string UpdateModel(double width, double height)
+    {
+        if (boidField is null)
+            return "";
+
+        boidField.Resize(width, height);
+        boidField.Advance(bounceOffWalls: true, wrapAroundEdges: false);
+
+        StringBuilder sb = new StringBuilder("[");
+        foreach (var boid in boidField.Boids)
+        {
+            double x = boid.X;
+            double y = boid.Y;
+            double r = boid.GetAngle() / 360;
+            sb.Append($"[{x:0.0},{y:0.0},{r:0.000}],");
+        }
+
+        sb.Append(boidField.PredatorCount.ToString());
+        sb.Append("]");
+
+
+        double fps = 1.0 / (DateTime.Now - LastRender).TotalSeconds;
+        LastRender = DateTime.Now;
+        Console.WriteLine($"FPS: {fps:#.00}");
+
+        return sb.ToString();
+    }
+}

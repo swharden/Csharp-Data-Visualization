@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blazor Boids</title>
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body style="background-color: #003366; color: white; margin: 0px;">
+    <app>
+        <div style="margin: 1em; font-size: 2em; font-family: 'Segoe UI', sans-serif;">
+            Loading Blazor Boids...
+        </div>
+    </app>
+
+    <div id="blazor-error-ui" style="visibility: hidden">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+
+        var lastFrameTime = 0;
+        function renderJS() {
+
+            // resize the canvas to fit its parent
+            var holder = document.getElementById('boidsHolder');
+            var canvas = document.getElementById('boidsCanvas');
+            canvas.width = holder.clientWidth;
+            canvas.height = holder.clientHeight;
+
+            // tell C# about the latest dimensions, advance the model, and parse the new data
+            var boidsString = window.theInstance.invokeMethod('UpdateModel', canvas.width, canvas.height);
+            var boids = JSON.parse(boidsString);
+            var predatorCount = boids.pop();
+
+            // render the background
+            var ctx = document.getElementById('boidsCanvas').getContext('2d');
+            ctx.fillStyle = "#003366";
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            // render the logo
+            var thisFrameTime = new Date();
+            var fps = 1000.0 / (thisFrameTime - lastFrameTime);
+            lastFrameTime = thisFrameTime;
+            ctx.font = "26px Segoe UI";
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fillText("Blazor Boids", 10, 30);
+
+            // render the FPS
+            ctx.font = "16px consolas";
+            ctx.fillStyle = "#FFFFFF44";
+            ctx.fillText("FPS: " + Math.round(fps), 10, 50);
+            ctx.fillText("www.SWHarden.com", 10, ctx.canvas.height - 16);
+
+            // render each boid
+            for (var i = 0; i < boids.length; i++) {
+                var predator = i < predatorCount;
+                var boid = boids[i];
+                var x = boid[0];
+                var y = boid[1];
+                var rotation = boid[2];
+                ctx.save();
+                ctx.translate(x, y);
+                ctx.rotate(rotation * 2 * Math.PI);
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(4, -2);
+                ctx.lineTo(0, 10);
+                ctx.lineTo(-4, -2);
+                ctx.lineTo(0, 0);
+                ctx.closePath();
+                ctx.fillStyle = predator ? '#FFFF00' : '#FFFFFF';
+                ctx.fill();
+                ctx.restore();
+            }
+
+            // call this same function to render the next frame
+            window.requestAnimationFrame(renderJS);
+        }
+
+        window.initRenderJS = (instance) => {
+            window.theInstance = instance;
+            window.requestAnimationFrame(renderJS);
+        };
+
+    </script>
+</body>
+
+</html>
