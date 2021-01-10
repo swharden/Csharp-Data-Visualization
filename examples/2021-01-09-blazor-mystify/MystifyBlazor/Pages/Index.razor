@@ -1,0 +1,92 @@
+﻿@page "/"
+@using System.Text;
+@inject IJSRuntime JsRuntime
+@inject NavigationManager NavManager
+@using Microsoft.AspNetCore.WebUtilities
+
+<div class="container mt-3">
+    <div class="display-4">Mystify your Browser with Blazor</div>
+
+    <div>
+        <div class="bg-white shadow mt-3" id="myCanvasHolder">
+            <canvas id="myCanvas" style="background-color: black;"></canvas>
+        </div>
+
+        <div class="display-5 mt-5">
+            Configuration
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="Speed">Speed: @MystifyField.Speed</label>
+            <input type="range" class="form-range" id="Speed"
+                   @bind="MystifyField.Speed" @bind:event="oninput">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="ShapeCount">Shapes: @MystifyField.ShapeCount</label>
+            <input type="range" class="form-range" id="ShapeCount"
+                   @bind="MystifyField.ShapeCount" @bind:event="oninput" min="1" max="20">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="CornerCount">Corners: @MystifyField.CornerCount</label>
+            <input type="range" class="form-range" id="CornerCount"
+                   @bind="MystifyField.CornerCount" @bind:event="oninput" min="3" max="20">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="historyCount">History: @MystifyField.HistoryCount</label>
+            <input type="range" class="form-range" id="historyCount"
+                   @bind="MystifyField.HistoryCount" @bind:event="oninput" min="1" max="50">
+        </div>
+    </div>
+
+    <div>
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary" @onclick="MystifyField.RandomizeColors">Random Colors</button>
+        </div>
+
+        <div class="d-inline-block m-4">
+            <input class="form-check-input" type="checkbox" value="" id="rainbow" @bind="MystifyField.Rainbow">
+            <label class="form-check-label" for="rainbow">
+                Rainbow
+            </label>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="display-5 mt-3">
+        Source Code
+    </div>
+    <div>
+        <ul class="py-2">
+            <li class="my-2">GitHub</li>
+            <li class="my-2">Blog Post</li>
+        </ul>
+    </div>
+
+    <div class="text-muted"><small>Running on .NET @Environment.Version</small></div>
+</div>
+
+@code
+{
+    Models.Field MystifyField = new Models.Field();
+
+    protected override void OnInitialized()
+    {
+        JsRuntime.InvokeAsync<object>("initRenderJS", DotNetObjectReference.Create(this));
+    }
+
+    [JSInvokable]
+    public string UpdateModel(double width, double height)
+    {
+        MystifyField.Advance(width, height);
+        return MystifyField.GetJSON();
+    }
+}

@@ -1,0 +1,94 @@
+﻿<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Mystify with Blazor</title>
+    <meta name='description' content='Classic screensaver implemented with client-side Blazor using WebAssembly and HTML Canvas' />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+
+<body class="bg-light">
+    <app>
+        <div class="m-4">
+            <div class="display-6 d-inline-block">
+                preparing to mystify your mind...
+            </div>
+            <div class="spinner-border" style="width: 2rem; height: 2rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </app>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+
+
+    <script>
+
+        var lastFrameTime = 0;
+        function renderJS() {
+
+            // resize the canvas to fit its parent (resizing clears the canvas too)
+            var holder = document.getElementById('myCanvasHolder');
+            var canvas = document.getElementById('myCanvas');
+            canvas.width = holder.clientWidth;
+            canvas.height = canvas.width * .6;
+
+            // tell C# about the latest dimensions, advance the model, and parse the new data
+            var dataString = window.theInstance.invokeMethod('UpdateModel', canvas.width, canvas.height);
+            var polys = JSON.parse(dataString);
+
+            // render each polygon
+            var lineCount = 0;
+            var ctx = document.getElementById('myCanvas').getContext('2d');
+            ctx.lineWidth = 2;
+            for (var i = 0; i < polys.length; i++) {
+                var poly = polys[i];
+                var color = poly.shift();
+
+                ctx.beginPath();
+                for (var j = 0; j < poly.length; j++) {
+                    x = parseFloat(poly[j][0]);
+                    y = parseFloat(poly[j][1]);
+                    if (j == 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.strokeStyle = color;
+                ctx.closePath();
+                ctx.stroke();
+                lineCount += 1;
+            }
+
+            // render corner message
+            var thisFrameTime = new Date();
+            var fps = Math.round(1000.0 / (thisFrameTime - lastFrameTime));
+            lastFrameTime = thisFrameTime;
+            ctx.fillStyle = "#FFFFFF33";
+            ctx.font = "16px consolas";
+            ctx.fillText(`${lineCount} lines at ${fps} FPS`, 10, 16);
+
+            // highest frame rate:
+            window.requestAnimationFrame(renderJS);
+        }
+
+        window.initRenderJS = (instance) => {
+            window.theInstance = instance;
+            window.requestAnimationFrame(renderJS);
+        };
+
+    </script>
+
+</body>
+
+</html>

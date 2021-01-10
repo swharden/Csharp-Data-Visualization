@@ -1,0 +1,113 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>MystifyBlazor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../wwwroot/css/bootstrap.css" rel="stylesheet" />
+    <link href="../wwwroot/css/app.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+    <div class="container mt-3" style="max-width: 900px;">
+        <div class="display-4">Mystify your Browser with Blazor</div>
+
+        <div class="bg-white shadow mt-3" id="myCanvasHolder">
+            <canvas id="myCanvas" style="background-color: black;"></canvas>
+        </div>
+
+        <div class="display-5 mt-5">
+            Configuration
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="polyCount">Polygons:</label>
+            <input class="form-control" id="polyCount" value="2" size="4">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="cornerCount">Corners:</label>
+            <input class="form-control" id="cornerCount" value="4" size="4">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <label for="historyCount">History:</label>
+            <input class="form-control" id="historyCount" value="5" size="4">
+        </div>
+
+        <div class="d-inline-block m-4">
+            <input class="form-check-input" type="checkbox" value="" id="rainbow">
+            <label class="form-check-label" for="rainbow">
+                Rainbow
+            </label>
+        </div>
+
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary btn-lg">Random Colors</button>
+        </div>
+
+        <div class="display-5 mt-3">
+            Source Code
+        </div>
+        <div>
+            <ul class="py-2">
+                <li class="my-2">GitHub</li>
+                <li class="my-2">Blog Post</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+
+        function renderJS() {
+
+            // resize the canvas to fit its parent (resizing clears the canvas too)
+            var holder = document.getElementById('myCanvasHolder');
+            var canvas = document.getElementById('myCanvas');
+            canvas.width = holder.clientWidth;
+            canvas.height = canvas.width * .75;
+
+            // tell C# about the latest dimensions, advance the model, and parse the new data
+            var dataString = `
+                [
+                    ["#00FF00",[1,2],[100,200],[200,100]],
+                    ["#666666",[312,24],[234,63],[987,79]],
+                    ["#0000FF",[123,321],[456,654],[222,111]]
+                ]`;
+            var polys = JSON.parse(dataString);
+
+            // render each polygon
+            var ctx = document.getElementById('myCanvas').getContext('2d');
+            ctx.lineWidth = 2;
+            for (var i = 0; i < polys.length; i++) {
+                var poly = polys[i];
+                var color = poly.shift();
+
+                ctx.beginPath();
+                for (var j = 0; j < poly.length; j++) {
+                    x = parseFloat(poly[j][0]);
+                    y = parseFloat(poly[j][1]);
+                    if (j == 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.strokeStyle = color;
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            // call this same function to render the next frame
+            window.requestAnimationFrame(renderJS);
+        }
+
+        window.requestAnimationFrame(renderJS);
+
+    </script>
+
+    <script src="../wwwroot/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
