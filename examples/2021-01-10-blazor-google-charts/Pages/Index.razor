@@ -1,0 +1,82 @@
+﻿@page "/"
+@inject IJSRuntime JsRuntime
+
+<div class="container bg-white mx-auto text-center p-5">
+    <div class="display-6">Google Charts with Blazor</div>
+    <div>
+        <a href="https://swharden.com/blog/2021-01-12-blazor-google-charts" style="text-decoration: none;">
+            <small>https://swharden.com/blog/2021-01-12-blazor-google-charts</small>
+        </a>
+    </div>
+
+    <div id="chart_div" class="card shadow m-5" style="height: 400px;"></div>
+
+    <div class="text-center d-inline-block p-3">
+        <div class="lead">Plot data from C# functions in a Google Chart</div>
+
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary" @onclick="PlotSin">Sin</button>
+        </div>
+
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary" @onclick="PlotRandom">Random</button>
+        </div>
+
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary" @onclick="PlotWalk">Walk</button>
+        </div>
+
+        <div class="d-inline-block m-4">
+            <button class="btn btn-primary" @onclick="PlotRandomXY">RandomXY</button>
+        </div>
+
+        <div>
+            <div class="d-inline-block m-4">
+                <label for="CornerCount">Points: @PointCount</label>
+                <input type="range" class="form-range" id="CornerCount" min="10" max="1000" @bind="PointCount" @bind:event="oninput">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code{
+    private int PointCount = 123;
+    private bool ChartHidden = true;
+    Random Rand = new Random();
+
+    private void PlotData(double[] xs, double[] ys)
+    {
+        JsRuntime.InvokeVoidAsync("createNewChart", new { xs, ys });
+    }
+
+    private void PlotSin()
+    {
+        double[] xs = Enumerable.Range(0, PointCount).Select(x => (double)x).ToArray();
+        double[] ys = xs.Select(x => Math.Sin(x / 10)).ToArray();
+        PlotData(xs, ys);
+    }
+
+    private void PlotRandom()
+    {
+        double[] xs = Enumerable.Range(0, PointCount).Select(x => (double)x).ToArray();
+        double[] ys = xs.Select(x => (Rand.NextDouble() - .5) * 1000).ToArray();
+        PlotData(xs, ys);
+    }
+
+    private void PlotWalk()
+    {
+        double[] xs = Enumerable.Range(0, PointCount).Select(x => (double)x).ToArray();
+        double[] ys = new double[PointCount];
+        for (int i = 1; i < ys.Length; i++)
+            ys[i] = ys[i - 1] + Rand.NextDouble() - .5;
+        PlotData(xs, ys);
+    }
+
+    private void PlotRandomXY()
+    {
+        double[] xs = Enumerable.Range(0, PointCount).Select(x => Rand.NextDouble()).ToArray();
+        double[] ys = Enumerable.Range(0, PointCount).Select(x => Rand.NextDouble()).ToArray();
+        PlotData(xs, ys);
+    }
+}
