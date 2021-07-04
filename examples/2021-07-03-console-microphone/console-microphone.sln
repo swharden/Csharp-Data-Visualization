@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "console-microphone", "console-microphone.csproj", "{133F329F-D2F5-4656-AA53-F529DE517AC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{133F329F-D2F5-4656-AA53-F529DE517AC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{133F329F-D2F5-4656-AA53-F529DE517AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{133F329F-D2F5-4656-AA53-F529DE517AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{133F329F-D2F5-4656-AA53-F529DE517AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {41400BF0-3003-4B1D-9800-36D4E31E67C2}
+	EndGlobalSection
+EndGlobal
