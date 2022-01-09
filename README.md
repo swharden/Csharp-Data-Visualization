@@ -1,6 +1,17 @@
 # C# Data Visualization
 
-**This repository is a collection of minimal-case code examples that display data with C#.** Simple examples use the System.Drawing library to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored. Additional resources can be found on the [C# Data Visualization Website](https://swharden.com/CsharpDataVis/).
+> **⚠️ WARNING:** In January 2022 this repository will begin transitioning to highlight `Microsoft.Maui.Graphics` since cross-platform support for `System.Drawing.Common` is being [terminated](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only). 
+>
+> All original projects and code samples will be preserved in [/dev/old](/dev/old) but the git history may be modified during this transition to delete large binary files that were unnecessarily committed early in the history of this repository.
+>
+> ### Resources
+> * https://Maui.Graphics
+> * https://github.com/dotnet/Microsoft.Maui.Graphics
+> * https://docs.microsoft.com/en-us/dotnet/maui/user-interface/graphics/
+
+---
+
+**This repository is a collection of minimal-case code examples that display data with C#.** Simple examples use the `System.Drawing.Common` package to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored. Additional resources can be found on the [C# Data Visualization Website](https://swharden.com/CsharpDataVis/).
 
 [Mystify](#advanced-examples) | [Life](#advanced-examples) | [Boids](#advanced-examples)
 ---|---|---
@@ -90,7 +101,7 @@ Project | Screenshot
 
 Project Description | Screenshot
 ---|---
-**[Graphing Data with GnuPlot from C++](https://github.com/swharden/code-notes/tree/master/Cpp/dev/old/2018-09-27%20hello%20gnuplot%20world)** isn't Csharp-specific, but can be translated to any programming language. It demonstrates how easy it is to graph data from any programming language by saving it as a text file then launching gnuplot on it. Advanced data control and styling can be set with command line arguments (compiled-in), or defined in script files which give the end user the ability to modify styling without modifying the source code. | ![](https://github.com/swharden/code-notes/blob/master/Cpp/dev/old/2018-09-27%20hello%20gnuplot%20world/doc/interactive.png)
+**[Graphing Data with GnuPlot from C++](https://github.com/swharden/code-notes/tree/master/Cpp/projects/2018-09-27%20hello%20gnuplot%20world)** isn't Csharp-specific, but can be translated to any programming language. It demonstrates how easy it is to graph data from any programming language by saving it as a text file then launching gnuplot on it. Advanced data control and styling can be set with command line arguments (compiled-in), or defined in script files which give the end user the ability to modify styling without modifying the source code. | ![](https://raw.githubusercontent.com/swharden/code-notes/master/Cpp/projects/2018-09-27%20hello%20gnuplot%20world/doc/interactive.png)
 **[Realtime Microphone FFT Analysis](dev/old/18-09-19_microphone_FFT_revisited)** is a new version of an older concept. This project uses a modern [ScottPlot](https://github.com/swharden/ScottPlot/) which has many improvements over older projects listed here. | ![](dev/old/18-09-19_microphone_FFT_revisited/screenshot.png)
 **[DataView 1.0](/dev/old/18-01-15_form_drawing/)** is an interactive plotting control written using only the standard library. It allows panning/zooming by left-click-dragging the axis labels, moving the scrollbars, clicking the buttons, and also through right-click menus on the axis labels. Interactive draggable markers are also included. This control was designed to look similar to the commercial software ClampFit. I have decided to re-code this project from the ground-up, but the solution is frozen as-is (in a quite useful state) and the project page contains many notes of considerations and insights I had while developing it. | ![](/dev/old/18-01-15_form_drawing/screenshot2.png)
 **[QRSS Spectrograph](/dev/old/18-01-14_qrss/)** produces spectrographs which are very large (thousands of pixels) and very high frequency resolution (fractions of a Hz) intended to be used to decode slow-speed (1 letter per minute) frequency-shifting Morse code radio signals, a transmission mode known as QRSS. While functional as it is, this project is intended to be a jumping-off point for anybody interested in making a feature-rich QRSS viewer.|![](/dev/old/18-01-14_qrss/screenshot_qrss.png)
