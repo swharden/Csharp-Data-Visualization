@@ -2,14 +2,18 @@
 
 > **⚠️ WARNING:** In January 2022 this repository will begin transitioning to highlight `Microsoft.Maui.Graphics` since cross-platform support for `System.Drawing.Common` is being [terminated](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only). 
 >
-> All original projects and code samples will be preserved in [/dev/old](/dev/old) but the git history may be modified during this transition to delete large binary files that were unnecessarily committed early in the history of this repository.
->
 > ### Resources
 > * https://Maui.Graphics
 > * https://github.com/dotnet/Microsoft.Maui.Graphics
 > * https://docs.microsoft.com/en-us/dotnet/maui/user-interface/graphics/
 
----
+# Drawing with Maui.Graphics
+
+Description | Screenshot
+---|---
+[**Draw with Maui.Graphics in Windows Forms and WPF**](projects/multi-target) - This project encapsulates drawing logic in a .NET Standard library using `Maui.Graphics` (with no dependency on `System.Drawing`). Separate .NET Framework and .NET Core WinForms and WPF apps reference this library to provide hardware-accelerated rendering using SkiaSharp and OpenGL. | ![](projects/multi-target/screenshot.gif)
+
+# Legacy Graphics with System.Drawing
 
 **This repository is a collection of minimal-case code examples that display data with C#.** Simple examples use the `System.Drawing.Common` package to draw on the screen, but alternative rendering systems like WPF and SkiaSharp with OpenGL are also explored. Additional resources can be found on the [C# Data Visualization Website](https://swharden.com/CsharpDataVis/).
 
