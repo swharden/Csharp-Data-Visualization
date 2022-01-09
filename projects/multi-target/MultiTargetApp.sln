@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32104.313
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StandardGraphics", "StandardGraphics\StandardGraphics.csproj", "{6043C345-A46B-4BFB-BBEE-1C8A97CD831C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StandardGraphics", "StandardGraphics\StandardGraphics.csproj", "{6043C345-A46B-4BFB-BBEE-1C8A97CD831C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsNetApp", "WinFormsNetApp\WinFormsNetApp.csproj", "{C6863226-25B5-4C6A-A91A-5AC6B073FF57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsNetApp", "WinFormsNetApp\WinFormsNetApp.csproj", "{C6863226-25B5-4C6A-A91A-5AC6B073FF57}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsFrameworkApp", "WinFormsFrameworkApp\WinFormsFrameworkApp.csproj", "{44BBB8EC-D127-4F18-9806-E9E488581FE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F7A216C2-57E7-4B50-9618-EFC0360F4F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{44BBB8EC-D127-4F18-9806-E9E488581FE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44BBB8EC-D127-4F18-9806-E9E488581FE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44BBB8EC-D127-4F18-9806-E9E488581FE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
