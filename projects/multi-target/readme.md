@@ -8,5 +8,10 @@ This project demonstrates how to create multi-targeted app using:
 * **Windows Forms** apps for rendering using Skia + OpenGL
   * .NET Framework 4.8
   * .NET 6.0
+* **WPF** app for rendering using Skia
+  * .NET Framework 4.8
+  * .NET 6.0
 
-![](screenshot.gif)
+Windows Forms | WPF
+---|---
+![](screenshot-winforms.gif) | ![](screenshot-wpf.gif)

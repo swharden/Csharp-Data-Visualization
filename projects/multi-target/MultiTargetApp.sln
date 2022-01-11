@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsNetApp", "WinFormsN
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsFrameworkApp", "WinFormsFrameworkApp\WinFormsFrameworkApp.csproj", "{44BBB8EC-D127-4F18-9806-E9E488581FE4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F7A216C2-57E7-4B50-9618-EFC0360F4F71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F7A216C2-57E7-4B50-9618-EFC0360F4F71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7A216C2-57E7-4B50-9618-EFC0360F4F71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
