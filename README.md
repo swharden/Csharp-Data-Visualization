@@ -4,7 +4,7 @@
 
 Description | Screenshot
 ---|---
-[**Draw with Maui.Graphics in Windows Forms and WPF**](projects/multi-target) - This project encapsulates drawing logic in a .NET Standard library using `Maui.Graphics` (with no dependency on `System.Drawing`). Separate .NET Framework and .NET Core WinForms and WPF apps reference this library to provide hardware-accelerated rendering using SkiaSharp and OpenGL. | ![](projects/multi-target/screenshot.gif)
+[**Draw with Maui.Graphics in Windows Forms and WPF**](projects/multi-target) - This project encapsulates drawing logic in a .NET Standard library using `Maui.Graphics` (with no dependency on `System.Drawing`). Separate .NET Framework and .NET Core WinForms and WPF apps reference this library to provide hardware-accelerated rendering using SkiaSharp and OpenGL. | ![](projects/multi-target/screenshot-wpf.gif)
 
 > **⚠️ WARNING:** In January 2022 this repository began transitioning to `Microsoft.Maui.Graphics` since cross-platform support for `System.Drawing.Common` is being [terminated](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only). 
 >
