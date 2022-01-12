@@ -5,6 +5,7 @@
 Description | Screenshot
 ---|---
 [**Draw with Maui.Graphics in Windows Forms, WPF, and MAUI apps**](projects/multi-target) - This project encapsulates drawing logic in a .NET Standard library using `Maui.Graphics` (with no dependency on `System.Drawing`). This common library is then referenced by separate Maui, Windows Forms, WPF, and console apps to display images and animations. | ![](projects/multi-target/screenshot-wpf.gif)
+[**Compare Maui.Graphics Skia rendering performance in Windows Forms with and without OpenGL**](projects/maui-forms-gl) - A test pattern of 10,000 anti-aliased semi-transparent lines is used to evaluate framerate performance of the `skControl` compared to the `skglControl`. On my system the standard control is over 6 times slower than the OpenGL control (3 Hz vs 20 Hz). | ![](projects/maui-forms-gl/screenshot.png)
 
 > **⚠️ WARNING:** In January 2022 this repository began transitioning to `Microsoft.Maui.Graphics` since cross-platform support for `System.Drawing.Common` is being [terminated](https://docs.microsoft.com/en-us/dotnet/core/compatibility/core-libraries/6.0/system-drawing-common-windows-only). 
 >
