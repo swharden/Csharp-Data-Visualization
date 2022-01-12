@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsFrameworkApp", "Win
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{F7A216C2-57E7-4B50-9618-EFC0360F4F71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "WpfApp\WpfApp.csproj", "{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp", "WpfApp\WpfApp.csproj", "{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MauiGraphicsApp", "MauiGraphicsApp\MauiGraphicsApp.csproj", "{CEA8277C-40E5-4954-A809-222EC7FF0E08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,12 @@ Global
 		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3893BCD6-475B-4CB0-B9B1-7CBF741E99C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEA8277C-40E5-4954-A809-222EC7FF0E08}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,23 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:drawable="clr-namespace:MauiGraphicsApp"
+             x:Class="MauiGraphicsApp.MainPage"
+             Title="Maui.Graphics (Maui App)"
+             BackgroundColor="{DynamicResource SecondaryColor}">
+    <ContentPage.Resources>
+        <drawable:TestDrawable x:Key="drawable" />
+    </ContentPage.Resources>
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Render" Padding="1" Margin="10" Clicked="Button_Clicked"/>
+            <CheckBox CheckedChanged="CheckBox_CheckedChanged" />
+            <Label VerticalTextAlignment="Center">Run</Label>
+        </StackLayout>
+        <GraphicsView
+            x:Name="MyGraphicsView"
+            Drawable="{StaticResource drawable}"
+            Margin="10"
+            VerticalOptions="FillAndExpand" 
+            HorizontalOptions="FillAndExpand"/>
+    </StackLayout>
+</ContentPage>
