@@ -10,7 +10,8 @@ namespace FormsViewer
         public Form1()
         {
             InitializeComponent();
-            ActiveModel = new GraphicsModelLibrary.Starfield.StarfieldModel();
+            //ActiveModel = new GraphicsModelLibrary.Starfield.StarfieldModel();
+            ActiveModel = new GraphicsModelLibrary.BallPit.BallPitModel();
             ActiveModel.Reset(skglControl1.Width, skglControl1.Height);
         }
 
