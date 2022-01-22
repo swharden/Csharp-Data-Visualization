@@ -10,7 +10,6 @@
             if (xs is null || ys is null || xs.Length != ys.Length)
                 throw new ArgumentException($"{nameof(xs)} and {nameof(ys)} must have same length");
 
-
             int inputPointCount = xs.Length;
             double[] inputDistances = new double[inputPointCount];
             for (int i = 1; i < inputPointCount; i++)
@@ -23,28 +22,28 @@
 
             double meanDistance = inputDistances.Last() / (count - 1);
             double[] evenDistances = Enumerable.Range(0, count).Select(x => x * meanDistance).ToArray();
-            double[] xsOut = InterpolateCubicSpline(inputDistances, xs, evenDistances);
-            double[] ysOut = InterpolateCubicSpline(inputDistances, ys, evenDistances);
+            double[] xsOut = Interpolate(inputDistances, xs, evenDistances);
+            double[] ysOut = Interpolate(inputDistances, ys, evenDistances);
             return (xsOut, ysOut);
         }
 
-        private static double[] InterpolateCubicSpline(double[] actualDistances, double[] actualValues, double[] interpolationDistances)
+        private static double[] Interpolate(double[] xOrig, double[] yOrig, double[] xInterp)
         {
-            (double[] a, double[] b) = FitMatrix(actualDistances, actualValues);
+            (double[] a, double[] b) = FitMatrix(xOrig, yOrig);
 
-            double[] interpolatedValues = new double[interpolationDistances.Length];
-            for (int i = 0; i < interpolatedValues.Length; i++)
+            double[] yInterp = new double[xInterp.Length];
+            for (int i = 0; i < yInterp.Length; i++)
             {
-                int nextIndex = Enumerable.Range(0, actualDistances.Length - 2)
-                    .FirstOrDefault(index => interpolationDistances[i] <= actualDistances[index + 1], actualDistances.Length - 2);
+                int nextIndex = Enumerable.Range(0, xOrig.Length - 2)
+                    .FirstOrDefault(index => xInterp[i] <= xOrig[index + 1], xOrig.Length - 2);
 
-                double dx = actualDistances[nextIndex + 1] - actualDistances[nextIndex];
-                double t = (interpolationDistances[i] - actualDistances[nextIndex]) / dx;
-                double y = (1 - t) * actualValues[nextIndex] + t * actualValues[nextIndex + 1] + t * (1 - t) * (a[nextIndex] * (1 - t) + b[nextIndex] * t);
-                interpolatedValues[i] = y;
+                double dx = xOrig[nextIndex + 1] - xOrig[nextIndex];
+                double t = (xInterp[i] - xOrig[nextIndex]) / dx;
+                double y = (1 - t) * yOrig[nextIndex] + t * yOrig[nextIndex + 1] + t * (1 - t) * (a[nextIndex] * (1 - t) + b[nextIndex] * t);
+                yInterp[i] = y;
             }
 
-            return interpolatedValues;
+            return yInterp;
         }
 
         private static (double[] a, double[] b) FitMatrix(double[] x, double[] y)
@@ -82,7 +81,20 @@
             B[n - 1] = 2.0f * A[n - 1];
             r[n - 1] = 3 * (dy1 / (dx1 * dx1));
 
-            double[] k = SolveTriDiagonalMatrix(r, A, B, C);
+            double[] cPrime = new double[n];
+            cPrime[0] = C[0] / B[0];
+            for (int i = 1; i < n; i++)
+                cPrime[i] = C[i] / (B[i] - cPrime[i - 1] * A[i]);
+
+            double[] dPrime = new double[n];
+            dPrime[0] = r[0] / B[0];
+            for (int i = 1; i < n; i++)
+                dPrime[i] = (r[i] - dPrime[i - 1] * A[i]) / (B[i] - cPrime[i - 1] * A[i]);
+
+            double[] k = new double[n];
+            k[n - 1] = dPrime[n - 1];
+            for (int i = n - 2; i >= 0; i--)
+                k[i] = dPrime[i] - cPrime[i] * k[i + 1];
 
             for (int i = 1; i < n; i++)
             {
@@ -93,28 +105,6 @@
             }
 
             return (a, b);
-        }
-
-        private static double[] SolveTriDiagonalMatrix(double[] d, double[] A, double[] B, double[] C)
-        {
-            int n = d.Length;
-
-            double[] cPrime = new double[n];
-            cPrime[0] = C[0] / B[0];
-            for (int i = 1; i < n; i++)
-                cPrime[i] = C[i] / (B[i] - cPrime[i - 1] * A[i]);
-
-            double[] dPrime = new double[n];
-            dPrime[0] = d[0] / B[0];
-            for (int i = 1; i < n; i++)
-                dPrime[i] = (d[i] - dPrime[i - 1] * A[i]) / (B[i] - cPrime[i - 1] * A[i]);
-
-            double[] x = new double[n];
-            x[n - 1] = dPrime[n - 1];
-            for (int i = n - 2; i >= 0; i--)
-                x[i] = dPrime[i] - cPrime[i] * x[i + 1];
-
-            return x;
         }
     }
 }

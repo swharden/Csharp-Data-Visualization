@@ -1,5 +1,4 @@
-﻿
-// generate sample X/Y data using a random walk
+﻿// generate sample data using a random walk
 Random rand = new(1268);
 int pountCount = 20;
 double[] xs1 = new double[pountCount];
@@ -18,4 +17,6 @@ var plt = new ScottPlot.Plot(600, 400);
 plt.AddScatter(xs1, ys1, label: "original", markerSize: 7);
 plt.AddScatter(xs2, ys2, label: "interpolated", markerSize: 3);
 plt.Legend();
-plt.SaveFig($"interpolation.png");
+string filePath = Path.GetFullPath($"interpolation.png");
+plt.SaveFig(filePath);
+Console.WriteLine(filePath);
