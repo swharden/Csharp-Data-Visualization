@@ -5,7 +5,9 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolationViewer", "InterpolationViewer.csproj", "{B3B6325F-D317-4A2E-A0AE-1BCFB4E28ECB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interpolation", "..\Interpolation\Interpolation.csproj", "{0B29A519-1305-4B9B-B288-43737A6943F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interpolation", "..\Interpolation\Interpolation.csproj", "{0B29A519-1305-4B9B-B288-43737A6943F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolationConsole", "..\InterpolationConsole\InterpolationConsole.csproj", "{064EC93D-2922-404F-AF9F-07CB219DAA36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0B29A519-1305-4B9B-B288-43737A6943F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B29A519-1305-4B9B-B288-43737A6943F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B29A519-1305-4B9B-B288-43737A6943F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064EC93D-2922-404F-AF9F-07CB219DAA36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064EC93D-2922-404F-AF9F-07CB219DAA36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064EC93D-2922-404F-AF9F-07CB219DAA36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064EC93D-2922-404F-AF9F-07CB219DAA36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
