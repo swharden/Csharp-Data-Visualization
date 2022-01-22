@@ -1,9 +1,16 @@
-﻿namespace Interpolation
+﻿// Original Author: Ryan Seghers
+// Original Copyright (C) 2013-2014 Ryan Seghers
+// Original License: MIT https://opensource.org/licenses/MIT
+// Original Source Code: https://github.com/SCToolsfactory/SCJMapper-V2/tree/master/OGL
+// Related Article: https://www.codeproject.com/Articles/560163/Csharp-Cubic-Spline-Interpolation
+// Modified by: Scott W Harden in 2022 (released under MIT license)
+
+namespace Interpolation
 {
     public static class Cubic
     {
         /// <summary>
-        /// Generate a curve of evenly-spaced points that follow the input data
+        /// Generate a smooth (interpolated) curve that follows the path of the given X/Y points
         /// </summary>
         public static (double[] xs, double[] ys) InterpolateXY(double[] xs, double[] ys, int count)
         {
