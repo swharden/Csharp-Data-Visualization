@@ -1,24 +1,79 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
+using System.Text;
 
 namespace InterpolationTests
 {
     public class Tests
     {
-        [Test]
-        public void Test1()
+        private (double[] xs, double[] ys) RandomWalks(int count)
         {
             Random rand = new(0);
-            double[] xs = Enumerable.Range(0, 20).Select(x => (rand.NextDouble() - .5) * 100).ToArray();
-            double[] ys = Enumerable.Range(0, 20).Select(x => (rand.NextDouble() - .5) * 100).ToArray();
+            double[] xs = Enumerable.Range(0, count).Select(x => (rand.NextDouble() - .5) * 100).ToArray();
+            double[] ys = Enumerable.Range(0, count).Select(x => (rand.NextDouble() - .5) * 100).ToArray();
+            return (xs, ys);
+        }
 
+        [TestCase(5)]
+        [TestCase(7)]
+        [TestCase(10)]
+        [TestCase(15)]
+        [TestCase(20)]
+        [TestCase(21)]
+        [TestCase(22)]
+        [TestCase(23)]
+        [TestCase(24)]
+        [TestCase(100)]
+        public void Test_InputLengths(int count)
+        {
+            (double[] xs, double[] ys) = RandomWalks(count);
+            (double[] interpolatedXs, double[] interpolatedYs) = Interpolation.Cubic.InterpolateXY(xs, ys, 5);
+            Assert.IsNotNull(interpolatedXs);
+            Assert.IsNotNull(interpolatedYs);
+        }
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        [TestCase(4)]
+        [TestCase(5)]
+        [TestCase(10)]
+        [TestCase(15)]
+        [TestCase(23)]
+        public void Test_OutputMultiples(int count)
+        {
+            (double[] xs, double[] ys) = RandomWalks(23);
+            (double[] interpolatedXs, double[] interpolatedYs) = Interpolation.Cubic.InterpolateXY(xs, ys, count);
+            Assert.IsNotNull(interpolatedXs);
+            Assert.IsNotNull(interpolatedYs);
+        }
+
+        private string GetCodeToInstantiateArray(double[] values, string name, int columns = 5)
+        {
+            StringBuilder sb = new();
+            sb.AppendLine($"{name} = new double[]");
+            sb.AppendLine("{");
+            for (int i = 0; i < values.Length; i++)
+            {
+                if (i % columns == 0 && i > 0)
+                    sb.Append("\n");
+                sb.Append($"{values[i]}, ");
+            }
+            sb.AppendLine("\n};");
+            return sb.ToString();
+        }
+
+        [Test]
+        public void Test_KnownValues_Match()
+        {
+            (double[] xs, double[] ys) = RandomWalks(20);
             (double[] interpolatedXs, double[] interpolatedYs) = Interpolation.Cubic.InterpolateXY(xs, ys, 5);
             Assert.IsNotNull(interpolatedXs);
             Assert.IsNotNull(interpolatedYs);
 
-            Console.WriteLine("X:" + string.Join(",", interpolatedXs.Select(x => x.ToString())));
-            Console.WriteLine("Y:" + string.Join(",", interpolatedYs.Select(x => x.ToString())));
+            Console.WriteLine(GetCodeToInstantiateArray(interpolatedXs, "xs"));
+            Console.WriteLine(GetCodeToInstantiateArray(interpolatedYs, "ys"));
 
             double[] expectedXs = {
                 22.624326996795986,32.019630850401846,29.343715252454555,23.3007244045564,19.23010618329573,

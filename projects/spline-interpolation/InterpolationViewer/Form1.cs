@@ -28,6 +28,7 @@ namespace SplineInterpolationViewer
 
             formsPlot1.Configuration.Quality = ScottPlot.Control.QualityMode.High;
 
+            formsPlot1.Plot.AxisAuto();
             ReInterpolate();
         }
 
@@ -46,7 +47,6 @@ namespace SplineInterpolationViewer
             Scatter2.AddRange(xs2, ys2);
             Scatter2.MarkerSize = cbShowPoints.Checked ? 4 : 0;
 
-            formsPlot1.Plot.AxisAuto();
             formsPlot1.Refresh(skipIfCurrentlyRendering: true);
         }
     }
