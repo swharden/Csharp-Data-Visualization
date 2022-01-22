@@ -40,9 +40,12 @@ namespace SplineInterpolationViewer
 
         private void ReInterpolate()
         {
-            lblSmoothness.Text = $"Smooth: {tbSmoothness.Value}";
+            int points = Math.Max(2, tbSmoothness.Value * tbSmoothness.Value / 100);
 
-            (double[] xs2, double[] ys2) = Interpolation.Cubic.InterpolateXY(Scatter1.Xs, Scatter1.Ys, tbSmoothness.Value);
+            (double[] xs2, double[] ys2) = Interpolation.Cubic.InterpolateXY(Scatter1.Xs, Scatter1.Ys, points);
+
+            lblSmoothness.Text = $"Original points: {Scatter1.Xs.Length} \t Interpolated Points: {xs2.Length}";
+
             Scatter2.Clear();
             Scatter2.AddRange(xs2, ys2);
             Scatter2.MarkerSize = cbShowPoints.Checked ? 4 : 0;

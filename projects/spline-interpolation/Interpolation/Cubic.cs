@@ -2,33 +2,33 @@
 {
     public static class Cubic
     {
-        public static (double[] xs, double[] ys) InterpolateXY(double[] xsIn, double[] ysIn, int multiple)
+        /// <summary>
+        /// Generate a curve of evenly-spaced points that follow the input data
+        /// </summary>
+        public static (double[] xs, double[] ys) InterpolateXY(double[] xs, double[] ys, int count)
         {
-            int inputPointCount = xsIn.Length;
-            int outputPointCount = xsIn.Length * multiple;
+            if (xs is null || ys is null || xs.Length != ys.Length)
+                throw new ArgumentException($"{nameof(xs)} and {nameof(ys)} must have same length");
 
-            double[] distIn = new double[inputPointCount];
+
+            int inputPointCount = xs.Length;
+            double[] inputDistances = new double[inputPointCount];
             for (int i = 1; i < inputPointCount; i++)
             {
-                double dx = xsIn[i] - xsIn[i - 1];
-                double dy = ysIn[i] - ysIn[i - 1];
+                double dx = xs[i] - xs[i - 1];
+                double dy = ys[i] - ys[i - 1];
                 double distance = Math.Sqrt(dx * dx + dy * dy);
-                distIn[i] = distIn[i - 1] + (float)distance; // TODO: REMOVE THIS CAST
+                inputDistances[i] = inputDistances[i - 1] + distance;
             }
 
-            // TOOD: replace with LINQ 
-            //double[] times = Enumerable.Range(0, outputPointCount).Select(x => x * meanDistanceBetweenPoints).ToArray();
-            double meanDistanceBetweenPoints = distIn.Last() / (outputPointCount - 1);
-            double[] distOut = new double[outputPointCount];
-            for (int i = 1; i < outputPointCount; i++)
-                distOut[i] = distOut[i - 1] + meanDistanceBetweenPoints;
-
-            double[] xsOut = InterpolateCubicSpline(distIn, xsIn, distOut);
-            double[] ysOut = InterpolateCubicSpline(distIn, ysIn, distOut);
+            double meanDistance = inputDistances.Last() / (count - 1);
+            double[] evenDistances = Enumerable.Range(0, count).Select(x => x * meanDistance).ToArray();
+            double[] xsOut = InterpolateCubicSpline(inputDistances, xs, evenDistances);
+            double[] ysOut = InterpolateCubicSpline(inputDistances, ys, evenDistances);
             return (xsOut, ysOut);
         }
 
-        public static double[] InterpolateCubicSpline(double[] actualDistances, double[] actualValues, double[] interpolationDistances)
+        private static double[] InterpolateCubicSpline(double[] actualDistances, double[] actualValues, double[] interpolationDistances)
         {
             (double[] a, double[] b) = FitMatrix(actualDistances, actualValues);
 
@@ -47,7 +47,7 @@
             return interpolatedValues;
         }
 
-        public static (double[] a, double[] b) FitMatrix(double[] x, double[] y)
+        private static (double[] a, double[] b) FitMatrix(double[] x, double[] y)
         {
             int n = x.Length;
             double[] a = new double[n - 1];

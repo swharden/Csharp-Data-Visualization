@@ -51,12 +51,12 @@
             this.tbSmoothness.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSmoothness.Location = new System.Drawing.Point(12, 27);
-            this.tbSmoothness.Maximum = 50;
-            this.tbSmoothness.Minimum = 1;
+            this.tbSmoothness.Maximum = 500;
             this.tbSmoothness.Name = "tbSmoothness";
             this.tbSmoothness.Size = new System.Drawing.Size(618, 45);
             this.tbSmoothness.TabIndex = 5;
-            this.tbSmoothness.Value = 5;
+            this.tbSmoothness.TickStyle = System.Windows.Forms.TickStyle.None;
+            this.tbSmoothness.Value = 100;
             this.tbSmoothness.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // lblSmoothness
@@ -64,9 +64,9 @@
             this.lblSmoothness.AutoSize = true;
             this.lblSmoothness.Location = new System.Drawing.Point(13, 9);
             this.lblSmoothness.Name = "lblSmoothness";
-            this.lblSmoothness.Size = new System.Drawing.Size(72, 15);
+            this.lblSmoothness.Size = new System.Drawing.Size(53, 15);
             this.lblSmoothness.TabIndex = 6;
-            this.lblSmoothness.Text = "Smoothness";
+            this.lblSmoothness.Text = "message";
             // 
             // cbShowPoints
             // 

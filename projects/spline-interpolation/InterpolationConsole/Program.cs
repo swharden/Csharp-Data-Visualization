@@ -11,7 +11,7 @@ for (int i = 1; i < pountCount; i++)
 }
 
 // Use cubic interpolation to smooth the original data
-(double[] xs2, double[] ys2) = Interpolation.Cubic.InterpolateXY(xs1, ys1, 10);
+(double[] xs2, double[] ys2) = Interpolation.Cubic.InterpolateXY(xs1, ys1, 200);
 
 // Plot the original vs. interpolated data
 var plt = new ScottPlot.Plot(600, 400);
