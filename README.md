@@ -88,7 +88,7 @@ Project | Screenshot
 [**Game of Life in C#**](/dev/old/drawing/game-of-life) - Conway's Game of Life is a zero-player video game that uses a few basic rules to determine if cells live or die based on the density of their neighbors. In this project we create Life using C# and System.Drawing.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/dev/old/drawing/game-of-life/screenshot.gif)
 [**Boids in C#**](/dev/old/drawing/boids) - This project implements the Boids flocking algorithm in C# to create an interesting procedural animation of bird-drones (boids) scurrying about the screen.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/dev/old/drawing/boids/screenshot.gif)
 [**Boids in C# with SkiaSharp**](/dev/old/drawing/boids2) - This project is an extension of the original boids project that uses an abstracted rendering system supporting SkiaSharp and OpenGL for hardware-accelerated rendering.  See [C# Data Visualization Website](https://swharden.com/CsharpDataVis) for details.|![](/dev/old/drawing/boids2/screenshot.png)
-
+[**Spline Interpolation with C#**](projects/spline-interpolation) - This project demonstrates how to create a smooth curve from a rough set of X/Y points using _cubic spline interpolation_. The interpolation code used here is in a .NET Standard 2.0 library, and the interactive GUI is a WinForms App using ScottPlot.| ![](projects/spline-interpolation/screenshot.gif)
 
 ## Child Projects
 
