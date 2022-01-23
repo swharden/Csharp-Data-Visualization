@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interpolation", "Interpolat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InterpolationConsole", "InterpolationConsole\InterpolationConsole.csproj", "{064EC93D-2922-404F-AF9F-07CB219DAA36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolationTests", "..\InterpolationTests\InterpolationTests.csproj", "{FEA62615-3415-456E-9CE3-463386A82617}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterpolationTests", "InterpolationTests\InterpolationTests.csproj", "{FEA62615-3415-456E-9CE3-463386A82617}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

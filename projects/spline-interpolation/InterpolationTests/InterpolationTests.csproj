@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\spline-interpolation\Interpolation\Interpolation.csproj" />
+    <ProjectReference Include="..\Interpolation\Interpolation.csproj" />
   </ItemGroup>
 
 </Project>
