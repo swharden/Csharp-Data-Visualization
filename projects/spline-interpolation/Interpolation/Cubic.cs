@@ -41,12 +41,15 @@ namespace Interpolation
             double[] yInterp = new double[xInterp.Length];
             for (int i = 0; i < yInterp.Length; i++)
             {
-                int nextIndex = Enumerable.Range(0, xOrig.Length - 2)
-                    .FirstOrDefault(index => xInterp[i] <= xOrig[index + 1], xOrig.Length - 2);
+                int j;
+                for (j = 0; j < xOrig.Length - 2; j++)
+                    if (xInterp[i] <= xOrig[j + 1])
+                        break;
 
-                double dx = xOrig[nextIndex + 1] - xOrig[nextIndex];
-                double t = (xInterp[i] - xOrig[nextIndex]) / dx;
-                double y = (1 - t) * yOrig[nextIndex] + t * yOrig[nextIndex + 1] + t * (1 - t) * (a[nextIndex] * (1 - t) + b[nextIndex] * t);
+                double dx = xOrig[j + 1] - xOrig[j];
+                double t = (xInterp[i] - xOrig[j]) / dx;
+                double y = (1 - t) * yOrig[j] + t * yOrig[j + 1] +
+                    t * (1 - t) * (a[j] * (1 - t) + b[j] * t);
                 yInterp[i] = y;
             }
 
