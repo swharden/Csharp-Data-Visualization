@@ -10,6 +10,7 @@ public partial class Form1 : Form
     public Form1()
     {
         InitializeComponent();
+        GraphicsPlatform.RegisterGlobalService(SkiaGraphicsService.Instance);
         skglControl1_SizeChanged(null, null);
     }
 
@@ -28,6 +29,8 @@ public partial class Form1 : Form
     private void nudX_ValueChanged(object sender, EventArgs e) => skglControl1.Invalidate();
 
     private void nudY_ValueChanged(object sender, EventArgs e) => skglControl1.Invalidate();
+
+    private void tbText_TextChanged(object sender, EventArgs e) => skglControl1.Invalidate();
 
     private void skglControl1_MouseMove(object sender, MouseEventArgs e)
     {
@@ -54,16 +57,19 @@ public partial class Form1 : Form
 
     private void skglControl1_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPaintGLSurfaceEventArgs e)
     {
-
         double angleFraction = trackbarAngle.Value / (double)trackbarAngle.Maximum;
         double angleRadians = 2 * Math.PI * angleFraction;
+        float angleDegrees = (float)(angleRadians * 180 / Math.PI);
+        float fontSize = 96;
+        string fontName = "Impact";
 
         ICanvas canvas = new SkiaCanvas() { Canvas = e.Surface.Canvas };
         canvas.FillColor = Colors.Navy;
         canvas.FillRectangle(0, 0, skglControl1.Width, skglControl1.Height);
 
-        float rectWidth = 300;
-        float rectHeight = 150;
+        Microsoft.Maui.Graphics.SizeF stringSize = GraphicsPlatform.CurrentService.GetStringSize(tbText.Text, fontName, fontSize);
+        float rectWidth = stringSize.Width;
+        float rectHeight = stringSize.Height;
 
         Microsoft.Maui.Graphics.PointF[] rectCorners =
         {
@@ -75,24 +81,29 @@ public partial class Form1 : Form
 
         Microsoft.Maui.Graphics.PointF origin = new((float)nudX.Value, (float)nudY.Value);
         Microsoft.Maui.Graphics.PointF[] rotatedCorners = rectCorners.Select(x => Rotate(origin, x, angleRadians)).ToArray();
+        bool mouseIsInRectangle = IsPointInsideRectangle(MousePosition, rotatedCorners);
 
-        Microsoft.Maui.Graphics.PathF path = new();
-        path.MoveTo(rotatedCorners[0]);
-        for (int i = 1; i < rectCorners.Length; i++)
-            path.LineTo(rotatedCorners[i]);
-        path.Close();
-
-        canvas.FillColor = IsPointInsideRectangle(MousePosition, rotatedCorners)
-            ? Colors.LightBlue
-            : Colors.LightBlue.WithAlpha(.5f);
-
-        canvas.FillPath(path);
-
-        canvas.FillColor = Colors.Magenta;
-        canvas.FillCircle(origin, 5);
-
+        // mouse position
         canvas.FillColor = Colors.Yellow;
         canvas.FillCircle(MousePosition, 5);
+
+        // draw the rotated rectangle and string using translation and rotation
+        canvas.Translate(origin.X, origin.Y);
+        canvas.Rotate(angleDegrees);
+
+        // rectangle
+        canvas.FillColor = mouseIsInRectangle ? Colors.LightBlue : Colors.LightBlue.WithAlpha(.5f);
+        canvas.FillRectangle(0, 0, rectWidth, rectHeight);
+
+        // rotation origin
+        canvas.FillColor = Colors.Magenta;
+        canvas.FillCircle(0, 0, 5);
+
+        // text
+        canvas.FontColor = Colors.Yellow;
+        canvas.FontSize = fontSize;
+        canvas.FontName = fontName;
+        canvas.DrawString(tbText.Text, 0, stringSize.Height, Microsoft.Maui.Graphics.HorizontalAlignment.Left);
     }
 
     public bool IsPointInsideRectangle(Microsoft.Maui.Graphics.PointF pt, Microsoft.Maui.Graphics.PointF[] rectCorners)

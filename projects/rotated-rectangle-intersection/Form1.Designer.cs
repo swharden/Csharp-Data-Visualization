@@ -36,11 +36,14 @@ partial class Form1
             this.nudY = new System.Windows.Forms.NumericUpDown();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.trackbarAngle = new System.Windows.Forms.TrackBar();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.tbText = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudX)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudY)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarAngle)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // skglControl1
@@ -112,9 +115,9 @@ partial class Form1
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.trackbarAngle);
-            this.groupBox2.Location = new System.Drawing.Point(266, 12);
+            this.groupBox2.Location = new System.Drawing.Point(385, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(583, 59);
+            this.groupBox2.Size = new System.Drawing.Size(464, 59);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rotation Angle";
@@ -125,15 +128,35 @@ partial class Form1
             this.trackbarAngle.Location = new System.Drawing.Point(3, 19);
             this.trackbarAngle.Maximum = 100;
             this.trackbarAngle.Name = "trackbarAngle";
-            this.trackbarAngle.Size = new System.Drawing.Size(577, 37);
+            this.trackbarAngle.Size = new System.Drawing.Size(458, 37);
             this.trackbarAngle.TabIndex = 0;
             this.trackbarAngle.Scroll += new System.EventHandler(this.trackbarAngle_Scroll);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.tbText);
+            this.groupBox3.Location = new System.Drawing.Point(266, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(113, 59);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "groupBox3";
+            // 
+            // tbText
+            // 
+            this.tbText.Location = new System.Drawing.Point(6, 22);
+            this.tbText.Name = "tbText";
+            this.tbText.Size = new System.Drawing.Size(100, 23);
+            this.tbText.TabIndex = 0;
+            this.tbText.Text = "Test";
+            this.tbText.TextChanged += new System.EventHandler(this.tbText_TextChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(861, 620);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.skglControl1);
@@ -146,6 +169,8 @@ partial class Form1
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackbarAngle)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
     }
@@ -160,4 +185,6 @@ partial class Form1
     private Label label1;
     private GroupBox groupBox2;
     private TrackBar trackbarAngle;
+    private GroupBox groupBox3;
+    private TextBox tbText;
 }
