@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="htmlcss bootstrap aside menu, vertical, sidebar nav menu CSS examples" />
+    <meta name="description" content="Bootstrap 5 sidebar navigation menu example" />
+
+    <title>Demo - Bootstrap 5 sidebar vertical menu sample. html code example </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+
+    <script src="bs5sidebar.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+
+    <style type="text/css">
+        .sidebar li .submenu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .sidebar .nav-link {
+            font-weight: 500;
+            color: var(--bs-dark);
+        }
+
+        .sidebar .nav-link:hover {
+            color: var(--bs-primary);
+        }
+    </style>
+
+
+</head>
+
+<body class="bg-light">
+
+    <!-- back splash -->
+    <div class="h-50 w-100" style="position: absolute; background-color: #002440"></div>
+
+    <!-- site header -->
+    <header class="section-header pt-5 pb-3" style="position: relative;">
+        <div class="container text-light">
+            <h1 class="mb-0">C# Data Visualization</h1>
+            <div class="text-muted">
+                Resources for visualizing data using C# and the .NET platform
+            </div>
+        </div>
+    </header>
+
+    <div class="container bg-white border rounded shadow-sm" style="position: relative;">
+
+        <section class="section-content py-3">
+            <div class="row">
+
+                <!-- menu -->
+                <aside class="col-lg-3">
+                    <nav class="sidebar py-2 mb-4 border-end">
+                        <ul class="nav flex-column" id="nav_accordion">
+
+                            <li class="nav-item has-submenu">
+                                <a class="nav-link" href="#">
+                                    Draw Graphics with C#
+                                    <i class="bi small bi-caret-down-fill"></i>
+                                </a>
+                                <ul class="submenu collapse">
+                                    <li><a class="nav-link" href="#">Console Application</a></li>
+                                    <li><a class="nav-link" href="#">Windows Forms</a></li>
+                                    <li><a class="nav-link" href="#">WPF</a> </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item has-submenu">
+                                <a class="nav-link" href="#">
+                                    Animate Graphics with C#
+                                    <i class="bi small bi-caret-down-fill"></i>
+                                </a>
+                                <ul class="submenu collapse">
+                                    <li><a class="nav-link" href="#">Create a Graphics Model</a></li>
+                                    <li><a class="nav-link" href="#">Animate Graphics in Windows Forms</a></li>
+                                    <li><a class="nav-link" href="#">Animate Graphics in WPF</a> </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item has-submenu">
+                                <a class="nav-link" href="#">
+                                    Performance and Optimization
+                                    <i class="bi small bi-caret-down-fill"></i>
+                                </a>
+                                <ul class="submenu collapse">
+                                    <li><a class="nav-link" href="#">Benchmarking and Performance Analysis</a></li>
+                                    <li><a class="nav-link" href="#">Rendering Graphics without Blocking GUI Thread</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item has-submenu">
+                                <a class="nav-link" href="#">
+                                    Graphics Libraries
+                                    <i class="bi small bi-caret-down-fill"></i>
+                                </a>
+                                <ul class="submenu collapse">
+                                    <li><a class="nav-link" href="#">Comparing C# Drawing Libraries</a></li>
+                                    <li><a class="nav-link" href="#">Drawing with WPF</a></li>
+                                    <li><a class="nav-link" href="#">Drawing with ImageSharp</a></li>
+                                    <li><a class="nav-link" href="#">Drawing with SkiaSharp</a></li>
+                                    <li><a class="nav-link" href="#">Drawing with SkiaSharp & OpenGL</a></li>
+                                    <li><a class="nav-link" href="#">Animating with SkiaSharp & OpenGL</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item has-submenu">
+                                <a class="nav-link" href="#">
+                                    Sample Projects
+                                    <i class="bi small bi-caret-down-fill"></i>
+                                </a>
+                                <ul class="submenu collapse">
+                                    <li><a class="nav-link" href="#">Mystify Your Mind</a></li>
+                                    <li><a class="nav-link" href="#">Game of Life</a></li>
+                                    <li><a class="nav-link" href="#">Boids</a></li>
+                                    <li><a class="nav-link" href="#">MSPaint Clone</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">GitHub</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </aside>
+
+                <!-- content -->
+                <main class="col-lg-9">
+
+                    <!-- page header -->
+                    <h1>Home</h1>
+
+                    <p>Test content</p>
+
+                </main>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="mt-5 text-center text-muted">
+        Copyright?
+    </footer>
+    
+</body>
+
+</html>
