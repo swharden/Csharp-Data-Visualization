@@ -1,0 +1,17 @@
+{{ define "main" }}
+
+<div class="mt-5">
+  <div class="display-6">All Pages</div>
+</div>
+
+<article>
+  <ul>
+    {{ range .Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+    </li>
+    {{ end }}
+  </ul>
+</article>
+
+{{ end }}

@@ -1,0 +1,41 @@
+/* Justification: Only underline links when the mouse hovers over them */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Justification: Shrink images to fit the content area */
+article img {
+    max-width: 100%;
+}
+
+/* Justification: GitHub-style blockquote */
+article blockquote p {
+    background-color: #f6f8fa;
+    border-left: 5px solid #ddd;
+    padding: 1em;
+}
+
+/* Justification: Default HLJS theme is ugly. */
+/* TODO: syntax highlighting in hugo, not with JS */
+article pre {
+    background-color: transparent !important;
+}
+
+article p code {
+    padding: 0px 3px;
+    color: #6c757d;
+}
+
+article code.hljs {
+    background: transparent;
+    background: #f6f8fa;
+    border-radius: 3px;
+    border: 1px solid #ddd !important;
+    font-size: 14px;
+    line-height: 150%;
+    overflow-x: auto;
+}

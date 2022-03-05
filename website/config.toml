@@ -1,0 +1,10 @@
+baseURL = "https://swharden.com/csdv"
+title = "C# Data Visualization"
+author = "Scott W Harden"
+copyright = "Copyright © 2022 - Scott W Harden"
+enableInlineShortcodes = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true

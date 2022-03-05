@@ -1,0 +1,20 @@
+<div class="row align-items-end m-5" style="opacity: .3;">
+
+    <div class="col text-start">
+        Copyright &copy;
+        {{ now.Format "2006" }}
+        <a href='https://swharden.com/about' class="text-dark">Scott W Harden</a>
+    </div>
+
+    <div class="col text-center">
+        Built on {{ .Date | time.Format ":date_long" }} at {{ .Date | time.Format ":time_short" }}
+    </div>
+
+    <div class="col text-end">
+        <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content{{ .RelPermalink }}{{ .File.LogicalName }}"
+            class="text-dark">
+            View Source
+        </a>
+    </div>
+    
+</div>

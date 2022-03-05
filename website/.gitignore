@@ -1,0 +1,25 @@
+content/**/*.jpg
+content/**/*.gif
+content/**/*.png
+content/**/*.mp3
+content/**/*.mp4
+content/**/*.jpeg
+content/**/*.ipynb
+content/**/*.pdf
+content/**/*.zip
+content/**/*.svg
+content/**/*.bmp
+content/**/*.psd
+content/**/*.xlsx
+content/**/*.ogg
+content/**/*.wav
+content/**/*.mod
+content/**/*.asc
+
+# dotnet build folders
+bin
+obj
+
+# hugo files
+.hugo_build.lock
+public
