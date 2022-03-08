@@ -1,6 +1,6 @@
 ---
-Title: "Drawing Graphics in C# Console Apps"
-Date: 2022-03-05 15:41:00
+Title: "Draw with System.Drawing in a C# Console App"
+Description: "yep"
 ---
 
 This example uses [System.Drawing](https://docs.microsoft.com/en-us/dotnet/api/system.drawing) in a Console Application to draw 10,000 random lines on a dark blue background and save the output as a PNG file. 
