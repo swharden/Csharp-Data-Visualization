@@ -1,27 +1,38 @@
 {{ define "main" }}
 
-<div class="mt-5">
-  <div class="display-6">All Pages</div>
-</div>
+<article class="my-3">
+  {{ partial "home.md" | markdownify }}
+</article>
 
 <article>
+  <div class="mt-5">
+    <div class="display-6">Pages</div>
+  </div>
+
   {{ range .Pages.GroupBy "Section" }}
-  <h3 class="mt-3 fw-light">{{ .Key | title }}</h3>
-  <ul>
-    {{ range .Pages }}
+  <section>
+    <div>
+      {{ with $.Site.GetPage "section" .Key }}
+      <h3 class="mt-3 fw-light">{{.Title}}</h3>
+      {{end}}
+    </div>
 
-    <ul class="all-posts">
+    <div>
       {{ range .Pages }}
-      <li>
-        <a href="{{ .URL }}" class="article-teaser">
-          {{ .Title }}
-        </a>
-      </li>
-      {{ end }}
-    </ul>
 
-    {{ end }}
-  </ul>
+      <ul class="all-posts">
+        {{ range .Pages }}
+        <li>
+          <a href="{{ .URL }}">
+            {{ .Title }}
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+  </section>
+  {{ end }}
+
   {{ end }}
 </article>
 
