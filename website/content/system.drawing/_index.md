@@ -1,3 +1,3 @@
 ---
-title: system drawing section
+title: System.Drawing
 ---

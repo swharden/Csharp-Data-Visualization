@@ -1,3 +1,3 @@
 ---
-title: skiasharp section
+title: SkiaSharp
 ---
