@@ -19,23 +19,21 @@ article blockquote p {
     padding: 1em;
 }
 
-/* Justification: Default HLJS theme is ugly. */
-/* TODO: syntax highlighting in hugo, not with JS */
+/* Supplement Hugo's Chroma styling for code blocks */
+pre {
+    background-color: #f8f8f8 !important;
+    border: 1px solid #dddddd;
+    padding: .5em;
+    border-radius: 5px;
+    line-height: 150%;
+    overflow-x: auto;
+}
+
 article pre {
-    background-color: transparent !important;
+    background-color: gray;
 }
 
 article p code {
     padding: 0px 3px;
     color: #6c757d;
-}
-
-article code.hljs {
-    background: transparent;
-    background: #f6f8fa;
-    border-radius: 3px;
-    border: 1px solid #ddd !important;
-    font-size: 14px;
-    line-height: 150%;
-    overflow-x: auto;
 }
