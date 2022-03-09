@@ -1,0 +1,21 @@
+<section>
+
+    {{ with .context.Site.GetPage "section" .sectionKey }}
+    <div>
+        <h3 class="mt-3 fw-light">
+            {{.Title}}
+        </h3>
+    </div>
+    {{ end }}
+
+    <ul>
+        {{ range (where .context.Site.Pages "Section" .sectionKey) }}
+        <li>
+            <a href="{{ .URL }}">
+                {{ .Title }}
+            </a>
+        </li>
+        {{ end }}
+    </ul>
+
+</section>
