@@ -6,6 +6,14 @@
     <div class="fs-5 fw-lighter">
         {{ .Description | markdownify }}
     </div>
+
+    <div style="opacity: .25;">
+        {{ .Date.Format "January 2, 2006" }}
+        {{ if isset .Params "updated" }}
+        (updated on {{ .Params.updated | dateFormat "Jan 2, 2006" }})
+        {{ end }}
+    </div>
+
 </div>
 
 <div class="py-2">
@@ -15,4 +23,5 @@
         </article>
     </main>
 </div>
+
 {{ end }}
