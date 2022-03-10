@@ -10,11 +10,16 @@
 
     <ul>
         {{ range (where .context.Site.Pages "Section" .sectionKey) }}
+
+        <!-- the second range is required so section indexes do not appear -->
+        {{ range .Pages }}
         <li>
             <a href="{{ .URL }}">
                 {{ .Title }}
             </a>
         </li>
+        {{ end }}
+
         {{ end }}
     </ul>
 
