@@ -1,85 +1,54 @@
 ---
 Title: "Draw with SkiaSharp in a C# Console App"
-Date: 2022-03-05 15:41:00
+Date: 2022-03-10 8:08:00
 ---
 
-This example uses [System.Drawing](https://docs.microsoft.com/en-us/dotnet/api/system.drawing) in a Console Application to draw 10,000 random lines on a dark blue background and save the output as a PNG file. 
+This article describes how to draw graphics from a C# console application and save the output as an image file using SkiaSharp.
 
-<div align="center">
+### 1. Create a Console App
+```
+dotnet new console
+```
 
-![](drawing-quickstart-console.png)
+### 2. Add NuGet Packages
+```
+dotnet add package SkiaSharp
+```
 
-</div>
+### 3. Draw some Graphics
 
-In the past System.Drawing could only be used on Windows, but [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) (released in 2017) brings System.Drawing to .NET Core for use on any operating system.
-
-### Code
-
-This code creates a `Bitmap` in memory, creates a `Graphics` object for it, then use the `Graphics` methods for drawing. When run, this code block produces the image at the top of the page.
+_This is the full code for a .NET 6 console app_
 
 ```cs
-static void Main(string[] args)
+using SkiaSharp;
+
+// Create an image and fill it blue
+SKBitmap bmp = new(640, 480);
+using SKCanvas canvas = new(bmp);
+canvas.Clear(SKColor.Parse("#003366"));
+
+// Draw lines with random positions and thicknesses
+Random rand = new(0);
+SKPaint paint = new() { Color = SKColors.White.WithAlpha(100), IsAntialias = true };
+for (int i = 0; i < 100; i++)
 {
-    Random rand = new Random();
-    using (var bmp = new Bitmap(600, 400))
-    using (var gfx = Graphics.FromImage(bmp))
-    using (var pen = new Pen(Color.White))
-    {
-        gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        gfx.Clear(Color.Navy);
-        for (int i = 0; i < 10_000; i++)
-        {
-            pen.Color = Color.FromArgb(rand.Next());
-            var pt1 = new Point(rand.Next(bmp.Width), rand.Next(bmp.Height));
-            var pt2 = new Point(rand.Next(bmp.Width), rand.Next(bmp.Height));
-            gfx.DrawLine(pen, pt1, pt2);
-        }
-        bmp.Save("drawing-quickstart-console.png");
-    }
+    SKPoint pt1 = new(rand.Next(bmp.Width), rand.Next(bmp.Height));
+    SKPoint pt2 = new(rand.Next(bmp.Width), rand.Next(bmp.Height));
+    paint.StrokeWidth = rand.Next(1, 10);
+    canvas.DrawLine(pt1, pt2, paint);
 }
+
+// Save the image to disk
+SKFileWStream fs = new("quickstart.jpg");
+bmp.Encode(fs, SKEncodedImageFormat.Jpeg, quality: 85);
 ```
 
-### Respect `IDisposable`
+### Output
 
-Many System.Drawing objects inherit from `IDisposable` and it is ***critical*** that they are disposed of properly to avoid memory issues. This means calling `Dispose()` after you're done using an object, or better yet throwing its instantiation inside a `using` statement.
+<img src="quickstart.jpg" class="border shadow mt-3 mb-5">
 
-> ðŸ’¡ **Deep Dive:** Read Microsoft's documentation about [using objects that implement IDisposable](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/using-objects)
-
-Take care to properly dispose of these common System.Drawing objects:
-* [`System.Drawing.Image`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image)
-* [`System.Drawing.Bitmap`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bitmap)
-* [`System.Drawing.Graphics`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.graphics)
-* [`System.Drawing.Pen`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.pen)
-* [`System.Drawing.Brush`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.brush)
-* [`System.Drawing.Font`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.font)
-* [`System.Drawing.FontFamily`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.fontfamily)
-* [`System.Drawing.StringFormat`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.stringformat)
-
-
-### Drawing Anti-Aliased Graphics and Text
-By default graphics will not be anti-aliased. Anti-aliasing is slower (especially for long lines), but looks superior when drawing angled lines and edges. 
-
-<div align="center">
-
-![](anti-aliasing-example.png)
-
-</div>
-
-Anti-aliasing is controlled differently for graphics and text:
-
-```cs
-// set anti-aliasing mode for graphics
-gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
-
-// set anti-aliasing mode for text
-gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
-```
-
-## Download Source Code
-
-_This code supports .NET Core and .NET Framework_
-
-* View on GitHub: [Program.cs](https://github.com/swharden/Csharp-Data-Visualization/blob/master/dev/old/drawing/quickstart-console/Program.cs)
-* Download this project: [quickstart-console.zip](files/quickstart-console.zip)
+## Resources
+* Source code: [projects/skiasharp-quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/skiasharp-quickstart)
+* NuGet: [SkiaSharp](https://www.nuget.org/packages/SkiaSharp)
+* Official: [Creating and drawing on SkiaSharp bitmaps](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/graphics/skiasharp/bitmaps/drawing) and [Saving SkiaSharp bitmaps to files
+](https://docs.microsoft.com/en-us/xamarin/xamarin-forms/user-interface/graphics/skiasharp/bitmaps/saving)
