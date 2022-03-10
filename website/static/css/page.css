@@ -35,5 +35,6 @@ article pre {
 
 article p code {
     padding: 0px 3px;
-    color: #6c757d;
+    background-color: #f4f4f4;
+    color: #545454;
 }
