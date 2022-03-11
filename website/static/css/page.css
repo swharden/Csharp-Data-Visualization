@@ -33,7 +33,7 @@ article pre {
     background-color: gray;
 }
 
-article p code {
+article code {
     padding: 0px 3px;
     background-color: #f4f4f4;
     color: #545454;
