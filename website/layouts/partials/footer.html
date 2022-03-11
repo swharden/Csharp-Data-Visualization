@@ -1,13 +1,21 @@
 <div class="row align-items-end m-5" style="opacity: .3;">
 
     <div class="col text-start">
-        Copyright &copy;
-        {{ now.Format "2006" }}
-        <a href='https://swharden.com/about' class="text-dark">Scott W Harden</a>
+        <div>
+            Copyright &copy; {{ now.Format "2006" }}
+        </div>
+        <div>
+            <a href='https://swharden.com/about' class="text-dark">Scott W Harden</a>
+        </div>
     </div>
 
     <div class="col text-center">
-        Built on {{ now | time.Format ":date_long" }} at {{ now | time.Format ":time_short" }}
+        <div>
+            Built with Hugo {{ .Site.Hugo.Version }}
+        </div>
+        <div>
+            {{ now | time.Format ":date_long" }} at {{ now | time.Format ":time_short" }}
+        </div>
     </div>
 
     <div class="col text-end">
