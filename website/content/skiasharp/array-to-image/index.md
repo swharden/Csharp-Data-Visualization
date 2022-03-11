@@ -56,7 +56,7 @@ bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
 /// <summary>
 /// Create an image from a 3D array of bytes arranged [width, height, channel]
 /// </summary>
-private static SKBitmap GetBitmap(byte[,,] pixelArray)
+public static SKBitmap GetBitmap(byte[,,] pixelArray)
 {
     int width = pixelArray.GetLength(1);
     int height = pixelArray.GetLength(0);
@@ -143,6 +143,8 @@ private static SKBitmap GetBitmapSLOW(byte[,,] pixelArray)
     return bitmap;
 }
 ```
+
+## TODO: Image to Array
 
 ## Resources
 * [C# Data Visualization on GitHib](https://github.com/swharden/Csharp-Data-Visualization)
