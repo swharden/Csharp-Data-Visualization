@@ -1,0 +1,33 @@
+name: Website
+
+on:
+  workflow_dispatch:
+  push:
+    #paths:
+    #- "website/**"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛒 Checkout
+        uses: actions/checkout@v2
+
+      - name: ✨ Setup Hugo
+        uses: peaceiris/actions-hugo@c03b5dbed22245418539b65eb9a3b1d5fdd9a0a6 # v2.5.0
+        with:
+          hugo-version: "0.92.2"
+
+      - name: 🛠️ Build
+        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
+
+      - name: 🚀 Deploy
+        uses: easingthemes/ssh-deploy@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # v2.2.11
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete --dry-run"
+          SOURCE: "output/"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
