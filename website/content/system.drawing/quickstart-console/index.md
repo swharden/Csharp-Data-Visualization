@@ -3,47 +3,46 @@ Title: "Draw with System.Drawing in a C# Console App"
 Description: "yep"
 ---
 
-This example uses [System.Drawing](https://docs.microsoft.com/en-us/dotnet/api/system.drawing) in a Console Application to draw 10,000 random lines on a dark blue background and save the output as a PNG file. 
+This example .NET Console application uses `System.Drawing` to draw 10,000 random lines on a dark blue background and save the output as a PNG file. 
 
-<div align="center">
-
-![](drawing-quickstart-console.png)
-
-</div>
-
-In the past System.Drawing could only be used on Windows, but [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/) (released in 2017) brings System.Drawing to .NET Core for use on any operating system.
+> ⚠️ **Warning: System.Drawing.Common now only supports Windows!**\
+> See [Cross-Platform Support for `System.Drawing`](../cross-platform) for more information and what you can do about it.
 
 ### Code
 
-This code creates a `Bitmap` in memory, creates a `Graphics` object for it, then use the `Graphics` methods for drawing. When run, this code block produces the image at the top of the page.
+_This example uses .NET 6 and version `4.*` of the [`System.Drawing.Common` package](https://www.nuget.org/packages/System.Drawing.Common/)._
 
 ```cs
-static void Main(string[] args)
+using System.Drawing;
+
+using Bitmap bmp = new(600, 400);
+using Graphics gfx = Graphics.FromImage(bmp);
+gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
+gfx.Clear(Color.Navy);
+
+Random rand = new(0);
+using Pen pen = new(Color.White);
+for (int i = 0; i < 10_000; i++)
 {
-    Random rand = new Random();
-    using (var bmp = new Bitmap(600, 400))
-    using (var gfx = Graphics.FromImage(bmp))
-    using (var pen = new Pen(Color.White))
-    {
-        gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        gfx.Clear(Color.Navy);
-        for (int i = 0; i < 10_000; i++)
-        {
-            pen.Color = Color.FromArgb(rand.Next());
-            var pt1 = new Point(rand.Next(bmp.Width), rand.Next(bmp.Height));
-            var pt2 = new Point(rand.Next(bmp.Width), rand.Next(bmp.Height));
-            gfx.DrawLine(pen, pt1, pt2);
-        }
-        bmp.Save("drawing-quickstart-console.png");
-    }
+    pen.Color = Color.FromArgb(rand.Next());
+    Point pt1 = new(rand.Next(bmp.Width), rand.Next(bmp.Height));
+    Point pt2 = new(rand.Next(bmp.Width), rand.Next(bmp.Height));
+    gfx.DrawLine(pen, pt1, pt2);
 }
+
+bmp.Save("demo.png");
 ```
+
+### Output
+
+<img src="drawing-quickstart-console.png" class="border shadow mb-5">
 
 ### Respect `IDisposable`
 
 Many System.Drawing objects inherit from `IDisposable` and it is ***critical*** that they are disposed of properly to avoid memory issues. This means calling `Dispose()` after you're done using an object, or better yet throwing its instantiation inside a `using` statement.
 
-> ðŸ’¡ **Deep Dive:** Read Microsoft's documentation about [using objects that implement IDisposable](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/using-objects)
+> 💡 **Deep Dive:** Read Microsoft's documentation about [using objects that implement IDisposable](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/using-objects)
 
 Take care to properly dispose of these common System.Drawing objects:
 * [`System.Drawing.Image`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.image)
@@ -56,8 +55,8 @@ Take care to properly dispose of these common System.Drawing objects:
 * [`System.Drawing.StringFormat`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.stringformat)
 
 
-### Drawing Anti-Aliased Graphics and Text
-By default graphics will not be anti-aliased. Anti-aliasing is slower (especially for long lines), but looks superior when drawing angled lines and edges. 
+### Anti-Aliased Graphics and Text
+**Anti-aliasing is OFF by default.** Enabling anti-aliasing significantly slows render time but produces superior images when drawing angled lines and edges. Anti-aliasing can be enabled separately for shapes and text.
 
 <div align="center">
 
@@ -65,21 +64,27 @@ By default graphics will not be anti-aliased. Anti-aliasing is slower (especiall
 
 </div>
 
-Anti-aliasing is controlled differently for graphics and text:
-
 ```cs
-// set anti-aliasing mode for graphics
+// Configure anti-aliasing mode for graphics
 gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 gfx.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighSpeed;
 
-// set anti-aliasing mode for text
-gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixel;
+// Configure anti-aliasing mode for text
+gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SingleBitPerPixelGridFit;
+gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+gfx.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
 ```
 
-## Download Source Code
+ClearType typically looks the best, but when drawn on a transparent background it looks poor ([because](https://devblogs.microsoft.com/oldnewthing/20150129-00/?p=44803) [reasons](https://devblogs.microsoft.com/oldnewthing/20060614-00/?p=30873)).
 
-_This code supports .NET Core and .NET Framework_
+## Resources
 
-* View on GitHub: [Program.cs](https://github.com/swharden/Csharp-Data-Visualization/blob/master/dev/old/drawing/quickstart-console/Program.cs)
-* Download this project: [quickstart-console.zip](files/quickstart-console.zip)
+* Source code: [projects/system-drawing/quickstart-console/](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/system-drawing/quickstart-console)
+
+* [Cross-Platform Support for `System.Drawing`](../cross-platform)
+
+* [Official documentation for `System.Drawing`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing)
+
+* [Pitfalls of transparent rendering of anti-aliased fonts](https://devblogs.microsoft.com/oldnewthing/20060614-00/?p=30873)
+
+* [Color-aware ClearType requires access to fixed background pixels, which is a problem if you don't know what the background pixels are, or if they aren't fixed](https://devblogs.microsoft.com/oldnewthing/20150129-00/?p=44803)

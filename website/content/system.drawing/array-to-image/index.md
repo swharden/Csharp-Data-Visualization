@@ -8,7 +8,7 @@ updated: 2022-03-10 6:58:00
 This page describes how to create an image from an array of RGB `byte` values using System.Drawing.
 
 > ⚠️ **Warning: System.Drawing.Common now only supports Windows!**\
-> See [Cross-Platform Support for System.Drawing.Common](../cross-platform) for more information and what you can do about it.
+> See [Cross-Platform Support for `System.Drawing`](../cross-platform) for more information and what you can do about it.
 
 ## Test Image Data
 
