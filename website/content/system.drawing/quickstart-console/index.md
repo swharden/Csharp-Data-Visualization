@@ -1,5 +1,5 @@
 ---
-Title: "Draw with System.Drawing in a C# Console App"
+Title: "Draw Graphics with System.Drawing in a C# Console App"
 Description: "yep"
 ---
 

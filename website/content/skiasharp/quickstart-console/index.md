@@ -1,5 +1,5 @@
 ---
-Title: "Draw with SkiaSharp in a C# Console App"
+Title: "Draw Graphics with SkiaSharp in a C# Console App"
 Date: 2022-03-10 8:08:00
 ---
 
