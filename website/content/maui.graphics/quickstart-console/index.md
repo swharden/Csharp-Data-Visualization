@@ -56,4 +56,4 @@ bmp.WriteToFile("console.png");
 
 ## Resources
 
-* [Download the source code for this project](https://github.com/swharden/Maui.Graphics/tree/main/projects)
+* [Download the source code for this project](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/maui-graphics)
