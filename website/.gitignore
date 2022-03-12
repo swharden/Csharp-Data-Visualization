@@ -5,3 +5,4 @@ obj
 # hugo files
 .hugo_build.lock
 public
+output
