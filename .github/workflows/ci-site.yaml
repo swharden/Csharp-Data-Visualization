@@ -23,7 +23,7 @@ jobs:
         run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
 
       - name: 🚀 Deploy
-        uses: easingthemes/ssh-deploy@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # v2.2.11
+        uses: easingthemes/ssh-deploy@c711f2c3391cac2876bf4c833590077f02e4bcb8 # v2.2.11
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete --dry-run"
