@@ -7,12 +7,14 @@
         {{ .Description | markdownify }}
     </div>
 
+    {{ if not .Date.IsZero }}
     <div style="opacity: .25;">
         {{ .Date.Format "January 2, 2006" }}
         {{ if isset .Params "updated" }}
         (updated on {{ .Params.updated | dateFormat "Jan 2, 2006" }})
         {{ end }}
     </div>
+    {{ end }}
 
 </div>
 
