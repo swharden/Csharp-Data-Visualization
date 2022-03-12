@@ -1,6 +1,7 @@
 ---
 Title: Maui.Graphics Maui Quickstart
 Description: How to draw on a graphics view using Maui.Graphics in a MAUI application
+Date: 2021-10-27
 ---
 
 ```xml
@@ -28,7 +29,6 @@ namespace MyMauiApp
     {
         public void Draw(ICanvas canvas, RectangleF dirtyRect)
         {
-            // Drawing code goes here
             canvas.StrokeColor = Colors.Red;
             canvas.StrokeSize = 6;
             canvas.DrawLine(10, 50, 90, 100);

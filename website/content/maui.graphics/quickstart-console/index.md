@@ -1,6 +1,8 @@
 ---
 Title: Maui.Graphics Console Quickstart
 Description: How to draw using Maui.Graphics in a Console Application
+Date: 2021-10-27
+Updated: 2022-03-12
 ---
 
 This page describes how to draw using Maui.Graphics from a console application and save the output as an image file.
@@ -50,11 +52,7 @@ bmp.WriteToFile("console.png");
 
 ### Output
 
-<div class="text-center">
-
-![](console.png)
-
-</div>
+<img src="console.png" class="border shadow mb-5">
 
 ## Resources
 
