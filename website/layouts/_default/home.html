@@ -1,19 +1,38 @@
 {{ define "main" }}
 
 <article class="my-3">
-  {{ partial "home.md" | markdownify }}
+  <p>
+    <strong>
+      This website is a collection of resources and simple code examples demonstrating how to visualize data and
+      draw graphics using C# and .NET technologies.</strong>
+    Rather than fragment this content across various articles on <a href='https://swharden.com/blog/'>my blog</a> I
+    decided to collect everything on this small website and pair it with my
+    <a href='https://github.com/swharden/Csharp-Data-Visualization'>C# Data Visualization GitHub project</a>.
+  </p>
 </article>
 
-<article>
-  <div class="mt-5">
-    <div class="display-6">All Pages</div>
+<article class="my-4">
+  <div class="row">
+    <div class="col-sm text-center">
+      <div class="fw-light fs-4">Boids</div>
+      <a href='simulations/boids'><img src="img/highlights/boids.gif"></a>
+    </div>
+    <div class="col-sm text-center">
+      <div class="fw-light fs-4">Life</div>
+      <a href="simulations/life"><img src="img/highlights/life.gif"></a>
+    </div>
+    <div class="col-sm text-center">
+      <div class="fw-light fs-4">Mystify</div>
+      <a href="simulations/mystify"><img src="img/highlights/mystify.gif"></a>
+    </div>
   </div>
+</article>
 
+<article class="my-3">
   {{ partial "section-links.html" (dict "context" . "sectionKey" "skiasharp") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "system.drawing") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "maui.graphics") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "simulations") }}
-
 </article>
 
 {{ end }}
