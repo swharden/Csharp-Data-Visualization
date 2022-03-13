@@ -15,9 +15,14 @@ jobs:
         uses: actions/checkout@v2
 
       - name: ✨ Setup Hugo
-        uses: peaceiris/actions-hugo@c03b5dbed22245418539b65eb9a3b1d5fdd9a0a6 # v2.5.0
-        with:
-          hugo-version: "0.92.2"
+        env:
+          HUGO_VERSION: 0.92.2
+        run: |
+          mkdir ~/hugo
+          cd ~/hugo
+          curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
+          tar -xvzf hugo.tar.gz
+          sudo mv hugo /usr/local/bin
 
       - name: 🛠️ Build
         run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
