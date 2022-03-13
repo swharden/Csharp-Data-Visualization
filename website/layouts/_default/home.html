@@ -1,39 +1,32 @@
 {{ define "main" }}
 
 <article class="py-3">
-  <p>
-    <strong>
-      This website is a collection of resources and simple code examples demonstrating how to visualize data and
-      draw graphics using C# and .NET technologies.</strong>
-    Rather than fragment this content across various articles on <a href='https://swharden.com/blog/'>my blog</a> I
-    decided to collect everything on this small website and pair it with my
-    <a href='https://github.com/swharden/Csharp-Data-Visualization'>C# Data Visualization GitHub project</a>.
-  </p>
+  {{ .Content }}
 </article>
 
-<article class="my-4">
-  <div class="row">
+<article>
+  <div class="row mb-5">
     <div class="col-sm text-center">
-      <div class="fw-light fs-4">Boids</div>
+      <div class="fw-light fs-5">Boids</div>
       <a href='simulations/boids'><img src="img/highlights/boids.gif"></a>
     </div>
     <div class="col-sm text-center">
-      <div class="fw-light fs-4">Life</div>
+      <div class="fw-light fs-5">Life</div>
       <a href="simulations/life"><img src="img/highlights/life.gif"></a>
     </div>
     <div class="col-sm text-center">
-      <div class="fw-light fs-4">Mystify</div>
+      <div class="fw-light fs-5">Mystify</div>
       <a href="simulations/mystify"><img src="img/highlights/mystify.gif"></a>
     </div>
   </div>
 </article>
 
-<article class="my-3">
+<article>
   {{ partial "section-links.html" (dict "context" . "sectionKey" "skiasharp") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "system.drawing") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "maui.graphics") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "simulations") }}
-  
+
   {{ if .Site.IsServer }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "dev") }}
   {{ end }}
