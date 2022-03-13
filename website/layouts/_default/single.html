@@ -27,11 +27,11 @@
 
 </div>
 
-
 <div class="py-2">
     <main>
         <article>
-            {{ .Content }}
+            {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
+                `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
         </article>
     </main>
 </div>
