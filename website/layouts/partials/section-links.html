@@ -1,10 +1,8 @@
 <section>
 
     {{ with .context.Site.GetPage "section" .sectionKey }}
-    <div>
-        <h3 class="mt-3 fw-light">
-            {{.Title}}
-        </h3>
+    <div class="fs-2 fw-light">
+        {{.Title}}
     </div>
     {{ end }}
 
