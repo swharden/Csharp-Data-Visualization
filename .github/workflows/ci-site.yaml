@@ -14,9 +14,6 @@ jobs:
       - name: 🛒 Checkout
         uses: actions/checkout@v2
 
-      - name: 🔎 Check IP
-        run: curl https://api.ipify.org
-
       - name: ✨ Setup Hugo
         uses: peaceiris/actions-hugo@c03b5dbed22245418539b65eb9a3b1d5fdd9a0a6 # v2.5.0
         with:
@@ -25,13 +22,12 @@ jobs:
       - name: 🛠️ Build
         run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
 
+      - name: 🔑 Configure SSH
+        uses: shimataro/ssh-key-action@3c9b0fc6f2d223b8450b02a0445f526350fc73e0 # v2.3.1
+        with:
+          key: ${{ secrets.REMOTE_SSH_KEY }}
+          name: id_rsa
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
       - name: 🚀 Deploy
-        uses: easingthemes/ssh-deploy@c711f2c3391cac2876bf4c833590077f02e4bcb8 # v2.2.11
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete --progress --stats"
-          SOURCE: "website/output/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
+        run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
