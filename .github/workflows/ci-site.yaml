@@ -14,6 +14,9 @@ jobs:
       - name: 🛒 Checkout
         uses: actions/checkout@v2
 
+      - name: 🔎 Check IP
+        run: curl https://api.ipify.org
+
       - name: ✨ Setup Hugo
         uses: peaceiris/actions-hugo@c03b5dbed22245418539b65eb9a3b1d5fdd9a0a6 # v2.5.0
         with:
