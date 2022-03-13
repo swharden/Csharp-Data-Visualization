@@ -1,7 +1,8 @@
 ---
 Title: "System.Drawing Console Quickstart"
-Description: "Draw Graphics with System.Drawing in a C# Console App"
+Description: "How to use System.Drawing to create graphics in a C# console application"
 date: 2020-05-16
+lastmod: 2022-03-13 
 weight: 1.1
 ---
 
@@ -40,7 +41,7 @@ bmp.Save("demo.png");
 
 <img src="drawing-quickstart-console.png" class="border shadow mb-5">
 
-### Respect `IDisposable`
+## Respect `IDisposable`
 
 Many System.Drawing objects inherit from `IDisposable` and it is ***critical*** that they are disposed of properly to avoid memory issues. This means calling `Dispose()` after you're done using an object, or better yet throwing its instantiation inside a `using` statement.
 
@@ -57,14 +58,10 @@ Take care to properly dispose of these common System.Drawing objects:
 * [`System.Drawing.StringFormat`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.stringformat)
 
 
-### Anti-Aliased Graphics and Text
+## Anti-Aliased Graphics and Text
 **Anti-aliasing is OFF by default.** Enabling anti-aliasing significantly slows render time but produces superior images when drawing angled lines and edges. Anti-aliasing can be enabled separately for shapes and text.
 
-<div align="center">
-
-![](anti-aliasing-example.png)
-
-</div>
+<img src="anti-aliasing-example.png" class="d-block mx-auto my-4">
 
 ```cs
 // Configure anti-aliasing mode for graphics
