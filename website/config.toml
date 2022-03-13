@@ -6,8 +6,10 @@ enableInlineShortcodes = true
 
 [outputFormats]
   [outputFormats.RSS]
+    # save RSS in /feed/index.xml and use .htaccess to serve it as the index for /feed/
     mediatype = "application/rss"
-    baseName = "rss"
+    path = "feed"
+    baseName = "index"
 
 [markup]
   [markup.goldmark]
