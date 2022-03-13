@@ -29,7 +29,7 @@ jobs:
         uses: easingthemes/ssh-deploy@c711f2c3391cac2876bf4c833590077f02e4bcb8 # v2.2.11
         env:
           SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete --dry-run --progress --stats"
+          ARGS: "-rltgoDzvO --delete --progress --stats"
           SOURCE: "website/output/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
