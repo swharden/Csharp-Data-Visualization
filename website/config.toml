@@ -4,6 +4,11 @@ author = "Scott W Harden"
 copyright = "Copyright © 2022 - Scott W Harden"
 enableInlineShortcodes = true
 
+[outputFormats]
+  [outputFormats.RSS]
+    mediatype = "application/rss"
+    baseName = "rss"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
