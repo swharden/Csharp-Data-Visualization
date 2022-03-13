@@ -2,7 +2,7 @@
 title: Array to Image with SkiaSharp
 description: How to create an image from a multidimensional array of pixel values
 date: 2022-03-08 7:38:00
-updated: 2022-03-10 6:58:00
+lastmod: 2022-03-10 6:58:00
 ---
 
 This page describes how to create an image from an array of RGB `byte` values using SkiaSharp.

@@ -1,6 +1,7 @@
 ---
-Title: "Draw Graphics with SkiaSharp in a C# Console App"
-Date: 2022-03-10 8:08:00
+title: "SkiaSharp Console Quickstart"
+description: "Draw Graphics with SkiaSharp in a C# Console App"
+date: 2022-03-10 8:08:00
 ---
 
 This article describes how to draw graphics from a C# console application and save the output as an image file using SkiaSharp.

@@ -2,7 +2,7 @@
 Title: Maui.Graphics WinForms Quickstart
 Description: How to draw with Maui.Graphics in a Windows Forms application
 Date: 2021-10-27
-Updated: 2022-03-12
+lastmod: 2022-03-12
 ---
 
 This page describes how to draw using Maui.Graphics from a Windows Forms application.

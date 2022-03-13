@@ -1,8 +1,8 @@
 ---
-Title: Maui.Graphics Console Quickstart
-Description: How to draw using Maui.Graphics in a Console Application
-Date: 2021-10-27
-Updated: 2022-03-12
+title: Maui.Graphics Console Quickstart
+description: How to draw using Maui.Graphics in a Console Application
+date: 2021-10-27
+lastmod: 2022-03-12
 ---
 
 This page describes how to draw using Maui.Graphics from a console application and save the output as an image file.
