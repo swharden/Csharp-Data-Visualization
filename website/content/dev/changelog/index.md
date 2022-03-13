@@ -1,0 +1,810 @@
+---
+title: Changelog
+---
+
+## ScottPlot 4.1.24 (in progress...)
+* Palette: `ScottPlot.Palette` has been created and cookbook recipes have been updated to use it. The module it replaces (`ScottPlot.Drawing.Palette`) will not be marked obsolete until ScottPlot 5. (#1299, #1304)
+* Style: Refactored to use static classes instead of enumeration members (#1299, #1291)
+
+## ScottPlot 4.1.23
+* NuGet: use deterministic builds, add source link support, and include compiler flags (#1285)
+
+## ScottPlot 4.1.22
+* Coxcomb Plots: Added support for image labels (#1265, #1275) _Thanks [**@Rayffer**](https://github.com/Rayffer)_
+* Palette: Added overloads for `GetColor()` and `GetColors()` to support transparency
+* Plot Viewer: fixed bug causing render warning to appear in WinForms and Avalonia plot viewers (#1265, #1238) _Thanks [**@bukkideme**](https://github.com/bukkideme), [**@Nexus452**](https://github.com/Nexus452), and [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.1.21
+* Legend: Throw an exception if `RenderLegend()` is called on a plot with no labeled plottables (#1257)
+* Radar: Improved support for category labels. (#1261, #1262) _Thanks [**@Rayffer**](https://github.com/Rayffer)_
+* Controls: Now have a `Refresh()` method as an alias of `Render()` for manually redrawing the plot and updating the image on the screen. Using `Render()` in user controls is more similar to similar plotting libraries and less likely to be confused with `Plot.Render()` in documentation and warning messages. (#1264, #1270, #1263, #1245, #1165)
+* Controls: Decreased visibility of the render warning (introduced in ScottPlot 4.1.19) by allowing it only to appear when the debugger is attached (#1165, #1264)
+* Radial Gaugue Plot: Fixed divide-by-zero bug affecting normalized gauges (#1272) _Thanks [**@arthurits**](https://github.com/arthurits)_
+
+## ScottPlot 4.1.20
+* Ticks: Fixed bug where corner labels would not render when multiplier or offset notation is in use (#1252, #1253) _Thanks [**@DavidBergstromSWE**](https://github.com/DavidBergstromSWE)_
+
+## ScottPlot 4.1.19
+* Controls: Fixed bug where render warning message is not hidden if `RenderRequest()` is called (#1165) _Thanks [**@gigios**](https://github.com/gigios)_
+
+## ScottPlot 4.1.18
+* Ticks: Improve placement when axis scale lock is enabled (#1229, #1197)
+* Plot: `SetViewLimits()` replaced by `SetOuterViewLimits()` and `SetInnerViewLimits()` (#1197) _Thanks [**@noob765**](https://github.com/noob765)_
+* Plot: `EqualScaleMode` (an enumeration accepted by `AxisScaleLock()`) now has `PreserveSmallest` and `PreserveLargest` members to indicate which axis to prioritize when adjusting zoom level. The new default is `PreserveSmallest` which prevents data from falling off the edge of the plot when resizing. (#1197) _Thanks [**@noob765**](https://github.com/noob765)_
+* Axis: Improved alignment of 90º rotated ticks (#1194, #1201) _Thanks [**@gigios**](https://github.com/gigios)_
+* Controls: Fix bug where middle-click-drag zoom rectangle would persist if combined with scroll wheel events (#1226) _Thanks [**@Elgot**](https://github.com/Elgot)_
+* Scatter Plot: Fixed bug affecting plots where `YError` is set but `XError` is not (#1237, #1238) _Thanks [**@simmdan**](https://github.com/simmdan)_
+* Palette: Added `Microcharts` colorset (#1235) _Thanks [**@arthurits**](https://github.com/arthurits)_
+* SignalPlotXY: Added support for `FillType` (#1232) _Thanks [**@ddrrrr**](https://github.com/ddrrrr)_
+* Arrow: New plot type for rendering arrows on plots. Arrowhead functionality of scatter plots has been deprecated. (#1241, #1240)
+* Controls: Automatic rendering has been deprecated. Users must call Render() manually at least once. (#1165, #1117)
+* Radial Gauge Plots: `AddRadialGauge()` now adds a radial gauge plot (a new circular plot type where values are represented as arcs spanning a curve). See cookbook for examples and documentation. (#1242) _Thanks [**@arthurits**](https://github.com/arthurits)_
+
+## ScottPlot 4.1.17
+* Improved `RadarPlot.Update()` default arguments (#1097) _Thanks [**@arthurits**](https://github.com/arthurits)_
+* Radar Plot: Improved `Update()` default arguments (#1097) _Thanks [**@arthurits**](https://github.com/arthurits)_
+* Crosshair: Added `XLabelOnTop` and `YLabelOnRight` options to improve multi-axis support and label customization (#1147) _Thanks [**@rutkowskit**](https://github.com/rutkowskit)_
+* Signal Plot: Added `StepDisplay` option to render signal plots as step plots when zoomed in (#1092, #1128) _Thanks [**@EmanuelFeru**](https://github.com/EmanuelFeru)_
+* Testing: Improved error reporting on failed XML documentation tests (#1127) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Histogram: Marked `ScottPlot.Statistics.Histogram` obsolete in favor of static methods in `ScottPlot.Statistics.Common` designed to create histograms and probability function curves (#1051, #1166). See cookbook for usage examples. _Thanks [**@breakwinz**](https://github.com/breakwinz) and [**@bclehmann**](https://github.com/bclehmann)_
+* WpfPlot: Improve memory management for dynamically created and destroyed WpfPlot controls by properly unloading the dispatcher timer (#1115, #1117) _Thanks [**@RamsayGit**](https://github.com/RamsayGit), [**@bclehmann**](https://github.com/bclehmann), [**@StendProg**](https://github.com/StendProg), and [**@Orace**](https://github.com/Orace)_
+* Mouse Processing: Improved bug that affected fast drag-dropping of draggable objects (#1076)
+* Rendering: Fixed clipping bug that caused some plot types to be rendered above data area frames (#1084)
+* Plot: Added `Width` and `Height` properties
+* Plot: `GetImageBytes()` now returns bytes for a PNG file for easier storage in cloud applications (#1107)
+* Axis: Added a `GetSettings()` method for developers, testers, and experimenters to gain access to experimental objects which are normally private for extreme customization
+* Axis: Axis ticks now have a `Ticks()` overload which allows selective control over major tick lines and major tick labels separately (#1118) _Thanks [**@kegesch**](https://github.com/kegesch)_
+* Plot: `AxisAuto()` now has `xAxisIndex` and `yAxisIndex` arguments to selectively adjust axes to fit data on a specified index (#1123)
+* Crosshair: Refactored to use two `AxisLine`s so custom formatters can now be used and lines can be independently styled (#1173, #1172, #1122, 1195) _Thanks [**@Maoyao233**](https://github.com/Maoyao233) and [**@EmanuelFeru**](https://github.com/EmanuelFeru)_
+* ClevelandDotPlot: Improve automatic axis limit detection (#1185) _Thanks [**@Nextra**](https://github.com/Nextra)_
+* ScatterPlotList: Improved legend formatting (#1190) _Thanks [**@Maoyao233**](https://github.com/Maoyao233)_
+* Plot: Added an optional argument to `Frameless()` to reverse its behavior and deprecated `Frame()` (#1112, #1192) _Thanks [**@arthurits**](https://github.com/arthurits)_
+* AxisLine: Added `PositionLabel` option for displaying position as text (using a user-customizable formatter function) on the axis (#1122, #1195, #1172, #1173) _Thanks [**@EmanuelFeru**](https://github.com/EmanuelFeru) and [**@Maoyao233**](https://github.com/Maoyao233)_
+* Radar Plot: Fixed rendering artifact that occurred when axis maximum is zero (#1139) _Thanks @petersesztak and [**@bclehmann**](https://github.com/bclehmann)_
+* Mouse Processing: Improved panning behavior when view limits (axis boundaries) are active (#1148, #1203) _Thanks [**@at2software**](https://github.com/at2software)_
+* Signal Plot: Fixed bug causing render artifacts when using fill modes (#1163, #1205)
+* Scatter Plot: Added support for `OffsetX` and `OffsetY` (#1164, #1213)
+* Coxcomb: Added a new plot type for categorical data. See cookbook for examples. (#1188) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Axes: Added `LockLimits()` to control pan/zoom manipulation so individual axes can be manipulated in multi-axis plots. See demo application for example. (#1179, #1210) _Thanks [**@kkaiser41**](https://github.com/kkaiser41)_
+* Vector Plot: Add additional options to customize arrowhead style and position. See cookbook for examples. (#1202) _Thanks [**@hhubschle**](https://github.com/hhubschle)_
+* Finance Plot: Fixed bug affecting plots with no data points (#1200) _Thanks [**@Maoyao233**](https://github.com/Maoyao233)_
+* Ticks: Improve display of rotated ticks on secondary axes (#1201) _Thanks [**@gigios**](https://github.com/gigios)_
+
+## ScottPlot 4.1.16
+* Made it easier to use custom color palettes (see cookbook) (#1058, #1082) _Thanks [**@EmanuelFeru**](https://github.com/EmanuelFeru)_
+* Added a `IgnoreAxisAuto` field to axis lines and spans (#999) _Thanks [**@kirsan31**](https://github.com/kirsan31)_
+* Heatmaps now have a `Smooth` field which uses bicubic interpolation to display smooth heatmaps (#1003) _Thanks [**@xichaoqiang**](https://github.com/xichaoqiang)_
+* Radar plots now have an `Update()` method for updating data values without clearing the plot (#1086, #1091) _Thanks [**@arthurits**](https://github.com/arthurits)_
+* Controls now automatically render after the list of plottables is modified (previously it was after the number of plottables changed). This behavior can be disabled by setting a public field in the control's `Configuration` module. (#1087, #1088) _Thanks [**@bftrock**](https://github.com/bftrock)_
+* New `Crosshair` plot type draws lines to highlight a point on the plot and labels their coordinates in the axes (#999, #1093) _Thanks [**@kirsan31**](https://github.com/kirsan31)_
+* Added support for a custom `Func<double, string>` to be used as custom tick label formatters (see cookbook) (#926, #1070) _Thanks @damiandixon and [**@ssalsinha**](https://github.com/ssalsinha)_
+* Added `Move`, `MoveFirst`, and `MoveLast` to the `Plot` module for added control over which plottables appear on top (#1090) _Thanks [**@EmanuelFeru**](https://github.com/EmanuelFeru)_
+* Fixed bug preventing expected behavior when calling `AxisAutoX` and `AxisAutoY` (#1089) _Thanks [**@EmanuelFeru**](https://github.com/EmanuelFeru)__
+
+## ScottPlot 4.1.15
+* Hide design-time error message component at run time to reduce flicking when resizing (#1073, #1075) _Thanks @Superberti and [**@bclehmann**](https://github.com/bclehmann)_
+* Added a modern `Plot.GetBitmap()` overload suitable for the new stateless rendering system (#913 #1063)
+* Controls now have `PlottableDragged` and `PlottableDropped` event handlers (#1072) _Thanks [**@JS-BGResearch**](https://github.com/JS-BGResearch)_
+
+## ScottPlot 4.1.14
+* Add support for custom linestyles in SignalXY plots (#1017, #1016) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@breakwinz**](https://github.com/breakwinz)_
+* Improved Avalonia dependency versioning (#1018, #1041) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Controls now properly process `MouseEnter` and `MouseLeave` events (#999) _Thanks [**@kirsan31**](https://github.com/kirsan31) and [**@breakwinz**](https://github.com/breakwinz)_
+* Controls now have a `RenderRequest()` method that uses a render queue to facilitate non-blocking render calls (#813, #1034) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Added Last() to finance plots to make it easier to access the final OHLC (#1038) _Thanks [**@CalderWhite**](https://github.com/CalderWhite)_
+* Controls that fail to render in design mode now display the error message in a textbox to prevent Visual Studio exceptions (#1048) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.1.13-beta
+* `Plot.Render()` and `Plot.SaveFig()` now have a `scale` argument to allow for the creation of high resolution scaled plots (#983, #982, #981) _Thanks [**@PeterDavidson**](https://github.com/PeterDavidson)_
+* A `BubblePlot` has been added to allow display of circles with custom colors and sizes. See cookbook for examples. (#984, #973, #960) _Thanks [**@PeterDavidson**](https://github.com/PeterDavidson)_
+* Avalonia 0.10.3 is now supported (#986) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Default version of System.Drawing.Common has been changed from `5.0.0` to `4.6.1` to minimize errors associated with downgrading (#1004, #1005, #993, #924, #655) _Thanks [**@bukkideme**](https://github.com/bukkideme)_
+
+## ScottPlot 4.1.12-beta
+* Added "Open in New Window" option to right-click menu (#958, #969) _Thanks @ademkaya and [**@bclehmann**](https://github.com/bclehmann)_
+* User control `Configuration` module now has customizable scroll wheel zoom fraction (#940, #937) _Thanks @
+PassionateDeveloper86 and [**@StendProg**](https://github.com/StendProg)_
+* Added options to `Plot.AxisScaleLock()` to let the user define scaling behavior when the plot is resized (#933, #857) _Thanks @ricecakebear and [**@StendProg**](https://github.com/StendProg)_
+* Improved XML documentation for `DataGen` module (#903, #902) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed bug where tick labels would not render for axes with a single tick (#945, #828, #725, #925) _Thanks [**@saklanmazozgur**](https://github.com/saklanmazozgur) and [**@audun**](https://github.com/audun)_
+* Added option to manually refine tick density (#828) _Thanks [**@ChrisAtVault**](https://github.com/ChrisAtVault) and [**@bclehmann**](https://github.com/bclehmann)_
+* Improved tick density calculations for DateTime axes (#725) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed SignalXY rendering artifact affecting the right edge of the plot (#929, #931) _Thanks @damiandixon and [**@StendProg**](https://github.com/StendProg)_
+* Improved line style customization for signal plots (#929, #931) _Thanks @damiandixon and [**@StendProg**](https://github.com/StendProg)_
+* Fixed bug where negative bar plots would default to red fill color (#968, #946) _Thanks [**@pietcoussens**](https://github.com/pietcoussens)_
+* Fixed bug where custom vertical margin was not respected when `AxisAuto()` was called with a middle-click (#943) _Thanks Andreas_
+* Added a minimum distance the mouse must travel while click-dragging for the action to be considered a drag instead of a click (#962)
+* Improved Histogram documentation and simplified access to probability curves (#930, #932, #971) _Thanks [**@LB767**](https://github.com/LB767), [**@breakwinz**](https://github.com/breakwinz), and [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.1.11-beta
+* FormsPlot mouse events are now properly forwarded to the base control (#892, #919) _Thanks [**@grabul**](https://github.com/grabul)_
+* Prevent right-click menu from deploying after right-click-drag (#891, #917)
+* Add offset support to SignalXY (#894, #890) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Eliminate rendering artifacts in SignalXY plots (#893, #889) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@grabul**](https://github.com/grabul)_
+* Optimize cookbook generation and test execution (#901) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.1.10-beta
+* Fixed a bug where applying the Seabourn style modified axis frame and minor tick distribution (#866) _Thanks [**@oszymczak**](https://github.com/oszymczak)_
+* Improved XML documentation and error reporting for getting legend bitmaps (#860) _Thanks [**@mzemljak**](https://github.com/mzemljak)_
+* Fixed rendering bug affecting finance plots with thin borders (#837) _Thanks [**@AlgoExecutor**](https://github.com/AlgoExecutor)_
+* Improved argument names and XML docs for SMA and Bollinger band calculation methods (#830) _Thanks [**@ticool**](https://github.com/ticool)_
+* Improved GetPointNearest support for generic signal plots (#809, #882, #886) _Thanks [**@StendProg**](https://github.com/StendProg), [**@at2software**](https://github.com/at2software), and [**@mrradd**](https://github.com/mrradd)_
+* Added support for custom slice label colors in pie charts (#883, #844) _Thanks [**@bclehmann**](https://github.com/bclehmann), [**@StendProg**](https://github.com/StendProg), and [**@Timothy343**](https://github.com/Timothy343)_
+* Improved support for transparent heatmaps using nullable double arrays (#849, #852) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Deprecated bar plot `IsHorizontal` and `IsVertical` in favor of an `Orientation` enumeration
+* Deprecated bar plot `xs` and `ys` in favor of `positions` and `values` which are better orientation-agnostic names
+* Added Lollipop and Cleveland plots as new types of bar plots (#842, #817) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed a bug where `Plot.AddBarGroups()` returned an array of nulls (#839) _Thanks [**@rhys-wootton**](https://github.com/rhys-wootton)_
+* Fixed a bug affecting manual tick labels (#829) _Thanks [**@ohru131**](https://github.com/ohru131)_
+* Implemented an optional render queue to allow asynchronous rendering in user controls (#813) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.1.9-beta
+* Improved support for negative DateTimes when using DateTime axis mode (#806, #807) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@at2software**](https://github.com/at2software)_
+* Improved axis limit detection when using tooltips (#805, #811) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@ChrisAtVault**](https://github.com/ChrisAtVault)_
+* Added `WickColor` field to candlestick plots (#803) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Improved rendering of candlesticks that open and close at the same price (#803, #800) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@AlgoExecutor**](https://github.com/AlgoExecutor)_
+* Improved rendering of SignalXY plots near the edge of the plot (#795) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* new `AddScatterStep()` helper method creates a scatter plot with the step style (#808) _Thanks [**@KlaskSkovby**](https://github.com/KlaskSkovby)_
+* Marked `MultiPlot` obsolete and added information to the [FAQ](https://swharden.com/scottplot/faq)
+* Refactored `Colormap` module to use classes instead of reflection (#767, #773) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Refactored `OHLC` fields and finance plots to store `DateTime` and `TimeSpan` instead of `double` (#795)
+
+## ScottPlot 4.1.8-beta
+* Improved validation and error reporting for large heatmaps (#772) _Thanks [**@Matthias-C**](https://github.com/Matthias-C)_
+* Removed noisy console output in `ScatterPlotList` (#780) _Thanks [**@Scr0nch**](https://github.com/Scr0nch)_
+* Improved rendering bug in signal plots (#783, #788) _Thanks [**@AlgoExecutor**](https://github.com/AlgoExecutor) and [**@StendProg**](https://github.com/StendProg)_
+* Fix bug that hid grid lines in frameless plots (#779)
+* Improved appearance of marker-only scatter plots in the legend (#790) _Thanks [**@AlgoExecutor**](https://github.com/AlgoExecutor)_
+* `AddPoint()` now has a `label` argument to match `AddScatter()` (#787) _Thanks [**@AlgoExecutor**](https://github.com/AlgoExecutor)_
+
+## ScottPlot 4.1.7-beta
+* Added support for image axis labels (#759, #446, #716) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Added `MinRenderIndex` and `MaxRenderIndex` support to Scatter plots (#737, #763) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved display of horizontal manual axis tick labels (#724, #762) _Thanks @inqb and [**@Saklut**](https://github.com/Saklut)_
+* Added support for listing and retrieving colormaps by their names (#767, #773) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Enabled mouse pan and zoom for plots with infinitely small width and height (#768, #733, #764) _Thanks [**@saklanmazozgur**](https://github.com/saklanmazozgur)_
+* A descriptive exception is now thrown when attempting to create heatmaps of unsupported dimensions (#722) _Thanks [**@Matthias-C**](https://github.com/Matthias-C)_
+
+## ScottPlot 4.1.6-beta
+* Fixed single point render bug in Signal plots (#744, #745) _Thanks [**@at2software**](https://github.com/at2software) and [**@StendProg**](https://github.com/StendProg)_
+* Improved display scaling support for WPF control (#721, #720) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* User control `OnAxesChanged` events now send the control itself as the sender object (#743, #756) _Thanks [**@at2software**](https://github.com/at2software)_
+* Fixed configuration bug related to Alt + middle-click-drag-zoom (#741) _Thanks [**@JS-BGResearch**](https://github.com/JS-BGResearch) and [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed render bug related to ALT + middle-click-drag zoom box (#742) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed render bug for extremely small plots (#735)
+* Added a coordinated heatmap plot type (#707) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved appearance of heatmap edges (#713) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved design-time rendering of Windows Forms control
+* Added and expanded XML documentation for Plot and Plottable classes
+* Created a new cookbook website generator that combines reflection with XML documentation (#727, #738, #756)
+* ScottPlot is now a reserved prefix on NuGet
+
+## ScottPlot 4.1.5-beta
+* Helper methods were added for creating scatter plots with just lines (`AddScatterLines()`) or just markers (`AddScatterPoints()`).
+* Scatter and Signal plots have `GetPointNearest()` which now has a `xyRatio` argument to support identifying points near the cursor in pixel space (#709, #722) _Thanks [**@olofszymczak**](https://github.com/olofszymczak), [**@StendProg**](https://github.com/StendProg), [**@bclehmann**](https://github.com/bclehmann)_
+* Improved display of manual tick labels (#724) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.1.4-beta
+* User controls have been extensively redesigned (#683)
+  * All user controls are almost entirely logic-free and pass events to `ScottPlot.Control`, a shared common back-end module which handles mouse interaction and pixel/coordinate conversions.
+  * Controls no longer have a `Configure()` method with numerous named arguments, but instead a `Configuration` field with XML-documented public fields to customize behavior.
+  * Renders occur automatically when the number of plottables changes, meaning you do not have to manually call `Render()` when plotting data for the first time. This behavior can be disabled in the configuration.
+  * Avalonia 0.10.0 is now supported and uses this new back-end (#656, #700) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+  * Events are used to provide custom right-click menu actions.
+  * The right-click plot settings window (that was only available from the WinForms control) has been removed.
+* New methods were added to `ScottPlot.Statistics.Common` which efficiently find the Nth smallest number, quartiles, or other quantiles from arrays of numbers (#690) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* New tooltip plot type (#696) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Fixed simple moving average (SMA) calculation (#703) _Thanks [**@Saklut**](https://github.com/Saklut)_
+* Improved multi-axis rendering (#706) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Improved `SetSourceAsync()` for segmented trees (#705, #692) _Thanks [**@jl0pd**](https://github.com/jl0pd) and [**@StendProg**](https://github.com/StendProg)_
+* Improved layout for axes with rotated ticks (#706, #699) _Thanks @MisterRedactus and [**@bclehmann**](https://github.com/bclehmann)_
+* ScottPlot now multi-targets more platforms and supports the latest C# language version on modern platforms but restricts the language to C# 7.3 for .NET Framework projects (#691, #711) _Thanks [**@jl0pd**](https://github.com/jl0pd)_
+* Improved project file to install `System.ValueTuple` when targeting .NET Framework 4.6.1 (#88, #691)
+
+## ScottPlot 4.1.3-beta
+* Scott will make a document to summarize 4.0 → 4.1 changes as we get closer to a non-beta release
+* Fixed rendering bug affecting axis spans when zoomed far in (#662) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved Gaussian blur performance (#667) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Largely refactored heatmaps (#679, #680) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* New Colorbar plot type (#681, see cookbook)
+* Improved SMA and Bollinger band generators (#647) _Thanks [**@Saklut**](https://github.com/Saklut)_
+* Improved tick label rounding (#657)
+* Improved setting of tick label color (#672)
+* Improved fill above and below for scatter plots (#676) _Thanks [**@MithrilMan**](https://github.com/MithrilMan)_
+* Additional customizations for radar charts (#634, #628, #635) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@SommerEngineering**](https://github.com/SommerEngineering)_
+
+## ScottPlot 4.1 Notes
+
+Work toward ScottPlot 4.1 began in October, 2020 and merged into the master branch one month later ([#605](https://github.com/swharden/ScottPlot/pull/605)). Improvements are focused at enhanced performance, improved thread safety, support for multiple axes, and options for data validation. See [roadmap.md](roadmap.md) for details.
+
+### Changes Affecting Users
+* **Most plotting methods are unchanged so many users will not experience any breaking changes.**
+* **Axis Limits**
+  * Axis limits are described by a `AxisLimits` struct (previously `double[]` was used)
+  * Methods which modify axis limits do not return anything (previously they returned `double[]`)
+  * To get the latest axis limits call `Plot.AxisLimits()` which returns a `AxisLimits` object
+* **Multiple Axes**
+  * Multiple axes are now supported! There is no change to the traditional workflow if this feature is not used.
+  * Most axis methods accept a `xAxisIndex` and `yAxisIndex` arguments to specify which axes they will modify or return
+  * Most plottable objects have `xAxisIndex` and `yAxisIndex` fields which specify which axes they will render on
+  * You can enable a second Y and X axis by calling `YLabel2` and `XLabel2()`
+  * You can obtain an axis by calling `GetXAxis(xAxisIndex)` or `GetYAxis(yAxisIndex)`, then modify its public fields to customize its behavior
+  * The default axes (left and bottom) both use axis index `0`
+  * The secondary axes (right and top) both use axis index `1`
+  * You can create additional axes by calling `Plot.AddAxis()` and customize it by modifying fields of the `Axis` it returns.
+* **Layout**
+  * The layout is re-calculated on every render, so it automatically adjusts to accommodate axis labels and ticks.
+  * To achieve extra space around the data area, call `Layout()` to supply a minimum size for each axis.
+  * To achieve a frameless plot where the data area fills the full figure, call `LayoutFrameless()`
+
+### Changes Affecting Developers
+* **Some namespaces and class names have changed**
+  * The `Plottable` base class has been replaced with an `IPlottable` interface
+  * Plottables have been renamed and moved into a `Plottable` namespace (e.g., `PlottableScatter` is  now `Plottable.ScatterPlot`)
+  * Several enums have been renamed
+* **The Settings module has been greatly refactored**
+  * It is still private, but you can request it with `Plot.GetSettings()`
+  * Many of its objects implement `IRenderable`, so their customization options are stored at the same level as their render methods.
+* **The Render system is now stateless**
+  * `Bitmap` objects are never stored. The `Render()` method will create and return a new `Bitmap` when called, or will render onto an existing `Bitmap` if it is supplied as an argument. This allows controls to manage their own performance optimization by optionally re-using a `Bitmap` for multiple renders.
+  * Drawing is achieved with `using` statements which respect all `IDisposable` drawing objects, improving thread safety and garbage collection performance.
+
+---
+
+# ScottPlot 4.0 Changelog
+
+In November, 2020 ScottPlot 4.0 branched into a permanent `stable` branch, and ScottPlot 4.1 began development as beta / pre-release in the main branch. ScottPlot 4.0 continues to be maintained, but modifications are aimed at small bugfixes rather than large refactoring or the addition of new features.
+
+ScottPlot 4.0 source code (including all cookbook examples and demo applications) can still be found on the [releases page](https://github.com/swharden/ScottPlot/releases) and on the [`4.0-stable` branch](https://github.com/ScottPlot/ScottPlot/tree/4.0-stable) of this repository.
+
+## ScottPlot 4.0.46
+* Improved ticks for small plots (#724) _Thanks [**@Saklut**](https://github.com/Saklut)_
+* Improved display of manual ticks (#724) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.0.45
+* Fixed a bug that affected very small plots with the benchmark enabled (#626) _Thanks [**@martin-brajer**](https://github.com/martin-brajer)_
+* Improved labels in bar graphs using a yOffset (#584) _Thanks Terbaco_
+* Added RenderLock() and RenderUnlock() to the Plot module to facilitate multi-threaded plot modification (#609) _Thanks [**@ZTaiIT1025**](https://github.com/ZTaiIT1025)_
+
+## ScottPlot 4.0.44
+* Improved limits for fixed-size axis spans (#586) _Thanks [**@citizen3942**](https://github.com/citizen3942) and [**@StendProg**](https://github.com/StendProg)_
+* Mouse drag/drop events now send useful event arguments (#593) _Thanks @charlescao460 and [**@StendProg**](https://github.com/StendProg)_
+* Fixed a bug that affected plots with extremely small (<1E-10) axis spans (#607) _Thanks [**@RFIsoft**](https://github.com/RFIsoft)_
+* Plot.SaveFig() now returns the full path to the file it created (#608)
+* Fixed AxisAuto() bug affecting signal plots using min/max render indexes with a custom sample rate (#621) _Thanks [**@LB767**](https://github.com/LB767)_
+* Fixed a bug affecting histogram normalization (#624) _Thanks [**@LB767**](https://github.com/LB767)_
+* WPF and Windows Forms user controls now also target .NET 5
+
+## ScottPlot 4.0.43
+* Improved appearance of semi-transparent legend items (#567)
+* Improved tick labels for ticks smaller than 1E-5 (#568) _Thanks [**@ozgur640**](https://github.com/ozgur640)_
+* Improved support for Avalonia 0.10 (#571) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@apkrymov**](https://github.com/apkrymov)_
+* Improved positions for base16 ticks (#582, #581) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.0.42
+* Improved DPI scaling support when using WinForms in .NET Core applications (#563) _Thanks [**@citizen3942**](https://github.com/citizen3942)_
+* Improved DPI scaling support for draggable axis lines and spans (#563) _Thanks [**@citizen3942**](https://github.com/citizen3942)_
+
+## ScottPlot 4.0.41
+* Improved density of DateTime ticks (#564, #561) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@waynetheron**](https://github.com/waynetheron)_
+* Improved display of DateTime tick labels containing multiple spaces (#539, #564) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.40
+* Added user control for Avalonia (#496, #503) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Holding shift while left-click-dragging the edge of a span moves it instead of resizing it (#509) _Thanks [**@Torgano**](https://github.com/Torgano)_
+* CSV export is now culture invariant for improved support on systems where commas are decimal separators (#512) _Thanks Daniel_
+* Added fill support to scatter plots (#529) _Thanks [**@AlexFsmn**](https://github.com/AlexFsmn)_
+* Fix bug that occurred when calling GetLegendBitmap() before the plot was rendered (#527) _Thanks [**@el-aasi**](https://github.com/el-aasi)_
+* Improved DateTime tick placement and added support for milliseconds (#539) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Pie charts now have an optional hollow center to produce donut plots (#534) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@AlexFsmn**](https://github.com/AlexFsmn)_
+* Added electrocardiogram (ECG) simulator to the DataGen module (#540) _Thanks [**@AteCoder**](https://github.com/AteCoder)_
+* Improved mouse scroll wheel responsiveness by delaying high quality render (#545, #543, #550) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Plot.PlotBitmap() allows Bitmaps to be placed at specific coordinates (#528) _Thanks [**@AlexFsmn**](https://github.com/AlexFsmn)_
+* DataGen.SampleImage() returns a sample Bitmap that can be used for testing
+* Bar graphs now have a hatchStyle property to customize fill pattern (#555) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Support timecode tick labels (#537) _Thanks @vrdriver and [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.39
+* Legend now reflects LineStyle of Signal and SignalXY plots (#488) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Improved mouse wheel zoom-to-cursor and middle-click-drag rectangle zoom in the WPF control for systems that use display scaling (#490) _Thanks [**@nashilnik**](https://github.com/nashilnik)_
+* The `Configure()` method of user controls now has a `lowQualityAlways` argument to let the user easily enable/disable anti-aliasing at the control level. Previously this was only configurable by reaching into the control's plot object and calling its `AntiAlias()` method. (#499) _Thanks [**@RachamimYaakobov**](https://github.com/RachamimYaakobov)_
+* SignalXY now supports parallel processing (#500) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* SignalXY now respects index-based render limits (#493, #500) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@envine**](https://github.com/envine)_
+
+## ScottPlot 4.0.38
+* Improved `Plot.PlotFillAboveBelow()` rendering of data with a non-zero baseline (#477) _Thanks [**@el-aasi**](https://github.com/el-aasi)_
+* Added `Plot.PlotWaterfall()` for easy creation of waterfall-style bar plots (#463, #476) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Axis tick labels can be displayed using notations other than base 10 by supplying `Plot.Ticks()` with `base` and `prefix` arguments, allowing axes that display binary (e.g., `0b100110`) or hexadecimal (eg., `0x4B0D10`) tick labels (#469, #457) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Added options to `PlotBar()` to facilitate customization of text displayed above bars when `showValue` is enabled (#483) _Thanks [**@WillemWever**](https://github.com/WillemWever)_
+* Plot objects are colored based on a pre-defined set of colors. The default colorset (category10) is the same palette of colors used by matplotlib. A new `Colorset` module has been created to better define this behavior, and `Plot.Colorset()` makes it easy to plot data using alternative colorsets. (#481)
+* Fixed a bug that caused instability when a population plot is zoomed-out so much that its fractional distribution curve is smaller than a single pixel (#480) _Thanks [**@HowardWhile**](https://github.com/HowardWhile)_
+* Added `Plot.Remove()` method to make it easier to specifically remove an individual plottable after it has been plotted. `Plot.Clear()` is similar, but designed to remove classes of plot types rather than a specific plot object. (#479) _Thanks @cstyx and [**@Resonanz**](https://github.com/Resonanz)_
+* Signal plots can now be created with a defined `minRenderIndex` (in addition to the already-supported `maxRenderIndex`) to facilitate partial display of large arrays (#474) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.0.37
+* Fixed a long-running issue related to strong assembly versioning that caused the WPF control to fail to render in the Visual Studio designer in .NET Framework (but not .NET Core) projects (#473, #466, #356) _Thanks [**@bhairav-thakkar**](https://github.com/bhairav-thakkar), [**@riquich**](https://github.com/riquich), [**@Helitune-RobMcKay**](https://github.com/Helitune-RobMcKay), and [**@iu2kxv**](https://github.com/iu2kxv)_
+* User controls now also target `net472` (while still supporting `net461` and `netcoreapp3.0`) to produce a build folder with just 3 DLLs (compared to over 100 when building with .NET Framework 4.6.1)
+
+## ScottPlot 4.0.36
+* `PlotSignal()` and `PlotSignalXY()` plots now have an optional `useParallel` argument (and public property on the objects they return) to allow the user to decide whether parallel or sequential calculations will be performed. (#454, #419, #245, #72) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved minor tick alignment to prevent rare single-pixel artifacts (#417)
+* Improved horizontal axis tick label positions in ruler mode (#453)
+* Added a `Statistics.Interpolation` module to generate smooth interpolated splines from a small number of input data points. See advanced statistics cookbook example for usage information. (#459) _Thanks Hans-Peter Moser_
+* Improved automatic axis adjustment when adding bar plots with negative values (#461, #462) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Created `Drawing.Colormaps` module which has over a dozen colormaps for easily converting a fractional value to a color for use in plotting or heatmap displays (#457, #458) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Updated `Plot.Clear()` to accept any `Plottable` as an argument, and all `Plottable` objects of the same type will be cleared (#464) _Thanks [**@imka-code**](https://github.com/imka-code)_
+
+## ScottPlot 4.0.35
+* Added `processEvents` argument to `formsPlot2.Render()` to provide a performance enhancement when linking axes of two `FormsPlot` controls together (by calling `Plot.MatchAxis()` from the control's `AxesChanged` event, as seen in the _Linked Axes_ demo application) (#451, #452) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@robokamran**](https://github.com/robokamran)_
+* New `Plot.PlotVectorField()` method for displaying vector fields (sometimes called quiver plots) (#438, #439, #440) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@hhubschle**](https://github.com/hhubschle)_
+* Included an experimental colormap module which is likely to evolve over subsequent releases (#420, #424, #442) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* `PlotScatterHighlight()` was created as a type of scatter plot designed specifically for applications where "show value on hover" functionality is desired. Examples are both in the cookbook and WinForms and WPF demo applications. (#415, #414) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@StendProg**](https://github.com/StendProg)_
+* `PlotRadar()` is a new plot type for creating Radar plots (also called spider plots or star plots). See cookbook and demo application for examples. (#428, #430) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* `PlotPlolygons()` is a new performance-optimized variant of `PlotPolygon()` designed for displaying large numbers of complex shapes (#426) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* The WinForms control's `Configure()` now has a `showCoordinatesTooltip` argument to continuously display the position at the tip of the cursor as a tooltip (#410) _Thanks [**@jcbeppler**](https://github.com/jcbeppler)_
+* User controls now use SHIFT (previously ALT) to lock the horizontal axis and ALT (previously SHIFT) while left-click-dragging for zoom-to-region. Holding CTRL+SHIFT while right-click-dragging now zooms evenly, without X/Y distortion. (#436) _Thanks @tomwimmenhove and [**@StendProg**](https://github.com/StendProg)_
+* Parallel processing is now enabled by default. Performance improvements will be most noticeable on Signal plots. (#419, #245, #72)
+* `Plot.PlotBar()` now has an `autoAxis` argument (which defaults `true`) that automatically adjusts the axis limits so the base of the bar graphs touch the edge of the plot area. (#406)
+* OSX-specific DLLs are now only retrieved by NuGet on OSX (#433, #211, #212)
+* Pie charts can now be made with `plt.PlotPie()`. See cookbook and demo application for examples. (#421, #423) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* `ScottPlot.FormsPlotViewer(Plot)` no longer resets the new window's plot to the default style (#416)  _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Controls now have a `recalculateLayoutOnMouseUp` option to prevent resetting of manually-defined data area padding
+
+## ScottPlot 4.0.34
+* Improve display of `PlotSignalXY()` by not rendering markers when zoomed very far out (#402) _Thanks [**@gobikulandaisamy**](https://github.com/gobikulandaisamy)_
+* Optimized rendering of solid lines which have a user-definable `LineStyle` property. This modification improves grid line rendering and increases performance for most types of plots. (#401, #327) _Thanks [**@bukkideme**](https://github.com/bukkideme) and [**@citizen3942**](https://github.com/citizen3942)_
+
+## ScottPlot 4.0.33
+* Force grid lines to always draw using anti-aliasing. This compensates for a bug in `System.Drawing` that may cause diagonal line artifacts to appear when the user controls were panned or zoomed. (#401, #327) _Thanks [**@bukkideme**](https://github.com/bukkideme) and [**@citizen3942**](https://github.com/citizen3942)_
+
+## ScottPlot 4.0.32
+* User controls now have a `GetMouseCoordinates()` method which returns the DPI-aware position of the mouse in graph coordinates (#379, #380) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Default grid color was lightened in the user controls to match the default style (#372)
+* New `PlotSignalXY()` method for high-speed rendering of signal data that has unevenly-spaced X coordinates (#374, #375) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@LogDogg**](https://github.com/LogDogg)_
+* Modify `Tools.Log10()` to return `0` instead of `NaN`, improving automatic axis limit detection (#376, #377) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* WpfPlotViewer and FormsPlotViewer launch in center of parent window (#378)
+* Improve reliability of `Plot.AxisAutoX()` and `Plot.AxisAutoY()` (#382)
+* The `Configure()` method of FormsPlot and WpfPlot controls now have `middleClickMarginX` and `middleClickMarginY` arguments which define horizontal and vertical auto-axis margin used for middle-clicking. Setting horizontal margin to 0 is typical when plotting signals. (#383)
+* `Plot.Grid()` and `Plot.Ticks()` now have a `snapToNearestPixel` argument which controls whether these lines appear anti-aliased or not. For static images non-anti-aliased grid lines and tick marks look best, but for continuously-panning plots anti-aliased lines look better. The default behavior is to enable snapping to the nearest pixel, consistent with previous releases. (#384)
+* Mouse events (MouseDown, MouseMove, etc.) are now properly forwarded to the FormsPlot control (#390) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* Improved rendering of very small candlesticks and OHLCs in financial plots
+* Labeled plottables now display their label in the ToString() output. This is useful when viewing plottables listed in the FormsPlot settings window #391 _Thanks [**@Minu476**](https://github.com/Minu476)_
+* Added a Statistics.Finance module with methods for creating Simple Moving Average (SMA) and Bollinger band technical indicators to Candlestick and OHLC charts. Examples are in the cookbook and demo program. (#397) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* Scatter plots, filled plots, and polygon plots now support Xs and Ys which contain `double.NaN` #396
+* Added support for line styles to Signal plots (#392) _Thanks [**@bukkideme**](https://github.com/bukkideme)_
+
+## ScottPlot 4.0.31
+* Created `Plot.PlotBarGroups()` for easier construction of grouped bar plots from 2D data (#367) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Plot.PlotScaleBar() adds an L-shaped scalebar to the corner of the plot (#363)
+* Default grid color lightened from #D3D3D3 (Color.LightGray) to #EFEFEF (#372)
+* Improved error reporting for scatter plots (#369) _Thanks [**@JagDTalcyon**](https://github.com/JagDTalcyon)_
+* Improve pixel alignment by hiding grid lines and snapping tick marks that are 1px away from the lower left edge (#359)
+* PlotText() ignores defaults to upperLeft alignment when rotation is used (#362)
+* Improved minor tick positioning to prevent cases where minor ticks are 1px away from major ticks (#373)
+
+## ScottPlot 4.0.30
+* `Plot.PlotCandlestick()` and `Plot.PlotOHLC()`
+  * now support `OHLC` objects with variable widths defined with a new `timeSpan` argument in the OHLC constructor. (#346) _Thanks [**@Minu476**](https://github.com/Minu476)_
+  * now support custom up/down colors including those with transparency (#346) _Thanks [**@Minu476**](https://github.com/Minu476)_
+  * have a new `sequential` argument to plot data based on array index rather than `OHLC.time`. This is a new, simpler way to display unevenly-spaced data (e.g., gaps over weekends) in a way that makes the gaps invisible. (#346) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* Fixed a marker/line alignment issue that only affeced low-density Signal plots on Linux and MacOS (#340) _Thanks [**@SeisChr**](https://github.com/SeisChr)_
+* WPF control now appears in Toolbox (#151) _Thanks [**@RalphLAtGitHub**](https://github.com/RalphLAtGitHub)_
+* Plot titles are now center-aligned with the data area, not the figure. This improves the look of small plots with titles. (#365) _Thanks [**@Resonanz**](https://github.com/Resonanz)_
+* Fixed bug that ignored `Configure(enableRightClickMenu: false)` in WPF and WinForms user controls. (#365) _Thanks [**@thunderstatic**](https://github.com/thunderstatic)_
+* Updated `Configure(enableScrollWheelZoom: false)` to disable middle-click-drag zooming. (#365) _Thanks [**@eduhza**](https://github.com/eduhza)_
+* Added color mixing methods to ScottPlot.Drawing.GDI (#361)
+* Middle-click-drag zooming now respects locked axes (#353) _Thanks [**@LogDogg**](https://github.com/LogDogg)_
+* Improved user control zooming of high-precision DateTime axis data (#351) _Thanks [**@bukkideme**](https://github.com/bukkideme)_
+* Plot.AxisBounds() now lets user set absolute bounds for drag and pan operations (#349) _Thanks [**@LogDogg**](https://github.com/LogDogg)_
+* WPF control uses improved Bitmap conversion method (#350)
+* Function plots have improved handling of functions with infinite values (#370) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+
+## ScottPlot 4.0.29
+* `Plot.PlotFill()` can be used to make scatter plots with shaded regions. Giving it a single pair of X/Y values (`xs, ys`) lets you shade beneath the curve to the `baseline` value (which defaults to 0). You can also give it a pair of X/Y values (`xs1, ys1, xs2, ys2`) and the area between the two curves will be shaded (the two curves do not need to be the same length). See cookbook for examples. (#255) _Thanks [**@ckovamees**](https://github.com/ckovamees)_ 
+* `DataGen.Range()` now has `includeStop` argument to include the last value in the returned array.
+* `Tools.Pad()` has been created to return a copy of a given array padded with data values on each side. (#255) _Thanks [**@ckovamees**](https://github.com/ckovamees)_
+* [Seaborn](https://seaborn.pydata.org/) style can be activated using `Plot.Style(Style.Seaborn)` (#339)
+* The `enableZooming` argument in `WpfPlot.Configure()` and `FormsPlot.Configure()` has been replaced by two arguments `enableRightClickZoom` and `enableScrollWheelZoom` (#338) _Thanks Zach_
+* Improved rendering of legend items for polygons and filled plots (#341) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+* Improved Linux rendering of legend items which use thick lines: axis spans, fills, polygons, etc. (#340) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+* Addded `Plot.PlotFillAboveBelow()` to create a shaded line plot with different colors above/below the baseline. (#255) _Thanks [**@ckovamees**](https://github.com/ckovamees)_
+* Improved rendering in Linux and MacOS by refactoring the font measurement system (#340) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+
+## ScottPlot 4.0.28
+* `Ticks()` now has arguments for numericStringFormat (X and Y) to make it easy to customize formatting of tick labels (percentage, currency, scientific notation, etc.) using standard [numeric format strings](https://docs.microsoft.com/en-us/dotnet/standard/base-types/standard-numeric-format-strings). Example use is demonstrated in the cookbook. (#336) _Thanks [**@deiruch**](https://github.com/deiruch)_
+* The right-click menu can now be more easily customized by writing a custom menu to `FormsPlot.ContextMenuStrip` or `WpfPlot.ContextMenu`. Demonstrations of both are in the demo application. (#337) _Thanks [**@Antracik**](https://github.com/Antracik)_
+
+## ScottPlot 4.0.27
+* `Plot.Polygon()` can now be used to plot polygons from X/Y points (#255) _Thanks [**@ckovamees**](https://github.com/ckovamees)_
+* User controls now have an "open in new window" item in their right-click menu (#280)
+* Plots now have offset notation and multiplier notation disabled by default. Layouts are automatically calculated before the first render, or manually after MouseUp events in the user controls. (#310)
+* `Plot.Annotation()` allows for the placement of text on the figure using pixel coordinates (not unit coordinates on the data grid). This is useful for creating custom static labels or information messages. (#321) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+* `FormsPlot.MouseDoubleClicked` event now passes a proper `MouseEventArgs` instead of `null` (#331) _Thanks [**@ismdiego**](https://github.com/ismdiego)_
+* Added a right-click menu to `WpfPlot` with items (save image, copy image, open in new window, help, etc.) similar to `FormsPlot`
+
+## ScottPlot 4.0.26
+* The `ScottPlot.WPF` package (which provides the `WpfPlot` user control) now targets .NET Framework 4.7.2 (in addition to .NET Core 3.0), allowing it to be used in applications which target either platform. The ScottPlot demo application now targets .NET Framework 4.7.2 which should be easier to run on most Windows systems. (#333)
+* The `ScottPlot.WinForms` package (which produves the `FormsPlot` control) now only targets .NET Framework 4.6.1 and .NET Core 3.0 platforms (previously it also had build targets for .NET Framework 4.7.2 and .NET Framework 4.8). It is important to note that no functionality was lost here. (#330, #333)
+
+## ScottPlot 4.0.25
+* `PlotBar()` now supports displaying values above each bar graph by setting the `showValues` argument.
+* `PlotPopulations()` has extensive capabilities for plotting grouped population data using box plots, bar plots, box and whisper plots, scatter data with distribution curves, and more! See the cookbook for details. (#315)
+* `Histogram` objects now have a `population` property.
+* `PopulationStats` has been renamed to `Population` and has additional properties and methods useful for reporting population statistics.
+* Improved grid rendering rare artifacts which appear as unwanted diagnal lines when anti-aliasing is disabled. (#327)
+
+## ScottPlot 4.0.24
+* `Plot.Clear()` has been improved to more effectively clear plottable objects. Various overloads are provided to selectively clear or preserve certain plot types. (#275) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* `PlotBar()` has been lightly refactored. Argument order has been adjusted, and additional options have been added. Error cap width is now in fractional units instead of pixel units. Horizontal bar charts are now supported. (#277, #315) _Thanks [**@bonzaiferroni**](https://github.com/bonzaiferroni)_
+
+## ScottPlot 4.0.23
+* Interactive plot viewers were created to make it easy to interactively display data in a pop-up window without having to write any GUI code. Examples have been added to the ScottPlot Demo application.
+  * `ScottPlot.WpfPlotViewer(plt)` for WPF
+  * `ScottPlot.FormsPlotViewer(plt)` for Windows Forms
+  * These can even be called from console applications
+* Fixed bug that affected the `ySpacing` argument of `Plot.Grid()`
+* `Plot.Add()` makes it easy to add a custom `Plottable` to the plot
+* `Plot.XLabels()` and `Plot.YLabels()` can now accept just a string array (x values are auto-populated as a consecutive series of numbers).
+* Aliased `Plot.AxisAuto()` to `Plot.AutoAxis()` and `Plot.AutoScale()` to make this function easier to locate for users who may have experience with other plot libraries. (#309) _Thanks [**@Resonanz**](https://github.com/Resonanz)_
+* Empty plots now render grid lines, ticks, and tick labels (#313)
+* New plot type: Error bars. They allow the user to define error bar size in all 4 directions by calling `plt.PlotErrorBars()`. (#316) _Thanks [**@zrolfs**](https://github.com/zrolfs)_
+* Improve how dashed lines appear in the legend
+* Improved minor tick positions when using log scales with `logScaleX` and `logScaleY` arguments of `plt.Ticks()` method
+* Fixed bug that caused the center of the coordinate field to shift when calling `Plot.AxisZoom()`
+* Grid line thickness and style (dashed, dotted, etc) can be customized with new arguments in the `Plot.Grid()` method
+
+## ScottPlot 4.0.22
+* Added support for custom horizontal axis tick rotation (#300) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+* Added support for fixed grid spacing when using DateTime axes (#299) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+* Updated ScottPlot icon (removed small text, styled icon after emoji)
+* Improved legend font size when using display scaling (#289)
+* Scroll wheel zooming now zooms to cursor (instead of center) in WPF control. This feature works now even if display scaling is used. (#281)
+* Added `Plot.EqualAxis` property to make it easy to lock axis scales together (#306) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.21
+
+### Misc
+* Created new cookbook and demo applications for WinForms and WPF (#271)
+* The `FormsPlot.MouseMoved` event now has `MouseEventArgs` (instead of `EventArgs`). The purpose of this was to make it easy to access mouse pixel coordinates via `e.X` and `e.Y`, but this change may require modifications to applications which use the old event signature.
+* WpfPlot now has an `AxisChanged` event (like FormsPlot)
+* Fixed bug that caused `Plot.CoordinateFromPixelY()` to return incorrect value
+* Fixed bug causing cursor to show arrows when hovered over some non-draggable objects
+* Improved support for WinForms and WpfPlot transparency (#286) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@envine**](https://github.com/envine)_
+* Added `DataGen.Zeros()` and `DataGen.Ones()` to generate arrays filled with values using methods familiar to numpy users.
+* Added `equalAxes` argument to `WpfPlot.Configure()` (#272)
+* Fixed a bug affecting the `equalAxes` argument in `FormsPlot.Configure()` (#272)
+* Made all `Plot.Axis` methods return axis limits as `double[]` (previously many of them returned `void`)
+* Added overload for `Plot.PlotLine()` which accepts a slope, offset, and start and end X points to make it easy to plot a linear line with known formula. Using PlotFormula() will produce the same output, but this may be simpler to use for straight lines.
+* Added `rSquared` property to linear regression fits (#290) _Thanks [**@bclehmann**](https://github.com/bclehmann) and [**@StendProg**](https://github.com/StendProg)_
+* Added `Tools.ConvertPolarCoordinates()` to make it easier to display polar data on ScottPlot's Cartesian axes (#298) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Improved `Plot.Function()` (#243) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Added overload for `Plot.SetCulture()` to let the user define number and date formatting rather than relying on pre-made cultures (#301, #236) _Thanks [**@SeidChr**](https://github.com/SeidChr)_
+
+## ScottPlot 4.0.19
+
+#### Plottable and Rendering Changes
+* Improved how markers are drawn in Signal and SignalConst plots at the transition area between zoomed out and zoomed in (#263) _Thanks [**@bukkideme**](https://github.com/bukkideme) and [**@StendProg**](https://github.com/StendProg)_
+* Improved support for zero lineSize and markerSize in Signal and SignalConst plots (#263, #264) _Thanks [**@bukkideme**](https://github.com/bukkideme) and [**@StendProg**](https://github.com/StendProg)_
+* Improved thread safety of interactive graphs (#245) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+#### Changes to `ScottPlot.Plot` Module
+* added `CoordinateFromPixelX()` and `CoordinateFromPixelY()` to get _double precision_ coordinates from a pixel location. Previously only SizeF (float) precision was available. This improvement is especially useful when using DateTime axes. (#269) _Thanks Chris_
+* added `AxisScale()` to adjust axis limits to set a defined scale (units per pixel) for each axis.
+* added `AxisEqual()` to adjust axis limits to set the scale of both axes to be the same regardless of the size of each axis. (#272) _Thanks [**@gberrante**](https://github.com/gberrante)_
+* `PlotHSpan()` and `PlotVSpan()` now return `PlottableHSpan` and `PlottableVSpan` objects (instead of a `PlottableAxSpan` with a `vertical` property)
+* `PlotHLine()` and `PlotVLine()` now return `PlottableHLine` and `PlottableVLine` objects (instead of a `PlottableAxLine` with a `vertical` property)
+
+#### Miscellaneous
+* MultiPlot now has a `GetSubplot()` method which returns the Plot from a row and column index (#242). See cookbook for details. _Thanks [**@Resonanz**](https://github.com/Resonanz) and [**@StendProg**](https://github.com/StendProg)_
+* Created `DataGen.Range()` to make it easy to create double arrays with evenly spaced data (#259)
+* Improved support for display scaling (#273) _Thanks [**@zrolfs**](https://github.com/zrolfs)_
+* Improved event handling (#266, #238) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved legend positioning (#253) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.18
+* Added `Plot.SetCulture()` for improved local culture formatting of numerical and DateTime axis tick labels (#236) _Thanks [**@teejay-87**](https://github.com/teejay-87)_
+
+## ScottPlot 4.0.17
+* Added `mouseCoordinates` property to WinForms and WPF controls (#235) _Thanks [**@bukkideme**](https://github.com/bukkideme)_
+* Fixed rendering bug that affected horizontal lines when anti-aliasing was turned off (#232) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Improved responsiveness while dragging axis lines and axis spans (#228) _Thanks [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.16
+* Improved support for MacOS and Linux (#211, #212, #216) _Thanks [**@Hexxonite**](https://github.com/Hexxonite) and [**@StendProg**](https://github.com/StendProg)_
+* Fixed a few display bugs
+  * Fixed a bug affecting the `ySpacing` argument in `Plot.Grid()` (#221) _@Thanks teejay-87_
+  * Enabled `visible` argument in `Title()`, `XLabel()`, and `YLabel()` (#222) _Thanks [**@ckovamees**](https://github.com/ckovamees)_
+* AxisSpan improvements
+  * Edges are now optionally draggable (#228) _Thanks [**@StendProg**](https://github.com/StendProg)_
+  * Can now be selectively removed with `Clear()` argument
+  * Fixed bug caused by zooming far into an axis span (#226) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* WinForms Control
+  * WinForms control now supports draggable axis lines and axis spans
+  * Right-click menu now has "copy image" option (#220)
+  * Settings screen now has "copy CSV" button to export data (#220)
+* WPF Control
+  * WPF control now supports draggable axis lines and axis spans
+  * new WpfPlot.Configure() to set various WPF control options
+* Misc improvements
+  * Improved axis handling, expansion, and auto-axis (#219, #230) _Thanks [**@StendProg**](https://github.com/StendProg)_
+  * Added more options to `DataGen.Cos()`
+  * Tick labels can be hidden with `Ticks()` argument (#223) _Thanks [**@ckovamees**](https://github.com/ckovamees)_
+
+## ScottPlot 4.0.14
+* Improved `MatchAxis()` and `MatchLayout()` (#217) _Thanks [**@ckovamees**](https://github.com/ckovamees) and [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.13
+* Improved support for Linux and MacOS _Thanks [**@Hexxonite**](https://github.com/Hexxonite)_
+* Improved font validation (#211, #212) _Thanks [**@Hexxonite**](https://github.com/Hexxonite) and [**@StendProg**](https://github.com/StendProg)_
+
+## ScottPlot 4.0.11
+* User controls now have a `cursor` property which can be set to allow custom cursors. (#187) _Thanks [**@gobikulandaisamy**](https://github.com/gobikulandaisamy)_
+* User controls now have a `mouseCoordinates` property which make it easy to get the X/Y location of the cursor. (#187) _Thanks [**@gobikulandaisamy**](https://github.com/gobikulandaisamy)_
+
+## ScottPlot 4.0.10
+* Improved density colormap (#192, #194) _Thanks [**@StendProg**](https://github.com/StendProg)_
+* Added linear regression tools and cookbook example (#198) _Thanks [**@bclehmann**](https://github.com/bclehmann)_
+* Added `maxRenderIndex` to Signal to allow partial plotting of large arrays intended to be used with live, incoming data (#202) _Thanks [**@StendProg**](https://github.com/StendProg) and [**@plumforest**](https://github.com/plumforest)_
+* Made _Shift + Left-click-drag_ zoom into a rectangle light middle-click-drag (in WinForms and WPF controls) to add support for mice with no middle button (#90) _Thanks [**@JagDTalcyon**](https://github.com/JagDTalcyon)_
+* Throw an exception if `SaveFig()` is called before the image is properly sized (#192) _Thanks @karimshams and [**@StendProg**](https://github.com/StendProg)_
+* Ticks() now has arguments for `FontName` and `FontSize` (#204) _Thanks Clay_
+* Fixed a bug that caused poor layout due to incorrect title label size estimation (#205) _Thanks Clay_
+* Grid() now has arguments to selectively enable/disable horizontal and vertical grid lines (#206) _Thanks Clay_
+* Added tool and cookbook example to make it easier to plot data on a log axis (#207) _Thanks [**@senged**](https://github.com/senged)_
+* Arrows can be plotted using `plt.PlotArrow()` (#201) _Thanks Clay_
+
+## ScottPlot 4.0.9
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-12-03_
+
+* Use local regional display settings when formatting the month tick of DateTime axes (#108) _Thanks [**@FadyDev2**](https://github.com/FadyDev2)_
+* Debug symbols are now deployed NuGet
+
+## ScottPlot 4.0.7
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-12-01_\
+This release updated the ScottPlot.WinForms package only.
+
+* Added WinForms support for .NET Framework 4.7.2 and 4.8
+* Fixed bug in WinForms control that only affected .NET Core 3.0 applications (#189 and #138) _Thanks [**@petarpetrovt**](https://github.com/petarpetrovt)_
+
+## ScottPlot 4.0.6
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-29_\
+This release updated the ScottPlot.WinForms package only.
+
+* fixed bug that affected the settings dialog window in the WinForms control (#187) _Thanks [**@gobikulandaisamy**](https://github.com/gobikulandaisamy)_
+
+## ScottPlot 4.0.5
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-27_
+
+#### Minor Changes
+* improved spacing for non-uniformly distributed OHLC and candlestick plots (#184) _Thanks [**@satyat110**](https://github.com/satyat110)_
+* added `fixedLineWidth` to Legend() to allow the user to control whether legend lines are dynamically sized (#185) _Thanks [**@ab-tools**](https://github.com/ab-tools)_
+* legend now hides lines or markers of they're hidden in the plottable
+* DateTime axes now use local display format (#108) _Thanks [**@FadyDev2**](https://github.com/FadyDev2)_
+
+## ScottPlot 4.0.4
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-24_
+
+* PlotText() now supports a background frame (#181) _Thanks [**@satyat110**](https://github.com/satyat110)_
+* OHLC objects can be created with a double or a DateTime (#182) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* Improved AxisAuto() fixes bug for mixed 2d and axis line plots
+
+## ScottPlot 4.0.3
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-23_
+
+* fixed bug when plotting single-point candlestick (#172) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* improved style editing of plotted objects (#173) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* fixed pan/zoom axis lock when holding CTRL or ALT (#90) _Thanks [**@FadyDev2**](https://github.com/FadyDev2)_
+* simplified the look of the user controls in designer mode
+* improved WPF control mouse tracking when using DPI scaling
+* added support for manual tick positions and labels (#174) _Thanks [**@Minu476**](https://github.com/Minu476)_
+* improved tick system when using DateTime units (#108) _Thanks [**@Padanian**](https://github.com/Padanian), [**@FadyDev2**](https://github.com/FadyDev2), and [**@Bhandejiya**](https://github.com/Bhandejiya)_
+* created `Tools.DateTimesToDoubles(DateTime[] array)` to easily convert an array of dates to doubles which can be plotted with ScottPlot, then displayed as time using `plt.Ticks(dateTimeX: true)`.
+* added an inverted sign flag (#177) to allow display of an axis with descending units _Thanks Bart_
+
+## ScottPlot 4.0.2
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-09_
+
+* **Multi-plot figures:** Images with several plots can be created using `ScottPlot.MultiPlot()` as seen in the [Multiplot example](https://github.com/swharden/ScottPlot/tree/master/cookbook#multiplot) in the cookbook
+* `ScottPlot.DataGen` functions which require a `Random` can accept null (they will create a `Random` if null is given)
+* `plt.MatchAxis()` and `plt.MatchLayout()` have been improved
+* `plt.PlotText()` now supports rotated text using the `rotation` argument (#160). See the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#plotting-text). _Thanks [**@gwilson9**](https://github.com/gwilson9)_
+* `ScottPlot.WinForms` user control has new events and `formsPlot1.Configure()` arguments to make it easy to replace the default functionality for double-clicking and deploying the right-click menu (#166). _Thanks [**@FadyDev2**](https://github.com/FadyDev2)_
+* All plottables now have a `visible` property which makes it easy to toggle visibility on/off after they've been plotted. See the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#set-visibility). _Thanks Nasser_
+
+## ScottPlot 4.0.1
+_Published on [NuGet](https://www.nuget.org/packages?q=scottplot) on 2019-11-03_
+
+#### Major Changes
+* **ScottPlot now targets .NET Standard 2.0** so in addition to .NET Framework projects it can now be used in .NET Core applications, ASP projects, Xamarin apps, etc.
+* **The WinForms control has its own package** ([ScottPlot.WinForms](https://www.nuget.org/packages/ScottPlot.WinForms/)) which targets both .NET Framework 4.6.1 and  .NET Core 3.0. Thanks for your early efforts on this [**@petarpetrovt**](https://github.com/petarpetrovt)
+* **The WPF control has its own package** ([ScottPlot.WPF](https://www.nuget.org/packages/ScottPlot.WPF/)) targeting .NET Core 3.0.
+
+#### Minor Changes
+* better layout system and control of padding (Thanks [**@citizen3942**](https://github.com/citizen3942))
+* added ruler mode to `plt.Ticks()` (Thanks [**@citizen3942**](https://github.com/citizen3942))
+* `plt.MatchLayout()` no longer throws exceptions
+* eliminated `MouseTracker` class (tracking is now in user controls)
+* Use NUnit (not MSTest) for tests
+
+## ScottPlot 3.1.6
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-10-20_
+
+#### Minor Changes
+* reduced designer mode checks to increase render speed (Thanks [**@StendProg**](https://github.com/StendProg))
+* fixed cursor bug that occurred when draggable axis lines were used (Thanks Kamran)
+* fully deleted the outdated `ScottPlotUC`
+* fixed infinite zoom bug caused by calling AxisAuto() when plotting a single point (or perfectly straight horizontal or vertical line)
+* added `ToolboxItem` and `DesignTimeVisible` delegates to WpfPlot control to try to get it to appear in the toolbox (but it doesn't seem to be working)
+* improved figure padding when axes frames are disabled (Thanks [**@citizen3942**](https://github.com/citizen3942))
+* improved rendering of ticks at the edge of the plottable area (Thanks [**@citizen3942**](https://github.com/citizen3942))
+* added `AxesChanged` event to user control to make it easier to sync axes between multiple plots (see linked plots demo)
+* disabled drawing of arrows on user control in designer mode
+
+## ScottPlot 3.1.5
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-10-06_
+
+#### Minor Changes
+* WPF user control improved support for display scaling (Thanks [**@morningkyle**](https://github.com/morningkyle))
+* Fixed bug that crashed on extreme zoom-outs (Thanks [**@morningkyle**](https://github.com/morningkyle))
+* WPF user control improvements (middle-click autoaxis, scrollwheel zoom)
+* ScottPlot user control has a new look in designer mode. Exceptions in user controls in designer mode can crash Visual Studio, so this risk is greatly reduced by not attempting to render a ScottPlot _inside_ Visual Studio.
+
+## ScottPlot 3.1.4
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-09-22_
+
+#### Major Changes
+* middle-click-drag zooms into a rectangle drawn with the mouse
+
+#### Minor Changes
+* fixed bug that caused user control to crash Visual Studio on some systems that used DPI scaling (#125, #111). _Thanks [**@ab-tools**](https://github.com/ab-tools) and [**@bukkideme**](https://github.com/bukkideme) for your work on this._
+* fixed poor rendering for extremely small plots
+* fixed bug when making a scatter plot with a single point (#126). _Thanks [**@bonzaiferroni**](https://github.com/bonzaiferroni) for your work on this._
+* added more options to right-click settings menu (grid options, legend options, axis labels, editable plot labels, etc.)
+* improved axis padding and image tightening
+* greatly refactored the settings module (no change in functionality)
+
+## ScottPlot 3.1.3
+
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-08-25_
+
+#### Minor Changes
+* FormsPlot improvements
+  * middle-click-drag zooms into a rectangle
+  * CTRL+scroll to lock vertical axis
+  * ALT+scroll to loch horizontal axis
+  * Improved (and overridable) right-click menu
+* Added additional options to `plt.Ticks()`
+  * rudimentary support for date tick labels (`dateTimeX` and `dateTimeY`)
+  * options to customize notation (`useExponentialNotation`, `useOffsetNotation`, and `useMultiplierNotation`)
+
+## ScottPlot 3.1.0
+
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-08-19_
+
+#### Major Changes
+* User controls were renamed
+  * `ScottPlotUC` was renamed to `FormsPlot`
+  * `ScottPlotWPF` was renamed to `WpfPlot`
+* The right-click menu has improved. It responds faster and has improved controls to adjust plot settings.
+* Plots can now be saved in BMP, PNG, JPG, and TIF format
+* Holding `CTRL` while click-dragging locks the horizontal axis
+* Holding `ALT` while click-dragging locks the vertical axis
+* Minor ticks are now displayed (and can be turned on or off with `Ticks()`)
+* Legend can be accessed for external display with `GetLegendBitmap()`
+
+#### Minor Changes
+* anti-aliasing is turned off while click-dragging to increase responsiveness (#93, [**@StendProg**](https://github.com/StendProg))
+* PlotSignalConst has several improvements ([**@StendProg**](https://github.com/StendProg))
+  * It can can now accept a generic inputs
+  * A demo has been added demonstrating highspeed interactive plotting of _one billion_ data points.
+  * It is now slightly faster by default
+  * It can use single-precision floating point calculations to further enhance performance
+* Legend draws more reliably (#104, #106, [**@StendProg**](https://github.com/StendProg))
+* `AxisAuto()` now has `expandOnly` arguments
+* Axis lines with custom lineStyles display properly in the legend
+
+## ScottPlot 3.0.9
+
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-08-12_
+
+#### Major Changes
+* **WPF User Control**: See [demos#wpf-application](https://github.com/swharden/ScottPlot/tree/master/demos#wpf-application) for a quickstart demo.
+* **New Plot Type: `PlotSignalConst()`** for extremely large arrays of data which are not expected to change after being plotted. Plots generated with this method can be much faster than PlotSignal(). See [cookbook#signalconst](https://github.com/swharden/ScottPlot/tree/master/cookbook#signalconst) for example usage. _Special thanks to [**@StendProg**](https://github.com/StendProg) for work on this feature._
+* **Greatly improved axis tick labels.** Axis tick labels are now less likely to overlap with axis labels, and it displays very large and very small numbers well using exponential notation. For an example see [cookbook#axis-exponent-and-offset](https://github.com/swharden/ScottPlot/tree/master/cookbook#axis-exponent-and-offset). _Special thanks to [**@Padanian**](https://github.com/Padanian) for work on this feature._
+* **Parallel processing support for PlotSignal()**. When parallel processing is enabled PlotSignal() can now use it to render graphs faster. For details see [cookbook#signal-with-parallel-processing](https://github.com/swharden/ScottPlot/tree/master/cookbook#signal-with-parallel-processing). _Special thanks to [**@StendProg**](https://github.com/StendProg) for work on this feature._
+* **Every `Plot` function now returns a `Plottable`.** When creating things like scatter plots, text, and axis lines, the returned object can now be used to update the data, position, styling, or call plot-type-specific methods. For an example see [cookbook#modify-styles-after-plotting](https://github.com/swharden/ScottPlot/tree/master/cookbook#modify-styles-after-plotting).
+
+#### Minor Changes
+* right-click menu now displays ScottPlot and .NET Framework version
+* improved rendering of extremely zoomed-out signals 
+* rendering speed increased now that Format32bppPArgb is the default PixelFormat (thanks [**@StendProg**](https://github.com/StendProg))
+* DataGen.NoisySin() was added
+* Code was tested in .NET Core 3.0 preview and compiled without error. Therefore, the next release will likely be for .NET Core 3.0 (Thanks [**@petarpetrovt**](https://github.com/petarpetrovt))
+* User controls now render graphs with anti-alias mode off (faster) while the mouse is being dragged. Upon release a high quality render is performed.
+
+## ScottPlot 3.0.8
+
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-08-04_
+
+#### Major Changes
+* **WPF User Control:** A ScottPlotWPF user control was created to allow provide a simple mouse-interactive ScottPlot control to WPF applications. It is not as full-featured as the winforms control (it lacks a right-click menu and click-and-drag functions), but it is simple to review the code (<100 lines of [.xaml](https://github.com/swharden/ScottPlot/blob/master/src/ScottPlot/ScottPlotWPF.xaml) and [.xaml.cs](https://github.com/swharden/ScottPlot/blob/master/src/ScottPlot/ScottPlotWPF.xaml.cs)) and easy to use. See the [WPF Application Quickstart](https://github.com/swharden/ScottPlot/tree/master/demos#wpf-application) guide for details.
+* **New plot type `plt.AxisSpan()`:** [demonstrated in the cookbook](https://github.com/swharden/ScottPlot/tree/master/cookbook#axis-spans) - shades a region of the graph (semi-transparency is supported).
+
+#### Minor Changes
+* **improved tick marks**
+  * Vertical ticks no longer overlap with vertical axis label (#47)
+  * When axis tick labels contain very large or very small numbers, scientific notation mode is engaged (see [cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#very-large-numbers)).
+  * Horizontal tick mark spacing increased to prevent overlapping
+  * Vertical tick mark spacing increased to be consistent with horizontal tick spacing
+* **CSV data export**
+  * Plottable objects now have a `SaveCSV(filename)` method. See the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#save-scatter-data).
+  * Scatter and Signal plot data can be saved from the user control through the right-click menu.
+* Added `lineStyle` arguments to Scatter plots (see the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#custom-linestyles))
+* Improved legend ([see cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#legend))
+  * ability to set location
+  * ability to set shadow direction
+  * markers and lines rendered in legend
+* Improved ability to use custom fonts ([see cookbook example](https://github.com/swharden/ScottPlot/tree/master/cookbook#custom-fonts))
+* Segoe UI is now the default font for all plot components
+
+## ScottPlot 3.0.7
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-07-27_
+
+#### Major Changes
+* **New plot type `plt.PlotStep()`:** demonstrated in the [cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md#step-plot).  An interactive example is in the demos folder.
+* **New plot type `plt.PlotCandlestick()`:** demonstrated in the [cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md#candlestick). An interactive example is in the demos folder.
+* **New plot type `plt.PlotOHLC()`:** demonstrated in the [cookbook](https://github.com/swharden/ScottPlot/blob/master/doc/cookbook/README.md#ohlc).  An interactive example is in the demos folder.
+* **`plt.MatchPadding()`:** copies the data frame layout from one ScottPlot onto another (useful for making plots of matching size). An interactive example is in the demos folder.
+* **`plt.MatchAxis()`:** copies the axes from one ScottPlot onto another (useful for making plots match one or both axis). An interactive example is in the demos folder.
+* **`plt.Legend()` improvements**
+  * The `location` argument allows the user to place the legend at one of 9 different places on the plot. See the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#legend).
+  * The `shadowDirection` argument allows the user to control if a shadow is shown and at what angle.
+* **Custom marker shapes** can be specified using the `markerShape` argument. See the [cookbook example](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#custom-marker-shapes).
+
+
+## ScottPlot 3.0.6
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-06-30_
+
+#### Major Changes
+* **Bar plot:** The plot module now has a `Bar()` method that lets users create various types of bar plots, as seen in [cookbook#plot-bar-data](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#plot-bar-data)
+* **Histogram:** The new `ScottPlot.Histogram` class has tools to create and analyze histogram data (including cumulative probability). Examples of this can be seen at [cookbook#histogram](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#histogram) and [cookbook#cph](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#cph)
+* **Step plot:** Scatter plots can now render as step plots. Use this feature by setting the `stepDisplay` argument with `PlotScatter()` as seen in the [cookbook#step-plot](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#step-plot)
+* **Manual grid spacing:** Users can now manually define the grid density by setting the `xSpacing` and `ySpacing` arguments in `Grid()` as seen in [cookbook#manual-grid-spacing](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#manual-grid-spacing)
+* **Draggable axis lines:** Axis lines can be dragged with the mouse if the `draggable` argument is set to `true` in `PlotHLine()` and `PlotHLine()`. Draggable axis line limits can also be set by defining additional arguments. The [DraggableMarkers](https://github.com/swharden/ScottPlot/tree/master/demos/ScottPlotDraggableMarkers) program was created to demonstrate this feature.
+
+#### Minor Changes
+* using the scrollwheel to zoom now zooms to the cursor position rather than the center of the plot area
+* `ScottPlot.DataGen.RandomNormal()` was created to create arbitrary amounts of normally-distributed random data
+* fixed bug causing axis line color to appear incorrectly in the legend
+* `AxisAuto()` is now called automatically on the first render. This means users no longer have to call this function manually for most applications. This simplifies quickstart programs to just: instantiate plot, plot data, render (now 3 lines in total instead of 4).
+* throw exceptions if scatter, bar, or signal data inputs are null (rather than failing later)
+
+## ScottPlot 3.0.5
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-06-23_
+* fixes a bug (discussed in [issue 11](https://github.com/swharden/ScottPlot/issues/11)) to improve pan and zoom performance.
+
+## ScottPlot 3.0.4
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-06-23_
+
+#### New features
+* **Bar graphs:** New `plotBar()` method allow creation of bar graphs. By customizing the `barWidth` and `xOffset` arguments you can push bars together to create grouped bar graphs. Error bars can also be added with the `yError` argument. Some [cookbook examples](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#plot-bar-data) demonstrate what this new function can do.
+* **Scatter plots support X and Y error bars:** `plotScatter()` now has arguments to allow X and Y error bars (with adjustable error bar line width and cap size). A [cookbook example](https://github.com/swharden/ScottPlot/tree/master/doc/cookbook#plotting-with-errorbars) was added and a demo program was also created to demonstrate this feature.
+* **Draggable axis lines:** `plotHLine()` and `plotVLine()` now have a `draggable` argument which lets those axis lines be dragged around with the mouse (when using the `ScottPlotUC` user control). Examples are in the demo folder ([ScottPlotDraggableMarkers](https://github.com/swharden/ScottPlot/tree/master/demos/ScottPlotDraggableMarkers)). This feature was initially requested in [issue 11](https://github.com/swharden/ScottPlot/issues/11).
+
+#### Minor changes
+* fixed errors caused by resizing to 0px
+* fixed a capitalization inconsistency in the `plotSignal` argument list
+* `axisAuto()` now responds to axis lines added by `plotHLine()` and `plotVLine()` (previously they were ignored)
+* fixed an [issue](https://github.com/swharden/ScottPlot/issues/23) that caused SplitContainer splitters to freeze
+
+## ScottPlot 3.0.3
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-05-28_
+* NuGet installer automatically adds system.drawing
+
+## ScottPlot 3.0.2
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-05-27_
+* Recompiled to support the .NET 4.5 framework
+
+#### ScottPlot 3.0.1
+_Published on [NuGet](https://www.nuget.org/packages/ScottPlot/) on 2019-05-27_
+* First version of ScottPlot published on NuGet
