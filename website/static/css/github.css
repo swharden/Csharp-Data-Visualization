@@ -5,6 +5,25 @@ article blockquote p {
     padding: 1em;
 }
 
+/* GitHub-style tables */
+
+table {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+
+td {
+    border: 1px solid #dfe2e5;
+    padding: .4em;
+}
+
+th {
+    background-color: #f6f8fa;
+    border: 1px solid #dfe2e5;
+    font-weight: 600;
+    padding: .4em;
+}
+
 /* GitHub-style headings */
 
 h1 {
@@ -27,7 +46,7 @@ h2 {
     font-size: 1.5em;
     border-bottom: 1px solid #eaecef;
     padding-bottom: 0.2em;
-    margin-top: 1.5em; 
+    margin-top: 1.5em;
 }
 
 h2 a {
