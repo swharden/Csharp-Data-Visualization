@@ -24,16 +24,17 @@ th {
     padding: .4em;
 }
 
-/* GitHub-style headings */
+/* GitHub-style H1 */
 
 h1 {
     font-size: 2em;
     border-bottom: 1px solid #eaecef;
     padding-bottom: 0.2em;
+    margin-top: 2em;
 }
 
-h1 a {
-    color: black;
+h1 a, a code {
+    color: black !important;
     text-decoration: none;
 }
 
@@ -42,15 +43,17 @@ h1 a:hover {
     text-decoration: underline;
 }
 
+/* GitHub-style H2 */
+
 h2 {
-    font-size: 1.5em;
+    font-size: 1.7em;
     border-bottom: 1px solid #eaecef;
     padding-bottom: 0.2em;
     margin-top: 1.5em;
 }
 
-h2 a {
-    color: black;
+h2 a, a code {
+    color: black !important;
     text-decoration: none;
 }
 
@@ -59,17 +62,38 @@ h2 a:hover {
     text-decoration: underline;
 }
 
+/* GitHub-style H3 */
+
 h3 {
     font-size: 1.3em;
     padding-bottom: 0.2em;
+    margin-top: 1.5em;
 }
 
-h3 a {
-    color: black;
+h3 a, a code {
+    color: black !important;
     text-decoration: none;
 }
 
 h3 a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+/* GitHub-style H4 */
+
+h4 {
+    font-size: 1.2em;
+    padding-bottom: 0.2em;
+    margin-top: 1.5em;
+}
+
+h4 a, a code {
+    color: black !important;
+    text-decoration: none;
+}
+
+h4 a:hover {
     color: black;
     text-decoration: underline;
 }
