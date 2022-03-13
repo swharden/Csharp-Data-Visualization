@@ -1,0 +1,56 @@
+/* GitHub-style blockquote */
+article blockquote p {
+    background-color: #f6f8fa;
+    border-left: 5px solid #ddd;
+    padding: 1em;
+}
+
+/* GitHub-style headings */
+
+h1 {
+    font-size: 2em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.2em;
+}
+
+h1 a {
+    color: black;
+    text-decoration: none;
+}
+
+h1 a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+h2 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #eaecef;
+    padding-bottom: 0.2em;
+    margin-top: 1.5em; 
+}
+
+h2 a {
+    color: black;
+    text-decoration: none;
+}
+
+h2 a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+h3 {
+    font-size: 1.3em;
+    padding-bottom: 0.2em;
+}
+
+h3 a {
+    color: black;
+    text-decoration: none;
+}
+
+h3 a:hover {
+    color: black;
+    text-decoration: underline;
+}

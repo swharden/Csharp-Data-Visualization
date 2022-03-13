@@ -16,13 +16,6 @@ article img {
     max-width: 100%;
 }
 
-/* Justification: GitHub-style blockquote */
-article blockquote p {
-    background-color: #f6f8fa;
-    border-left: 5px solid #ddd;
-    padding: 1em;
-}
-
 /* Justification: override Bootstrap's default inline code styling */
 article code {
     padding: 0px 3px;

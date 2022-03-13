@@ -1,22 +1,32 @@
 {{ define "main" }}
-<div class="mt-5">
-    <h1 class="display-5">
-        {{ .Title | markdownify }}
-    </h1>
+
+<div class="mt-4">
+
+    <div class="fs-1 fw-light mb-0">
+        <a href="{{ .Permalink }}" class="text-dark">
+            {{ .Title | markdownify }}
+        </a>
+    </div>
+
     <div class="fs-5 fw-lighter">
         {{ .Description | markdownify }}
     </div>
 
-    {{ if not .Date.IsZero }}
-    <div style="opacity: .25;">
-        {{ .Date.Format "January 2, 2006" }}
-        {{ if isset .Params "lastmod" }}
-        (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
-        {{ end }}
+    <div style="opacity: .4;">
+        <a href="{{ .Permalink }}" class="text-dark">
+            {{ if not .Date.IsZero }}
+            {{ .Date.Format "January 2, 2006" }}
+            {{ end }}
+
+            {{ if isset .Params "lastmod" }}
+            (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
+            {{ end }}</a>
     </div>
-    {{ end }}
+
+    <hr />
 
 </div>
+
 
 <div class="py-2">
     <main>

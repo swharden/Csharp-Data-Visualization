@@ -8,12 +8,11 @@ weight: 2.1
 
 This page describes how to create an image from an array of RGB `byte` values using SkiaSharp.
 
-## Test Image Data
+## Generate Sample Image Data
+
+This code creates a 3D array of image data arranged [width, height, channel]
 
 ```cs
-/// <summary>
-/// Create a 3D array of image data arranged [width, height, channel]
-/// </summary>
 public byte[,,] TestPattern(int width, int height)
 {
     byte[,,] pixelArray = new byte[height, width, 3];
