@@ -18,9 +18,10 @@
             {{ .Date.Format "January 2, 2006" }}
             {{ end }}
 
-            {{ if isset .Params "lastmod" }}
+            {{ if ne .Date .Lastmod }}
             (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
-            {{ end }}</a>
+            {{ end }}
+        </a>
     </div>
 
     <hr />
