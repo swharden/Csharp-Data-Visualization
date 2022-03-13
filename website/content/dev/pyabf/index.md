@@ -29,7 +29,7 @@ Characterization of previously-undocumented features (e.g., extracting digital o
 
 # Table of Contents
 
-![](TOC)
+{{< toc >}}
 
 ## Reading the ABF Header
 
@@ -341,7 +341,6 @@ VoiceTagSection = readStruct(f, "IIl", 300)
 SynchArraySection = readStruct(f, "IIl", 316)
 AnnotationSection = readStruct(f, "IIl", 332)
 StatsSection = readStruct(f, "IIl", 348)
-
 ```
 
 Notice that we read a struct format `IIl` for each section, corresponding to `int`, `int`, `long`. This causes all returned values to be a list of 3 numbers which reveals information for each section: 

@@ -33,7 +33,10 @@
   {{ partial "section-links.html" (dict "context" . "sectionKey" "system.drawing") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "maui.graphics") }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "simulations") }}
+  
+  {{ if .Site.IsServer }}
   {{ partial "section-links.html" (dict "context" . "sectionKey" "dev") }}
+  {{ end }}
 </article>
 
 {{ end }}
