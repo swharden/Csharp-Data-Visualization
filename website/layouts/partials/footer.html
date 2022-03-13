@@ -1,5 +1,20 @@
 <div class="row align-items-end m-5" style="opacity: .3;">
 
+    <div class="text-center invisible">
+        <div>
+            Copyright &copy; {{ now.Format "2006" }}
+            <a href='https://swharden.com/about' class="text-dark">Scott W Harden</a>
+            &nbsp;|&nbsp;
+            <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
+                class="text-dark">View Source</a>
+        </div>
+        <div>
+            Built with Hugo {{ .Site.Hugo.Version }}
+            | {{ time now | time.Format ":date_long" }}
+            at {{ time now "America/New_York" | time.Format ":time_short" }} EST
+        </div>
+    </div>
+
     <div class="col text-start">
         <div>
             Copyright &copy; {{ now.Format "2006" }}
@@ -14,7 +29,8 @@
             Built with Hugo {{ .Site.Hugo.Version }}
         </div>
         <div>
-            {{ now | time.Format ":date_long" }} at {{ now | time.Format ":time_short" }}
+            {{ time now | time.Format ":date_long" }}
+            at {{ time now "America/New_York" | time.Format ":time_short" }} EST
         </div>
     </div>
 
