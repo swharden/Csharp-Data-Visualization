@@ -2,6 +2,7 @@
 Title: Mystify Your Mind with C#
 Description: A C# implementation of the classic screensaver
 Date: 2021-01-09
+weight: 999
 ---
 
 This project recreates the classic screensaver _Mystify_ using C# and `System.Drawing` in a Windows Forms application.

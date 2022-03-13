@@ -2,6 +2,7 @@
 Title: Maui.Graphics WPF Quickstart
 Description: How to draw using Maui.Graphics in a WPF application
 date: 2021-10-27
+weight: 1.3
 ---
 
 This page describes how to draw using Maui.Graphics from a WPF application.

@@ -2,6 +2,7 @@
 title: Life in C#
 description: Conway's Game of Life implemented using C#
 date: 2020-05-10
+weight: 1
 ---
 
 **Conway's _Game of Life_ is a zero-player video game that uses a few basic rules to determine if cells live or die based on the density of their neighbors.** In this project we create _Life_ using C# and System.Drawing and display the animated graphics model using Windows Forms.

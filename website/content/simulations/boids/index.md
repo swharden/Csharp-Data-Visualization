@@ -2,6 +2,7 @@
 title: Boids in C#
 description: A procedural animation demonstrating emergent flocking behavior implemented in C#
 date: 2020-05-11
+weight: 2
 ---
 
 **This project implements the [Boids flocking algorithm](https://en.wikipedia.org/wiki/Boids) in C# to create an interesting procedural animation of bird-drones (boids) scurrying about the screen.** This simulation produces complex emergent flocking behavior from a system where individual boids follow a simple set of rules. Code shown on this page uses `System.Drawing` in a Windows Forms application, but source is available for an OpenGL-accelerated version using SkiaSharp.

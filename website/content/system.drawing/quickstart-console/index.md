@@ -2,6 +2,7 @@
 Title: "System.Drawing Console Quickstart"
 Description: "Draw Graphics with System.Drawing in a C# Console App"
 date: 2020-05-16
+weight: 1.1
 ---
 
 This example .NET Console application uses `System.Drawing` to draw 10,000 random lines on a dark blue background and save the output as a PNG file. 
