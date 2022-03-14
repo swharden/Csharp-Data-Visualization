@@ -1,1 +1,1 @@
-hugo --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
+hugo --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --minify --panicOnWarning
