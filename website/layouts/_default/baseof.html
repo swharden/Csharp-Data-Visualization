@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -23,8 +24,10 @@
     <link rel="stylesheet" href="/csdv/css/page.css?{{ md5 (now|time) }}">
     <link rel="stylesheet" href="/csdv/css/github.css?{{ md5 (now|time) }}">
 
-    {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/google_analytics_async.html" . }}
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+
 </head>
 
 <body>
