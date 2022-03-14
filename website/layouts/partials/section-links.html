@@ -2,7 +2,7 @@
 
     {{ with .context.Site.GetPage "section" .sectionKey }}
     <div class="fs-2 fw-light">
-        {{.Title}}
+        <a href="{{ .Permalink }}" class="text-dark">{{.Title}}</a>
     </div>
     {{ end }}
 
