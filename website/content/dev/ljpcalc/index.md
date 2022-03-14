@@ -1,6 +1,7 @@
 ---
 title: Liquid Junction Potential (LJP) Theory and Correction
 description: Notes about the analytical methods LJPcalc uses to calculate LJP from ion tables as well as notes for experimenters about what causes LJP and how to compensate for it in electrophysiology experiments.
+date: 2020-01-01
 ---
 
 This page contains notes about the analytical methods LJPcalc uses to calculate LJP from ion tables

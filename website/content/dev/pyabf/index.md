@@ -1,5 +1,7 @@
 ---
-title: Unofficial Guide to the ABF File Format
+title: ABF Guide
+description: Unofficial Guide to the ABF File Format
+date: 2020-01-01
 ---
 
 ### What are ABF files?

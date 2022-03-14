@@ -1,5 +1,7 @@
 ---
 title: Changelog
+description: Sample changelog web page
+date: 2020-01-01
 ---
 
 ## ScottPlot 4.1.24 (in progress...)
