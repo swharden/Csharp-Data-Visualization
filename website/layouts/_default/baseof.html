@@ -23,14 +23,8 @@
     <link rel="stylesheet" href="/csdv/css/page.css?{{ md5 (now|time) }}">
     <link rel="stylesheet" href="/csdv/css/github.css?{{ md5 (now|time) }}">
 
-    <script src='/csdv/js/starfield.js?v5'></script>
-
-    <style>
-        /* put code here just while you're working with it to prevent caching */
-    </style>
-
+    {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/google_analytics_async.html" . }}
-
 </head>
 
 <body>
