@@ -40,17 +40,25 @@
 <hr class="my-5" style="visibility: hidden;">
 
 <div style="opacity: .5;" class="lh-lg">
+
+    {{ if .Next }}
     <div class="">
         Next: <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
     </div>
+    {{ end }}
+
+    {{ if .Prev }}
     <div class="">
         Previous: <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
     </div>
+    {{ end }}
+
     <div class="">
         {{ with .Site.GetPage "section" .Section }}
         Section: <a href='{{ .Permalink }}'>{{ .Title }}</a>
         {{ end }}
     </div>
+    
 </div>
 
 {{ end }}
