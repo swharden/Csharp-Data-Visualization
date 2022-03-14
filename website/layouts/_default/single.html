@@ -1,5 +1,17 @@
 {{ define "main" }}
 
+{{ if not .Title }}
+{{ warnf "Missing Title: %q" .Path }}
+{{ end }}
+
+{{ if not .Description }}
+{{ warnf "Missing Description: %q" .Path }}
+{{ end }}
+
+{{ if not .Date }}
+{{ warnf "Missing Date: %q" .Path }}
+{{ end }}
+
 <div class="mt-4">
 
     <div class="fs-1 fw-light mb-0">

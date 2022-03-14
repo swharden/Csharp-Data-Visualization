@@ -12,8 +12,8 @@
         <!-- the second range is required so section indexes do not appear -->
         {{ range .Pages }}
         <li>
-            <a href="{{ .URL }}">
-                {{ .Title }}
+            <a href="{{ .Permalink }}">
+                {{ .Title | default "⚠️ no title" }}
             </a>
         </li>
         {{ end }}
