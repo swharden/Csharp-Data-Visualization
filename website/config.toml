@@ -1,5 +1,6 @@
-baseURL = "https://swharden.com/csdv"
+baseURL = 'https://swharden.com/csdv'
 enableInlineShortcodes = true
+googleAnalytics = 'G-GN1D8JT7TK'
 
 [outputFormats]
   [outputFormats.RSS]
