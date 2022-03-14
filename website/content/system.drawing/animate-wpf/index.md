@@ -1,4 +1,8 @@
-# Animating Graphics in WPF
+---
+Title: Animating Graphics in WPF
+Description: Update and render a platform-agnostic graphics model using WPF
+date: 2020-04-20
+---
 
 This page demonstrates a simple method for animating graphics in WPF.
 
@@ -82,9 +86,9 @@ void timer_Tick(object sender, EventArgs e)
 }
 ```
 
-> **âš ï¸ WARNING: This method blocks the GUI thread while rendering.** This is not noticeable if your renderer is very fast, but this can result in laggy applications if your renderer takes more than a few milliseconds. We will explore how to render graphics without blocking the GUI thread in a future article.
+> **⚠️ WARNING: This method blocks the GUI thread while rendering.** This is not noticeable if your renderer is very fast, but this can result in laggy applications if your renderer takes more than a few milliseconds. We will explore how to render graphics without blocking the GUI thread in a future article.
 
-> ðŸ’¡ Install the System.Drawing.Common NuGet package even if you don't think you need it. Using the common library instead of native System.Drawing will ensure your program can be compiled for .NET Core if you decide to upgrade later. It also ensures you can pass System.Drawing objects to .NET Standard libraries which use System.Drawing.Common under the hood.
+> 💡 Install the `System.Drawing.Common` NuGet package even if you don't think you need it. Using the common library instead of native System.Drawing will ensure your program can be compiled for .NET Core if you decide to upgrade later. It also ensures you can pass System.Drawing objects to .NET Standard libraries which use System.Drawing.Common under the hood.
 
 ### Converting a `Bitmap` to a `BitmapImage`
 

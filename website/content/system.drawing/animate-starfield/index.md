@@ -1,4 +1,8 @@
-# Create a Starfield Graphics Model
+---
+Title: Starfield Animation Graphics Model
+Description: Create a graphics model that can be controlled and rendered by an abstracted GUI system
+date: 2020-04-20
+---
 
 Our goal is to create a starfield animation with these rules: 
 * Stars of random sizes are randomly placed on the field

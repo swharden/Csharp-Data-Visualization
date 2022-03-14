@@ -1,4 +1,8 @@
-# Animating Graphics in Windows Forms
+---
+Title: Animating Graphics in Windows Forms
+Description: Update and render a platform-agnostic graphics model using Windows Forms
+date: 2020-04-20
+---
 
 This page demonstrates a simple method for animating graphics in Windows Forms. In this example we use the [Starfield graphics model](4-starfield.md.html) which keeps track of star positions and has a `Render()` method that will draw the field onto an existing `Bitmap`.
 
