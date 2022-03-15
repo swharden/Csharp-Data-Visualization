@@ -15,7 +15,7 @@ article img {
 /* Justification: override Bootstrap's default inline code styling */
 article code {
     padding: 0px 3px;
-    background-color: #f4f4f4;
+    background-color: #0000000C;
     color: #545454;
 }
 
