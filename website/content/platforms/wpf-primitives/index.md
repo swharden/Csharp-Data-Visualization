@@ -153,4 +153,4 @@ private void Render(int lineCount)
 * [Using DrawingVisual Objects](https://docs.microsoft.com/en-us/dotnet/framework/wpf/graphics-multimedia/using-drawingvisual-objects)
 
 ## Source Code
-GitHub: [WpfBenchmark](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/drawing/alternate/WpfBenchmark)
+GitHub: [WPF Primitive Benchmark](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/drawing/alternate/WpfBenchmark)
