@@ -53,15 +53,15 @@
 
 <div style="opacity: .5;" class="lh-lg">
 
-    {{ if .Next }}
+    {{ if .Prev }}
     <div class="">
-        Next: <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
+        Next: <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
     </div>
     {{ end }}
 
-    {{ if .Prev }}
+    {{ if .Next }}
     <div class="">
-        Previous: <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
+        Previous: <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
     </div>
     {{ end }}
 
