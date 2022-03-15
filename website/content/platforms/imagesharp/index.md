@@ -8,7 +8,7 @@ date: 2020-04-01
 
 ImageSharp is provided under the [Apache 2.0 License](https://github.com/SixLabors/ImageSharp/blob/master/LICENSE) which requires modifications to be open-sourced and projects to carry NOTICE files into derivative works along with a copy of the Apache 2.0 license. An [alternative commercial license](https://sixlabors.com/pricing/license) is available for annual purchase which may be more suitable for closed-source commercial applications.
 
-<img src="drawing-with-ImageSharp.png" class="d-block mx-auto">
+<img src="drawing-with-imagesharp.png" class="d-block mx-auto">
 
 <div class="text-center">
 <div class="mx-auto d-inline-block">
