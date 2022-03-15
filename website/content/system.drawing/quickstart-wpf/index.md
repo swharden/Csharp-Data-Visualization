@@ -2,7 +2,7 @@
 title: System.Drawing WPF Quickstart
 Description: Using System.Drawing to Draw Graphics in WPF Applications
 date: 2020-04-20
-weight: 1.3
+weight: 30
 ---
 **This example demonstrates how to draw graphics in WPF.** We lay-out a `Canvas` with an `Image` inside it, then create a render method which creates a `Bitmap` the size of the canvas, draws on it using a `Graphics` object, then copies the output from a `Bitmap` (which System.Drawing produces) to a `BitmapImage` (which WPF can display).
 

@@ -2,7 +2,7 @@
 title: System.Drawing Windows Forms Quickstart
 Description: A quickstart guide to using System.Drawing in Windows Forms applications
 date: 2020-04-20
-weight: 1.2
+weight: 20
 ---
 
 **This example demonstrates how to draw graphics in Windows Forms.** We create a `Bitmap` and draw on it using a `Graphics` object like before, but then we apply it to the `Image` property of a `PictureBox`. A key difference here is that the Bitmap will be sized to exactly fit the `PictureBox`, and we will use events to create new properly-sized `Bitmap` objects every time the form is resized.
