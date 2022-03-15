@@ -22,6 +22,7 @@ th {
     border: 1px solid #dfe2e5;
     font-weight: 600;
     padding: .4em;
+    text-align: center;
 }
 
 /* GitHub-style H1 */
@@ -33,7 +34,7 @@ h1 {
     margin-top: 2em;
 }
 
-h1 a, a code {
+h1 a, h1 a code {
     color: black !important;
     text-decoration: none;
 }
@@ -52,7 +53,7 @@ h2 {
     margin-top: 1.5em;
 }
 
-h2 a, a code {
+h2 a, h2 a code {
     color: black !important;
     text-decoration: none;
 }
@@ -70,7 +71,7 @@ h3 {
     margin-top: 1.5em;
 }
 
-h3 a, a code {
+h3 a, h3 a code {
     color: black !important;
     text-decoration: none;
 }
@@ -88,7 +89,7 @@ h4 {
     margin-top: 1.5em;
 }
 
-h4 a, a code {
+h4 a, h4 a code {
     color: black !important;
     text-decoration: none;
 }

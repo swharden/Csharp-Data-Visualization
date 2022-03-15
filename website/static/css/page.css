@@ -7,10 +7,6 @@ a:hover {
     text-decoration: underline;
 }
 
-a code {
-    color: #0d6efd !important;
-}
-
 /* Justification: Shrink images to fit the content area */
 article img {
     max-width: 100%;
@@ -21,6 +17,10 @@ article code {
     padding: 0px 3px;
     background-color: #f4f4f4;
     color: #545454;
+}
+
+article a code {
+    color: #0d6efd !important;
 }
 
 /* Justification 1: prevent code in fences from getting background */
