@@ -36,5 +36,5 @@ jobs:
       - name: 🚀 Deploy
         run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
 
-      - name: 🧹 Purge Website Cache
-        run: curl --user deploy:${{ secrets.CACHE_PASSWORD }} https://scottplot.net/admin/clear-cache.php
+      #- name: 🧹 Purge Website Cache
+      #run: curl --user deploy:${{ secrets.CACHE_PASSWORD }} https://scottplot.net/admin/clear-cache.php
