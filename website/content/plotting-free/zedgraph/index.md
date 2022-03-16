@@ -1,24 +1,26 @@
 ---
 title: Plot Data with ZedGraph
-description: todo
-date: 3333-01-01
+description: How to plot data in C# projects using ZedGraph
+date: 2020-05-16
+lastmod: 2022-03-16
 ---
 
-ZedGraph is a C# plotting library for drawing 2D Line, Bar, and Pie Charts. ZedGraph was initially created in the early 2000s but development seems to have ceased before 2010 according to the [ZedGraph home page](http://zedgraph.sourceforge.net/samples.html) at SourceForge. Despite its age, ZedGraph is available as a [NuGet package](https://www.nuget.org/packages/ZedGraph) (and via its [GitHub page](https://github.com/ZedGraph/ZedGraph)). The project still has occasional commits, typically aimed at modernizing the build. 
+**ZedGraph is a C# plotting library for drawing 2D Line, Bar, and Pie Charts.** ZedGraph was created in the early 2000s but development appears to have ceased before 2010 according to the [ZedGraph home page](http://zedgraph.sourceforge.net/samples.html) at SourceForge. ZedGraph is available as a [NuGet package](https://www.nuget.org/packages/ZedGraph) and it has a [GitHub page](https://github.com/ZedGraph/ZedGraph), but neither have been updated since 2018.
 
-<div align="center">
+<img src="zedgraph-quickstart.gif" class="d-block mx-auto my-4">
 
-![](graphics/zedgraph-quickstart.gif)
+> **⚠️ WARNING:** ZedGraph has a LGPL license! 💀 Depending on how you use it in your project, you may be forced to open-source your application. ZedPlot may not suitable for integration in closed-source commercial software.
 
-</div>
+## Supported Platforms
 
-ZedGraph on NuGet supports .NET Framework 3.5 and newer, and importantly also targets [.NET Standard 2.0](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) so it can be used in .NET Core projects.
+* The [`ZedGraph 5.1.7` NuGet package](https://www.nuget.org/packages/ZedGraph/5.1.7) (2015) targets **.NET Framework 3.5** so it can only be used in .NET Framework projects.
 
-> **⚠️ WARNING:** ZedPlot has a LGPL license! 💀 Depending on how you use it in your project you may be forced to open-source your application. ZedPlot may not suitable for integration in closed-source commercial software.
+* The [`ZedGraph 6.0.0-alpha0001` NuGet package](https://www.nuget.org/packages/ZedGraph/6.0.0-alpha0001) (2018) targets **.NET Standard 2.0** so it can be used in .NET Framework and .NET Core projects.
 
 ## Quickstart
 
 * Install the `ZedGraph` NuGet package
+
 * Drag a `ZedGraphControl` from the toolbox onto your form
 
 ### Sample Data
@@ -40,11 +42,7 @@ private double[] RandomWalk(int points = 5, double start = 100, double mult = 50
 
 ### Bar Graph
 
-<div align="center">
-
-![](graphics/zedgraph-quickstart-bar.png)
-
-</div>
+<img src="zedgraph-quickstart-bar.png" class="d-block mx-auto my-5 shadow">
 
 ```cs
 // generate some random Y data
@@ -73,11 +71,7 @@ zedGraphControl1.Refresh();
 
 ### Scatter Plot
 
-<div align="center">
-
-![](graphics/zedgraph-quickstart-scatter.png)
-
-</div>
+<img src="zedgraph-quickstart-scatter.png" class="d-block mx-auto my-5 shadow">
 
 ```cs
 // generate some random Y data
@@ -110,11 +104,7 @@ zedGraphControl1.Refresh();
 
 ### Line Graph
 
-<div align="center">
-
-![](graphics/zedgraph-quickstart-line.png)
-
-</div>
+<img src="zedgraph-quickstart-line.png" class="d-block mx-auto my-5 shadow">
 
 ```cs
 // generate some random Y data
@@ -148,11 +138,7 @@ zedGraphControl1.Refresh();
 
 ## Console Applications
 
-<div align="center">
-
-![](graphics/zedgraph-console-quickstart.png)
-
-</div>
+<img src="zedgraph-console-quickstart.png" class="d-block mx-auto my-5 shadow">
 
 ```cs
 var pane = new ZedGraph.GraphPane();
@@ -169,7 +155,7 @@ bmp.Save("zedgraph-console-quickstart.png", ImageFormat.Png);
 
 ## Multiple Y Axes
 
-![](graphics/zedgraph-multiple-y-axes.png)
+<img src="zedgraph-multiple-y-axes.png" class="d-block mx-auto my-5">
 
 ```cs
 // generate some random Y data
@@ -226,4 +212,4 @@ zedGraphControl1.Refresh();
 
 ## Source Code
 
-* https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/zedgraph
+* [ZedGraph Quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/plotting/zedgraph/ZedGraphQuickstart)
