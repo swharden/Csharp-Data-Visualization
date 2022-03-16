@@ -1,4 +1,8 @@
-# Plot Data with Infragistics Chart
+---
+title: Plot Data with Infragistics Chart
+description: todo
+date: 3333-01-01
+---
 
 Infragistics has [charting tools for a variety of platforms](https://www.infragistics.com/products/ultimate) including Windows Forms and WPF. 
 

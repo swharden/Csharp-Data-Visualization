@@ -1,4 +1,9 @@
-# Plot Data with ScottPlot
+---
+title: Plot Data with ScottPlot
+description: todo
+date: 3333-01-01
+---
+
 
 [ScottPlot](https://swharden.com/scottplot) is an interactive plotting library for .NET published under the permissive MIT license. It's definitely the new kid on the block, with its first public release on NuGet in 2019. It has user controls for Windows Forms and WPF, and the core library has its own package allowing plots to be created in server environments or console applications and saved as images. ScottPlot targets .NET Standard 2.0 so it can be used in both .NET Core and .NET Framework applications.
 

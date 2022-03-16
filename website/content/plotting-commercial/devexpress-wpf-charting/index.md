@@ -1,4 +1,8 @@
-# Plot Data with DevExpress WPF Charting
+---
+title: Plot Data with DevExpress WPF Charting
+description: todo
+date: 3333-01-01
+---
 
 The [WPF Charting](https://www.devexpress.com/Products/NET/Controls/WPF/Charting/) package by DevExpress provides user controls for creating interactive and animated charts in .NET applications.
 

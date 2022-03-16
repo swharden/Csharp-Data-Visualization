@@ -1,4 +1,8 @@
-# Plot Data with NPlot
+---
+title: Plot Data with NPlot
+description: todo
+date: 3333-01-01
+---
 
 NPlot is a free charting library for .NET developed by [Matt Howlett](https://www.matthowlett.com/) and [others](http://netcontrols.org/nplot/wiki/index.php?n=Main.Contributors). It can be used to render graphs as Bitmaps (suitable for use in console applications) and it has a mouse-interactive user control for Windows Forms. While NPlot is simple, it lacks many features, targets .NET Framework 4.0, and has not been actively developed for many years.
 

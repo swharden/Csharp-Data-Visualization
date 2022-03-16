@@ -1,4 +1,8 @@
-# Plot Data with Syncfusion WPF Charts
+---
+title: Plot Data with Syncfusion WPF Charts
+description: todo
+date: 3333-01-01
+---
 
 The SfChart control was made by [Syncfusion](https://www.syncfusion.com/) and is available for many platforms including Windows Forms, WPF, UWP, Xamarin, and even JavaScript (Angular, React, and Vue). Their [demos page](https://www.syncfusion.com/demos) is quite impressive, and it's particularly entertaining that the same types of plots in the WPF controls are [viewable in your browser](https://ej2.syncfusion.com/vue/demos/#/material/chart/histogram.html) using JavaScript.
 

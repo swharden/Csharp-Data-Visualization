@@ -1,4 +1,8 @@
-# Plotting Data with Microsoft Charting
+---
+title: Plotting Data with Microsoft Charting
+description: todo
+date: 3333-01-01
+---
 
 Microsoft's `Chart` control is one of the easiest ways to get started displaying data in Windows Forms applications since it comes with Visual Studio. Just drag a `Chart` from the toolbox and drop it onto your form.
 

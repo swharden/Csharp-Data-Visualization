@@ -1,4 +1,8 @@
-# Plot Data with LiveCharts
+---
+title: Plot Data with LiveCharts
+description: How to plot data in a .NET application using the LiveCharts library
+date: 3333-01-01
+---
 
 LiveCharts is a .NET charing library that is free (under a MIT license), but sells an enhancement called the "Geared package" which improves performance using DirectX rendering (provided by [SharpDX](http://sharpdx.org/) which is now abandoned). LiveCharts tries to produce clean-looking animated charts and is open about the fact that performance is a secondary concern. 
 

@@ -1,4 +1,8 @@
-## SciChart
+---
+title: Plot Data with SciChart
+description: todo
+date: 3333-01-01
+---
 
 [SciChart](https://www.scichart.com) is a commercial charting library for .NET. Although they have mobile (iOS and Android) libraries, here we will take a closer look at their WPF charts library. It may be possible to use this control in Windows Forms applications with [ElementHost](https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms754008(v=vs.90)) or [more modern](https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-hosting-a-wpf-composite-control-in-windows-forms) techniques, but it's clearly intended for use in WPF applications.
 

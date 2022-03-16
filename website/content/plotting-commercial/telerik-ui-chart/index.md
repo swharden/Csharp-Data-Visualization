@@ -1,4 +1,8 @@
-# Plot Data with Telerik UI Chart
+---
+title: Plot Data with Telerik UI Chart
+description: todo
+date: 3333-01-01
+---
 
 Telerik has UI controls for [WPF](https://www.telerik.com/products/wpf/chart.aspx) and [WinForms](https://www.telerik.com/products/winforms.aspx), one of which is a chart module. Although it looks like this control was built for easy theming and supports little animations for simple data, it doesn't seem to have been built with performance as a primary design goal. I did find it interesting they support multiple rendering systems including Bitmap and Direct2D which.
 
