@@ -1,16 +1,13 @@
 ---
 title: Plot Data with OxyPlot
-description: todo
-date: 3333-01-01
+description: How to plot data in C# projects using OxyPlot
+date: 2020-05-17
+lastmod: 2022-03-16
 ---
 
-[OxyPlot](https://github.com/oxyplot) is a 2D plotting library for .NET that has been actively developed since 2010. OxyPlot is MIT-licensed and has components for an impressive number of modern platforms (WinForms, WPF, UWP, Xamarin, XWT) and some legacy ones too (Silveright and Windows Phone). The WinForms control ([PlotView.cs](https://github.com/oxyplot/oxyplot/blob/develop/Source/OxyPlot.WindowsForms/PlotView.cs)) renders using System.Drawing, but a rendering systems using SkiaSharp and ImageSharp also exist.
+**OxyPlot is a 2D plotting library for .NET that has been actively developed since 2010.** OxyPlot is MIT-licensed and has components for an impressive number of modern platforms (WinForms, WPF, UWP, Xamarin, XWT) and some legacy ones too (Silveright and Windows Phone). The WinForms control ([PlotView.cs](https://github.com/oxyplot/oxyplot/blob/develop/Source/OxyPlot.WindowsForms/PlotView.cs)) renders using System.Drawing, but a rendering systems using SkiaSharp and ImageSharp also exist. OxyPlot was created to plot 2D data which is why it has "xy" in its name.
 
-<div align="center">
-
-![](graphics/oxyplot-quickstart.gif)
-
-</div>
+<img src="oxyplot-quickstart.gif" class="d-block mx-auto my-3">
 
 ### Interactive Controls
 
@@ -19,11 +16,12 @@ date: 3333-01-01
 * mouse-wheel-scroll to zoom
 * mouse-wheel-scroll over an axis to zoom in one axis
 
-> **💡 What's in a name?** OxyPlot was created to plot 2D data which is why it has "xy" in its name.
-
 ## Quickstart
 
-* Install the `OxyPlot.WindowsForms` NuGet package
+* Create a Windows Forms application
+
+* Add the `OxyPlot.WindowsForms` NuGet package
+
 * Drag a `PlotView` from the Toolbox onto your form
 
 ### Generate Sample Data
@@ -45,13 +43,9 @@ private double[] RandomWalk(int points = 5, double start = 100, double mult = 50
 
 ### Scatter Plot
 
-<div align="center">
+**Interacting with OxyPlot is achieved by constructing data objects and passing them around.** Graphing data requires creating data series objects (like lines and bars), populating them with data, then putting them into a plot model, then loading that model into a view (like a user control).
 
-![](graphics/oxyplot-quickstart-scatter-plot.png)
-
-</div>
-
-Interacting with OxyPlot is achieved by constructing [MVC-style](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) objects and passing them around. Graphing data requires creating data series objects (like lines and bars), populating them with data, then putting them into a plot model, then loading that model into a view (like a user control).
+<img src="oxyplot-quickstart-scatter-plot.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random XY data
@@ -100,11 +94,7 @@ plotView1.Model = model;
 
 ### Bar Graph
 
-<div align="center">
-
-![](graphics/oxyplot-quickstart-bar-graph.png)
-
-</div>
+<img src="oxyplot-quickstart-bar-graph.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -148,15 +138,11 @@ model.Series.Add(seriesB);
 plotView1.Model = model;
 ```
 
-### Performance Notes
+## Performance
 
-I found the line plot to be relatively fast. Lines with 1 million points plotted at a few FPS.
+I found the line plot to be relatively fast (1 million points display at a rate of few FPS).
 
-<div align="center">
-
-![](graphics/oxyplot-quickstart-line-plot.png)
-
-</div>
+<img src="oxyplot-quickstart-line-plot.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -200,12 +186,6 @@ plotView1.Model = model;
 
 ## Create Plots in Console Applications
 
-<div align="center">
-
-![](graphics/oxyplot-console-quickstart.png)
-
-</div>
-
 To use OxyPlot in a console application create your model the same as before, but use a file exporter to save your model to a file rather than display it in a user control.
 
 ```cs
@@ -214,9 +194,14 @@ OxyPlot.WindowsForms.PngExporter.Export(model, "test.png", 400, 300, OxyPlot.Oxy
 
 A platform-specific `PngExporter` is provided with whatever NuGet package you installed. This code example uses the `PngExporter` in the `OxyPlot.WindowsForms` package, but installing `OxyPlot.Core.Drawing` may be the way to go for true console applications.
 
+<img src="oxyplot-console-quickstart.png" class="d-block mx-auto shadow my-5 border">
+
 ## Resources
-* Graph types with code can be reviewed in [/models/index.html](https://oxyplot.readthedocs.io/en/latest/models/index.html)
-* [oxyplot/documentation-examples](https://github.com/oxyplot/documentation-examples) GitHub project
+* Documentation: [Introduction to OxyPlot](https://oxyplot.readthedocs.io/en/latest/introduction/introduction.html)
+* GitHub: [OxyPlot](https://github.com/oxyplot/oxyplot)
+* Graph types: [/models/index.html](https://oxyplot.readthedocs.io/en/latest/models/index.html)
+* Documentation: GitHub [oxyplot/documentation-examples](https://github.com/oxyplot/documentation-examples)
+* Note: the domain oxyplot.org is no longer associated with this project
 
 ## Source Code
-* [/dev/old/plotting/oxyplot](https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/oxyplot)
+* [oxyplot quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/plotting/oxyplot/OxyPlotQuickstart)
