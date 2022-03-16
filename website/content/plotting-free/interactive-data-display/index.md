@@ -1,5 +1,5 @@
 ---
-title: Interactive Data Display
+title: Plot Data with Interactive Data Display
 description: Getting Started with Microsoft's Interactive Data Display Library for WPF
 date: 2020-05-18
 lastmod: 2022-03-16
