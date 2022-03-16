@@ -1,20 +1,23 @@
 ---
 title: Plot Data with NPlot
-description: todo
-date: 3333-01-01
+description: How to plot data using NPlot in C# projects
+date: 2020-05-15
+lastmod: 2022-03-16
 ---
 
-NPlot is a free charting library for .NET developed by [Matt Howlett](https://www.matthowlett.com/) and [others](http://netcontrols.org/nplot/wiki/index.php?n=Main.Contributors). It can be used to render graphs as Bitmaps (suitable for use in console applications) and it has a mouse-interactive user control for Windows Forms. While NPlot is simple, it lacks many features, targets .NET Framework 4.0, and has not been actively developed for many years.
+**NPlot is a charting library for .NET Framework applications.** It can be used to render graphs as Bitmaps (suitable for use in console applications) and it has a mouse-interactive user control for Windows Forms. NPlot is simple, but it lacks many features, and it only targets .NET Framework.
 
-<div align="center">
+<img src="nplot-quickstart.gif" class="d-block mx-auto">
 
-![](graphics/nplot-quickstart.gif)
+### NPlot is no longer developed
+* [NPlot WIKI](http://netcontrols.org/nplot/wiki/index.php) has been inactive since 2014
+* [NPlot on GitHub](https://github.com/mhowlett/nplot) has a single commit from 2016
+* [NPlot on NuGet](https://www.nuget.org/packages/NPlot/) has a single package uploaded in 2016
 
-</div>
+## Quickstart
 
-## Code
+* Get the `NPlot` NuGet package
 
-* Get the `NPlot` package using NuGet
 * Drag a `PlotSurface2D` from the toolbox onto your form
 
 ### Sample Data
@@ -70,11 +73,7 @@ plotSurface2D1.AddInteraction(new NPlot.Windows.PlotSurface2D.Interactions.AxisD
 
 Users who aren't using Windows Forms (or the PlotSurface2D user control) can render directly on `Bitmap` objects using the `Bitmap.PlotSurface2D` class. This allows NPlot to be used in console applications (or in server applications such as ASP.NET)
 
-<div align="center">
-
-![](graphics/nplot-console-quickstart.png)
-
-</div>
+<img src="nplot-console-quickstart.png" class="d-block mx-auto my-4">
 
 ```cs
 var linePlot = new NPlot.PointPlot { DataSource = RandomWalk(20) };
@@ -94,11 +93,8 @@ NPlot is designed for Windows Forms, but the author noted [it can be used in WPF
 
 
 ## Resources
-* [NPlot WIKI](http://netcontrols.org/nplot/wiki/index.php) (inactive since 2014)
-* [NPlot on GitHub](https://github.com/mhowlett/nplot) (inactive since 2016)
-* [NPlot on NuGet](https://www.nuget.org/packages/NPlot/) (inactive since 2016) has a permissive [3-clause-BSD](https://tldrlegal.com/license/bsd-3-clause-license-(revised)) license
 * [Creating Graphs and Plot Charts Quickly with NPlot](https://www.oreilly.com/library/view/windows-developer-power/0596527543/ch04s08.html) (O'Reilly)
 
 ## Source Code
 
-* https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/nplot
+* [NPlot Quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/plotting/nplot/NPlotQuickstart)
