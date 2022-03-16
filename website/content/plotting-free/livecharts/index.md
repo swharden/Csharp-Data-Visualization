@@ -1,18 +1,19 @@
 ---
 title: Plot Data with LiveCharts
 description: How to plot data in a .NET application using the LiveCharts library
-date: 3333-01-01
+date: 2020-05-17
+lastmod: 2022-03-16
 ---
 
-LiveCharts is a .NET charing library that is free (under a MIT license), but sells an enhancement called the "Geared package" which improves performance using DirectX rendering (provided by [SharpDX](http://sharpdx.org/) which is now abandoned). LiveCharts tries to produce clean-looking animated charts and is open about the fact that performance is a secondary concern. 
+**LiveCharts is a charing library that updates and animates automatically as data changes in real time.** LiveCharts is up-front about the that performance is a secondary concern. LiveCharts used to sell an enhancement called the "Geared package" which improved performance using DirectX (although [SharpDX is no longer maintained](http://sharpdx.org/)). LiveCharts2 began development in 2021 and uses an alternative rendering system (SkiaSharp) to improve support and performance across multiple platforms.
 
-<div align="center">
+<img src="livecharts-quickstart.gif" class="d-block mx-auto my-5">
 
-![](graphics/livecharts-quickstart.gif)
+### Project Status
 
-</div>
+**LiveCharts appears mostly abandoned.** The [LiveCharts GitHub page](https://github.com/Live-Charts/Live-Charts) claimed version 1.0 was "about to be released" in 2018 but that text is now crossed-out. The [last commit to the project](https://github.com/Live-Charts/Live-Charts/commits/) (other than updates to the readme) was in 2018. The last NuGet published was in 2017.
 
-The [LiveCharts GitHub page](https://github.com/Live-Charts/Live-Charts) claims version 1.0 is about to be released, but the last commit on the was in 2018 so it seems development has stalled or been abandoned. The issues page has a growing list of hundreds of issues, but no issues have been closed for a long time.
+**LiveCharts2 is in preview and is being actively developed.** Work is in the [LiveCharts2 GitHub repository](https://github.com/beto-rodriguez/LiveCharts2) but there are not yet packages on NuGet.
 
 ## Quickstart
 
@@ -40,11 +41,7 @@ private double[] RandomWalk(int points = 5, double start = 100, double mult = 50
 
 ### Bar Graph
 
-<div align="center">
-
-![](graphics/livecharts-quickstart-bar-graph.png)
-
-</div>
+<img src="livecharts-quickstart-bar-graph.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -73,11 +70,7 @@ cartesianChart1.Series.Add(series2);
 
 ### Scatter Plot
 
-<div align="center">
-
-![](graphics/livecharts-quickstart-scatter-plot.png)
-
-</div>
+<img src="livecharts-quickstart-scatter-plot.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random XY data
@@ -116,11 +109,7 @@ cartesianChart1.Series.Add(series2);
 
 ### Line Plot
 
-<div align="center">
-
-![](graphics/livecharts-quickstart-line-plot.png)
-
-</div>
+<img src="livecharts-quickstart-line-plot.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -158,8 +147,11 @@ cartesianChart1.Zoom = LiveCharts.ZoomingOptions.Xy;
 However mouse interaction is so sluggish I did not find it useful and intentionally omitted it from the quickstart example.
 
 ## Resources
-* https://lvcharts.net/
+* [LiveCharts Tutorial and Samples](https://lvcharts.net/App/examples/Wpf/start)
+* NuGet: [LiveCharts](https://www.nuget.org/packages/LiveCharts/)
+* GitHub: [LiveCharts](https://github.com/Live-Charts/Live-Charts/)
+* GitHub: [LiveCharts2](https://github.com/beto-rodriguez/LiveCharts2)
 
 ## Source Code
 
-* [/dev/old/plotting/livecharts](https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/livecharts)
+* [livecharts quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/plotting/livecharts/LiveChartsQuickstart)
