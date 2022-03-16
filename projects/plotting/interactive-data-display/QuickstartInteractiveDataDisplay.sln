@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickstartInteractiveDataDisplay", "QuickstartInteractiveDataDisplay.csproj", "{B3820B17-C0F1-4FCC-903D-C5D2F75205EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3820B17-C0F1-4FCC-903D-C5D2F75205EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3820B17-C0F1-4FCC-903D-C5D2F75205EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3820B17-C0F1-4FCC-903D-C5D2F75205EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3820B17-C0F1-4FCC-903D-C5D2F75205EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {906B4633-9085-4CAF-9546-39BF158D38FA}
+	EndGlobalSection
+EndGlobal

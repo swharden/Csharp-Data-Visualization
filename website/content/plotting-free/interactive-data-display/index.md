@@ -21,14 +21,34 @@ lastmod: 2022-03-16
 * scroll-wheel to zoom
 * double-click to fit axis limits to data
 
-## XAML
+## Quickstart
 
-Add the following to your layout to get started
+1. Create a .NET Framework WPF Application
+
+2. Add the `InteractiveDataDisplay.WPF` NuGet package
+
+3. Add a chart control to your layout
+
+4. `Add()` graph types to your chart
+
+## MainWindow.xaml
 
 ```xml
-<d3:Chart Name="myChart">
-    <Grid Name="myGrid"/>
-</d3:Chart>
+<Window x:Class="QuickstartInteractiveDataDisplay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuickstartInteractiveDataDisplay" 
+        xmlns:d3="clr-namespace:InteractiveDataDisplay.WPF;assembly=InteractiveDataDisplay.WPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <d3:Chart Name="myChart">
+            <Grid Name="myGrid"/>
+        </d3:Chart>
+    </Grid>
+</Window>
 ```
 
 ## Generate Sample Data
@@ -58,7 +78,6 @@ private double[] Consecutive(int points, double offset = 0, double stepSize = 1)
     return values;
 }
 ```
-
 
 ## Bar Graph
 
@@ -209,4 +228,4 @@ myChart.LegendVisibility = Visibility.Visible;
 
 ## Source Code
 
-* [interactive-data-display](https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/interactive-data-display)
+* [interactive-data-display](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/plotting/interactive-data-display)
