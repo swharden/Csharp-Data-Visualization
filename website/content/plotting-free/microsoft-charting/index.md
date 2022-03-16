@@ -1,19 +1,21 @@
 ---
-title: Plotting Data with Microsoft Charting
-description: todo
-date: 3333-01-01
+title: Plot Data with Microsoft Charting
+description: Getting Started with Microsoft's Chart control
+date: 2020-05-15
+lastmod: 2022-03-16
 ---
 
-Microsoft's `Chart` control is one of the easiest ways to get started displaying data in Windows Forms applications since it comes with Visual Studio. Just drag a `Chart` from the toolbox and drop it onto your form.
+**Microsoft's `Chart` control is one of the easiest ways to get started displaying data in .NET Framework WinForms applications** since it is [natively available](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datavisualization.charting.chart) and automatically appears in the Windows Forms Toolbox in Visual Studio. To get started just drag a `Chart` from the toolbox and drop it onto your form.
 
-![](graphics/microsoft-charting-toolbox.png)
+<img src="microsoft-charting-toolbox.png" class="d-block mx-auto shadow my-5">
 
-While the Chart control is simple, is has a few serious drawbacks worth considering:
+### Disadvantages
 * It is not mouse-interactive
 * It only supports Windows Forms
-* It is no longer developed
+* It is only available on .NET Framework
+* It is no longer actively developed
 
-## Code
+## Quickstart
 
 ### Sample Data
 
@@ -36,7 +38,7 @@ private double[] RandomWalk(int points = 5, double start = 100, double mult = 50
 
 Microsoft calls a horizontal bar graph a "bar chart", while a bar graph with vertical bars is called a "column chart". This program can be made with the following code.
 
-![](graphics/quickstart-bar.png)
+<img src="quickstart-bar.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -72,7 +74,7 @@ chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
 
 The look of a scatter plot can be achieved by binding X and Y data.
 
-![](graphics/quickstart-scatter.png)
+<img src="quickstart-scatter.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random XY data
@@ -112,7 +114,9 @@ chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
 
 The `FastLine` chart is optimized for speed. On my system I can comfortably display 100,000 points in real time. When I tried to display 1 million points interaction became very sluggish.
 
-![](graphics/quickstart-fast-line.png)
+> **💡 What makes FastLine fast?** According to Microsoft, "The FastLine chart type is a variation of the Line chart that significantly reduces the drawing time of a series that contains a very large number of data points. Use this chart in situations where very large data sets are used and rendering speed is critical. Some features are omitted (control of point level visual attributes, markers, data point labels, and shadows) to improve performance."
+
+<img src="quickstart-fast-line.png" class="d-block mx-auto shadow my-5">
 
 ```cs
 // generate some random Y data
@@ -144,8 +148,6 @@ chart1.ChartAreas[0].AxisY.MajorGrid.LineColor = Color.LightGray;
 chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.LightGray;
 ```
 
-> **💡 What makes FastLine fast?** According to Microsoft, "The FastLine chart type is a variation of the Line chart that significantly reduces the drawing time of a series that contains a very large number of data points. Use this chart in situations where very large data sets are used and rendering speed is critical. Some features are omitted (control of point level visual attributes, markers, data point labels, and shadows) to improve performance."
-
 ## Source Code
 
-* https://github.com/swharden/Csharp-Data-Visualization/tree/master/dev/old/plotting/microsoft-charting
+* [Microsoft Charting Quickstart](https://github.com/swharden/Csharp-Data-Visualization/tree/main/dev/old/plotting/microsoft-charting/ChartingQuickstart)
