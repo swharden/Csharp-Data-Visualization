@@ -1,39 +1,38 @@
 ---
-title: Plot Data with Syncfusion WPF Charts
-description: todo
-date: 3333-01-01
+title: Syncfusion WPF Charts
+description: Using SyncFusion's SfChart to display data in WPF applications
+date: 2020-04-01
+lastmod: 2022-03-17
 ---
 
-The SfChart control was made by [Syncfusion](https://www.syncfusion.com/) and is available for many platforms including Windows Forms, WPF, UWP, Xamarin, and even JavaScript (Angular, React, and Vue). Their [demos page](https://www.syncfusion.com/demos) is quite impressive, and it's particularly entertaining that the same types of plots in the WPF controls are [viewable in your browser](https://ej2.syncfusion.com/vue/demos/#/material/chart/histogram.html) using JavaScript.
+**Syncfusion's SfChart control is available for many platforms including Windows Forms, WPF, UWP, Xamarin, and even JavaScript (Angular, React, and Vue).** Their [demos page](https://www.syncfusion.com/demos) is quite impressive, and it's particularly interesting that the same types of plots available in the WPF controls are [viewable in your browser](https://ej2.syncfusion.com/vue/demos/#/material/chart/histogram.html) using JavaScript.
 
-<div align="center">
+<img src="wpf-charts-trend.png" class="d-block mx-auto my-4">
 
-![](graphics/wpf-charts-trend.png)
-
-</div>
-
-One thing I really like about SfChart is the [easy to browse collection of documentation](https://help.syncfusion.com/wpf/charts/series#scatter) showing how to generate all types of plots. They also have controls for more specialized charting, like the[SfSmithChart](https://help.syncfusion.com/wpf/smith-chart/overview) for making [Smith Charts](https://en.wikipedia.org/wiki/Smith_chart).
+**SfChart's documentation is easy and accessible.** They have working demos paired with source code showing how to generate all types of plots (e.g., [Bubble and Scatter in WPF Charts](https://help.syncfusion.com/wpf/charts/seriestypes/bubbleandscatter)). They also have controls for more specialized charting, like the [SfSmithChart](https://help.syncfusion.com/wpf/smith-chart/overview) for making [Smith Charts](https://en.wikipedia.org/wiki/Smith_chart).
 
 
-The [Migrating from Chart to SfChart in WPF Charts (SfChart)](https://help.syncfusion.com/wpf/charts/migrating-from-chart-to-sfchart) guide makes it easy to learn how to use SfChart for those who already have a strong grasp of Microsoft's Chart module.
+The [Migrating from Microsoft Chart to SfChart](https://help.syncfusion.com/wpf/charts/migrating-from-chart-to-sfchart) guide makes it easy to learn how to use SfChart for those who already have a strong grasp of Microsoft's Chart module.
 
-### Price
-It looks like the ability to use these controls depends on paying a yearly fee. The first year is roughly twice as expensive as subsequent years.
+## Price
 
-* All controls: $2,495 per developer for 1st year
-* WinForms or WPF controls only: $995 per developer for 1st year
+According to their [pricing page](https://www.syncfusion.com/sales/products) in 2022
 
-## WPF Demo
+* $995 / year per developer for one set of controls (e.g., WinForms or WPF)
+* $2,495 / year per developer for all controls
+* prices decrease after the first year
 
-I wasn't able to download the WinForms demo (it wanted me to [download and compile it myself](https://github.com/syncfusion/winforms-demos)), but I did find a WPF demo [here](https://wpf.syncfusion.com/samples/18.1.0.42/ui/sfchart/sfchart.htm). It has most of the same chart types shown in the web browser demo.
+## Demo
 
-From the demos it doesn't seem these graphs are mouse-interactive. I found one mouse-interactive chart called "stock zooming" which felt very smooth and performant. It's disappointing that most of the graphs aren't able to be zoomed or panned.
+A WPF demo can now be downloaded from [appcenter](https://install.appcenter.ms/orgs/syncfusion-demos/apps/wpf-demos/distribution_groups/release) and run as described in [this help page](https://help.syncfusion.com/wpf/samples). Plots are smooth, but do not seem to be interactive to allow panning or zooming with the mouse.
 
-### Line Plot
+<img src="patient-monitor.gif" class="d-block mx-auto my-4">
+
+## Line Plot
 
 Let's take a closer look at their "fast charts" line plot demo. 
 
-![](graphics/wpf-charts-line.jpg)
+<img src="wpf-charts-line.jpg" class="d-block mx-auto my-4">
 
 Most of the styling and behavior of charts is controlled with XAML:
 
@@ -90,7 +89,7 @@ Most of the styling and behavior of charts is controlled with XAML:
 </chart:SfChart>
 ```
 
-The C# under the hood is pretty simple. MVC-style.
+The code-behind uses MVVM to manage data and update the plot:
 
 ```cs
 DataGenerator _viewModel = new DataGenerator();

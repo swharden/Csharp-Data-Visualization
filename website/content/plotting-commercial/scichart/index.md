@@ -1,49 +1,36 @@
 ---
-title: Plot Data with SciChart
-description: todo
-date: 3333-01-01
+title: SciChart
+description: A closer look at interactive scientific charting provided by SciChart
+date: 2020-04-01
+lastmod: 2022-03-17
 ---
 
-[SciChart](https://www.scichart.com) is a commercial charting library for .NET. Although they have mobile (iOS and Android) libraries, here we will take a closer look at their WPF charts library. It may be possible to use this control in Windows Forms applications with [ElementHost](https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms754008(v=vs.90)) or [more modern](https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-hosting-a-wpf-composite-control-in-windows-forms) techniques, but it's clearly intended for use in WPF applications.
+**SciChart is a commercial charting library for .NET for high performance interactive charting.** Although they have mobile (iOS and Android) libraries, here we will take a closer look at their WPF charts library. It may be possible to use this control in Windows Forms applications with [ElementHost](https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms754008(v=vs.90)) or [more modern](https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-hosting-a-wpf-composite-control-in-windows-forms) techniques, but their core product is intended for use in WPF applications.
 
-<div align="center">
+<img src="scichart-demo.gif" class="d-block mx-auto my-4">
 
-![](graphics/scichart-demo.gif)
+**SciChart strikes a nice balance of performance and aesthetic.** These charts benefit from DirectX (Windows), OpenGL (Android), or Metal (iOS) hardware acceleration, and controls are extensively themeable and have many customizable behaviors. The SciChart trial application demonstrates many plot types, and the intuitive controls, well-balanced visuals, and subtle animations are the best I've seen in this class of software.
 
-</div>
+## Price
+According to the [SciChart store](https://store.scichart.com/) in 2022:
 
-SciChart strikes a nice balance of performance and aesthetic. They use DirectX (Windows), OpenGL (Android), or Metal (iOS) hardware acceleration, while providing extensively themeable controls with many customizable behaviors. Their demo application features many plot types, and the intuitive controls, well-balanced visuals, and subtle animations are the best I've seen in this class of software.
+* $1,699 / year per developer for binaries for 2D charts for Windows
+* $1,999 / year per developer for binaries for 2D charts for all platforms
+* $2,299 / year per developer for binaries for 2D and 3D charts for Windows
+* $2,999 / year per developer for binaries for 2D and 3D charts for all platforms
+* $3,999 / year per developer for full source code
 
-### Default Controls
-* double click: fit axes to data
-* left-click-drag: zoom to region (if zoom mode)
-* left-click-drag: zoom to region (if pan mode)
-* scroll-wheel: zoom to cursor
+## Demo
 
-### Price
-Old screenshots suggest:
-* $599 for binaries and 3 months of support
-* $899 for binaries and 12 months of support
-* $2,200 for full source code and mobile controls
+The [SciChart examples website](https://www.scichart.com/example/) shows many sample charts with source code. Let's take a closer look at the [line chart example](https://www.scichart.com/example/wpf-line-chart-example/) shown in the screenshot at the top of the page. 
 
-But the [SciChart store](https://store.scichart.com/) now lists prices as a yearly fee, with different prices per year number, so I'm confused to the point where I don't know what the cost actually is or if the current software is a "software as a service" model or not.
+> **Warning:** It appears you are not able to evaluate the [demos](https://www.scichart.com/examples/wpf-chart/) on your machine without registering your personal information to obtain a trial application ☠️
 
-### Demo Application
+<img src="scichart-demos.jpg" class="d-block mx-auto shadow my-4 border">
 
-![](graphics/scichart-demos.jpg)
-
-The SciChart demo application has tons of example charts, all with source code. Let's take a closer look at the line chart shown in the screenshot at the top of the page.
-
-### Sample Code (Line Chart)
-
-Here's the code associated with the line chart shown in the screenshot at the top of the page.
-
-Most of the styling seems to be achieved by customizing the XAML.
+Most styling and behavior customization is achieved by writing XAML:
 
 ```xml
-<!--  The SciChartInteractionToolbar adds zoom, pan, zoom extents and rotate functionality  -->
-<!--  to the chart and is included for example purposes.  -->
-<!--  If you wish to know how to zoom and pan a chart then do a search for Zoom Pan in the Examples suite!  -->
 <ext:SciChartInteractionToolbar TargetSurface="{Binding Source={x:Reference Name=sciChart}}"/>
 
 <!--  Create the chart surface  -->
@@ -71,7 +58,7 @@ Most of the styling seems to be achieved by customizing the XAML.
 </s:SciChartSurface>
 ```
 
-The C# uses MVC-style programming to crate a series (model) and load it into a renderer (view). Modifying the series data will trigger updates to the view.
+Data must be loaded into custom objects to be displayed in the chart:
 
 ```cs
 private void LineChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
@@ -90,40 +77,25 @@ private void LineChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
 }
 ```
 
-### Performance Demo
+## Performance
 
-The SciChart demo has a performance example which simulates live incoming data (1,000 points every 20 ms). Comfortable interactive frame rates are achieved even when the data set has millions of points.
+The SciChart demo has a performance example which simulates live incoming data (1,000 points every 20 ms). Comfortable interactive frame rates are achieved even when the dataset has millions of points. This example disables mouse interaction while data is being updated and it's not entirely clear to me why, but overall these demos are quite impressive!
 
-![](graphics/scichart-performance.gif) 
+<img src="scichart-performance.gif" class="d-block mx-auto my-4">
 
-Interestingly they disallow mouse interaction while data is being updated and I'm not sure why. This is a strikingly impressive demo nonetheless!
+## Conclusions
 
-The excellent performance of SciCharts is what makes it a strong contender in the charting space. Their demo application did an excellent thing by pairing interactive examples with their source code.
+**SciChart's excellent performance and extensive documentation makes it a very strong contender in the .NET charting space.** It is very expensive, but this may be a good fit for large companies with big budgets or niche software products with high profit margins.
 
-<!--
-**I'm not a fan of the setup:** I was immediately disappointed I couldn't assess SciChart's capabilities by simply running a demo on my machine. Don't get me wrong - they do have a demo application - but it only comes bundled with the whole SciChart distribution. Worse, you can't even download it without creating an account (which I anticipate will put junk mail in my inbox). Worse still, you can't simply run a demo application after downloading the huge 200MB zip, you have to _install_ the SciChart application on your machine first. The installer requires you give it administrative privileges to run, and when it launches it obnoxiously occupies the full screen with a self-promoting advertisement. After installation, the demo program pops up, and I noticed "allow usage stats feedback to our surface" was enabled by default, hidden behind a settings screen. I could deselect it, but who knows what data was already sent before I could reach that menu. I'm not actually worried about my privacy here - I'll bet that is intended to control data transfer related to user feedback buttons in the app and it is probably described in the huge legal agreement I "read" when I installed the demo - but pulling a quick move like that didn't instill me with confidence that this group has my best interests in mind.
+* I like how their demo application pairs working examples with source code, but I am disappointed you are required to share your personal information and sign-up for a trial just to run it.
 
-### Why to Favor SciChart Over Open-Source Options
+* Their model of customization through extensive XAML editing makes sense, but requires extensive domain knowledge to get started and is obviously targeted at WPF experts.
 
-I found SciChart's [Comparison of SciChart vs. Open Source Chart Controls](https://www.scichart.com/comparison-of-scichart-vs-open-source-chart-controls/) very interesting! As a developer of an open source chart control myself, I read their compelling article and summarized it like this:
+* I found [Comparison of SciChart vs. Open Source Chart controls](https://www.scichart.com/comparison-of-scichart-vs-open-source-chart-controls/) fascinating. They raise some compelling arguments why you may _not_ want use open-source software. As an open-source maintainer it's difficult for me to evaluate these arguments without bias. Personally, I'm not particularly impressed by how many bugs have been fixed in a product, or how quick a company is to sell me technical support. I would prefer a software product that is simple, does not require frequent bug fixes, and is easy enough to use that it does not require additional paid support. I'm somewhat suspicious of library authors who write complex libraries that are difficult to use then charge for consultancy.
 
-**1. OSS projects have lots of issues.** This point is stated literally, calling out [OxyPlot](https://github.com/oxyplot/oxyplot/issues), [LiveCharts](https://github.com/Live-Charts/Live-Charts/issues), [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart/issues), and [Microsoft Charts](https://github.com/danielgindi/Charts/issues) for having many open issues on GitHub. SciChart states it has thousands of _resolved_ issues, but can't provide a link to their issues page because their GitHub repository is not public.
+* The [SciChart home page](https://www.scichart.com/) advertises the project contains 3,490,000 lines of code. I come from an environment where lines of code are considered a metric of technical debt, and well-designed software minimizes the amount of code that must be maintained. Perhaps this is a reasonable number for their project, I just find it interesting they advertise it.
 
-**2. Use a simple library.** A hard to learn or hard to adapt "free" library will cost you by absorbing unnecessarily-large amounts of developer time, and possibly even delay shipment of your software product. There's something to be said for a choosing a library with a simple API, examples, documentation, tutorials, etc., because they save you time (and therefore money). There's an excellent case made here that a difficult-to-use library will set you back in time and money, so be sure to factor-in ease of adoption and integration when choosing which library is the best tool for the job.
-
-**3. Many open-source projects become abandoned.** This is very true, and SciChart drives the point home by showing the commit history graphs of popular OSS charting libraries. One could argue that a stable libraries will taper-down their commits as they mature, but the four they list (OxyPlot, MPAndroidChart, LiveCharts, and Microsoft Charts) are indeed dead or dying projects.
-
-**4. SciChart has lots of features.** They present a table where they compare SciChart's features to those of the popular open-source libraries. They make the point that many of the open-source options have limited capabilities, documentation, and support.
-
-**5. Flexibility.** This point seems to be a bit nuanced but they point to some niche features of SciChart (they call "deep features") and argue that they can make it easier if your needs become more complex in the future. 
-
-I can't help but comment on this one. SciChart argues their _extensibility_ is useful, as it can be adapted to accomplish obscure tasks. This is true, however one could also argue open-source software is _flexible_ in that its code can be modified as needed to accomplish obscure tasks. In fairness this is only true if the source code is well-written, easy to understand, and well-maintained, and open-source projects are the wild west of coding styles so you never know what you're going to get.
-
-**6. Performance.** SciChart uses hardware acceleration (DirectX, OpenGL, and Metal) to produce some of the fastest charts in the world.
-
--->
-
-### SciChart Resources
+## Resources
 * [SciChart WPF SDK Documentation](https://www.scichart.com/documentation/win/current/SciChart_WPF_SDK_User_Manual.html)
 * [SciChart WPF Tutorials](https://www.scichart.com/documentation/v5.x/Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
 * [SciChart Community FAQs (Forums)](www.scichart.com/questions)
