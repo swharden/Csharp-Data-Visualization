@@ -1,6 +1,6 @@
 baseURL = 'https://swharden.com/csdv'
 enableInlineShortcodes = true
-googleAnalytics = 'G-GN1D8JT7TK'
+disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [outputFormats]
   [outputFormats.RSS]
