@@ -24,7 +24,14 @@
     <link rel="stylesheet" href="/csdv/css/page.css?{{ md5 (now|time) }}">
     <link rel="stylesheet" href="/csdv/css/github.css?{{ md5 (now|time) }}">
 
-    {{ template "_internal/google_analytics_async.html" . }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GN1D8JT7TK"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-GN1D8JT7TK');
+    </script>
+
     {{ template "_internal/opengraph.html" . }}
     {{ template "_internal/twitter_cards.html" . }}
 
