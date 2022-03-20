@@ -1,24 +1,36 @@
 {{ define "main" }}
 
-<article class="bg-white shadow-sm border rounded px-3" style="min-height: 800px;">
 
-    <div class="fs-1 fw-light my-4">
-        <a href="{{ .Permalink }}" class="text-dark">{{.Title}}</a>
-        <div>{{ .Description }}</div>
-    </div>
+<article class="bg-light shadow-sm rounded border" style="min-height: 800px;">
 
-    {{ .Content }}
+    <header class="px-3 py-2">
 
-    {{ range .Paginator.Pages }}
-    <div class="my-4">
-        <div class="fs-4">
-            <a href='{{.Page.Permalink}}'>{{.Title}}</a>
+        <div class="fs-1 fw-light lh-1 mt-2">
+            <a href="{{ .Permalink }}" class="text-dark">
+                {{ .Title | markdownify }}
+            </a>
         </div>
-        <div>
-            {{.Description}}
+
+        <div class="fs-5 fw-lighter lh-1 mt-2">
+            {{ .Description | markdownify }}
         </div>
+
+    </header>
+
+    <div class="px-3 rounded bg-white border-top">
+        {{ .Content }}
+
+        {{ range .Paginator.Pages }}
+        <div class="my-4">
+            <div class="fs-4">
+                <a href='{{.Page.Permalink}}'>{{.Title}}</a>
+            </div>
+            <div>
+                {{.Description}}
+            </div>
+        </div>
+        {{ end }}
     </div>
-    {{ end }}
 
 </article>
 

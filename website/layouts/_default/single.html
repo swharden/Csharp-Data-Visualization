@@ -12,9 +12,9 @@
 {{ warnf "Missing Date: %q" .File.Path }}
 {{ end }}
 
-<article class="bg-white shadow-sm border rounded">
+<article class="bg-light shadow-sm rounded border">
 
-    <header class="border-bottom bg-light px-3 py-2">
+    <header class="px-3 py-2">
 
         <div class="fs-1 fw-light lh-1 mt-2">
             <a href="{{ .Permalink }}" class="text-dark">
@@ -53,7 +53,7 @@
 
     </header>
 
-    <div class="p-3">
+    <div class="p-3 rounded bg-white border-top">
         {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
             `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
     </div>
