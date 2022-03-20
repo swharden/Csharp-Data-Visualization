@@ -2,6 +2,7 @@
 title: Infragistics Chart
 description: Investigating charting controls provided by Infragistics
 date: 2020-04-01
+weight: 20
 ---
 
 **Infragistics has [charting tools for a variety of platforms](https://www.infragistics.com/products/ultimate) including Windows Forms and WPF.** They seem to actively develop a wide variety of controls for many frameworks (including web platforms), and that diffusion of effort leaves them with a charting library that is interesting and looks nice, but isn't really the type of thing I'd want to integrate into a scientific desktop application.

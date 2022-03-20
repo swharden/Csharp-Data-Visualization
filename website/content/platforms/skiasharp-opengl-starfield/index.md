@@ -2,6 +2,7 @@
 title: Animating Graphics with SkiaSharp and OpenGL
 description: How to animate 2D graphics in C# using SkiaSharp & OpenGL
 date: 2020-04-01
+weight: 40
 ---
 
 **This project uses C# and the SkiaSharp drawing library to create high-performance animations with hardware-acceleration provided by OpenGL.** We will use the same Starfield graphics model we created earlier in this series.

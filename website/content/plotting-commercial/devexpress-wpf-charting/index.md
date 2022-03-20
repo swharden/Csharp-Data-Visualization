@@ -2,6 +2,7 @@
 title: DevExpress WPF Charting
 description: Investigating the WPF Charting controls provided by DevExpress
 date: 2020-04-01
+weight: 30
 ---
 
 **The [WPF Charting](https://www.devexpress.com/Products/NET/Controls/WPF/Charting/) package by DevExpress provides user controls for creating interactive and animated charts in .NET applications.** DevExpress makes many controls for [Windows Forms](https://www.devexpress.com/products/net/controls/winforms/) and [WPF](https://www.devexpress.com/products/net/controls/wpf/), and charting controls are just one part of their large collection of UI components offered. When their charting controls are put under a magnifying glass and examined in isolation, I don't find them particularly impressive compared to similar controls designed by teams who only produce charting software.

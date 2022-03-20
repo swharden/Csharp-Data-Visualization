@@ -2,6 +2,7 @@
 title: Drawing with ImageSharp
 description: How to draw 2D graphics in C# using ImageSharp
 date: 2020-04-01
+weight: 50
 ---
 
 **[ImageSharp](https://github.com/SixLabors/ImageSharp) is a 2D graphics library developed by [Six Labors](https://sixlabors.com/).** Compared to System.Drawing, ImageSharp uses more modern paradigms like memory management, thread safety, and functional styles, and strives to be flexible and extensible. Development is partially supported by contributions through [Open Collective](https://opencollective.com/sixlabors).

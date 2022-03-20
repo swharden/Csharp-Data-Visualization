@@ -3,6 +3,7 @@ title: SciChart
 description: A closer look at interactive scientific charting provided by SciChart
 date: 2020-04-01
 lastmod: 2022-03-17
+weight: 10
 ---
 
 **SciChart is a commercial charting library for .NET for high performance interactive charting.** Although they have mobile (iOS and Android) libraries, here we will take a closer look at their WPF charts library. It may be possible to use this control in Windows Forms applications with [ElementHost](https://docs.microsoft.com/en-us/previous-versions/dotnet/netframework-3.5/ms754008(v=vs.90)) or [more modern](https://docs.microsoft.com/en-us/dotnet/framework/wpf/advanced/walkthrough-hosting-a-wpf-composite-control-in-windows-forms) techniques, but their core product is intended for use in WPF applications.

@@ -3,6 +3,7 @@ title: Plot Data with OxyPlot
 description: How to plot data in C# projects using OxyPlot
 date: 2020-05-17
 lastmod: 2022-03-16
+weight: 20
 ---
 
 **OxyPlot is a 2D plotting library for .NET that has been actively developed since 2010.** OxyPlot is MIT-licensed and has components for an impressive number of modern platforms (WinForms, WPF, UWP, Xamarin, XWT) and some legacy ones too (Silveright and Windows Phone). The WinForms control ([PlotView.cs](https://github.com/oxyplot/oxyplot/blob/develop/Source/OxyPlot.WindowsForms/PlotView.cs)) renders using System.Drawing, but a rendering systems using SkiaSharp and ImageSharp also exist. OxyPlot was created to plot 2D data which is why it has "xy" in its name.

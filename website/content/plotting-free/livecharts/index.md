@@ -3,6 +3,7 @@ title: Plot Data with LiveCharts
 description: How to plot data in a .NET application using the LiveCharts library
 date: 2020-05-17
 lastmod: 2022-03-16
+weight: 40
 ---
 
 **LiveCharts is a charing library that updates and animates automatically as data changes in real time.** LiveCharts is up-front about the that performance is a secondary concern. LiveCharts used to sell an enhancement called the "Geared package" which improved performance using DirectX (although [SharpDX is no longer maintained](http://sharpdx.org/)). LiveCharts2 began development in 2021 and uses an alternative rendering system (SkiaSharp) to improve support and performance across multiple platforms.

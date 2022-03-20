@@ -2,6 +2,7 @@
 title: Drawing with SkiaSharp
 description: How to draw 2D graphics in C# using SkiaSharp
 date: 2020-04-01
+weight: 20
 ---
 
 **[SkiaSharp](https://github.com/mono/SkiaSharp) is a .NET wrapper for Google's [Skia Graphics Library](https://skia.org/)** that can be used to draw 2D graphics across mobile, server, and desktop platforms. SkiaSharp can be used with OpenGL for hardware-accelerated rendering. SkiaSharp was initially developed by Mono but is now maintained by Microsoft and is provided under the [MIT License](https://github.com/mono/SkiaSharp/blob/master/LICENSE.md).

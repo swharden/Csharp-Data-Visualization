@@ -3,6 +3,7 @@ title: Plot Data with ScottPlot
 description: How to use ScottPlot to interactively display data in C# applications
 date: 2020-05-17
 lastmod: 2022-03-16
+weight: 10
 ---
 
 **[ScottPlot](https://scottplot.net) is a free and open-source interactive plotting library for .NET.** It has user controls for Windows Forms, WPF, Avalonia, and Eto Forms, and it can even generate plots as image files in server environments or console applications. ScottPlot targets .NET Standard 2.0 so it can be used in both .NET Framework and .NET Core applications. ScottPlot's API mimics [Matplotlib](https://matplotlib.org/) for Python, and most plots can be created with a single line of code (using optional arguments to customize styling).

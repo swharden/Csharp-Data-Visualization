@@ -2,6 +2,7 @@
 title: Drawing with WPF Primitives
 description: How to draw 2D graphics in C# using WPF primitive shapes
 date: 2020-04-01
+weight: 60
 ---
 
 **This article demonstrates how to draw graphics using WPF primitive objects.** The allure of drawing this way is that the programmer can simply place objects and WPF will display them using a separate thread (with DirectX acceleration). We will also take a closer look at the use of `DrawingVisual` which can be used to display graphics with a slight performance enhancement.

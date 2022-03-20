@@ -3,6 +3,7 @@ title: Plot Data with Interactive Data Display
 description: Getting Started with Microsoft's Interactive Data Display Library for WPF
 date: 2020-05-18
 lastmod: 2022-03-16
+weight: 80
 ---
 
 **Interactive Data Display is a set of WPF controls developed by Microsoft for interactively displaying data in WPF applications.** It supports line graphs, bubble charts, heat maps and other complex 2D plots which are very common in scientific software. The last commit on the [GitHub page](https://github.com/Microsoft/InteractiveDataDisplay.WPF) is from 2018 and the last published NuGet package [`InteractiveDataDisplay.WPF`](https://www.nuget.org/packages/InteractiveDataDisplay.WPF/) is from 2017, so it seems **this project is no longer maintained**.

@@ -3,6 +3,7 @@ title: Plot Data with Microsoft Charting
 description: Getting Started with Microsoft's Chart control
 date: 2020-05-15
 lastmod: 2022-03-16
+weight: 70
 ---
 
 **Microsoft's `Chart` control is one of the easiest ways to get started displaying data in .NET Framework WinForms applications** since it is [natively available](https://docs.microsoft.com/en-us/dotnet/api/system.windows.forms.datavisualization.charting.chart) and automatically appears in the Windows Forms Toolbox in Visual Studio. To get started just drag a `Chart` from the toolbox and drop it onto your form.

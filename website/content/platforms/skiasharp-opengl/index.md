@@ -2,6 +2,7 @@
 title: Drawing with SkiaSharp & OpenGL
 description: How to draw 2D graphics in C# using SkiaSharp & OpenGL
 date: 2020-04-01
+weight: 30
 ---
 
 The [drawing with SkiaSharp](../skiasharp) page described how to use Skia to render graphics on a Bitmap and display them in a `PictureBox`. **In this project we will use the `skglControl` user control to create an OpenGL-accelerated surface for us to draw on.** OpenGL will offer an excellent performance enhancement, especially when creating large or full-screen animations.

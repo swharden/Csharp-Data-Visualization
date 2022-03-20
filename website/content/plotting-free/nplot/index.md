@@ -3,6 +3,7 @@ title: Plot Data with NPlot
 description: How to plot data using NPlot in C# projects
 date: 2020-05-15
 lastmod: 2022-03-16
+weight: 60
 ---
 
 **NPlot is a charting library for .NET Framework applications.** It can be used to render graphs as Bitmaps (suitable for use in console applications) and it has a mouse-interactive user control for Windows Forms. NPlot is simple, but it lacks many features, and it only targets .NET Framework.

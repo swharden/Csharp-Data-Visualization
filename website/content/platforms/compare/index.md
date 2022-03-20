@@ -2,6 +2,7 @@
 title: Comparing Graphics Libraries
 description: Evaluating alternatives to System.Drawing for rendering 2D graphics using C#
 date: 2020-04-01
+weight: 10
 ---
 
 **This set of articles will look beyond `System.Drawing` at some of the currently-available alternative options for 2D drawing libraries.** To compare performance of different rendering libraries we will use a common benchmark image which is simply a blue background with random lines on it that vary by position, size, and color.

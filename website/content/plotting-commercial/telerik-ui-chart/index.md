@@ -3,6 +3,7 @@ title: Telerik UI Chart
 description: Using Telerik's chart control to display data in .NET applications
 date: 2020-04-01
 lastmod: 2022-03-17
+weight: 70
 ---
 
 **Telerik sells a suite of UI components which includes ChartView, a control for data visualization.** Information on [WPF ChartView](https://www.telerik.com/products/wpf/chartview.aspx) and [WinForms ChartView](https://www.telerik.com/products/winforms/chartview.aspx) is found on separate pages. It appears this control was built for easy theming and supports animations for simple data, but I suspect performance or support for large datasets was not a primary design goal.

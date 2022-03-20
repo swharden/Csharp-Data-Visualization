@@ -3,6 +3,7 @@ title: Plot Data with ZedGraph
 description: How to plot data in C# projects using ZedGraph
 date: 2020-05-16
 lastmod: 2022-03-16
+weight: 50
 ---
 
 **ZedGraph is a C# plotting library for drawing 2D Line, Bar, and Pie Charts.** ZedGraph was created in the early 2000s but development appears to have ceased before 2010 according to the [ZedGraph home page](http://zedgraph.sourceforge.net/samples.html) at SourceForge. ZedGraph is available as a [NuGet package](https://www.nuget.org/packages/ZedGraph) and it has a [GitHub page](https://github.com/ZedGraph/ZedGraph), but neither have been updated since 2018.
