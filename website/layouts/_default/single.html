@@ -12,42 +12,54 @@
 {{ warnf "Missing Date: %q" .File.Path }}
 {{ end }}
 
+<header class="my-3">
 
-<article class="bg-white shadow-sm px-4 py-1 border border-top-0 rounded-bottom rounded-top-0">
+    <div class="fs-1 fw-light mb-0">
+        <a href="{{ .Permalink }}" class="text-dark">
+            {{ .Title | markdownify }}
+        </a>
+    </div>
 
-    <header>
+    <div class="fs-5 fw-lighter">
+        {{ .Description | markdownify }}
+    </div>
 
-        <div class="fs-1 fw-light mb-0">
-            <a href="{{ .Permalink }}" class="text-dark">
-                {{ .Title | markdownify }}
-            </a>
-        </div>
+    <div style="opacity: .4;">
 
-        <div class="fs-5 fw-lighter">
-            {{ .Description | markdownify }}
-        </div>
+        {{ if not .Date.IsZero }}
+        <a href="{{ .Permalink }}" class="text-dark">
+            {{ .Date.Format "January 2, 2006" }}
+        </a>
+        {{ end }}
 
-        <div style="opacity: .4;">
-            <a href="{{ .Permalink }}" class="text-dark">
-                {{ if not .Date.IsZero }}
-                {{ .Date.Format "January 2, 2006" }}
-                {{ end }}
+        <span style='opacity: .3;'>|</span>
 
-                {{ if isset .Params "lastmod" }}
-                {{ if ne .Date .Lastmod }}
-                (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
-                {{ end }}
-                {{ end }}
-            </a>
-        </div>
+        {{ if isset .Params "lastmod" }}
+        {{ if ne .Date .Lastmod }}
 
-    </header>
+        <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
+        {{ end }}
+        {{ end }}
 
-    <hr class="my-4" />
+        <span style='opacity: .3;'>|</span>
 
+        <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
+            class="text-dark">view source</a>
+    </div>
+
+</header>
+
+<article class="bg-white shadow-sm p-4 border rounded0">
     {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
         `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
 </article>
+
+<div class="p-2" style="opacity: .3;">
+    <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
+        class="text-dark">
+        view source
+    </a>
+</div>
 
 <nav class="p-2 lh-lg fs-4 my-4 fw-light">
 
