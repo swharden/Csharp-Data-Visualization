@@ -1,57 +1,55 @@
 {{ define "main" }}
 
 {{ if not .Title }}
-{{ warnf "Missing Title: %q" .Path }}
+{{ warnf "Missing Title: %q" .File.Path }}
 {{ end }}
 
 {{ if not .Description }}
-{{ warnf "Missing Description: %q" .Path }}
+{{ warnf "Missing Description: %q" .File.Path }}
 {{ end }}
 
 {{ if not .Date }}
-{{ warnf "Missing Date: %q" .Path }}
+{{ warnf "Missing Date: %q" .File.Path }}
 {{ end }}
 
-<div class="mt-4">
 
-    <div class="fs-1 fw-light mb-0">
-        <a href="{{ .Permalink }}" class="text-dark">
-            {{ .Title | markdownify }}
-        </a>
-    </div>
+<article class="bg-white shadow-sm px-4 py-1 border border-top-0 rounded-bottom rounded-top-0">
 
-    <div class="fs-5 fw-lighter">
-        {{ .Description | markdownify }}
-    </div>
+    <header>
 
-    <div style="opacity: .4;">
-        <a href="{{ .Permalink }}" class="text-dark">
-            {{ if not .Date.IsZero }}
-            {{ .Date.Format "January 2, 2006" }}
-            {{ end }}
+        <div class="fs-1 fw-light mb-0">
+            <a href="{{ .Permalink }}" class="text-dark">
+                {{ .Title | markdownify }}
+            </a>
+        </div>
 
-            {{ if ne .Date .Lastmod }}
-            (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
-            {{ end }}
-        </a>
-    </div>
+        <div class="fs-5 fw-lighter">
+            {{ .Description | markdownify }}
+        </div>
 
-    <hr />
+        <div style="opacity: .4;">
+            <a href="{{ .Permalink }}" class="text-dark">
+                {{ if not .Date.IsZero }}
+                {{ .Date.Format "January 2, 2006" }}
+                {{ end }}
 
-</div>
+                {{ if isset .Params "lastmod" }}
+                {{ if ne .Date .Lastmod }}
+                (updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }})
+                {{ end }}
+                {{ end }}
+            </a>
+        </div>
 
-<div class="py-2">
-    <main>
-        <article>
-            {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
-                `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
-        </article>
-    </main>
-</div>
+    </header>
 
-<hr class="my-5" style="visibility: hidden;">
+    <hr class="my-4" />
 
-<div style="opacity: .5;" class="lh-lg">
+    {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
+        `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
+</article>
+
+<nav class="p-2 lh-lg fs-4 my-4 fw-light">
 
     {{ if .Prev }}
     <div class="">
@@ -70,7 +68,7 @@
         Section: <a href='{{ .Permalink }}'>{{ .Title }}</a>
         {{ end }}
     </div>
-    
-</div>
+
+</nav>
 
 {{ end }}
