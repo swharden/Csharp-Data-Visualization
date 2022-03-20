@@ -1,38 +1,42 @@
 {{ define "main" }}
 
-<article class="py-3">
-  {{ .Content }}
-</article>
+<article class="bg-white shadow-sm border rounded px-3">
 
-<article>
-  <div class="row mb-5">
-    <div class="col-sm text-center">
-      <div class="fw-light fs-5">Boids</div>
-      <a href='simulations/boids'><img src="img/highlights/boids.gif"></a>
-    </div>
-    <div class="col-sm text-center">
-      <div class="fw-light fs-5">Life</div>
-      <a href="simulations/life"><img src="img/highlights/life.gif"></a>
-    </div>
-    <div class="col-sm text-center">
-      <div class="fw-light fs-5">Mystify</div>
-      <a href="simulations/mystify"><img src="img/highlights/mystify.gif"></a>
+  <div class="py-3">
+    {{ .Content }}
+  </div>
+
+  <div>
+    <div class="row mb-5">
+      <div class="col-sm text-center">
+        <div class="fw-light fs-5">Boids</div>
+        <a href='simulations/boids'><img src="img/highlights/boids.gif"></a>
+      </div>
+      <div class="col-sm text-center">
+        <div class="fw-light fs-5">Life</div>
+        <a href="simulations/life"><img src="img/highlights/life.gif"></a>
+      </div>
+      <div class="col-sm text-center">
+        <div class="fw-light fs-5">Mystify</div>
+        <a href="simulations/mystify"><img src="img/highlights/mystify.gif"></a>
+      </div>
     </div>
   </div>
-</article>
 
-<article>
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "skiasharp") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "system.drawing") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "maui.graphics") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "simulations") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "platforms") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "plotting-free") }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "plotting-commercial") }}
+  <div>
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "skiasharp") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "system.drawing") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "maui.graphics") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "simulations") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "platforms") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "plotting-free") }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "plotting-commercial") }}
 
-  {{ if .Site.IsServer }}
-  {{ partial "section-links.html" (dict "context" . "sectionKey" "dev") }}
-  {{ end }}
+    {{ if .Site.IsServer }}
+    {{ partial "section-links.html" (dict "context" . "sectionKey" "dev") }}
+    {{ end }}
+  </div>
+
 </article>
 
 {{ end }}

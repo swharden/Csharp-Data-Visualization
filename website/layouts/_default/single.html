@@ -12,46 +12,52 @@
 {{ warnf "Missing Date: %q" .File.Path }}
 {{ end }}
 
-<header class="my-3">
+<article class="bg-white shadow-sm border rounded">
 
-    <div class="fs-1 fw-light mb-0">
-        <a href="{{ .Permalink }}" class="text-dark">
-            {{ .Title | markdownify }}
-        </a>
+    <header class="border-bottom bg-light px-3 py-2">
+
+        <div class="fs-1 fw-light lh-1 mt-2">
+            <a href="{{ .Permalink }}" class="text-dark">
+                {{ .Title | markdownify }}
+            </a>
+        </div>
+
+        <div class="fs-5 fw-lighter lh-1 mt-2">
+            {{ .Description | markdownify }}
+        </div>
+
+        <div class="mt-2 mb-1" style="opacity: .4;">
+
+            {{ if not .Date.IsZero }}
+            <a href="{{ .Permalink }}" class="text-dark">
+                {{ .Date.Format "January 2, 2006" }}
+            </a>
+            {{ end }}
+
+            {{ if isset .Params "lastmod" }}
+            {{ if ne .Date .Lastmod }}
+            <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
+            <span style='opacity: .3;'>|</span>
+            {{ end }}
+            {{ end }}
+
+            <span style='opacity: .3;'>|</span>
+
+            <a href="{{ .Permalink }}" class="text-dark">permalink</a>
+
+            <span style='opacity: .3;'>|</span>
+
+            <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
+                class="text-dark">view source</a>
+        </div>
+
+    </header>
+
+    <div class="p-3">
+        {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
+            `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
     </div>
 
-    <div class="fs-5 fw-lighter">
-        {{ .Description | markdownify }}
-    </div>
-
-    <div style="opacity: .4;">
-
-        {{ if not .Date.IsZero }}
-        <a href="{{ .Permalink }}" class="text-dark">
-            {{ .Date.Format "January 2, 2006" }}
-        </a>
-        {{ end }}
-
-        <span style='opacity: .3;'>|</span>
-
-        {{ if isset .Params "lastmod" }}
-        {{ if ne .Date .Lastmod }}
-
-        <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
-        {{ end }}
-        {{ end }}
-
-        <span style='opacity: .3;'>|</span>
-
-        <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
-            class="text-dark">view source</a>
-    </div>
-
-</header>
-
-<article class="bg-white shadow-sm p-4 border rounded0">
-    {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
-        `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
 </article>
 
 <div class="p-2" style="opacity: .3;">
