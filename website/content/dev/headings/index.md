@@ -1,5 +1,7 @@
 ---
 title: Headings
+description: demonstrate every heading level
+date: 2020-04-01
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non iaculis augue. Morbi maximus pulvinar dui, maximus dignissim nisi sagittis eget. Suspendisse aliquam enim sed felis venenatis vestibulum. Phasellus fringilla est lacus, sed mattis justo varius sed. Duis mauris velit, consequat non lacus a, eleifend eleifend neque. Cras a libero hendrerit, semper dui nec, pharetra nunc. Vestibulum pulvinar eget erat at ullamcorper. Donec luctus tempus dui malesuada consectetur. Aliquam dapibus eros eu tortor congue, vitae tincidunt leo pulvinar. Sed tincidunt ultrices risus, eu pharetra quam volutpat id. Cras facilisis non erat in varius. Curabitur commodo tellus eget diam volutpat bibendum. Curabitur a sodales massa. Suspendisse efficitur quam purus, non blandit sapien facilisis ac. Mauris elementum efficitur metus sit amet luctus.
