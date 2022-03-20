@@ -26,14 +26,20 @@
             {{ .Description | markdownify }}
         </div>
 
-        <div class="mt-2 mb-1" style="opacity: .4;">
+        <nav class="mt-2 mb-1" style="opacity: .4;">
 
+            <!-- section -->
+            <a href="{{ .CurrentSection.Permalink }}" class="text-dark">{{ .CurrentSection.Title }}</a>
+
+            <!-- original date -->
+            <span style='opacity: .3;'>|</span>
             {{ if not .Date.IsZero }}
             <a href="{{ .Permalink }}" class="text-dark">
                 {{ .Date.Format "January 2, 2006" }}
             </a>
             {{ end }}
 
+            <!-- modified date -->
             {{ if isset .Params "lastmod" }}
             {{ if ne .Date .Lastmod }}
             <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
@@ -41,15 +47,15 @@
             {{ end }}
             {{ end }}
 
+            <!-- permalink -->
             <span style='opacity: .3;'>|</span>
-
             <a href="{{ .Permalink }}" class="text-dark">permalink</a>
 
+            <!-- source link -->
             <span style='opacity: .3;'>|</span>
-
             <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
                 class="text-dark">view source</a>
-        </div>
+        </nav>
 
     </header>
 
