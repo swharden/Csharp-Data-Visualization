@@ -43,7 +43,7 @@
 
     <div class="container-fluid" style="position: relative; max-width: 1000px;">
 
-        <nav class="text-light py-5">
+        <header class="text-light py-5">
             <div class="container-fluid" style="max-width: 1000px;">
                 <div class="display-5 fw-normal">
                     <a href='/csdv' class="text-light" style="text-shadow: 2px 2px 2px #00000066;">C# Data
@@ -53,18 +53,46 @@
                     Resources for visualizing data using C# and the .NET platform
                 </div>
             </div>
-        </nav>
+        </header>
 
         <main>
             {{ block "main" . }}
             {{ end }}
         </main>
 
-        <footer>
-            {{ partial "footer.html" . }}
-        </footer>
-
     </div>
+
+    <footer class="align-items-end mt-5">
+        <div class="row">
+            <div class="col-sm text-center py-3" style="opacity: .3;">
+                <div>
+                    Copyright &copy; {{ now.Format "2006" }}
+                </div>
+                <div>
+                    <a href='https://swharden.com/about' class="text-dark">Scott W Harden</a>
+                </div>
+            </div>
+
+            <div class="col-sm text-center py-3" style="opacity: .3;">
+                <div>
+                    Built with Hugo {{ .Site.Hugo.Version }}
+                </div>
+                <div>
+                    {{ time now | time.Format ":date_long" }}
+                    at {{ time now "America/New_York" | time.Format ":time_short" }} EST
+                </div>
+            </div>
+
+            <div class="col-sm text-center py-3" style="opacity: .3;">
+                <a href="/csdv/feed" class="text-dark">RSS Feed</a>
+                <br>
+                <a href="https://github.com/swharden/Csharp-Data-Visualization/blob/main/website/content/{{ path.Clean .File.Path }}"
+                    class="text-dark">
+                    Page Source
+                </a>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
