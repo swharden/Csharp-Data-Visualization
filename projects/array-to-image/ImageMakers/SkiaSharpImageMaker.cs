@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace ArrayToImage.ImageMakers;
 
-internal class SkiaSharpImageMaker : IImageMaker
+internal class SkiaSharpImageMaker : IGraphicsPlatform
 {
     public string Name => "SkiaSharp";
 
@@ -15,6 +15,28 @@ internal class SkiaSharpImageMaker : IImageMaker
         SKBitmap bmp = GetBitmap(pixelArray);
         using FileStream fs = new(filePath, FileMode.Create);
         bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
+        Console.WriteLine(filePath);
+    }
+
+    public byte[,,] LoadImageRgb(string filePath)
+    {
+        SKBitmap bmp = SKBitmap.Decode(filePath);
+
+        ReadOnlySpan<byte> spn = bmp.GetPixelSpan();
+
+        byte[,,] pixelValues = new byte[bmp.Height, bmp.Width, 3];
+        for (int y = 0; y < bmp.Height; y++)
+        {
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                int offset = (y * bmp.Width + x) * bmp.BytesPerPixel;
+                pixelValues[y, x, 0] = spn[offset + 2];
+                pixelValues[y, x, 1] = spn[offset + 1];
+                pixelValues[y, x, 2] = spn[offset + 0];
+            }
+        }
+
+        return pixelValues;
     }
 
     private static SKBitmap GetBitmap(byte[,,] pixelArray)

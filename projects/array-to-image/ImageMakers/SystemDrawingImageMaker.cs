@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace ArrayToImage.ImageMakers;
 
-public class SystemDrawingImageMaker : IImageMaker
+public class SystemDrawingImageMaker : IGraphicsPlatform
 {
     public string Name => "System.Drawing";
 
@@ -17,6 +17,33 @@ public class SystemDrawingImageMaker : IImageMaker
         bmp.Save(filePath);
         Console.WriteLine(filePath);
     }
+
+    public byte[,,] LoadImageRgb(string filePath)
+    {
+        using Bitmap bmp = new(filePath);
+        int bytesPerPixel = Image.GetPixelFormatSize(bmp.PixelFormat) / 8;
+        Rectangle rect = new(0, 0, bmp.Width, bmp.Height);
+        BitmapData bmpData = bmp.LockBits(rect, ImageLockMode.ReadWrite, bmp.PixelFormat);
+        int byteCount = Math.Abs(bmpData.Stride) * bmp.Height;
+        byte[] bytes = new byte[byteCount];
+        Marshal.Copy(bmpData.Scan0, bytes, 0, byteCount);
+        bmp.UnlockBits(bmpData);
+
+        byte[,,] pixelValues = new byte[bmp.Height, bmp.Width, 3];
+        for (int y = 0; y < bmp.Height; y++)
+        {
+            for (int x = 0; x < bmp.Width; x++)
+            {
+                int offset = (y * bmpData.Stride) + x * bytesPerPixel;
+                pixelValues[y, x, 0] = bytes[offset + 2]; // red
+                pixelValues[y, x, 1] = bytes[offset + 1]; // green
+                pixelValues[y, x, 2] = bytes[offset + 0]; // blue
+            }
+        }
+
+        return pixelValues;
+    }
+
     private static Bitmap GetBitmap(byte[,,] pixelArray)
     {
         int width = pixelArray.GetLength(1);
