@@ -42,8 +42,8 @@
             <!-- modified date -->
             {{ if isset .Params "lastmod" }}
             {{ if ne .Date .Lastmod }}
-            <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
             <span style='opacity: .3;'>|</span>
+            <a href="{{ .Permalink }}" class="text-dark">updated on {{ .Params.lastmod | dateFormat "Jan 2, 2006" }}</a>
             {{ end }}
             {{ end }}
 
