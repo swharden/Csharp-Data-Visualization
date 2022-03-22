@@ -1,62 +1,22 @@
 ---
 title: Array to Image with SkiaSharp
-description: How to create an image from a multidimensional array of pixel values
+description: How to convert a multidimensional array of pixel values to a Bitmap and back
 date: 2022-03-08 7:38:00
 lastmod: 2022-03-10 6:58:00
 weight: 2.1
 ---
 
-This page describes how to create an image from an array of RGB `byte` values using SkiaSharp.
+This page describes how to create an image from an array of RGB byte values (and vise-versa) using SkiaSharp.
 
-## Generate Sample Image Data
-
-This code creates a 3D array of image data arranged [width, height, channel]
-
-```cs
-public byte[,,] TestPattern(int width, int height)
-{
-    byte[,,] pixelArray = new byte[height, width, 3];
-
-    int period = 150;
-    int thickness = 60;
-
-    for (int y = 0; y < pixelArray.GetLength(0); y++)
-    {
-        for (int x = 0; x < pixelArray.GetLength(1); x++)
-        {
-            if ((x + y) % period < thickness)
-                pixelArray[y, x, 0] = 255; // red
-
-            if (y % period < thickness)
-                pixelArray[y, x, 1] = 255; // green
-
-            if (x % period < thickness)
-                pixelArray[y, x, 2] = 255; // blue
-        }
-    }
-
-    return pixelArray;
-}
-```
 
 ## Array to Image
 
-The following code will convert the 3D array to a `SKBitmap` and save the output as an image file.
+**This example creates a `SKBitmap` image from a 3D `byte` array** where the first axis is `row` position, the second axis is `column` position, and the final axis is color (`red`, `green` and `blue`).
 
-Notice that garbage collector handle's `AddrOfPinnedObject()` in combination with `InstallPixels()` allows this task to be accomplished without requiring an `unsafe` code block.
-
-```cs
-byte[,,] pixelArray = TestPattern();
-SKBitmap bmp = GetBitmap(pixelArray);
-using FileStream fs = new("demo.png", FileMode.Create);
-bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
-```
+This code uses the garbage collector handle's `AddrOfPinnedObject()` in combination with `InstallPixels()` so the conversion can be accomplished without requiring an `unsafe` code block.
 
 ```cs
-/// <summary>
-/// Create an image from a 3D array of bytes arranged [width, height, channel]
-/// </summary>
-public static SKBitmap GetBitmap(byte[,,] pixelArray)
+public static SKBitmap ArrayToImage(byte[,,] pixelArray)
 {
     int width = pixelArray.GetLength(1);
     int height = pixelArray.GetLength(0);
@@ -84,6 +44,71 @@ public static SKBitmap GetBitmap(byte[,,] pixelArray)
     bitmap.InstallPixels(info, ptr, rowBytes, delegate { gcHandle.Free(); });
 
     return bitmap;
+}
+```
+
+## Image to Array
+
+This example uses `Span<T>` so byte access can be provided without requiring `unsafe` code.
+
+```cs
+public byte[,,] ImageToArray(SKBitmap bmp)
+{
+    ReadOnlySpan<byte> spn = bmp.GetPixelSpan();
+
+    byte[,,] pixelValues = new byte[bmp.Height, bmp.Width, 3];
+    for (int y = 0; y < bmp.Height; y++)
+    {
+        for (int x = 0; x < bmp.Width; x++)
+        {
+            int offset = (y * bmp.Width + x) * bmp.BytesPerPixel;
+            pixelValues[y, x, 0] = spn[offset + 2];
+            pixelValues[y, x, 1] = spn[offset + 1];
+            pixelValues[y, x, 2] = spn[offset + 0];
+        }
+    }
+
+    return pixelValues;
+}
+```
+
+## Example Program
+
+The following code produces a multi-color pattern suitable for testing code found on this page.
+
+> 💡 **Tip:** I create test images using prime numbers for width and height to maximize the likelihood that memory errors and stride length miscalculations will be most obvious.
+
+```cs
+byte[,,] pixelArray = TestPattern(653, 487);
+SKBitmap bmp = ArrayToImage(pixelArray);
+using FileStream fs = new("demo.png", FileMode.Create);
+bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
+```
+
+```cs
+public byte[,,] TestPattern(int width, int height)
+{
+    byte[,,] pixelArray = new byte[height, width, 3];
+
+    int period = 150;
+    int thickness = 60;
+
+    for (int y = 0; y < pixelArray.GetLength(0); y++)
+    {
+        for (int x = 0; x < pixelArray.GetLength(1); x++)
+        {
+            if ((x + y) % period < thickness)
+                pixelArray[y, x, 0] = 255; // red
+
+            if (y % period < thickness)
+                pixelArray[y, x, 1] = 255; // green
+
+            if (x % period < thickness)
+                pixelArray[y, x, 2] = 255; // blue
+        }
+    }
+
+    return pixelArray;
 }
 ```
 
@@ -143,8 +168,6 @@ private static SKBitmap GetBitmapSLOW(byte[,,] pixelArray)
     return bitmap;
 }
 ```
-
-## TODO: Image to Array
 
 ## Resources
 * [C# Data Visualization on GitHib](https://github.com/swharden/Csharp-Data-Visualization)
