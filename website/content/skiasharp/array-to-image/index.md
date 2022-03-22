@@ -2,7 +2,7 @@
 title: Array to Image with SkiaSharp
 description: How to convert a multidimensional array of pixel values to a SKBitmap and back
 date: 2022-03-08 7:38:00
-lastmod: 2022-03-10 6:58:00
+lastmod: 2022-03-21 20:50:00
 weight: 2.1
 ---
 

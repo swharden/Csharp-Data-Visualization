@@ -2,7 +2,7 @@
 title: Array to Image with System.Drawing
 description: How to convert a multidimensional array of pixel values to a Bitmap and back
 date: 2022-03-08 7:38:00
-lastmod: 2022-03-10 6:58:00
+lastmod: 2022-03-21 20:50:00
 ---
 
 This page describes how to create an image from an array of RGB `byte` values (and vise-versa) using System.Drawing.
