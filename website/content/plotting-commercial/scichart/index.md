@@ -2,7 +2,7 @@
 title: SciChart
 description: A closer look at interactive scientific charting provided by SciChart
 date: 2020-04-01
-lastmod: 2022-03-17
+lastmod: 2022-03-24
 weight: 10
 ---
 
@@ -24,8 +24,6 @@ According to the [SciChart store](https://store.scichart.com/) in 2022:
 ## Demo
 
 The [SciChart examples website](https://www.scichart.com/example/) shows many sample charts with source code. Let's take a closer look at the [line chart example](https://www.scichart.com/example/wpf-line-chart-example/) shown in the screenshot at the top of the page. 
-
-> **Warning:** It appears you are not able to evaluate the [demos](https://www.scichart.com/examples/wpf-chart/) on your machine without registering your personal information to obtain a trial application ☠️
 
 <img src="scichart-demos.jpg" class="d-block mx-auto shadow my-4 border">
 
@@ -80,21 +78,17 @@ private void LineChartExampleView_OnLoaded(object sender, RoutedEventArgs e)
 
 ## Performance
 
-The SciChart demo has a performance example which simulates live incoming data (1,000 points every 20 ms). Comfortable interactive frame rates are achieved even when the dataset has millions of points. This example disables mouse interaction while data is being updated and it's not entirely clear to me why, but overall these demos are quite impressive!
+**The SciChart demo has a performance example which simulates live incoming data (1,000 points every 20 ms).** Comfortable interactive frame rates are achieved even when the dataset has millions of points. YouTime videos exist demonstrating SciChart displaying [1 billion](https://www.youtube.com/watch?v=YokLTaj6xvY), [10 billion](https://www.youtube.com/watch?v=XB7rZYUcKvY), and [64 billion](https://www.youtube.com/watch?v=wBJ7r9rTs_4) data points.
 
 <img src="scichart-performance.gif" class="d-block mx-auto my-4">
 
 ## Conclusions
 
-**SciChart's excellent performance and extensive documentation makes it a very strong contender in the .NET charting space.** It is very expensive, but this may be a good fit for large companies with big budgets or niche software products with high profit margins.
+**SciChart's excellent performance, extensive documentation, and options for paid support make it an appealing option for integration into commercial software products.** It has a hefty price tag, but the cost may be worth it for companies whose earning potential is pinned to the quality of the charting controls in their software products. 
 
-* I like how their demo application pairs working examples with source code, but I am disappointed you are required to share your personal information and sign-up for a trial just to run it.
+SciChart's [Comparison of SciChart vs. Open Source Chart controls](https://www.scichart.com/comparison-of-scichart-vs-open-source-chart-controls/) page makes a strong case that "free" software comes with drawbacks like limited bugfixes, risk of project abandonment, no guarantee of support, etc. While these may not be compelling arguments against using open-source software for hobby projects, paying for a commercial charting control run by a team of developers and support staff has benefits which appeal to enterprise clients that profit directly from their software.
 
-* Their model of customization through extensive XAML editing makes sense, but requires extensive domain knowledge to get started and is obviously targeted at WPF experts.
-
-* I found [Comparison of SciChart vs. Open Source Chart controls](https://www.scichart.com/comparison-of-scichart-vs-open-source-chart-controls/) fascinating. They raise some compelling arguments why you may _not_ want use open-source software. As an open-source maintainer it's difficult for me to evaluate these arguments without bias. Personally, I'm not particularly impressed by how many bugs have been fixed in a product, or how quick a company is to sell me technical support. I would prefer a software product that is simple, does not require frequent bug fixes, and is easy enough to use that it does not require additional paid support. I'm somewhat suspicious of library authors who write complex libraries that are difficult to use then charge for consultancy.
-
-* The [SciChart home page](https://www.scichart.com/) advertises the project contains 3,490,000 lines of code. I come from an environment where lines of code are considered a metric of technical debt, and well-designed software minimizes the amount of code that must be maintained. Perhaps this is a reasonable number for their project, I just find it interesting they advertise it.
+> 💡 **Update:** In March, 2022 I had a brief conversation with with SciChart's founder [Dr. Andrew Burnett-Thompson](https://www.scichart.com/about-us/) about the role of SciChart in an environment where open-source alternatives exist. Andrew was very supportive of open-source projects and their maintainers, and noted that SciChart is a professional product created for enterprises which stand to benefit from the superior quality and support that paying for a commercial charting library can provide.
 
 ## Resources
 * [SciChart WPF SDK Documentation](https://www.scichart.com/documentation/win/current/SciChart_WPF_SDK_User_Manual.html)
