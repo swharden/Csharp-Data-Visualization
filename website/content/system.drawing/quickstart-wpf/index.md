@@ -56,7 +56,7 @@ private BitmapImage BmpImageFromBmp(Bitmap bmp)
 
 ### 3. Create a `Render()` Method
 
-Here's the star of the show! It's nearly identical to the [drawing in Windows Forms](2-drawing-in-windows-forms.md.html) example, with key differences being:
+Here's the star of the show! It's nearly identical to the [Windows Forms quickstart](../quickstart-winforms/) example, with key differences being:
 
 * Bitmap size is determined by the `ActualWidth` and `ActualHeight` of the `Canvas`
 * At the end of the render we copy the output to the `Source` property of an `Image`.

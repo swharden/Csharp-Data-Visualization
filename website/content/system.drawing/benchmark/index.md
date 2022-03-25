@@ -61,7 +61,7 @@ var pixelFormat = System.Drawing.Imaging.PixelFormat.Format32bppPArgb;
 var bmp = new Bitmap(width, height, pixelFormat);
 ```
 
-> **💡 Deep dive:** Learn more about [straight vs. premultiplied alpha composition](https://en.wikipedia.org/wiki/Alpha_compositing#Straight_versus_premultiplied) theory on Wikipedia, and the application of [premultiplied alpha](https://microsoft.github.io/Win2D/html/PremultipliedAlpha.htm) in the .NET environment from Microsoft's website.
+> **💡 Deep dive:** Learn more about [straight vs. premultiplied alpha composition](https://en.wikipedia.org/wiki/Alpha_compositing#Straight_versus_premultiplied) theory on Wikipedia
 
 ## Source Code
 

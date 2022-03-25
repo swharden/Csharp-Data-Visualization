@@ -93,5 +93,5 @@ SciChart's [Comparison of SciChart vs. Open Source Chart controls](https://www.s
 ## Resources
 * [SciChart WPF SDK Documentation](https://www.scichart.com/documentation/win/current/SciChart_WPF_SDK_User_Manual.html)
 * [SciChart WPF Tutorials](https://www.scichart.com/documentation/v5.x/Tutorial%2001%20-%20Referencing%20SciChart%20DLLs.html)
-* [SciChart Community FAQs (Forums)](www.scichart.com/questions)
-* [WPF Chart Examples with Source-Code](www.scichart.com/wpf-chart-examples)
+* [SciChart Community FAQs (Forums)](https://www.scichart.com/questions)
+* [WPF Chart Examples with Source-Code](https://www.scichart.com/wpf-chart-examples)

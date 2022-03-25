@@ -89,7 +89,7 @@ public static void RenderContinuously()
 
 ## Notes
 
-* You can improve the responsiveness of your application by [animating graphics without blocking the GUI thread](../8-animating-without-GUI-blocking.md.html).
+* You can improve the responsiveness of your application by [animating graphics without blocking the GUI thread](../threading/).
 
 * System.Drawing actually has a [`BufferedGraphics`](https://docs.microsoft.com/en-us/dotnet/api/system.drawing.bufferedgraphics) which may be useful. I frequently choose not to use it because it has more complexity than my applications require.
 
