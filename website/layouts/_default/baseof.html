@@ -6,25 +6,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- standard meta -->
     <title>{{ .Title }}</title>
-
+    <meta name="description" content="{{ .Description }}">
     <link rel="icon" href="/csdv/favicon.ico" sizes="any">
     <link rel="icon" href="/csdv/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/csdv/favicon-180.png">
     <link rel="manifest" href="/csdv/manifest.webmanifest">
-
-    <meta name="description" content="{{ .Description }}">
-    <meta http-equiv="expires" content="3600" />
-    <link rel="sitemap" type="application/xml" title="Sitemap" href="/csdv/sitemap.xml">
-    <link rel="alternate" type="application/rss+xml" href="/csdv/feed" />
     <meta name="theme-color" content="#002440" />
 
+    <!-- feed -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/csdv/sitemap.xml">
+    <link rel="alternate" type="application/rss+xml" href="/csdv/feed" />
+
+    <!-- stylesheets -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
     <link rel="stylesheet" href="/csdv/css/page.css?v=20200319">
     <link rel="stylesheet" href="/csdv/css/github.css?v=20200319">
 
+    <!-- Facebook -->
+    <meta property="og:url" content="https://swharden.com/csdv/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ .Title }}">
+    <meta property="og:description" content="{{ .Description }}">
+    <meta property="og:image" content="/csdv/img/banner.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="swharden.com">
+    <meta property="twitter:url" content="https://swharden.com/csdv/">
+    <meta name="twitter:title" content="{{ .Title }}">
+    <meta name="twitter:description" content="{{ .Description }}">
+    <meta name="twitter:image" content="/csdv/img/banner.jpg">
+
+    <!-- analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-GN1D8JT7TK"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -32,9 +48,6 @@
         gtag('js', new Date());
         gtag('config', 'G-GN1D8JT7TK');
     </script>
-
-    {{ template "_internal/opengraph.html" . }}
-    {{ template "_internal/twitter_cards.html" . }}
 
 </head>
 
