@@ -59,7 +59,7 @@
 
     </header>
 
-    <div class="p-3 rounded bg-white border-top">
+    <div class="p-3 rounded bg-white border-top" style="min-height: 800px;">
         {{ .Content | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)"
             `<a href="#${2}">${1}</a> ${3}` | safeHTML }}
     </div>
@@ -75,23 +75,19 @@
 
 <nav class="p-2 lh-lg fs-4 my-4 fw-light">
 
-    {{ if .Prev }}
-    <div class="">
-        Next: <a href="{{ .Prev.Permalink }}">{{ .Prev.Title }}</a>
-    </div>
+    {{ if .PrevInSection }}
+    <div>Next: <a href="{{ .PrevInSection.Permalink }}">{{ .PrevInSection.Title }}</a></div>
     {{ end }}
 
-    {{ if .Next }}
-    <div class="">
-        Previous: <a href="{{ .Next.Permalink }}">{{ .Next.Title }}</a>
-    </div>
+    {{ if .NextInSection }}
+    <div>Previous: <a href="{{ .NextInSection.Permalink }}">{{ .NextInSection.Title }}</a></div>
     {{ end }}
 
-    <div class="">
-        {{ with .Site.GetPage "section" .Section }}
-        Section: <a href='{{ .Permalink }}'>{{ .Title }}</a>
-        {{ end }}
-    </div>
+    {{ with .Site.GetPage "section" .Section }}
+    <div>Section: <a href='{{ .Permalink }}'>{{ .Title }}</a></div>
+    {{ end }}
+
+    <div>Home: <a href='/csdv/'>C# Data Visualization</a></div>
 
 </nav>
 
