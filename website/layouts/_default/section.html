@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 
-<article class="bg-light shadow rounded border" style="min-height: 800px;">
+<article class="bg-light shadow rounded border">
 
     <header class="px-3 py-2">
 
@@ -17,7 +17,7 @@
 
     </header>
 
-    <div class="px-3 rounded bg-white border-top">
+    <div class="px-3 rounded bg-white border-top" style="min-height: 800px;">
         {{ .Content }}
 
         {{ range .Paginator.Pages }}
