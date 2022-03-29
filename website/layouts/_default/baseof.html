@@ -14,6 +14,9 @@
     <link rel="apple-touch-icon" href="/csdv/favicon-180.png">
     <link rel="manifest" href="/csdv/manifest.webmanifest">
     <meta name="theme-color" content="#002440" />
+    {{ if .Params.noindex }}
+    <meta name="robots" content="noindex">
+    {{ end }}
 
     <!-- feed -->
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/csdv/sitemap.xml">
