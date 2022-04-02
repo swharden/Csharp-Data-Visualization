@@ -1,6 +1,6 @@
 ---
 title: Drawing with SkiaSharp
-description: How to draw 2D graphics in C# using SkiaSharp
+description: How to draw 2D graphics in a C# WinForms application using SkiaSharp
 date: 2020-04-01
 weight: 20
 ---
@@ -30,9 +30,7 @@ In this example we are going to use SkiaSharp _without_ the SkiaSharp user contr
 * Edit your build settings to target `32-bit` or `64-bit` (not `any CPU`)
 * Install the `SkiaSharp` NuGet package
 
-The overall goal here is to create a `SKSurface` in memory, then draw on it using methods of its `Canvas`. 
-
-### Create a SKSurface in memory
+### 1. Create a SKSurface and Canvas
 
 ```cs
 var imageInfo = new SKImageInfo(
@@ -46,7 +44,7 @@ var surface = SKSurface.Create(imageInfo);
 var canvas = surface.Canvas;
 ```
 
-### Draw on the Surface's Canvas
+### 2. Draw on the Canvas
 
 ```cs
 canvas.Clear(SKColor.Parse("#003366"));
@@ -79,7 +77,7 @@ for (int i = 0; i < lineCount; i++)
 
 > 💡 See the [full SkiaSharp API](https://docs.microsoft.com/en-us/dotnet/api/SkiaSharp) to learn more about the available drawing methods
 
-### Render onto a Bitmap
+### 3. Render onto a Bitmap displayed in a Picturebox
 
 Now that we're done with the drawing, let's convert this image to a Bitmap so we can display it in a Picturebox. As we've discussed previously, as Picturebox is preferred because it is double-buffered and less prone to flickering during animations where the underlying image it displays is frequently updated.
 
