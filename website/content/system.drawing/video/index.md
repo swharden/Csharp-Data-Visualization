@@ -7,19 +7,27 @@ weight: 100
 
 This page describes the method I use to create video files using System.Drawing and ffmpeg.
 
+> ⚠️ **Warning: System.Drawing.Common now only supports Windows!**\
+> See [Cross-Platform Support for `System.Drawing`](../cross-platform) for more information and what you can do about it.
+
 <video controls autoplay loop width="400" height="300" class="d-block mx-auto my-5 border shadow">
     <source src="output.webm"
             type="video/webm">
     Sorry, your browser doesn't support embedded videos.
 </video>
 
-
-### 1. Add FFMpegCore to your Project
+### 1. Get FFMpegCore
 
 Add the [FFMpegCore package](https://www.nuget.org/packages/FFMpegCore/) to your project:
 
 ```
 dotnet add package FFMpegCore
+```
+
+If you're not working in a .NET Framework application, you may need to install [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/)
+
+```
+dotnet add package System.Drawing.Common
 ```
 
 Add the necessary usings to your code:
@@ -81,6 +89,5 @@ var success = FFMpegArguments
 
 ## Resources
 * Source code for this project: [Program.cs](https://github.com/swharden/Csharp-Data-Visualization/blob/main/projects/system-drawing/video/GraphicsToVideo/Program.cs)
-* https://www.nuget.org/packages/FFMpegCore/
-* https://github.com/rosenbjerg/FFMpegCore
-* [BitmapVideoFrameWrapper.cs](https://github.com/rosenbjerg/FFMpegCore/blob/6377c50de7aac95f5a6beb4278c58a890e2ddac5/FFMpegCore/Extend/BitmapVideoFrameWrapper.cs)
+* NuGet: https://www.nuget.org/packages/FFMpegCore
+* GitHub: https://github.com/rosenbjerg/FFMpegCore
