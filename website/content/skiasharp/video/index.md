@@ -2,7 +2,6 @@
 title: Render Video with SkiaSharp
 description: How to draw graphics for each frame and use ffmpeg to save the result as a video file
 date: 2020-05-02
-weight: 100
 ---
 
 This page describes the method I use to create video files using SkiaSharp and ffmpeg.
