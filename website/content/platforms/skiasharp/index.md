@@ -7,7 +7,7 @@ weight: 20
 
 **[SkiaSharp](https://github.com/mono/SkiaSharp) is a .NET wrapper for Google's [Skia Graphics Library](https://skia.org/)** that can be used to draw 2D graphics across mobile, server, and desktop platforms. SkiaSharp can be used with OpenGL for hardware-accelerated rendering. SkiaSharp was initially developed by Mono but is now maintained by Microsoft and is provided under the [MIT License](https://github.com/mono/SkiaSharp/blob/master/LICENSE.md).
 
-> 💡 This page demonstrates how to draw with SkiaSharp in a Windows Forms application. Users working with other platforms may wish to start with the [SkiaSharp Console Quickstart](https://swharden.com/csdv/skiasharp/quickstart-console/)
+> 💡 This page demonstrates how to create a `Surface`, draw on it, then convert it to a `Bitmap` and display it on a `PictureBox` in a windows forms application. A much better way to achieve this effect in WinForms apps is to [simply use the SKGLControl](https://swharden.com/csdv/platforms/skiasharp-opengl/)
 
 <img src="drawing-with-skiasharp.png" class="d-block mx-auto">
 
