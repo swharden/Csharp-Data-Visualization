@@ -7,6 +7,8 @@ weight: 999
 
 This project recreates the classic screensaver _Mystify_ using C# and `System.Drawing` in a Windows Forms application.
 
+> 💡 An updated version of this article is at https://swharden.com/blog/2022-04-06-mystify/
+
 <img src="mystify.gif">
 
 ### Field.cs
