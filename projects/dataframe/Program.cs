@@ -6,6 +6,12 @@ public static class Program
     {
         DataFrame df = SampleDataFrame();
 
+    }
+
+    private static void ColStats()
+    {
+        DataFrame df = SampleDataFrame();
+
         foreach (DataFrameColumn col in df.Columns.Skip(1))
         {
             // warning: additional care must be taken for datasets which contain null
