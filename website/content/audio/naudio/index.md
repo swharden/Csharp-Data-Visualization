@@ -1,5 +1,5 @@
 ---
-title: Read Microphone Audio with C#
+title: Access Microphone Audio with C#
 description: How to use NAudio to sample microphone audio in a C# application
 date: 2022-05-07
 weight: 1
