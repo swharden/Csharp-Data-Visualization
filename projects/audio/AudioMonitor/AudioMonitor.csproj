@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FftSharp" Version="1.1.5" />
     <PackageReference Include="NAudio" Version="2.0.1" />
     <PackageReference Include="ScottPlot" Version="4.1.45" />
     <PackageReference Include="ScottPlot.WinForms" Version="4.1.45" />
