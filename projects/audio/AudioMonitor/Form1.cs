@@ -36,7 +36,6 @@ namespace AudioMonitor
         {
             if (Wave is not null)
             {
-                Wave.DataAvailable += WaveIn_DataAvailable;
                 Wave.StopRecording();
                 Wave.Dispose();
 
