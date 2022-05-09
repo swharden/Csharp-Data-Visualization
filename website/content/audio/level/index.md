@@ -1,5 +1,5 @@
 ---
-title: Plot Audio with C#
+title: Plot Audio Waveform with C#
 description: Display microphone audio in real time using NAudio and ScottPlot
 date: 2022-05-08
 weight: 2
