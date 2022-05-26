@@ -23,9 +23,9 @@ dotnet new WinForms
 #### 2. Add NuGet Packages
 
 ```sh
-dotnet add package Microsoft.Maui.Graphics --prerelease
-dotnet add package Microsoft.Maui.Graphics.Skia --prerelease
-dotnet add package SkiaSharp.Views.WindowsForms --prerelease
+dotnet add package Microsoft.Maui.Graphics
+dotnet add package Microsoft.Maui.Graphics.Skia
+dotnet add package SkiaSharp.Views.WindowsForms
 ```
 
 #### 3. Add a SkiaSharp Control
@@ -77,3 +77,4 @@ private void timer1_Tick(object s, EventArgs e) => skglControl1.Invalidate();
 ## Resources
 
 * [Download the source code for this project](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/maui-graphics)
+* [https://maui.graphics](https://maui.graphics)

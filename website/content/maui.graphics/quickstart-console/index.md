@@ -19,8 +19,8 @@ dotnet new console
 #### 2. Add NuGet Packages
 
 ```
-dotnet add package Microsoft.Maui.Graphics --prerelease
-dotnet add package Microsoft.Maui.Graphics.Skia --prerelease
+dotnet add package Microsoft.Maui.Graphics
+dotnet add package Microsoft.Maui.Graphics.Skia
 ```
 
 #### 3. Draw Graphics
@@ -28,8 +28,8 @@ dotnet add package Microsoft.Maui.Graphics.Skia --prerelease
 Create a bitmap export context, interact with its canvas, then save the output as an image file:
 
 ```cs
-using Microsoft.Maui.Graphics; // 6.0.200-preview.13.935
-using Microsoft.Maui.Graphics.Skia; // 6.0.200-preview.13.935
+using Microsoft.Maui.Graphics;
+using Microsoft.Maui.Graphics.Skia;
 
 SkiaBitmapExportContext bmp = new(600, 400, 1.0f);
 ICanvas canvas = bmp.Canvas;
@@ -58,3 +58,4 @@ bmp.WriteToFile("console.png");
 ## Resources
 
 * [Download the source code for this project](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/maui-graphics)
+* [https://maui.graphics](https://maui.graphics)

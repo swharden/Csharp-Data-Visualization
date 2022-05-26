@@ -24,9 +24,9 @@ dotnet new wpf
 #### 2. Add NuGet Packages
 
 ```sh
-dotnet add package Microsoft.Maui.Graphics --prerelease
-dotnet add package Microsoft.Maui.Graphics.Skia --prerelease
-dotnet add package SkiaSharp.Views.WPF --prerelease
+dotnet add package Microsoft.Maui.Graphics
+dotnet add package Microsoft.Maui.Graphics.Skia
+dotnet add package SkiaSharp.Views.WPF
 ```
 
 #### 3. Add a SkiaSharp Element
@@ -66,3 +66,4 @@ private void SKElement_PaintSurface(object sender, SkiaSharp.Views.Desktop.SKPai
 ## Resources
 
 * [Download the source code for this project](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/maui-graphics)
+* [https://maui.graphics](https://maui.graphics)
