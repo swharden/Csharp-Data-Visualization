@@ -34,7 +34,7 @@ using Microsoft.Maui.Graphics.Skia;
 SkiaBitmapExportContext bmp = new(600, 400, 1.0f);
 ICanvas canvas = bmp.Canvas;
 
-canvas.FillColor = Colors.Navy;
+canvas.FillColor = Color.FromArgb("#003366");
 canvas.FillRectangle(0, 0, bmp.Width, bmp.Height);
 
 Random rand = new(0);

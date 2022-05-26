@@ -34,7 +34,7 @@ static void BiggerExample()
 
     // draw a big blue rectangle with a yellow border
     Rect backgroundRectangle = new(0, 0, bmp.Width, bmp.Height);
-    canvas.FillColor = Colors.Navy;
+    canvas.FillColor = Color.FromArgb("#003366");
     canvas.FillRectangle(backgroundRectangle);
     canvas.StrokeColor = Colors.Black;
     canvas.StrokeSize = 20;
