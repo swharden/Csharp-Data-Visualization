@@ -58,4 +58,5 @@ bmp.WriteToFile("console.png");
 ## Resources
 
 * [Download the source code for this project](https://github.com/swharden/Csharp-Data-Visualization/tree/main/projects/maui-graphics)
+* [Use Microsoft.Maui.Graphics to Draw 2D Graphics in Any .NET Application](https://swharden.com/blog/2022-05-25-maui-graphics)
 * [https://maui.graphics](https://maui.graphics)

@@ -40,4 +40,5 @@ namespace MyMauiApp
 ### Resources
 
 * [Microsoft.Maui.Graphics #111](https://github.com/dotnet/Microsoft.Maui.Graphics/discussions/111)
+* [Use Microsoft.Maui.Graphics to Draw 2D Graphics in Any .NET Application](https://swharden.com/blog/2022-05-25-maui-graphics)
 * [https://maui.graphics](https://maui.graphics)
