@@ -1,1 +1,4 @@
 ErrorDocument 404 /csdv/404/index.html
+Redirect 302 /csdv/platforms/skiasharp/ /csdv/skiasharp/skiasharp/
+Redirect 302 /csdv/platforms/skiasharp-opengl/ /csdv/skiasharp/skiasharp-opengl/
+Redirect 302 /csdv/platforms/skiasharp-opengl-starfield/ /csdv/skiasharp/skiasharp-opengl-starfield/
