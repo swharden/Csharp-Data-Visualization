@@ -1,5 +1,5 @@
 ---
-title: Comparing Graphics Libraries
+title: Comparing C# Graphics Libraries
 description: Evaluating alternatives to System.Drawing for rendering 2D graphics using C#
 date: 2020-04-01
 weight: 10
