@@ -41,6 +41,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.websiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scottPlotHannPcm = new ScottPlot.ScottPlotUC();
+            this.scottPlotHannFft = new ScottPlot.ScottPlotUC();
             this.tableLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -48,18 +50,21 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 516F));
+            this.tableLayoutPanel1.Controls.Add(this.scottPlotHannFft, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.scottPlotHannPcm, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.scottPlotUC1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.scottPlotUC2, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.72024F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.27976F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(912, 672);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1052, 672);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // scottPlotUC1
@@ -69,17 +74,17 @@
             this.scottPlotUC1.Margin = new System.Windows.Forms.Padding(2);
             this.scottPlotUC1.Name = "scottPlotUC1";
             this.scottPlotUC1.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.scottPlotUC1.Size = new System.Drawing.Size(908, 332);
+            this.scottPlotUC1.Size = new System.Drawing.Size(532, 357);
             this.scottPlotUC1.TabIndex = 0;
             // 
             // scottPlotUC2
             // 
             this.scottPlotUC2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.scottPlotUC2.Location = new System.Drawing.Point(2, 338);
+            this.scottPlotUC2.Location = new System.Drawing.Point(2, 363);
             this.scottPlotUC2.Margin = new System.Windows.Forms.Padding(2);
             this.scottPlotUC2.Name = "scottPlotUC2";
             this.scottPlotUC2.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
-            this.scottPlotUC2.Size = new System.Drawing.Size(908, 332);
+            this.scottPlotUC2.Size = new System.Drawing.Size(532, 307);
             this.scottPlotUC2.TabIndex = 1;
             // 
             // timerReplot
@@ -93,7 +98,7 @@
             this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 650);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(912, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1052, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -111,7 +116,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(912, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1052, 24);
             this.menuStrip1.TabIndex = 2;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -153,11 +158,31 @@
             this.infoMessageToolStripMenuItem.Text = "Info Message";
             this.infoMessageToolStripMenuItem.Click += new System.EventHandler(this.infoMessageToolStripMenuItem_Click);
             // 
+            // scottPlotHannPcm
+            // 
+            this.scottPlotHannPcm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scottPlotHannPcm.Location = new System.Drawing.Point(538, 2);
+            this.scottPlotHannPcm.Margin = new System.Windows.Forms.Padding(2);
+            this.scottPlotHannPcm.Name = "scottPlotHannPcm";
+            this.scottPlotHannPcm.Padding = new System.Windows.Forms.Padding(0, 20, 0, 0);
+            this.scottPlotHannPcm.Size = new System.Drawing.Size(512, 357);
+            this.scottPlotHannPcm.TabIndex = 2;
+            // 
+            // scottPlotHannFft
+            // 
+            this.scottPlotHannFft.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scottPlotHannFft.Location = new System.Drawing.Point(538, 363);
+            this.scottPlotHannFft.Margin = new System.Windows.Forms.Padding(2);
+            this.scottPlotHannFft.Name = "scottPlotHannFft";
+            this.scottPlotHannFft.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
+            this.scottPlotHannFft.Size = new System.Drawing.Size(512, 307);
+            this.scottPlotHannFft.TabIndex = 3;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(912, 672);
+            this.ClientSize = new System.Drawing.Size(1052, 672);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
@@ -189,6 +214,8 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem websiteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoMessageToolStripMenuItem;
+        private ScottPlot.ScottPlotUC scottPlotHannFft;
+        private ScottPlot.ScottPlotUC scottPlotHannPcm;
     }
 }
 
