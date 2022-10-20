@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using NAudio.Wave;
 using NAudio.CoreAudioApi;
+using ScottPlot;
 
 namespace ScottPlotMicrophoneFFT
 {
@@ -19,6 +20,7 @@ namespace ScottPlotMicrophoneFFT
         // MICROPHONE ANALYSIS SETTINGS
         private int RATE = 44100; // sample rate of the sound card
         private int BUFFERSIZE = (int)Math.Pow(2, 11); // must be a multiple of 2
+        double[] hannWindow;
 
         // prepare class objects
         public BufferedWaveProvider bwp;
@@ -29,6 +31,17 @@ namespace ScottPlotMicrophoneFFT
             SetupGraphLabels();
             StartListeningToMicrophone();
             timerReplot.Enabled = true;
+            GenerateHannWindow();
+        }
+
+        private void GenerateHannWindow()
+        {
+            hannWindow = new double[BUFFERSIZE/2];
+            var angleUnit = 2 * Math.PI / (hannWindow.Length - 1);
+            for (int i = 0; i < hannWindow.Length; i++)
+            {
+                hannWindow[i] = 0.5*(1-Math.Cos(i*angleUnit));
+            }
         }
 
         void AudioDataAvailable(object sender, WaveInEventArgs e)
@@ -51,6 +64,17 @@ namespace ScottPlotMicrophoneFFT
             scottPlotUC2.fig.labelY = "Power (raw)";
             scottPlotUC2.fig.labelX = "Frequency (Hz)";
             scottPlotUC2.Redraw();
+
+            scottPlotHannPcm.fig.labelTitle = "Microphone Hann PCM Data";
+            scottPlotHannPcm.fig.labelY = "Amplitude (PCM)";
+            scottPlotHannPcm.fig.labelX = "Time (ms)";
+            scottPlotHannPcm.Redraw();
+
+            scottPlotHannFft.fig.labelTitle = "Microphone Hann FFT Data";
+            scottPlotHannFft.fig.labelY = "Power (raw)";
+            scottPlotHannFft.fig.labelX = "Frequency (Hz)";
+            scottPlotHannFft.Redraw();
+
         }
 
         public void StartListeningToMicrophone(int audioDeviceNumber = 0)
@@ -107,21 +131,41 @@ namespace ScottPlotMicrophoneFFT
 
             // create double arrays to hold the data we will graph
             double[] pcm = new double[graphPointCount];
-            double[] fft = new double[graphPointCount];
-            double[] fftReal = new double[graphPointCount/2];
-            
+            double[] fftReal = new double[graphPointCount / 2];
+
             // populate Xs and Ys with double data
             for (int i = 0; i < graphPointCount; i++)
             {
                 // read the int16 from the two bytes
-                Int16 val = BitConverter.ToInt16(audioBytes, i * 2);
+                var val = BitConverter.ToInt16(audioBytes, i * 2);
 
                 // store the value in Ys as a percent (+/- 100% = 200%)
-                pcm[i] = (double)(val) / Math.Pow(2,16) * 200.0;
+                pcm[i] = (double)(val) / Math.Pow(2, 16) * 200.0;
             }
 
+
+            GraphData(graphPointCount, pcm, fftReal, scottPlotUC1, scottPlotUC2);
+
+            for (int i = 0;  i < hannWindow.Length; i++)
+                pcm[i] *= hannWindow[i];
+
+            GraphData(graphPointCount, pcm, fftReal, scottPlotHannPcm, scottPlotHannFft);
+
+            //scottPlotUC1.PlotSignal(Ys, RATE);
+
+            numberOfDraws += 1;
+            lblStatus.Text = $"Analyzed and graphed PCM and FFT data {numberOfDraws} times";
+
+            // this reduces flicker and helps keep the program responsive
+            Application.DoEvents();
+
+        }
+
+        private void GraphData(int graphPointCount, double[] pcm, double[] fftReal,
+            ScottPlotUC scottPcm, ScottPlotUC scottFft)
+        {
             // calculate the full FFT
-            fft = FFT(pcm);
+            var fft = FFT(pcm);
 
             // determine horizontal axis units for graphs
             double pcmPointSpacingMs = RATE / 1000;
@@ -130,29 +174,20 @@ namespace ScottPlotMicrophoneFFT
 
             // just keep the real half (the other half imaginary)
             Array.Copy(fft, fftReal, fftReal.Length);
-            
+
             // plot the Xs and Ys for both graphs
-            scottPlotUC1.Clear();
-            scottPlotUC1.PlotSignal(pcm, pcmPointSpacingMs, Color.Blue);
-            scottPlotUC2.Clear();
-            scottPlotUC2.PlotSignal(fftReal, fftPointSpacingHz, Color.Blue);
+            scottPcm.Clear();
+            scottPcm.PlotSignal(pcm, pcmPointSpacingMs, Color.Blue);
+            scottFft.Clear();
+            scottFft.PlotSignal(fftReal, fftPointSpacingHz, Color.Blue);
 
             // optionally adjust the scale to automatically fit the data
             if (needsAutoScaling)
             {
-                scottPlotUC1.AxisAuto();
-                scottPlotUC2.AxisAuto();
+                scottPcm.AxisAuto();
+                scottFft.AxisAuto();
                 needsAutoScaling = false;
             }
-
-            //scottPlotUC1.PlotSignal(Ys, RATE);
-
-            numberOfDraws += 1;
-            lblStatus.Text = $"Analyzed and graphed PCM and FFT data {numberOfDraws} times";
-
-            // this reduces flicker and helps keep the program responsive
-            Application.DoEvents(); 
-
         }
 
         private void autoScaleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -186,5 +221,6 @@ namespace ScottPlotMicrophoneFFT
                 fft[i] = fftComplex[i].Magnitude;
             return fft;
         }
+
     }
 }
