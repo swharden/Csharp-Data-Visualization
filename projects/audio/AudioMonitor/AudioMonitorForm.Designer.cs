@@ -70,7 +70,7 @@
             this.timer1.Interval = 20;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // Form1
+            // AudioMonitorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,8 +78,9 @@
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.formsPlot1);
             this.Controls.Add(this.pbVolume);
-            this.Name = "Form1";
+            this.Name = "AudioMonitorForm";
             this.Text = "Audio Monitor";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AudioMonitorForm_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 

@@ -1,8 +1,12 @@
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
+
 namespace AudioMonitor;
 
 public partial class AudioMonitorForm : Form
 {
     NAudio.Wave.WaveInEvent? Wave;
+    NAudio.Wave.WasapiLoopbackCapture? CaptureDevice = null;
 
     readonly double[] AudioValues;
 
@@ -30,10 +34,37 @@ public partial class AudioMonitorForm : Form
             var caps = NAudio.Wave.WaveIn.GetCapabilities(i);
             comboBox1.Items.Add(caps.ProductName);
         }
+
+
+        #region Output devices
+        
+        var enumerator = new MMDeviceEnumerator();
+        foreach (var wasapi in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+        {
+            comboBox1.Items.Add(wasapi.FriendlyName);
+        }
+
+        #endregion Output devices
+    }
+
+    private void StopOutputDeviceRecording()
+    {
+        if (CaptureDevice is not null)
+        {
+            CaptureDevice.StopRecording();
+            CaptureDevice.Dispose();
+            CaptureDevice = null;
+
+            for (int i = 0; i < AudioValues.Length; i++)
+                AudioValues[i] = 0;
+            formsPlot1.Plot.AxisAuto();
+        }
     }
 
     private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
     {
+        StopOutputDeviceRecording();
+
         if (Wave is not null)
         {
             Wave.StopRecording();
@@ -47,15 +78,39 @@ public partial class AudioMonitorForm : Form
         if (comboBox1.SelectedIndex == -1)
             return;
 
-        Wave = new NAudio.Wave.WaveInEvent()
+        if (comboBox1.SelectedIndex < NAudio.Wave.WaveIn.DeviceCount)
         {
-            DeviceNumber = comboBox1.SelectedIndex,
-            WaveFormat = new NAudio.Wave.WaveFormat(SampleRate, BitDepth, ChannelCount),
-            BufferMilliseconds = BufferMilliseconds
-        };
+            Wave = new NAudio.Wave.WaveInEvent()
+            {
+                DeviceNumber = comboBox1.SelectedIndex,
+                WaveFormat = new NAudio.Wave.WaveFormat(SampleRate, BitDepth, ChannelCount),
+                BufferMilliseconds = BufferMilliseconds
+            };
 
-        Wave.DataAvailable += WaveIn_DataAvailable;
-        Wave.StartRecording();
+            Wave.DataAvailable += WaveIn_DataAvailable;
+            Wave.StartRecording();
+        }
+        else
+        {
+            #region Output devices
+
+            var enumerator = new MMDeviceEnumerator();
+            int selectedIndex = NAudio.Wave.WaveIn.DeviceCount;
+            foreach (var wasapi in enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active))
+            {
+                if (comboBox1.SelectedIndex == selectedIndex)
+                {
+                    MMDevice loopbackCaptureDevice = wasapi;
+                    CaptureDevice = new WasapiLoopbackCapture(loopbackCaptureDevice);
+                    CaptureDevice.DataAvailable += WaveIn_DataAvailable;
+                    CaptureDevice.StartRecording();
+                    break;
+                }
+                ++selectedIndex;
+            }
+
+            #endregion Output devices
+        }
 
         formsPlot1.Plot.Title(comboBox1.SelectedItem.ToString());
     }
@@ -63,7 +118,12 @@ public partial class AudioMonitorForm : Form
     void WaveIn_DataAvailable(object? sender, NAudio.Wave.WaveInEventArgs e)
     {
         for (int i = 0; i < e.Buffer.Length / 2; i++)
-            AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * 2);
+        {
+            if (i < AudioValues.Length)
+            {
+                AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * 2);
+            }
+        }
     }
 
     private void timer1_Tick(object sender, EventArgs e)
@@ -90,5 +150,10 @@ public partial class AudioMonitorForm : Form
         {
             //handle hardware muting the mic
         }
+    }
+
+    private void AudioMonitorForm_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        StopOutputDeviceRecording();
     }
 }
