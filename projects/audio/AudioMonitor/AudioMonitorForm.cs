@@ -68,20 +68,27 @@ public partial class AudioMonitorForm : Form
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        int level = (int)AudioValues.Max();
+        try
+        {
+            int level = (int)AudioValues.Max();
 
-        // auto-scale the maximum progressbar level
-        if (level > pbVolume.Maximum)
-            pbVolume.Maximum = level;
-        pbVolume.Value = level;
+            // auto-scale the maximum progressbar level
+            if (level > pbVolume.Maximum)
+                pbVolume.Maximum = level;
+            pbVolume.Value = level;
 
-        // auto-scale the plot Y axis limits
-        var currentLimits = formsPlot1.Plot.GetAxisLimits();
-        formsPlot1.Plot.SetAxisLimits(
-            yMin: Math.Min(currentLimits.YMin, -level),
-            yMax: Math.Max(currentLimits.YMax, level));
+            // auto-scale the plot Y axis limits
+            var currentLimits = formsPlot1.Plot.GetAxisLimits();
+            formsPlot1.Plot.SetAxisLimits(
+                yMin: Math.Min(currentLimits.YMin, -level),
+                yMax: Math.Max(currentLimits.YMax, level));
 
-        // request a redraw using a non-blocking render queue
-        formsPlot1.RefreshRequest();
+            // request a redraw using a non-blocking render queue
+            formsPlot1.RefreshRequest();
+        }
+        catch (Exception)
+        {
+            //handle hardware muting the mic
+        }
     }
 }
