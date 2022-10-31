@@ -1,87 +1,74 @@
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
+
 namespace AudioMonitor;
 
 public partial class AudioMonitorForm : Form
 {
-    NAudio.Wave.WaveInEvent? Wave;
-
     readonly double[] AudioValues;
 
-    readonly int SampleRate = 44100;
-    readonly int BitDepth = 16;
-    readonly int ChannelCount = 1;
-    readonly int BufferMilliseconds = 20;
+    readonly WasapiCapture AudioDevice;
 
-    public AudioMonitorForm()
+    public AudioMonitorForm(WasapiCapture captureDevice)
     {
         InitializeComponent();
+        AudioDevice = captureDevice;
+        WaveFormat fmt = captureDevice.WaveFormat;
 
-        AudioValues = new double[SampleRate * BufferMilliseconds / 1000];
+        AudioValues = new double[fmt.SampleRate * 10 / 1000]; // 10 milliseconds
 
-        formsPlot1.Plot.AddSignal(AudioValues, SampleRate / 1000);
+        formsPlot1.Plot.AddSignal(AudioValues, fmt.SampleRate / 1000);
         formsPlot1.Plot.YLabel("Level");
         formsPlot1.Plot.XLabel("Time (milliseconds)");
-        formsPlot1.Render();
+        formsPlot1.Plot.Title($"{fmt.Encoding} ({fmt.BitsPerSample}-bit) {fmt.SampleRate} KHz");
+        formsPlot1.Plot.SetAxisLimitsY(-.5, .5);
+        formsPlot1.Refresh();
+
+        AudioDevice.DataAvailable += WaveIn_DataAvailable;
+        AudioDevice.StartRecording();
     }
 
-    private void Form1_Load(object sender, EventArgs e)
+    private void AudioMonitorForm_FormClosed(object sender, FormClosedEventArgs e)
     {
-        for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
-        {
-            var caps = NAudio.Wave.WaveIn.GetCapabilities(i);
-            comboBox1.Items.Add(caps.ProductName);
-        }
-    }
-
-    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (Wave is not null)
-        {
-            Wave.StopRecording();
-            Wave.Dispose();
-
-            for (int i = 0; i < AudioValues.Length; i++)
-                AudioValues[i] = 0;
-            formsPlot1.Plot.AxisAuto();
-        }
-
-        if (comboBox1.SelectedIndex == -1)
-            return;
-
-        Wave = new NAudio.Wave.WaveInEvent()
-        {
-            DeviceNumber = comboBox1.SelectedIndex,
-            WaveFormat = new NAudio.Wave.WaveFormat(SampleRate, BitDepth, ChannelCount),
-            BufferMilliseconds = BufferMilliseconds
-        };
-
-        Wave.DataAvailable += WaveIn_DataAvailable;
-        Wave.StartRecording();
-
-        formsPlot1.Plot.Title(comboBox1.SelectedItem.ToString());
-    }
-
-    void WaveIn_DataAvailable(object? sender, NAudio.Wave.WaveInEventArgs e)
-    {
-        for (int i = 0; i < e.Buffer.Length / 2; i++)
-            AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * 2);
+        System.Diagnostics.Debug.WriteLine($"Closing audio device: {AudioDevice}");
+        AudioDevice.StopRecording();
+        AudioDevice.Dispose();
     }
 
     private void timer1_Tick(object sender, EventArgs e)
     {
-        int level = (int)AudioValues.Max();
-
-        // auto-scale the maximum progressbar level
-        if (level > pbVolume.Maximum)
-            pbVolume.Maximum = level;
-        pbVolume.Value = level;
-
-        // auto-scale the plot Y axis limits
-        var currentLimits = formsPlot1.Plot.GetAxisLimits();
-        formsPlot1.Plot.SetAxisLimits(
-            yMin: Math.Min(currentLimits.YMin, -level),
-            yMax: Math.Max(currentLimits.YMax, level));
-
-        // request a redraw using a non-blocking render queue
         formsPlot1.RefreshRequest();
+    }
+
+    private void WaveIn_DataAvailable(object? sender, WaveInEventArgs e)
+    {
+        int bytesPerSamplePerChannel = AudioDevice.WaveFormat.BitsPerSample / 8;
+        int bytesPerSample = bytesPerSamplePerChannel * AudioDevice.WaveFormat.Channels;
+        int bufferSampleCount = e.Buffer.Length / bytesPerSample;
+
+        if (bufferSampleCount >= AudioValues.Length)
+        {
+            bufferSampleCount = AudioValues.Length;
+        }
+
+        if (bytesPerSamplePerChannel == 2 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.Pcm)
+        {
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * bytesPerSample);
+        }
+        else if (bytesPerSamplePerChannel == 4 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.Pcm)
+        {
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToInt32(e.Buffer, i * bytesPerSample);
+        }
+        else if (bytesPerSamplePerChannel == 4 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.IeeeFloat)
+        {
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToSingle(e.Buffer, i * bytesPerSample);
+        }
+        else
+        {
+            throw new NotSupportedException(AudioDevice.WaveFormat.ToString());
+        }
     }
 }
