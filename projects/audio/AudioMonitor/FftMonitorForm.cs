@@ -1,82 +1,83 @@
-﻿namespace AudioMonitor;
+﻿using NAudio.CoreAudioApi;
+using NAudio.Wave;
+
+namespace AudioMonitor;
 
 public partial class FftMonitorForm : Form
 {
-    NAudio.Wave.WaveInEvent? Wave;
-
     readonly double[] AudioValues;
+
+    readonly WasapiCapture AudioDevice;
     readonly double[] FftValues;
 
-    readonly int SampleRate = 44100;
-    readonly int BitDepth = 16;
-    readonly int ChannelCount = 1;
-    readonly int BufferMilliseconds = 20; // increase this to increase frequency resolution
-
-    public FftMonitorForm()
+    public FftMonitorForm(WasapiCapture audioDevice)
     {
         InitializeComponent();
+        AudioDevice = audioDevice;
+        WaveFormat fmt = audioDevice.WaveFormat;
 
-        AudioValues = new double[SampleRate * BufferMilliseconds / 1000];
+        AudioValues = new double[fmt.SampleRate / 10];
         double[] paddedAudio = FftSharp.Pad.ZeroPad(AudioValues);
-        double[] fftMag = FftSharp.Transform.FFTmagnitude(paddedAudio);
+        double[] fftMag = FftSharp.Transform.FFTpower(paddedAudio);
         FftValues = new double[fftMag.Length];
+        double fftPeriod = FftSharp.Transform.FFTfreqPeriod(fmt.SampleRate, fftMag.Length);
 
-        double fftPeriod = FftSharp.Transform.FFTfreqPeriod(SampleRate, fftMag.Length);
-
-        formsPlot1.Plot.AddSignal(FftValues, fftPeriod);
+        formsPlot1.Plot.AddSignal(FftValues, 1.0 / fftPeriod);
         formsPlot1.Plot.YLabel("Spectral Power");
         formsPlot1.Plot.XLabel("Frequency (kHz)");
-
+        formsPlot1.Plot.Title($"{fmt.Encoding} ({fmt.BitsPerSample}-bit) {fmt.SampleRate} KHz");
+        formsPlot1.Plot.SetAxisLimits(0, 6000, 0, .005);
         formsPlot1.Refresh();
+
+        AudioDevice.DataAvailable += WaveIn_DataAvailable;
+        AudioDevice.StartRecording();
+
+        FormClosed += FftMonitorForm_FormClosed;
     }
 
-    private void FftMonitorForm_Load(object sender, EventArgs e)
+    private void FftMonitorForm_FormClosed(object? sender, FormClosedEventArgs e)
     {
-        for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+        System.Diagnostics.Debug.WriteLine($"Closing audio device: {AudioDevice}");
+        AudioDevice.StopRecording();
+        AudioDevice.Dispose();
+    }
+
+    private void WaveIn_DataAvailable(object? sender, WaveInEventArgs e)
+    {
+        int bytesPerSamplePerChannel = AudioDevice.WaveFormat.BitsPerSample / 8;
+        int bytesPerSample = bytesPerSamplePerChannel * AudioDevice.WaveFormat.Channels;
+        int bufferSampleCount = e.Buffer.Length / bytesPerSample;
+
+        if (bufferSampleCount >= AudioValues.Length)
         {
-            var caps = NAudio.Wave.WaveIn.GetCapabilities(i);
-            comboBox1.Items.Add(caps.ProductName);
+            bufferSampleCount = AudioValues.Length;
         }
-    }
 
-    private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (Wave is not null)
+        if (bytesPerSamplePerChannel == 2 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.Pcm)
         {
-            Wave.StopRecording();
-            Wave.Dispose();
-
-            for (int i = 0; i < AudioValues.Length; i++)
-                AudioValues[i] = 0;
-            formsPlot1.Plot.AxisAuto();
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * bytesPerSample);
         }
-
-        if (comboBox1.SelectedIndex == -1)
-            return;
-
-        Wave = new NAudio.Wave.WaveInEvent()
+        else if (bytesPerSamplePerChannel == 4 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.Pcm)
         {
-            DeviceNumber = comboBox1.SelectedIndex,
-            WaveFormat = new NAudio.Wave.WaveFormat(SampleRate, BitDepth, ChannelCount),
-            BufferMilliseconds = BufferMilliseconds
-        };
-
-        Wave.DataAvailable += WaveIn_DataAvailable;
-        Wave.StartRecording();
-
-        formsPlot1.Plot.Title(comboBox1.SelectedItem.ToString());
-    }
-
-    void WaveIn_DataAvailable(object? sender, NAudio.Wave.WaveInEventArgs e)
-    {
-        for (int i = 0; i < e.Buffer.Length / 2; i++)
-            AudioValues[i] = BitConverter.ToInt16(e.Buffer, i * 2);
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToInt32(e.Buffer, i * bytesPerSample);
+        }
+        else if (bytesPerSamplePerChannel == 4 && AudioDevice.WaveFormat.Encoding == WaveFormatEncoding.IeeeFloat)
+        {
+            for (int i = 0; i < bufferSampleCount; i++)
+                AudioValues[i] = BitConverter.ToSingle(e.Buffer, i * bytesPerSample);
+        }
+        else
+        {
+            throw new NotSupportedException(AudioDevice.WaveFormat.ToString());
+        }
     }
 
     private void timer1_Tick(object sender, EventArgs e)
     {
         double[] paddedAudio = FftSharp.Pad.ZeroPad(AudioValues);
-        double[] fftMag = FftSharp.Transform.FFTpower(paddedAudio);
+        double[] fftMag = FftSharp.Transform.FFTmagnitude(paddedAudio);
         Array.Copy(fftMag, FftValues, fftMag.Length);
 
         // find the frequency peak
@@ -86,18 +87,9 @@ public partial class FftMonitorForm : Form
             if (fftMag[i] > fftMag[peakIndex])
                 peakIndex = i;
         }
-        double fftPeriod = FftSharp.Transform.FFTfreqPeriod(SampleRate, fftMag.Length);
+        double fftPeriod = FftSharp.Transform.FFTfreqPeriod(AudioDevice.WaveFormat.SampleRate, fftMag.Length);
         double peakFrequency = fftPeriod * peakIndex;
         label1.Text = $"Peak Frequency: {peakFrequency:N0} Hz";
-
-        // auto-scale the plot Y axis limits
-        double fftPeakMag = fftMag.Max();
-        double plotYMax = formsPlot1.Plot.GetAxisLimits().YMax;
-        formsPlot1.Plot.SetAxisLimits(
-            xMin: 0,
-            xMax: 6,
-            yMin: 0,
-            yMax: Math.Max(fftPeakMag, plotYMax));
 
         // request a redraw using a non-blocking render queue
         formsPlot1.RefreshRequest();
