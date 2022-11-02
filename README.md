@@ -19,6 +19,13 @@ Project | Screenshot
 
 ## Drawing with Different Graphics Technologies
 
+### Drawing Graphics from Scratch
+
+
+Description | Screenshot
+---|---
+[**Create a bitmap by editing bytes in memory**](projects/bitmap-raw) and save the resulting image to disk without using any image manipulation library dependency | ![](projects/bitmap-raw/demo.jpeg)
+
 ### Drawing Graphics with [Maui.Graphics](https://maui.graphics)
 
 These examples use `Microsoft.Maui.Graphics` package to provide cross-platform drawing in .NET Core and .NET Framework applications. 
