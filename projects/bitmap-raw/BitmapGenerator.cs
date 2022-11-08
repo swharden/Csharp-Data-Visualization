@@ -6,14 +6,6 @@ using System.Threading.Tasks;
 
 internal static class BitmapGenerator
 {
-    public static RawColor RandomColor(Random rand)
-    {
-        byte r = (byte)rand.Next(256);
-        byte g = (byte)rand.Next(256);
-        byte b = (byte)rand.Next(256);
-        return new RawColor(r, g, b);
-    }
-
     public static byte[] Rainbow(int width = 400, int height = 300)
     {
         RawBitmap bmp = new(width, height);
@@ -61,8 +53,7 @@ internal static class BitmapGenerator
         {
             for (int y = 0; y < height; y++)
             {
-                RawColor color = RandomColor(rand);
-                bmp.SetPixel(x, y, color);
+                bmp.SetPixel(x, y, RawColor.Random(rand));
             }
         }
 
@@ -82,7 +73,7 @@ internal static class BitmapGenerator
             int rectY = rand.Next(bmp.Height);
             int rectWidth = rand.Next(50);
             int rectHeight = rand.Next(50);
-            RawColor color = RandomColor(rand);
+            RawColor color = RawColor.Random(rand);
 
             // draw the rectangle
             for (int x = rectX; x < rectX + rectWidth; x++)

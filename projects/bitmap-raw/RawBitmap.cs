@@ -1,16 +1,4 @@
-﻿public struct RawColor
-{
-    public readonly byte R, G, B;
-
-    public RawColor(byte r, byte g, byte b)
-    {
-        R = r;
-        G = g;
-        B = b;
-    }
-}
-
-public class RawBitmap
+﻿public class RawBitmap
 {
     public readonly int Width;
     public readonly int Height;
