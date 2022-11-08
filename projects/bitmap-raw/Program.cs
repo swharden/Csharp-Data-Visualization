@@ -1,16 +1,45 @@
-﻿RawBitmap bmp = new(500, 300);
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
+using SkiaSharp;
 
-Random rand = new();
-for (int i = 0; i < 1000; i++)
+SaveBitmapBytes(BitmapGenerator.Rainbow(), "rainbow.jpg");
+SaveBitmapBytes(BitmapGenerator.RandomGrayscale(), "random-grayscale.jpg");
+SaveBitmapBytes(BitmapGenerator.RandomRGB(), "random-rgb.jpg");
+SaveBitmapBytes(BitmapGenerator.RandomRectangles(), "rectangles.jpg");
+
+static void SaveBitmapBytes(byte[] bytes, string filename)
 {
-    int x = rand.Next(bmp.Width);
-    int y = rand.Next(bmp.Height);
-    int width = rand.Next(50);
-    int height = rand.Next(50);
-    byte R = (byte)rand.Next(256);
-    byte G = (byte)rand.Next(256);
-    byte B = (byte)rand.Next(256);
-    bmp.FillRectangle(x, y, width, height, R, G, B);
+    SaveBitmapImageSharp(bytes, filename);
+    SaveBitmapSkia(bytes, filename);
+    SaveBitmapSystemDrawing(bytes, filename);
 }
 
-bmp.Save("test.bmp");
+static void SaveBitmapImageSharp(byte[] bytes, string filename)
+{
+    Image image = Image.Load(bytes);
+
+    string saveAs = Path.GetFullPath("ImageSharp-" + filename);
+    JpegEncoder encoder = new() { Quality = 95 };
+    image.Save(saveAs, encoder);
+    Console.WriteLine(saveAs);
+}
+
+static void SaveBitmapSkia(byte[] bytes, string filename)
+{
+    SKBitmap bmp = SKBitmap.Decode(bytes);
+
+    string saveAs = Path.GetFullPath("SkiaSharp-" + filename);
+    SKFileWStream fs = new(saveAs);
+    bmp.Encode(fs, SKEncodedImageFormat.Jpeg, quality: 95);
+    Console.WriteLine(saveAs);
+}
+
+static void SaveBitmapSystemDrawing(byte[] bytes, string filename)
+{
+    MemoryStream ms = new(bytes);
+    System.Drawing.Image image = System.Drawing.Bitmap.FromStream(ms);
+
+    string saveAs = Path.GetFullPath("SystemDrawing-" + filename);
+    image.Save(saveAs);
+    Console.WriteLine(saveAs);
+}

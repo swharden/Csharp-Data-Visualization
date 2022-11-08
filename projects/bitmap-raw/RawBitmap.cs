@@ -1,4 +1,16 @@
-﻿public class RawBitmap
+﻿public struct RawColor
+{
+    public readonly byte R, G, B;
+
+    public RawColor(byte r, byte g, byte b)
+    {
+        R = r;
+        G = g;
+        B = b;
+    }
+}
+
+public class RawBitmap
 {
     public readonly int Width;
     public readonly int Height;
@@ -11,25 +23,21 @@
         ImageBytes = new byte[width * height * 4];
     }
 
-    private void SetPixel(int x, int y, byte R, byte G, byte B)
+    public void SetPixel(int x, int y, RawColor color)
     {
-        if (x < 0 || x >= Width)
-            return;
-
-        if (y < 0 || y >= Height)
-            return;
-
         int offset = ((Height - y - 1) * Width + x) * 4;
-        ImageBytes[offset + 0] = B;
-        ImageBytes[offset + 1] = G;
-        ImageBytes[offset + 2] = R;
+        ImageBytes[offset + 0] = color.B;
+        ImageBytes[offset + 1] = color.G;
+        ImageBytes[offset + 2] = color.R;
     }
 
-    public void FillRectangle(int x, int y, int width, int height, byte R, byte G, byte B)
+    public RawColor GetPixel(int x, int y)
     {
-        for (int i = x; i < x + width; i++)
-            for (int j = y; j < y + height; j++)
-                SetPixel(i, j, R, G, B);
+        int offset = ((Height - y - 1) * Width + x) * 4;
+        byte r = ImageBytes[offset + 0];
+        byte g = ImageBytes[offset + 0];
+        byte b = ImageBytes[offset + 0];
+        return new RawColor(r, g, b);
     }
 
     public byte[] GetBitmapBytes()

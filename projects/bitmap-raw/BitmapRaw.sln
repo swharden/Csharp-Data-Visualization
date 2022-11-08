@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitmapDemo", "BitmapDemo.csproj", "{A2831B64-2D92-46A9-8F8B-215E4FB0325C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BitmapRaw", "BitmapRaw.csproj", "{A07B028B-A16C-4160-8B8C-0B3B1F96FCE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A2831B64-2D92-46A9-8F8B-215E4FB0325C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2831B64-2D92-46A9-8F8B-215E4FB0325C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2831B64-2D92-46A9-8F8B-215E4FB0325C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2831B64-2D92-46A9-8F8B-215E4FB0325C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A07B028B-A16C-4160-8B8C-0B3B1F96FCE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A07B028B-A16C-4160-8B8C-0B3B1F96FCE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A07B028B-A16C-4160-8B8C-0B3B1F96FCE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A07B028B-A16C-4160-8B8C-0B3B1F96FCE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {97AE9B1D-8C9D-4F21-AD40-B3A7898F5C1A}
+		SolutionGuid = {49A66C59-C659-42AA-BEBB-D63DF5128D17}
 	EndGlobalSection
 EndGlobal
