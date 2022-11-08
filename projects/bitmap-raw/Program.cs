@@ -6,6 +6,7 @@ SaveBitmapBytes(BitmapGenerator.Rainbow(), "rainbow.jpg");
 SaveBitmapBytes(BitmapGenerator.RandomGrayscale(), "random-grayscale.jpg");
 SaveBitmapBytes(BitmapGenerator.RandomRGB(), "random-rgb.jpg");
 SaveBitmapBytes(BitmapGenerator.RandomRectangles(), "rectangles.jpg");
+SaveBitmapBytes(BitmapGenerator.Ramps(), "ramps.jpg");
 
 static void SaveBitmapBytes(byte[] bytes, string filename)
 {

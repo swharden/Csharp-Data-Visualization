@@ -89,4 +89,21 @@ internal static class BitmapGenerator
 
         return bmp.GetBitmapBytes();
     }
+
+    public static byte[] Ramps(int width = 401, int height = 307)
+    {
+        RawBitmap bmp = new(width, height);
+
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < width; x++)
+            {
+                byte value = (byte)((x % 10) * 25);
+                RawColor color = RawColor.Gray(value++);
+                bmp.SetPixel(x, y, color);
+            }
+        }
+
+        return bmp.GetBitmapBytes();
+    }
 }
