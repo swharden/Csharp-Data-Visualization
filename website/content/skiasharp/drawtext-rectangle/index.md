@@ -4,6 +4,8 @@ description: How to draw a string within the boundaries if a rectangle using Ski
 date: 2022-09-07
 ---
 
+> 💡 **TIP:** If you just want to measure a string to draw a border around it, check out the [Drawing Text with SkiaSharp](../text) page
+
 SkiaSharp can render text in a straight using the [SKCanvas.DrawText Method](https://docs.microsoft.com/en-us/dotnet/api/skiasharp.skcanvas.drawtext), but developers will find that there is no built-in ability to wrap text to fit a rectangle. This page demonstrates how to draw a text inside a rectangle using SkiaSharp.
 
 <img src="skiasharp-word-wrap.gif" class="d-block mx-auto">
