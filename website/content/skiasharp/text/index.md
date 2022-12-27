@@ -125,6 +125,12 @@ canvas.DrawText("Hello, World", 0, 0, paint);
 canvas.Restore(); // revert to the original state
 ```
 
+Advanced users will appreciate [SKAutoCanvasRestore](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skautocanvasrestore) which restores state from its destructor when the object goes out of scope
+
+```cs
+using SKAutoCanvasRestore _ = new(surface.Canvas);
+```
+
 ## Fix Pixelated Rotated Text
 
 SkiaSharp renders text poorly when rendered 90º, most noticeable in the "V" characters:
