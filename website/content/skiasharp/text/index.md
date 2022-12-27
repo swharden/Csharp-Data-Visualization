@@ -24,7 +24,7 @@ using SKFileWStream fs = new("quickstart.png");
 bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
 ```
 
-![](quickstart.png)
+<img src="quickstart.png" class="mx-auto d-block my-5 border border-dark shadow">
 
 ## Font and Styling Options
 
@@ -51,7 +51,7 @@ using SKFileWStream fs = new("options.png");
 bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
 ```
 
-![](options.png)
+<img src="options.png" class="mx-auto d-block my-5 border border-dark shadow">
 
 ## Measure a String with SkiaSharp
 
@@ -86,7 +86,7 @@ using SKFileWStream fs = new("measure.png");
 bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
 ```
 
-![](measure.png)
+<img src="measure.png" class="mx-auto d-block my-5 border border-dark shadow">
 
 ## Rotating Text with SkiaSharp
 
@@ -113,7 +113,7 @@ SKFileWStream fs = new("rotation.png");
 bmp.Encode(fs, SKEncodedImageFormat.Png, quality: 100);
 ```
 
-![](rotation.png)
+<img src="rotation.png" class="mx-auto d-block my-5 border border-dark shadow">
 
 If you intend to revert transformations and draw on the original canvas again, use [SKCanvas.Save](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skcanvas.save) and [SKCanvas.Restore](https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skcanvas.restore)
 
@@ -131,9 +131,15 @@ SkiaSharp renders text poorly when rendered 90º, most noticeable in the "V" cha
 
 A solution is to rotate the text by 90.1º instead of 90.0º
 
-Rotated by `90.0f` | Rotated by `90.0f`
+<div class="text-center">
+<div class="d-inline-block">
+
+Rotated by `90.0f` | Rotated by `90.1f`
 ---|---
 ![](rotation-artifact.png)|![](rotation-artifact-fixed.png)
+
+</div>
+</div>
 
 ## References
 * https://learn.microsoft.com/en-us/dotnet/api/skiasharp.skcanvas.drawtext
