@@ -10,7 +10,7 @@ weight: 50
 
 <img src="zedgraph-quickstart.gif" class="d-block mx-auto my-4">
 
-> **⚠️ WARNING:** ZedGraph has a LGPL license! 💀 Depending on how you use it in your project, you may be forced to open-source part of your application. Read more about the [LGPL license](https://fossa.com/blog/open-source-software-licenses-101-lgpl-license/) if you are considering using this library in a commercial application.
+> **⚠️ WARNING:** ZedGraph has a LGPL license! 💀 Depending on how you use it in your project, you may be forced to open-source part of your application. Read more about the [LGPL 2.1 license](https://opensource.org/license/lgpl-2-1/) if you are considering using this library in a commercial application.
 
 ## Supported Platforms
 
