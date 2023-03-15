@@ -15,22 +15,12 @@ internal class SKBitmapFrame : IVideoFrame, IDisposable
     {
         if (bmp.ColorType != SKColorType.Bgra8888)
             throw new NotImplementedException("only 'bgra' color type is supported");
-
         Source = bmp;
     }
 
-    public void Serialize(Stream stream)
-    {
-        stream.Write(Source.Bytes);
-    }
+    public void Dispose() => Source.Dispose();
+    public void Serialize(Stream s) => s.Write(Source.Bytes);
+    public async Task SerializeAsync(Stream s, CancellationToken t) => 
+        await s.WriteAsync(Source.Bytes, t).ConfigureAwait(false);
 
-    public async Task SerializeAsync(Stream stream, CancellationToken token)
-    {
-        await stream.WriteAsync(Source.Bytes, token).ConfigureAwait(false);
-    }
-
-    public void Dispose()
-    {
-        Source.Dispose();
-    }
 }

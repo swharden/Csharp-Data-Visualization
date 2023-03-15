@@ -4,7 +4,7 @@ description: How to draw graphics for each frame and use ffmpeg to save the resu
 date: 2020-05-02
 ---
 
-This page describes the method I use to create video files using SkiaSharp and ffmpeg.
+**This page describes how to create video files using SkiaSharp and ffmpeg.** Note that there is a similar page describing [how to render video with System.Drawing](../../system.drawing/video/), but it is windows-only. The method described here works on all operating systems including Linux and MacOS.
 
 <video controls autoplay loop width="400" height="300" class="d-block mx-auto my-5 border shadow">
     <source src="output.webm"
@@ -14,14 +14,20 @@ This page describes the method I use to create video files using SkiaSharp and f
 
 ### 1. Get SkiaSharp and FFMpegCore
 
-Add [SkiaSharp](https://www.nuget.org/packages/SkiaSharp/) and [FFMpegCore](https://www.nuget.org/packages/FFMpegCore/) packages to your project:
+Create a new project:
 
+```bash
+dotnet new console
 ```
+
+Add packages:
+
+```bash
 dotnet add package SkiaSharp
 dotnet add package FFMpegCore
 ```
 
-Add the necessary usings to your code:
+### 2. Add Using Statements
 
 ```cs
 using FFMpegCore;
@@ -29,16 +35,17 @@ using FFMpegCore.Pipes;
 using SkiaSharp;
 ```
 
-### 2. Create a Frame Converter
+### 3. Create a Frame Converter
 
 This class is used to convert `SKBitmap` images to `IVideoFrame` objects that can be used by ffmpeg.
 
 ```cs
-public class SKBitmapFrame : IVideoFrame, IDisposable
+class SKBitmapFrame : IVideoFrame, IDisposable
 {
     public int Width => Source.Width;
     public int Height => Source.Height;
     public string Format => "bgra";
+
     private readonly SKBitmap Source;
 
     public SKBitmapFrame(SKBitmap bmp)
@@ -49,15 +56,14 @@ public class SKBitmapFrame : IVideoFrame, IDisposable
     }
 
     public void Dispose() => Source.Dispose();
+    public void Serialize(Stream s) => s.Write(Source.Bytes);
+    public async Task SerializeAsync(Stream s, CancellationToken t) => 
+        await s.WriteAsync(Source.Bytes, t).ConfigureAwait(false);
 
-    public void Serialize(Stream stream) => stream.Write(Source.Bytes);
-
-    public async Task SerializeAsync(Stream stream, CancellationToken token) => 
-        await stream.WriteAsync(Source.Bytes, token).ConfigureAwait(false);
 }
 ```
 
-### 3. Create Frame Rendering Logic
+### 4. Create Frame Rendering Logic
 
 This `IEnumerable` function is used to `yield` individual `IVideoFrame` objects as ffmpeg needs them. 
 
@@ -66,7 +72,7 @@ When a frame is requested it is rendered onto a `SKBitmap` and returned packaged
 This way frames are rendered just before they are needed, preventing memory accumulation during large rendering jobs.
 
 ```cs
-static IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
+IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
 {
     using SKFont textFont = new(SKTypeface.FromFamilyName("consolas"), size: 32);
     using SKPaint textPaint = new(textFont) { Color = SKColors.Yellow, TextAlign = SKTextAlign.Center };
@@ -75,7 +81,7 @@ static IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
 
     for (int i = 0; i < count; i++)
     {
-        Console.WriteLine($"Rendering frame {i + 1} of {count}");
+        Console.WriteLine($"\rRendering frame {i + 1} of {count}");
         using SKBitmap bmp = new(width, height);
         using SKCanvas canvas = new(bmp);
         canvas.Clear(backgroundColor);
@@ -83,21 +89,21 @@ static IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
         canvas.DrawText("SkiaSharp", bmp.Width / 2, bmp.Height * .4f, textPaint);
         canvas.DrawText($"Frame {i}", bmp.Width / 2, bmp.Height * .6f, textPaint);
 
-        using SKBitmapFrame frame = new(bmp);
+        using GraphicsToVideo.SKBitmapFrame frame = new(bmp);
         yield return frame;
     }
 }
 ```
 
 
-### 4. Render a Video File
+### 5. Render a Video File
 
 Tying everything together, this code defines an enumerated 150-frame video and loads it into a pipe, then uses FFMpeg to encode the frames into a WEBM file (shown at the top of the page).
 
 ```cs
 var frames = CreateFrames(count: 150, width: 400, height: 300);
-var videoFramesSource = new RawVideoPipeSource(frames) { FrameRate = 30 };
-var success = FFMpegArguments
+RawVideoPipeSource videoFramesSource = new(frames) { FrameRate = 30 };
+bool success = FFMpegArguments
     .FromPipeInput(videoFramesSource)
     .OutputToFile("output.webm", overwrite: true, options => options.WithVideoCodec("libvpx-vp9"))
     .ProcessSynchronously();
