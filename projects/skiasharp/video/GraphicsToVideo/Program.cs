@@ -2,15 +2,15 @@
 using FFMpegCore.Pipes;
 using SkiaSharp;
 
-string outputPath = Path.GetFullPath("output.webm");
+string saveAs = Path.GetFullPath("output.webm");
 var frames = CreateFrames(count: 150, width: 400, height: 300);
 RawVideoPipeSource videoFramesSource = new(frames) { FrameRate = 30 };
 bool success = FFMpegArguments
     .FromPipeInput(videoFramesSource)
-    .OutputToFile("output.webm", overwrite: true, options => options.WithVideoCodec("libvpx-vp9"))
+    .OutputToFile(saveAs, overwrite: true, options => options.WithVideoCodec("libvpx-vp9"))
     .ProcessSynchronously();
 
-Console.WriteLine($"Saved: {outputPath}");
+Console.WriteLine($"Saved: {saveAs}");
 
 static IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
 {
@@ -29,7 +29,7 @@ static IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
         canvas.DrawText("SkiaSharp", bmp.Width / 2, bmp.Height * .4f, textPaint);
         canvas.DrawText($"Frame {i}", bmp.Width / 2, bmp.Height * .6f, textPaint);
 
-        using GraphicsToVideo.SKBitmapFrame frame = new(bmp);
+        using SKBitmapFrame frame = new(bmp);
         yield return frame;
     }
 }

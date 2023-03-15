@@ -89,7 +89,7 @@ IEnumerable<IVideoFrame> CreateFrames(int count, int width, int height)
         canvas.DrawText("SkiaSharp", bmp.Width / 2, bmp.Height * .4f, textPaint);
         canvas.DrawText($"Frame {i}", bmp.Width / 2, bmp.Height * .6f, textPaint);
 
-        using GraphicsToVideo.SKBitmapFrame frame = new(bmp);
+        using SKBitmapFrame frame = new(bmp);
         yield return frame;
     }
 }

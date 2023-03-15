@@ -1,8 +1,6 @@
 ﻿using FFMpegCore.Pipes;
 using SkiaSharp;
 
-namespace GraphicsToVideo;
-
 internal class SKBitmapFrame : IVideoFrame, IDisposable
 {
     public int Width => Source.Width;
