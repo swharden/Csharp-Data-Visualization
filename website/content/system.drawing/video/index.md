@@ -5,7 +5,7 @@ date: 2020-05-02
 weight: 100
 ---
 
-**This page describes how to create video files using System.Drawing and ffmpeg.** The method described here uses [System.Drawing.Common](../cross-platform) which is no longer supported on non-Windows platforms. Check out the [rendering video with SkiaSharp](../skiasharp/video) page for a cross-platform solution.
+**This page describes how to create video files using System.Drawing and ffmpeg.** The method described here uses [System.Drawing.Common](../cross-platform) which is no longer supported on non-Windows platforms. Check out the [rendering video with SkiaSharp](../../skiasharp/video) page for a cross-platform solution.
 
 <video controls autoplay loop width="400" height="300" class="d-block mx-auto my-5 border shadow">
     <source src="output.webm"
