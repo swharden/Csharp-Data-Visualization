@@ -5,10 +5,7 @@ date: 2020-05-02
 weight: 100
 ---
 
-This page describes the method I use to create video files using System.Drawing and ffmpeg.
-
-> ⚠️ **Warning: System.Drawing.Common now only supports Windows!**\
-> See [Cross-Platform Support for `System.Drawing`](../cross-platform) for more information and what you can do about it.
+**This page describes how to create video files using System.Drawing and ffmpeg.** The method described here uses [System.Drawing.Common](../cross-platform) which is no longer supported on non-Windows platforms. Check out the [rendering video with SkiaSharp](../skiasharp/video) page for a cross-platform solution.
 
 <video controls autoplay loop width="400" height="300" class="d-block mx-auto my-5 border shadow">
     <source src="output.webm"
@@ -18,65 +15,70 @@ This page describes the method I use to create video files using System.Drawing 
 
 ### 1. Get FFMpegCore
 
-Add the [FFMpegCore package](https://www.nuget.org/packages/FFMpegCore/) to your project:
+Create a new project:
 
-```
-dotnet add package FFMpegCore
+```bash
+dotnet new console
 ```
 
-If you're not working in a .NET Framework application, you may need to install [System.Drawing.Common](https://www.nuget.org/packages/System.Drawing.Common/)
+Add the necessary packages to your project:
 
-```
+```bash
 dotnet add package System.Drawing.Common
+dotnet add package FFMpegCore
+dotnet add package FFMpegCore.Extensions.System.Drawing.Common
 ```
 
-Add the necessary usings to your code:
+### 2. Add Using Statements
 
 ```cs
 using FFMpegCore;
-using FFMpegCore.Enums;
-using FFMpegCore.Extend;
 using FFMpegCore.Pipes;
-using System.Drawing;
-using System.Drawing.Imaging;
+using FFMpegCore.Extensions.System.Drawing.Common;
 ```
 
-### 2. Create a Frame Generator
+### 3. Create a Frame Generator
 
-Create a function to `yield` frames by creating and returning bitmap images one at a time. The `FFMpegCore.Extend` namespace contains a `BitmapVideoFrameWrapper` that accepts a `System.Drawing.Bitmap` and returns an object `FFMpegCore` can use as a pipe source when encoding video.
-
-This example draws a green rectangle that moves and grows as a function of frame number, and also displays frame information as text at the top of the image.
+Create a function to `yield` frames by creating and returning `Bitmap` images one at a time. This is where the logic goes that determines what will be drawn in each frame. This example draws a green rectangle that moves and grows as a function of frame number, and also displays frame information as text at the top of the image.
 
 ```cs
-static IEnumerable<BitmapVideoFrameWrapper> CreateFramesSD(int count, int width, int height)
+IEnumerable<BitmapVideoFrameWrapper> CreateFramesSD(int count, int width, int height)
 {
     for (int i = 0; i < count; i++)
     {
+        // create a Bitmap
         using Bitmap bmp = new(width, height, PixelFormat.Format24bppRgb);
         using Graphics gfx = Graphics.FromImage(bmp);
+
+        // draw a blue background
         gfx.Clear(Color.Navy);
 
+        // draw a growing green square
         Point pt = new(i, i);
         Size sz = new(i, i);
         Rectangle rect = new(pt, sz);
         gfx.FillRectangle(Brushes.Green, rect);
 
+        // draw some text
         using Font fnt = new("consolas", 24);
         gfx.DrawString($"Frame: {i + 1:N0}", fnt, Brushes.Yellow, 2, 2);
 
+        // yield the wrapped Bitmap
         using BitmapVideoFrameWrapper wrappedBitmap = new(bmp);
         yield return wrappedBitmap;
     }
 }
 ```
 
-### 3. Encode a Video File
+### 4. Encode a Video File
+
+This step cycles through your frame generator and encodes the video one frame at a time.
 
 ```cs
 var frames = CreateFramesSD(count: 200, width: 400, height: 300);
-var videoFramesSource = new RawVideoPipeSource(frames) { FrameRate = 30 };
-var success = FFMpegArguments
-    .FromPipeInput(videoFramesSource)
+RawVideoPipeSource source = new(frames) { FrameRate = 30 };
+bool success = FFMpegArguments
+    .FromPipeInput(source)
     .OutputToFile("output.webm", overwrite: true, options => options.WithVideoCodec("libvpx-vp9"))
     .ProcessSynchronously();
 ```

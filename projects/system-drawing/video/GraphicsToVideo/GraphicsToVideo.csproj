@@ -1,15 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="FFMpegCore" Version="4.7.0" />
-    <PackageReference Include="System.Drawing.Common" Version="5.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="FFMpegCore" Version="5.1.0" />
+        <PackageReference Include="FFMpegCore.Extensions.System.Drawing.Common" Version="5.0.0" />
+        <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
+    </ItemGroup>
 
 </Project>
