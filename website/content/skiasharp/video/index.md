@@ -40,7 +40,7 @@ using SkiaSharp;
 This class is used to convert `SKBitmap` images to `IVideoFrame` objects that can be used by ffmpeg.
 
 ```cs
-class SKBitmapFrame : IVideoFrame, IDisposable
+internal class SKBitmapFrame : IVideoFrame, IDisposable
 {
     public int Width => Source.Width;
     public int Height => Source.Height;
@@ -55,11 +55,14 @@ class SKBitmapFrame : IVideoFrame, IDisposable
         Source = bmp;
     }
 
-    public void Dispose() => Source.Dispose();
-    public void Serialize(Stream s) => s.Write(Source.Bytes);
-    public async Task SerializeAsync(Stream s, CancellationToken t) => 
-        await s.WriteAsync(Source.Bytes, t).ConfigureAwait(false);
+    public void Dispose() =>
+        Source.Dispose();
 
+    public void Serialize(Stream pipe) =>
+        pipe.Write(Source.Bytes, 0, Source.Bytes.Length);
+
+    public Task SerializeAsync(Stream pipe, CancellationToken token) =>
+        pipe.WriteAsync(Source.Bytes, 0, Source.Bytes.Length, token);
 }
 ```
 
