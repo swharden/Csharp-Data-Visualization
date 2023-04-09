@@ -150,7 +150,7 @@ public partial class FftMonitorForm : Form
 
         double fftPeriod = FftSharp.Transform.FFTfreqPeriod(SampleRate, fftMag.Length);
 
-        formsPlot1.Plot.AddSignal(FftValues, fftPeriod);
+        formsPlot1.Plot.AddSignal(FftValues, 1.0 / fftPeriod);
         formsPlot1.Plot.YLabel("Spectral Power");
         formsPlot1.Plot.XLabel("Frequency (kHz)");
 
