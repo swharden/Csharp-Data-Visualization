@@ -79,7 +79,7 @@ double fftPeriod = FftSharp.Transform.FFTfreqPeriod(SampleRate, fftMag.Length);
 I can then add the FFT array to the plot once, and simply request a refresh using a timer once the program is running.
 
 ```cs
-formsPlot1.Plot.AddSignal(FftValues, fftPeriod);
+formsPlot1.Plot.AddSignal(FftValues, 1.0 / fftPeriod);
 formsPlot1.Plot.YLabel("Spectral Power");
 formsPlot1.Plot.XLabel("Frequency (kHz)");
 formsPlot1.Refresh();
