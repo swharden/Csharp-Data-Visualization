@@ -29,6 +29,6 @@ jobs:
       - name: 🔑 Populate Key
         run: echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
       - name: 🚀 Upload
-        run: rsync --archive --stats -e 'ssh -p 18765 -o StrictHostKeyChecking=no' 'website/output/' swharden.com@ssh.swharden.com:~/www/swharden.com/public_html/csdv/
+        run: rsync --archive --delete --stats -e 'ssh -p 18765 -o StrictHostKeyChecking=no' 'website/output/' swharden.com@ssh.swharden.com:~/www/swharden.com/public_html/csdv/
       - name: 🧹 Clear Cache
         run: ssh swharden.com@ssh.swharden.com -p 18765 "site-tools-client domain update id=1 flush_cache=1"
