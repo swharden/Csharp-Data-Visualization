@@ -23,7 +23,7 @@ jobs:
           tar -xvzf hugo.tar.gz
           sudo mv hugo /usr/local/bin
       - name: 🛠️ Build
-        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
+        run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/
       - name: 🔐 Create Key File
         run: install -m 600 -D /dev/null ~/.ssh/id_rsa
       - name: 🔑 Populate Key
