@@ -2,9 +2,9 @@ name: Website
 
 on:
   workflow_dispatch:
-  push:
-    #paths:
-    #- "website/**"
+  push: # only runs on commits to main branch (typically after a merge)
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,28 +13,22 @@ jobs:
     steps:
       - name: 🛒 Checkout
         uses: actions/checkout@v2
-
       - name: ✨ Setup Hugo
         env:
-          HUGO_VERSION: 0.92.2
+          HUGO_VERSION: 0.100.1
         run: |
           mkdir ~/hugo
           cd ~/hugo
           curl -L "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_Linux-64bit.tar.gz" --output hugo.tar.gz
           tar -xvzf hugo.tar.gz
           sudo mv hugo /usr/local/bin
-
       - name: 🛠️ Build
         run: hugo --source website --destination output --cleanDestinationDir --baseURL https://swharden.com/csdv/ --debug --minify
-
-      - name: 🔑 Install SSH Key
-        run: |
-          install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.REMOTE_SSH_KEY }}" > ~/.ssh/id_rsa
-          echo "${{ secrets.KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-
-      - name: 🚀 Deploy
-        run: rsync --archive --delete --stats -e 'ssh -p 18765' 'website/output/' ${{ secrets.REMOTE_DEST }}
-
-      #- name: 🧹 Purge Website Cache
-      #run: curl --user deploy:${{ secrets.CACHE_PASSWORD }} https://scottplot.net/admin/clear-cache.php
+      - name: 🔐 Create Key File
+        run: install -m 600 -D /dev/null ~/.ssh/id_rsa
+      - name: 🔑 Populate Key
+        run: echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa
+      - name: 🚀 Upload
+        run: rsync --archive --stats -e 'ssh -p 18765 -o StrictHostKeyChecking=no' 'website/output/' swharden.com@ssh.swharden.com:~/www/swharden.com/public_html/csdv/
+      - name: 🧹 Clear Cache
+        run: ssh swharden.com@ssh.swharden.com -p 18765 "site-tools-client domain update id=1 flush_cache=1"
